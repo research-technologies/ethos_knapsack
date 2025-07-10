@@ -17,9 +17,9 @@ class ThesisOrDissertationForm < Hyrax::Forms::ResourceForm(ThesisOrDissertation
   # if you want a field in the form, but it doesn't have a directly corresponding
   # model attribute, make it virtual
 
-  # Not sure what _should_ go in here, but this seems harmless and if this is not overridden here, it carps 
+  # Not sure what _should_ go in here, but this seems harmless and if this is not overridden here, it carps
   def self.build_permitted_params
     [:title, :creator]
-  end 
+  end
 
 end
