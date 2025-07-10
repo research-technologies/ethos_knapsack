@@ -38,6 +38,23 @@
 #<xs:element name="qualificationlevel" substitutionGroup="dc:type"/>
 
 attributes:
+  abstract:
+    type: string
+    multiple: true
+    form:
+      primary: true
+      required: true
+    index_keys:
+      - "abstract_tesim"
+    predicate: http://purl.org/dc/terms/abstract
+  contributor:
+    type: string
+    multiple: true
+    form:
+      primary: false
+    index_keys:
+      - "contributor_tesim"
+    predicate: http://purl.org/dc/elements/1.1/contributor
   creator:
     type: string
     multiple: true

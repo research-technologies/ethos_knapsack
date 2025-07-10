@@ -9,7 +9,7 @@ class ThesisOrDissertation < Hyrax::Work
 #  include Hyrax::Schema(:with_video_embed)
   include Hyrax::ArResource
   include Hyrax::NestedWorks
-  
+
 #  include IiifPrint.model_configuration(
 #    pdf_split_child_model: GenericWorkResource,
 #    pdf_splitter_service: IiifPrint::TenantConfig::PdfSplitter
