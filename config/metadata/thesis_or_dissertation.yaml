@@ -1,0 +1,75 @@
+# Simple yaml config-driven schema which is used to define model attributes,
+# index key names, and form properties.
+#
+# Attributes must have a type but all other configuration options are optional.
+# Please note: If using Valkyrie's Fedora Metadata Adapter, predicates for attributes
+# must be placed here.
+#
+# attributes:
+#   attribute_name:
+#     type: string
+#     multiple: false
+#     index_keys:
+#       - "attribute_name_sim"
+#     form:
+#       required: true
+#       primary: true
+#       multiple: false
+#
+# @see config/metadata/basic_metadata.yaml for an example configuration
+#
+# Generated via
+#  `rails generate hyrax:work_resource ThesisOrDissertation`
+
+# The UKETD terms https://ethos.library.leeds.ac.uk/ethos-oai/2.0/uketdterms.xsd
+#
+#<xs:element name="authoridentifier" substitutionGroup="dc:creator"/>
+#<xs:element name="advisor" substitutionGroup="dc:contributor"/>
+#<xs:element name="sponsor" substitutionGroup="dc:contributor"/>
+#<xs:element name="checksum" substitutionGroup="dc:format"/>
+#<xs:element name="grantnumber" substitutionGroup="dc:identifier"/>
+#<xs:element name="institution" substitutionGroup="dc:publisher"/>
+#<xs:element name="department" substitutionGroup="dc:publisher"/>
+#<xs:element name="commercial" substitutionGroup="dc:publisher"/>
+#<xs:element name="embargotype" substitutionGroup="dc:rights"/>
+#<xs:element name="embargodate" substitutionGroup="dc:rights"/>
+#<xs:element name="embargoreason" substitutionGroup="dc:rights"/>
+#<xs:element name="qualificationname" substitutionGroup="dc:type"/>
+#<xs:element name="qualificationlevel" substitutionGroup="dc:type"/>
+
+attributes: 
+  abstract:
+    type: string
+    multiple: true
+    form:
+      primary: false
+    index_keys:
+      - "abstract_tesim"
+    predicate: http://purl.org/dc/terms/abstract
+  contributor:
+    type: string
+    multiple: true
+    form:
+      primary: false
+    index_keys:
+      - "contributor_tesim"
+    predicate: http://purl.org/dc/elements/1.1/contributor
+  creator:
+    type: string
+    multiple: true
+    form:
+      required: true
+      primary: true
+    index_keys:
+      - "creator_tesim"
+    predicate: http://purl.org/dc/elements/1.1/creator
+  institution:
+    type: string
+    multiple: true
+    form:
+      primary: false
+    index_keys:
+      - "institution_sim"
+      - "institution_tesim"
+    predicate: http://purl.org/dc/elements/1.1/publisher
+
