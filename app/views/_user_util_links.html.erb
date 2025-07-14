@@ -1,0 +1,12 @@
+<%= render 'shared/locale_picker' if available_translations.size > 1 %>
+  <% if user_signed_in? %>
+    <li class="navbar-menu"><a class="navbar-menu" target="_self" href="/contact"><span class="navbar-menu"><%= render_notifications(user: current_user) %>
+</span></a></li>
+
+  <% else %>
+    <li class="navbar-menu"><a class="navbar-menu" target="_self" href="/contact"><span class="navbar-menu">
+      <%= link_to main_app.single_signon_index_path, class: 'nav-link' do %>
+        <i class="fa fa-sign-in" aria-hidden="true"></i> <%= t("hyrax.toolbar.profile.login") %>
+      <% end %>
+      </span></li>
+  <% end %>
