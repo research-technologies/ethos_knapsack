@@ -24,5 +24,4 @@ class ThesisOrDissertationForm < Hyrax::Forms::ResourceForm(ThesisOrDissertation
   def self.build_permitted_params
     [:title, :creator]
   end
-
 end
