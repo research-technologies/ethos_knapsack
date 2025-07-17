@@ -8,7 +8,7 @@
 class ThesisOrDissertationForm < Hyrax::Forms::ResourceForm(ThesisOrDissertation)
 #  include Hyrax::FormFields(:basic_metadata)
   include Hyrax::FormFields(:thesis_or_dissertation)
-  include Hyrax::CompoundFieldsBehaviour
+ # include Hyrax::CompoundFieldsBehaviour
 
   include Hyrax::FormFields(:with_pdf_viewer)
   include Hyrax::FormFields(:with_video_embed)
@@ -20,7 +20,13 @@ class ThesisOrDissertationForm < Hyrax::Forms::ResourceForm(ThesisOrDissertation
 
   # if you want a field in the form, but it doesn't have a directly corresponding
   # model attribute, make it virtual
-  #
-  property :creator_given, virtual: true
-  property :creator_family, virtual: true
+  
+  property :creators_family_name, virtual: true, required: true
+
+  def creators
+    { creators_family_name: creators_family_name,
+      creators_given_name: creators_given_name
+    }
+  end
+  
 end
