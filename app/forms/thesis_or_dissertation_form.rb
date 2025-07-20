@@ -22,6 +22,8 @@ class ThesisOrDissertationForm < Hyrax::Forms::ResourceForm(ThesisOrDissertation
   # model attribute, make it virtual
   
   property :creators_family_name, virtual: true, required: true
+  property :creators_given_name, virtual: true, required: true
+
 
   def creators
     { creators_family_name: creators_family_name,
