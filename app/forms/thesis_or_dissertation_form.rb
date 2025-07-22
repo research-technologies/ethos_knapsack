@@ -8,11 +8,11 @@
 class ThesisOrDissertationForm < Hyrax::Forms::ResourceForm(ThesisOrDissertation)
 #  include Hyrax::FormFields(:basic_metadata)
   include Hyrax::FormFields(:thesis_or_dissertation)
-  include Hyrax::CompoundFieldsBehaviour
+ # include Hyrax::CompoundFieldsBehaviour
 
-#  include Hyrax::FormFields(:with_pdf_viewer)
-#  include Hyrax::FormFields(:with_video_embed)
-#  include VideoEmbedBehavior::Validation
+  include Hyrax::FormFields(:with_pdf_viewer)
+  include Hyrax::FormFields(:with_video_embed)
+  include ::VideoEmbedBehavior::Validation
 
   # Define custom form fields using the Valkyrie::ChangeSet interface
   #
@@ -22,4 +22,5 @@ class ThesisOrDissertationForm < Hyrax::Forms::ResourceForm(ThesisOrDissertation
   # model attribute, make it virtual
   #
   # property :user_input_not_destined_for_the_model, virtual: true
+  
 end

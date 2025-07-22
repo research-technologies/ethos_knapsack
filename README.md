@@ -76,6 +76,37 @@ cd $PROJECT_NAME_knapsack
 git remote add prime https://github.com/samvera-labs/hyku_knapsack
 ```
 
+### Keeping Your Knapsack Updated with Prime
+
+Whether you've set up your Knapsack using a new repository or a fork, you may want to pull in updates from `hyku_knapsack` prime (i.e., `https://github.com/samvera-labs/hyku_knapsack`) over time. To do this, ensure you've added the upstream remote as `prime`:
+
+```bash
+git remote add prime https://github.com/samvera-labs/hyku_knapsack
+```
+
+To fetch and merge in changes from the prime repository:
+
+```bash
+git fetch prime
+git merge prime/main
+```
+
+If you prefer a cleaner commit history, you may rebase instead:
+
+```bash
+git fetch prime
+git rebase prime/main
+```
+
+After resolving any conflicts, push the updates to your repository:
+
+```bash
+git push origin main
+```
+
+This setup ensures your Knapsack stays aligned with ongoing improvements and bug fixes in the Hyku Knapsack project.
+
+
 ### Hyku and HykuKnapsack
 
 You run your Hyku application by way of the HykuKnapsack.  As mentioned, the HykuKnapsack contains your application's relevant information for running an instance of Hyku.
@@ -138,6 +169,56 @@ When you want to bring down an updated version of your Hyku submodule, use the f
 
 This will checkout the submodule to the HEAD of the specified branch.
 
+### 🚀 Getting Started with Stack Car
+
+Hyku Knapsack uses [Stack Car](https://github.com/samvera-labs/stack_car) to manage Docker-based development.
+For alternative setup options, refer to [Hyku's Getting Started](https://github.com/samvera/hyku/blob/main/docs/getting-started.md).
+
+> **Important:** All commands below should be run from the **root of your Knapsack project**, **not** from within the `hyrax-webapp` submodule.
+
+#### 1. Install Stack Car (if you haven't already)
+
+```bash
+gem install stack_car
+```
+
+#### 2. Set up the development proxy
+
+You only need to run this once per installed version of Stack Car:
+
+```bash
+sc proxy cert
+sc proxy up
+```
+
+#### 3. Prepare and start the stack
+
+```bash
+sc pull     # Pull the latest base images
+sc build    # Build your local image
+sc up       # Start the container stack
+```
+
+#### 4. Open the app in your browser
+
+Once running, visit:
+
+```
+https://admin-{repo-name}.localhost.direct/
+```
+
+Example (for the Hyku Knapsack repo):
+
+```
+https://admin-hyku-knapsack.localhost.direct/
+```
+
+#### 5. Open a shell in the container (if needed)
+
+```bash
+sc sh
+```
+
 ### Overrides
 
 Before overriding anything, please think hard (or ask the community) about whether what you are working on is a bug or feature that can apply to Hyku itself. If it is, please make a branch in your Hyku checkout (`./hyrax-webapp`) and do the work there. Read more about [working with Hyku branches in your Knapsack](https://github.com/samvera-labs/hyku_knapsack/wiki/Hyku-Branches).
@@ -152,13 +233,24 @@ Deployment code can be added as needed.
 
 ### Theme files
 
-Theme files (views, css, etc) can be added to the knapsack. We recommend adding an [override comment](https://github.com/samvera-labs/hyku_knapsack/wiki/Decorators-and-Overrides)
+Theme files (views, css, etc) can be added to the knapsack. We recommend adding an [override comment](https://github.com/samvera-labs/hyku_knapsack/wiki/Decorators-and-Overrides#best-practices-for-view-overrides)
 
 ### Gems
 
 It can be useful to add additional gems to the bundle. This can be done without editing Hyku by adding them to the [./bundler.d/example.rb](./bundler.d/example.rb).  [See the bundler-inject documentation for more details](https://github.com/kbrock/bundler-inject/) on overriding and adding gems.
 
 **NOTE:** Do not add gems to the gemspec nor Gemfile.  When you add to the knapsack Gemfile/gemspec, when you bundle, you'll update the Hyku Gemfile; which will mean you might be updating Hyku prime with knapsack installation specific dependencies.  Instead add gems to `./bundler.d/example.rb`.
+
+### Work Resource Generator
+
+This project includes a Rails generator to create new custom work types within your Hyku Knapsack application. This generator is a modified version of the one provided by Hyrax, specifically adapted to ensure that all generated files are created within the knapsack directory structure, rather than in the core Hyku submodule.
+
+To use the generator, run the following command from the root of your knapsack project:
+
+```bash
+bundle exec rails generate hyku_knapsack:work_resource WorkType
+```
+Replace `WorkType` with the desired name for your new work type. The generator will create the necessary model, controller, form, indexer, and view files in the appropriate directories within the knapsack.
 
 ## Converting a Fork of Hyku Prime to a Knapsack
 

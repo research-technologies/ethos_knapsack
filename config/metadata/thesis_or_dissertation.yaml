@@ -42,7 +42,8 @@ attributes:
     type: string
     multiple: true
     form:
-      primary: false
+      primary: true
+      required: true
     index_keys:
       - "abstract_tesim"
     predicate: http://purl.org/dc/terms/abstract
@@ -72,4 +73,3 @@ attributes:
       - "institution_sim"
       - "institution_tesim"
     predicate: http://purl.org/dc/elements/1.1/publisher
-
