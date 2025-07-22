@@ -1,0 +1,148 @@
+<%# OVERRIDE: HydraEditor 5.0.5 support dynamic labels and hints for custom worktypes %>
+<%# Avoid NoMethod error when rendering partial in Collection or batch edit form %>
+<%# Hide unwanted fields from the form %>
+<% return if f.object.try(:hidden?, key) %>
+
+<% record = f.object.model %>
+
+  <div class="row">
+    <div class="col">
+      <label class="control-label multi_value required" for="creator" id="creator_label"><%=label_for(term: key, record_class: record.class)%> <span class="badge badge-info required-tag">required</span></label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <%= hint_for(term: key, record_class: record.class) %>
+    </div>
+  </div>
+
+  <div class="multiple-group">
+    <div class="row">
+      <div class="col">
+        <label for="creator_position" class="col-md-3 form-control-sm creator-position-display"></label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-3">
+        <label for="creator_name_type" class="form-control-sm">Type</label>
+        <select id="creator_name_type" class="form-control form-control-sm creator-name-type" placeholder="Creator Name Type">
+          <option selected>Personal</option>
+          <option>Organisational</option>
+        </select>
+      </div>
+    </div>
+    <div class="row creator_personal">
+      <div class="form-group col-md-6">
+        <label for="creator_given_name" class="form-control-sm">Given Name</label>
+        <input type="text" name="creator_given_name" id="creator_given_name" class="form-control form-control-sm" placeholder="Creator Given Name">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="creator_family_name" class="form-control-sm">Family Name</label>
+        <input type="text" name="creator_family_name" id="creator_family_name" class="form-control form-control-sm" placeholder="Creator Family Name">
+      </div>
+    </div>
+    <div class="row creator_personal">
+      <div class="form-group col-md-6">
+         <label for="creator_orcid" class="form-control-sm">ORCID</label>
+         <input type="text" name="creator_orcid" id="creator_orcid" class="form-control form-control-sm" placeholder="Creator ORCID">    
+      </div>
+      <div class="form-group col-md-6">
+         <label for="creator_isni" class="form-control-sm">ISNI</label>
+         <input type="text" name="creator_isni" id="creator_isni" class="form-control form-control-sm" placeholder="Creator ISNI">    
+      </div>
+    </div>
+    <div class="row creator_organisational">
+      <div class="form-group col">
+        <label for="creator_organisation_name" class="form-control-sm">Organisation Name</label>
+        <input type="text" class="form-control form-control-sm" placeholder="Creator Organisation Name">
+      </div>
+    </div>
+    <div class="row creator_organisational">
+      <div class="form-group col-md-6">
+        <label for="creator_ror" class="form-control-sm">ROR</label>
+        <input type="text" name="creator_ror" id="creator_ror" class="form-control form-control-sm" placeholder="Creator ROR">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="creator_grid" class="form-control-sm">GRID</label>
+        <input type="text" name="creator_grid" id="creator_grid" class="form-control form-control-sm" placeholder="Creator GRID">
+      </div>
+    </div>
+    <div class="row creator_organisational">
+      <div class="form-group col-md-6">
+         <label for="creator_wikidata" class="form-control-sm">Wikidata</label>
+         <input type="text" name="creator_wikidata" id="creator_wikidata" class="form-control form-control-sm" placeholder="Creator Wikidata">    
+      </div>
+      <div class="form-group col-md-6">
+         <label for="creator_isni" class="form-control-sm">ISNI</label>
+         <input type="text" name="creator_isni" id="creator_isni" class="form-control form-control-sm" placeholder="Creator ISNI">    
+      </div>
+    </div>
+    <input type="hidden" class="creator-position" name="creator_position" value="1"/>
+    <div class="form-group">
+      <a href="#" style="color:red;" class="remove_creator">
+        <span class="glyphicon glyphicon-remove"></span>
+        <span class="controls-remove-text">Remove</span>
+      </a>
+      |
+      <a href="#" class="add_creator">Add another</a>
+    </div>
+  </div>
+
+<script>
+  function toggle_inputs(group){
+    console.log($(group).find("select.creator-name-type").val());
+    if ($(group).find("select.creator-name-type").val() == "Personal") {
+      $(group).find('.creator_organisational').hide();
+      $(group).find('.creator_personal').fadeIn('fast');
+    } else if ($(group).find("select.creator-name-type").val() == "Organisational") {
+      $(group).find('.creator_personal').hide();
+      $(group).find('.creator_organisational').fadeIn('fast');
+    }
+  }
+  function clear_other_values(select_val){
+    if (select_val == "Personal") {
+      $('.creator_organisational input[type="text"]').val('');
+    } else if (select_val == "Organisational") {
+      $('.creator_personal input[type="text"]').val('');
+    }
+  }
+  $(".creator-name-type").each(function(){
+    toggle_inputs($(this).closest('.multiple-group'));
+  });
+  $(".creator-name-type").change(function () {
+    toggle_inputs($(this).closest('.multiple-group'));
+  });
+  //TODO call this on form submit
+  //clear_other_values($(this).val());
+
+
+  $(document).on('turbolinks:load', function() {
+
+    $('.multiple-group').each(function(ind){
+       $(this).find('.creator-position-display').html("Creator: "+(ind+1));
+    });
+
+    return $('body').on('click', '.add_creator', function(event) {
+     event.preventDefault();
+      last_group = $(this).closest('.multiple-group').last();
+      const clonedCreatorSection = last_group.clone();
+      clonedCreatorSection.find('input').val('');
+      clonedCreatorSection.find('option').attr('selected', false);
+
+      // increment hidden_field counter after cloning
+      mg_count = parseInt($('.multiple-group').length) + 1;
+      $(clonedCreatorSection).find('input.creator-position').val(mg_count);
+      $(clonedCreatorSection).find('label.creator-position-display').html("Creator: "+mg_count);
+
+      // add the cloned section at the end of the creator list
+      last_group.after(clonedCreatorSection);
+      toggle_inputs(clonedCreatorSection);
+      $(clonedCreatorSection).find(".creator-name-type").change(function () {
+        toggle_inputs($(this).closest('.multiple-group'));
+      });
+
+    });
+  });
+</script>
+
+
