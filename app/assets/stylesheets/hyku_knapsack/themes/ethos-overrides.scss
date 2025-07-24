@@ -90,6 +90,20 @@ body.public-facing {
   body.public-facing a:hover,
   body.public-facing a:focus { color: var(--color-text-primary); }
 
+  a.header_logo {
+    position: fixed;
+    height: -moz-fit-content;
+    height: fit-content;
+    right: var(--m-16);
+    z-index: var(--z-index-home-button);
+    top: 0;
+    opacity: 1;
+    transition: opacity .3s ease-in-out, transform .3s ease-in-out;
+  }
+  svg.header_logo {
+     width: 77px;
+  }
+   
   nav#masthead {
     display: flex;
     justify-content: center;
@@ -179,6 +193,36 @@ body.public-facing {
     font-family: inherit;
     text-align: inherit;
     font-size: inherit;
+  }
+
+  div.layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  div.layout_content {
+    flex-grow: 1;
+  }
+  .layout_main {
+    font-family: var(--font-sans);
+    font-weight: var(--font-weight-light);
+    color: var(--color-text-primary);
+    padding-top: var(--m-164);
+    padding-inline: var(--m-16);
+    width: 100%;
+    margin-inline: auto;
+    max-width: 1700px;
+    position: relative;
+  }
+  
+  .bl-homepage {
+    width: 100%;
+    margin-block: var(--block-spacing);
+  }
+
+  .bl-homepage-container {
+    margin-inline: auto;
+    max-width: 62.5rem;
   }
 
 }
