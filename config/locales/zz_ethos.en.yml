@@ -1,0 +1,4 @@
+en:
+  simple_form:
+    hints:
+      creator: The person or group responsible for the work. Usually this is the author of the content.

@@ -1,10 +1,102 @@
-<% array_of_hash = get_model(f.object.model.creator, f.object.model.class.to_s, 'creator', 'creator_position') %>
-<!--
-Clicking edit button returns an error it is something other than an array of hash
-it will throw either ActionView::Template::Error (undefined method `each_with_index' for nil:NilClass)
-  or
-ActionView::Template::Error (undefined method `dig' for "null":String):
-The line below fixes that
--->
-<% array_of_hash = array_of_hash || [{}] %>
-<%= render "records/edit_fields/compound_fields", array_of_hash: array_of_hash, f: f %>
+<%# OVERRIDE: HydraEditor 5.0.5 support dynamic labels and hints for custom worktypes %>
+<%# Avoid NoMethod error when rendering partial in Collection or batch edit form %>
+<%# Hide unwanted fields from the form %>
+<% return if f.object.try(:hidden?, key) %>
+
+<% record = f.object.model %>
+
+  <div class="row">
+    <div class="col">
+      <label class="control-label multi_value required" for="creator" id="creator_label"><%=label_for(term: key, record_class: record.class)%></label>
+     <span class="badge badge-info required-tag">required</span> 
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <%= hint_for(term: key, record_class: record.class) %>
+    </div>
+  </div>
+  <br/>
+
+<% f.object.attributes[key].empty? ? creators = [{}] : creators = f.object.attributes[key].map{|c| eval(c.gsub(/^\d+~/,''))} %>
+<% creators.each_with_index do | c, index | %>
+
+  <%# c = eval(creator.gsub(/^\d+~/,''))%>
+
+  <div class="multiple-group <%=key%>-multiple-group">
+
+    <div class="row">
+      <div class="col-md-3">
+        <label for="creator_position" class="form-control-md creator-position-display"><%=key.capitalize%>: <%=index+1%></h3>
+      </div>
+    </div>
+
+    <div class="row creator_personal">
+      <div class="form-group col-md-6">
+        <label for="creator_given_name" class="form-control-sm">Given Name</label>
+        <input type="text" name="thesis_or_dissertation[creator_given_name][]" id="creator_given_name" class="form-control form-control-sm" placeholder="Creator Given Name" value="<%=c['creator_given_name']%>">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="creator_family_name" class="form-control-sm">Family Name</label>
+        <input type="text" name="thesis_or_dissertation[creator_family_name][]" id="creator_family_name" class="form-control form-control-sm" placeholder="Creator Family Name" value="<%=c['creator_family_name']%>">
+      </div>
+    </div>
+    <div class="row creator_personal">
+      <div class="form-group col-md-6">
+         <label for="creator_orcid" class="form-control-sm">ORCID</label>
+         <input type="text" name="thesis_or_dissertation[creator_orcid][]" id="creator_orcid" class="form-control form-control-sm" placeholder="Creator ORCID" value="<%=c['creator_orcid']%>">    
+      </div>
+      <div class="form-group col-md-6">
+         <label for="creator_isni" class="form-control-sm">ISNI</label>
+         <input type="text" name="thesis_or_dissertation[creator_isni][]" id="creator_isni" class="form-control form-control-sm" placeholder="Creator ISNI" value="<%=c['creator_isni']%>">    
+      </div>
+    </div>
+    <input type="hidden" class="creator-position" name="creator_position" value="<%=index+1%>"/>
+    <div class="form-group">
+      <a href="#" style="color:red;" class="remove_creator">
+        <span class="glyphicon glyphicon-remove"></span>
+        <span class="controls-remove-text">Remove</span>
+      </a>
+      |
+      <a href="#" class="add_creator">Add another</a>
+    </div>
+  </div>
+
+<% end %>
+
+<script>
+
+  $(document).on('turbolinks:load', function() {
+
+    return $('body').on('click', '.add_creator', function(event) {
+     event.preventDefault();
+      last_group = $(this).closest('.multiple-group').last();
+      const clonedCreatorSection = last_group.clone();
+      clonedCreatorSection.find('input').val('');
+  
+      // increment hidden_field counter after cloning
+      mg_count = parseInt($('.creator-multiple-group').length) + 1;
+      $(clonedCreatorSection).find('input.creator-position').val(mg_count);
+      $(clonedCreatorSection).find('label.creator-position-display').html("Creator: "+mg_count);
+
+      // add the cloned section at the end of the creator list
+      last_group.after(clonedCreatorSection);
+    });
+  });
+  
+  // remove selected creator section
+  $(document).on('turbolinks:load', function() {
+    return $('body').on('click', '.remove_creator', function(event) {
+      event.preventDefault();
+      console.log("remove_creator",$('.creator-multiple-group').length);
+      if ($('.creator-multiple-group').length > 1 ) {
+        console.log("remove_creator: ",$(this).closest('.creator-multiple-group'));
+        $(this).closest('.creator-multiple-group').remove();
+      }
+    });
+  });
+
+
+</script>
+
+

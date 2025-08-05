@@ -1,0 +1,110 @@
+<%# OVERRIDE: HydraEditor 5.0.5 support dynamic labels and hints for custom worktypes %>
+<%# Avoid NoMethod error when rendering partial in Collection or batch edit form %>
+<%# Hide unwanted fields from the form %>
+<% return if f.object.try(:hidden?, key) %>
+
+<% record = f.object.model %>
+
+  <div class="row">
+    <div class="col">
+      <label class="control-label multi_value required" for="contributor" id="contributor_label"><%=label_for(term: key, record_class: record.class)%></label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <%= hint_for(term: key, record_class: record.class) %>
+    </div>
+  </div>
+  <br/>
+
+<% f.object.attributes[key].empty? ? contributors = [{}] : contributors = f.object.attributes[key].map{|c| eval(c.gsub(/^\d+~/,''))} %>
+
+<% contributors.each_with_index do | c, index | %>
+  <%# c = eval(contributor.gsub(/^\d+~/,''))%>
+
+  <div class="multiple-group <%=key%>-multiple-group">
+
+    <div class="row">
+      <div class="col-md-3">
+        <label for="contributor_position" class="form-control-md contributor-position-display"><%=key.capitalize%>: <%=index+1%></h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-3">
+        <label for="contributor_role" class="form-control-sm">Role</label>
+        <select id="contributor_role" class="form-control form-control-sm contributor-name-type" placeholder="Contributor Name Type">
+          <option selected>Advisor</option>
+          <option>Supervisor</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row contributor_personal">
+      <div class="form-group col-md-6">
+        <label for="contributor_given_name" class="form-control-sm">Given Name</label>
+        <input type="text" name="thesis_or_dissertation[contributor_given_name][]" id="contributor_given_name" class="form-control form-control-sm" placeholder="Contributor Given Name" value="<%=c['contributor_given_name']%>">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="contributor_family_name" class="form-control-sm">Family Name</label>
+        <input type="text" name="thesis_or_dissertation[contributor_family_name][]" id="contributor_family_name" class="form-control form-control-sm" placeholder="Contributor Family Name" value="<%=c['contributor_family_name']%>">
+      </div>
+    </div>
+    <div class="row contributor_personal">
+      <div class="form-group col-md-6">
+         <label for="contributor_orcid" class="form-control-sm">ORCID</label>
+         <input type="text" name="thesis_or_dissertation[contributor_orcid][]" id="contributor_orcid" class="form-control form-control-sm" placeholder="Contributor ORCID" value="<%=c['contributor_orcid']%>">    
+      </div>
+      <div class="form-group col-md-6">
+         <label for="contributor_isni" class="form-control-sm">ISNI</label>
+         <input type="text" name="thesis_or_dissertation[contributor_isni][]" id="contributor_isni" class="form-control form-control-sm" placeholder="Contributor ISNI" value="<%=c['contributor_isni']%>">    
+      </div>
+    </div>
+    <input type="hidden" class="contributor-position" name="contributor_position" value="<%=index+1%>"/>
+    <div class="form-group">
+      <a href="#" style="color:red;" class="remove_contributor">
+        <span class="glyphicon glyphicon-remove"></span>
+        <span class="controls-remove-text">Remove</span>
+      </a>
+      |
+      <a href="#" class="add_contributor">Add another</a>
+    </div>
+  </div>
+
+<% end %>
+
+<script>
+
+  $(document).on('turbolinks:load', function() {
+
+    return $('body').on('click', '.add_contributor', function(event) {
+     event.preventDefault();
+      last_group = $(this).closest('.multiple-group').last();
+      const clonedContributorSection = last_group.clone();
+      clonedContributorSection.find('input').val('');
+  
+      // increment hidden_field counter after cloning
+      mg_count = parseInt($('.contributor-multiple-group').length) + 1;
+      $(clonedContributorSection).find('input.contributor-position').val(mg_count);
+      $(clonedContributorSection).find('label.contributor-position-display').html("Contributor: "+mg_count);
+ 
+      // add the cloned section at the end of the contributor list
+      last_group.after(clonedContributorSection);
+    });
+  });
+  
+  // remove selected contributor section
+  $(document).on('turbolinks:load', function() {
+    return $('body').on('click', '.remove_contributor', function(event) {
+      event.preventDefault();
+      console.log("remove_contributor",$('.contributor-multiple-group').length);
+      if ($('.contributor-multiple-group').length > 1 ) {
+        console.log("remove_contributor: ",$(this).closest('.contributor-multiple-group'));
+        $(this).closest('.contributor-multiple-group').remove();
+      }
+    });
+  });
+
+
+</script>
+
+
