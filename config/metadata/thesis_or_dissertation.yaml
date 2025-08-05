@@ -38,38 +38,201 @@
 #<xs:element name="qualificationlevel" substitutionGroup="dc:type"/>
 
 attributes: 
-  abstract:
-    type: string
-    multiple: true
-    form:
-      primary: true
-      required: true
-    index_keys:
-      - "abstract_tesim"
-    predicate: http://purl.org/dc/terms/abstract
-  contributor:
-    type: string
-    multiple: true
-    form:
-      primary: false
-    index_keys:
-      - "contributor_tesim"
-    predicate: http://purl.org/dc/elements/1.1/contributor
   creator:
     type: string
     multiple: true
     form:
-      required: true
+      required: false
       primary: true
     index_keys:
       - "creator_tesim"
     predicate: http://purl.org/dc/elements/1.1/creator
+  qualification_name:
+    type: string
+    multiple: true
+    form:
+      required: true
+      primary: true
+    index_keys:
+      - "qualification_name_tesim"
+    predicate: http://ethos.library.leeds.ac.uk/uketd/terms/qualificationname
+  qualification_level:
+    type: string
+    multiple: true
+    form:
+      required: true
+      primary: true
+    index_keys:
+      - "qualification_level_tesim"
+    predicate: http://ethos.library.leeds.ac.uk/uketd/terms/qualificationlevel
+  alternative_title:
+    type: string
+    multiple: true
+    form:
+      required: false
+      primary: true
+    index_keys:
+      - "alternative_title_tesim"
+    predicate: http://purl.org/dc/terms/alternative
+  contributor:
+    type: string
+    multiple: true
+    form:
+      primary: true
+    index_keys:
+      - "contributor_tesim"
+    predicate: http://purl.org/dc/elements/1.1/contributor
+  abstract:
+    type: string
+    multiple: true
+    form:
+      required: false
+      primary: true
+    index_keys:
+      - "abstract_tesim"
+    predicate: http://purl.org/dc/elements/1.1/abstract
   institution:
     type: string
     multiple: true
     form:
-      primary: false
+      primary: true
     index_keys:
       - "institution_sim"
       - "institution_tesim"
-    predicate: http://purl.org/dc/elements/1.1/publisher
+    predicate: http://ethos.library.leeds.ac.uk/uketd/terms/institution
+  org_unit:
+    type: string
+    multiple: true
+    form:
+      primary: true
+    index_keys:
+      - "org_unit_tesim"
+    predicate: http://ethos.library.leeds.ac.uk/uketd/terms/department
+  sponsor:
+    type: string
+    multiple: true
+    form:
+      primary: true
+    index_keys:
+      - "sponsor_tesim"
+    predicate: http://ethos.library.leeds.ac.uk/uketd/terms/sponsor
+  grant_number:
+    type: string
+    multiple: true
+    form:
+      primary: true
+    index_keys:
+      - "grant_number_tesim"
+    predicate: http://ethos.library.leeds.ac.uk/uketd/terms/sponsor
+  publisher:
+    type: string
+    multiple: true
+    form:
+      primary: true
+    index_keys:
+      - "publisher_tesim"
+    predicate: http://ethos.library.leeds.ac.uk/uketd/terms/commercial
+  date_accepted:
+    type: string
+    multiple: true
+    form:
+      primary: true
+    index_keys:
+      - "date_accepted_tesim"
+    predicate: http://purl.org/dc/terms/dateAccepted
+  date_issued:
+    type: string
+    multiple: true
+    form:
+      primary: true
+    index_keys:
+      - "date_issued_tesim"
+    predicate: http://purl.org/dc/terms/issued
+  language:
+    type: string
+    multiple: true
+    form:
+      primary: true
+    index_keys:
+      - "language_tesim"
+    predicate: http://purl.org/dc/elements/1.1/language
+  keyword:
+    type: string
+    multiple: true
+    form:
+      required: false
+      primary: true
+    index_keys:
+      - "keyword_tesim"
+    predicate: http://purl.org/dc/elements/1.1/subject
+  dewey:
+    type: string
+    multiple: true
+    form:
+      required: false
+      primary: true
+    index_keys:
+      - "dewey_tesim"
+    predicate: http://purl.org/dc/terms/DDC
+  additional_info:
+    type: string
+    multiple: true
+    form:
+      required: false
+      primary: true
+    index_keys:
+      - "additional_info_tesim"
+    predicate: http://purl.org/ontology/bibo/Note
+  ethos_access_rights:
+    type: string
+    multiple: true
+    form:
+      required: false
+      primary: true
+    index_keys:
+      - "ethos_access_rights_tesim"
+    predicate: http://www.w3.org/ns/ma-ont#hasAccessConditions
+
+
+
+
+#title 
+#alt_title 
+#creator 
+#contributor 
+#abstract 
+#institution 
+#org_unit 
+#publisher
+#funder (sponsor)
+#fndr_project_ref (grant_number)
+#date_accepted 
+#date_submitted (date_issued)
+#language 
+#qualification_name 
+#qualification_level
+#keyword 
+#dewey 
+#add_info 
+#ethos_access_rights
+
+##resource_type 
+##rendering_ids 
+##date_published 
+##media
+##project_name 
+##pagination 
+##current_he_institution 
+##official_link 
+##related_url 
+##license
+##rights_statement 
+##rights_holder 
+##alternate_identifier 
+##related_identifier 
+##library_of_congress_classification
+##rendering_ids 
+
+##original_doi 
+##draft_doi 
+
