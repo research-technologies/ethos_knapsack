@@ -8,3 +8,5 @@ Rails.application.config.after_initialize do
   config.register_curation_concern :thesis_or_dissertation
   end
 end
+
+Qa::Authorities::Local.register_subauthority('qualification_names', 'Qa::Authorities::Local::FileBasedAuthority')
