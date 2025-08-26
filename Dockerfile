@@ -3,7 +3,6 @@ FROM ghcr.io/samvera/hyrax/hyrax-base:$HYRAX_IMAGE_VERSION AS hyku-web
 
 USER root
 RUN git config --system --add safe.directory \*
-ENV PATH="/app/samvera/bin:${PATH}"
 
 USER app
 ENV LD_PRELOAD=/usr/lib/libjemalloc.so.2
@@ -27,10 +26,3 @@ CMD ./bin/web
 
 FROM hyku-web AS hyku-worker
 CMD ./bin/worker
-
-FROM solr:8.3 AS hyku-solr
-ENV SOLR_USER="solr" \
-    SOLR_GROUP="solr"
-USER root
-COPY --chown=solr:solr solr/security.json /var/solr/data/security.json
-USER $SOLR_USER
