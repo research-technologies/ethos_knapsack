@@ -20,9 +20,4 @@ on:
 jobs:
   deploy:
     uses: notch8/actions/.github/workflows/deploy.yaml@v1.0.4
-    secrets:
-      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-      INITIAL_ADMIN_PASSWORD: ${{ secrets.INITIAL_ADMIN_PASSWORD }}
-      KUBECONFIG_FILE: ${{ secrets.KUBECONFIG_FILE }}
-      REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
-      SOLR_ADMIN_PASSWORD: ${{ secrets.SOLR_ADMIN_PASSWORD }}
+    secrets: inherit
