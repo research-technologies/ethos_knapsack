@@ -235,6 +235,8 @@ redis:
   architecture: standalone
   auth:
     password: $REDIS_PASSWORD
+  persistence:
+    storageClass: gp2
 solr:
   enabled: false
 
