@@ -6,11 +6,12 @@ on:
       environment:
         description: "Deploy to Environment"
         required: true
-        default: 'staging'
+        default: "staging"
         type: choice
         options:
+          - demo
+          - iiif
           - staging
-          - production
       debug_enabled:
         type: boolean
         description: "Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)"
@@ -54,4 +55,5 @@ jobs:
           export DEPLOY_TAG=${TAG};
           export DEPLOY_IMAGE=ghcr.io/${REPO_LOWER}/web;
           export WORKER_IMAGE=ghcr.io/${REPO_LOWER}/worker;
+          ./bin/helm_deploy ${{ inputs.k8s-release-name || format('{0}-{1}', github.event.repository.name, inputs.environment) }} ${{ inputs.k8s-namespace || format('{0}-{1}', github.event.repository.name, inputs.environment) }}
           ./bin/helm_deploy ${{ inputs.k8s-release-name || format('{0}-{1}', github.event.repository.name, inputs.environment) }} ${{ inputs.k8s-namespace || format('{0}-{1}', github.event.repository.name, inputs.environment) }}
