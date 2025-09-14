@@ -61,6 +61,7 @@ services:
     extends:
       file: hyrax-webapp/docker-compose.yml
       service: solr
+    image: ghcr.io/research-technologies/ethos_knapsack/solr:${TAG:-latest}
 
   fcrepo:
     extends:
