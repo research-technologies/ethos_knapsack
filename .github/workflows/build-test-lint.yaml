@@ -35,7 +35,7 @@ jobs:
       workerTarget: hyku-worker
 
   lint:
-    needs: push
+    needs: build
     uses: notch8/actions/.github/workflows/lint.yaml@v1.0.4
     with:
       webTarget: hyku-web
@@ -43,7 +43,7 @@ jobs:
       rubocop_cmd: "bundle exec rubocop --parallel --format progress"
 
   test:
-    needs: push
+    needs: build
     uses: notch8/actions/.github/workflows/test.yaml@v1.0.4
     with:
       confdir: "/app/samvera/hyrax-webapp/solr/conf"
