@@ -1,0 +1,3 @@
+[submodule "hyrax-webapp"]
+	path = hyrax-webapp
+	url = git@github.com:samvera/hyku.git
