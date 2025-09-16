@@ -93,20 +93,20 @@ extraEnvVars: &envVars
     value: "8080"
   - name: FCREPO_REST_PATH
     value: rest
-  - name: GOOGLE_ANALYTICS_ID
-    value: $GOOGLE_ANALYTICS_ID
-  - name: GOOGLE_OAUTH_APP_NAME
-    value: ethos-knapsack-staging
-  - name: GOOGLE_OAUTH_APP_VERSION
-    value: '1.0'
-  - name: GOOGLE_OAUTH_PRIVATE_KEY_SECRET
-    value: $GOOGLE_OAUTH_PRIVATE_KEY_SECRET
-  - name: GOOGLE_OAUTH_PRIVATE_KEY_PATH
-    value: prod-cred.p12
-  - name: GOOGLE_OAUTH_PRIVATE_KEY_VALUE
-    value: $GOOGLE_OAUTH_PRIVATE_KEY_VALUE
-  - name: GOOGLE_OAUTH_CLIENT_EMAIL
-    value: ethos-knapsack-staging
+  # - name: GOOGLE_ANALYTICS_ID
+  #   value: $GOOGLE_ANALYTICS_ID
+  # - name: GOOGLE_OAUTH_APP_NAME
+  #   value: ethos-knapsack-staging
+  # - name: GOOGLE_OAUTH_APP_VERSION
+  #   value: '1.0'
+  # - name: GOOGLE_OAUTH_PRIVATE_KEY_SECRET
+  #   value: $GOOGLE_OAUTH_PRIVATE_KEY_SECRET
+  # - name: GOOGLE_OAUTH_PRIVATE_KEY_PATH
+  #   value: prod-cred.p12
+  # - name: GOOGLE_OAUTH_PRIVATE_KEY_VALUE
+  #   value: $GOOGLE_OAUTH_PRIVATE_KEY_VALUE
+  # - name: GOOGLE_OAUTH_CLIENT_EMAIL
+  #   value: hyku-demo@hyku-demo.iam.gserviceaccount.com
   - name: INITIAL_ADMIN_EMAIL
     value: admin@example.com
   - name: INITIAL_ADMIN_PASSWORD
@@ -146,9 +146,9 @@ extraEnvVars: &envVars
   - name: HYKU_BLOCK_VALKYRIE_REDIRECT
     value: "false"
   - name: HYKU_CONTACT_EMAIL
-    value: ethos-knapsack-staging
+    value: example@ethos-knapsack.notch8.cloud
   - name: HYKU_CONTACT_EMAIL_TO
-    value: ethos-knapsack-staging
+    value: example@ethos-knapsack.notch8.cloud
   - name: HYKU_FILE_ACL
     value: "false"
   - name: HYKU_ADMIN_HOST
