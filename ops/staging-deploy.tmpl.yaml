@@ -113,6 +113,8 @@ extraEnvVars: &envVars
     value: $INITIAL_ADMIN_PASSWORD
   - name: IN_DOCKER
     value: "true"
+  - name: LD_LIBRARY_PATH
+    value: /app/fits/tools/mediainfo/linux
   - name: PASSENGER_APP_ENV
     value: production
   - name: RAILS_CACHE_STORE_URL
@@ -155,16 +157,20 @@ extraEnvVars: &envVars
     value: "false"
   - name: HYKU_ALLOW_SIGNUP
     value: "false"
+  - name: HYKU_ATTACK_RATE_THROTTLE_OFF
+    value: "true"
   - name: HYKU_DEFAULT_HOST
     value: "%{tenant}.ethos-knapsack-staging.notch8.cloud"
+  - name: HYRAX_FITS_PATH
+    value: /app/fits/fits.sh
   - name: HYKU_MULTITENANT
     value: "true"
   - name: HYKU_ROOT_HOST
     value: ethos-knapsack-staging.notch8.cloud
+  - name: HYKU_SHOW_BACKTRACE
+    value: "true"
   - name: NEGATIVE_CAPTCHA_SECRET
     value: $NEGATIVE_CAPTCHA_SECRET
-  - name: PATH
-    value: /app/samvera/hyrax-webapp/bin:/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
   - name: SMTP_ADDRESS
     value: "maildev-smtp.maildev.svc.cluster.local"
   - name: SMTP_DOMAIN
