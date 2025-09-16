@@ -9,9 +9,8 @@ on:
         default: "staging"
         type: choice
         options:
-          - demo
-          - iiif
           - staging
+          - production
       debug_enabled:
         type: boolean
         description: "Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)"

@@ -2,3 +2,4 @@ kube_config.yml
 k8s/*-values.yaml
 .backend
 .terraform*
+k8s/cloudflare-api-token-secret.yaml

@@ -158,6 +158,11 @@ resource "helm_release" "cert_manager" {
   }]
 }
 
+resource "kubectl_manifest" "cloudflare-api-token-secret" {
+  depends_on = [helm_release.cert_manager]
+  yaml_body  = file("./k8s/cloudflare-api-token-secret.yaml")
+}
+
 resource "kubectl_manifest" "prod_issuer" {
   depends_on = [helm_release.cert_manager]
   yaml_body = file("./k8s/prod_issuer.yaml")

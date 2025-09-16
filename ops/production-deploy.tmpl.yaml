@@ -1,4 +1,4 @@
-fullnameOverride: 'ethos-knapsack-production'
+fullnameOverride: "ethos-knapsack-production"
 
 replicaCount: 2
 
