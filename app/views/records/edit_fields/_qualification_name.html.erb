@@ -1,0 +1,2 @@
+<%= f.input :qualification_name, as: :select, collection: Hyrax::QualificationNamesService.select_all_options,
+    input_html: { class: 'form-control', multiple: false } %>
