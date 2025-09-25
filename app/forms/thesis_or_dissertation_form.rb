@@ -17,9 +17,19 @@ class ThesisOrDissertationForm < Hyrax::Forms::ResourceForm(ThesisOrDissertation
   # if you want a field in the form, but it doesn't have a directly corresponding
   # model attribute, make it virtual
 
-  # Not sure what _should_ go in here, but this seems harmless and if this is not overridden here, it carps
   def self.build_permitted_params
     [:title, :creator]
   end
+
+#  def self.terms += %i[title alt_title resource_type creator contributor rendering_ids abstract date_published media
+#                     institution org_unit project_name funder fndr_project_ref pagination publisher
+#                     current_he_institution date_accepted date_submitted official_link related_url language license
+#                     rights_statement rights_holder original_doi draft_doi qualification_name qualification_level
+#                     alternate_identifier related_identifier refereed keyword dewey library_of_congress_classification
+#                     add_info rendering_ids ethos_access_rights
+#                    ]
+
+#    self.required_fields += %i[qualification_name qualification_level]
+
 
 end

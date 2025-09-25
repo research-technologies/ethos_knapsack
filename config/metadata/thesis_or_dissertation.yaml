@@ -38,23 +38,6 @@
 #<xs:element name="qualificationlevel" substitutionGroup="dc:type"/>
 
 attributes:
-  abstract:
-    type: string
-    multiple: true
-    form:
-      primary: true
-      required: true
-    index_keys:
-      - "abstract_tesim"
-    predicate: http://purl.org/dc/terms/abstract
-  contributor:
-    type: string
-    multiple: true
-    form:
-      primary: false
-    index_keys:
-      - "contributor_tesim"
-    predicate: http://purl.org/dc/elements/1.1/contributor
   creator:
     type: string
     multiple: true
@@ -66,7 +49,7 @@ attributes:
     predicate: http://purl.org/dc/elements/1.1/creator
   qualification_name:
     type: string
-    multiple: false
+    multiple: true
     form:
       required: true
       primary: true
@@ -75,7 +58,7 @@ attributes:
     predicate: http://ethos.library.leeds.ac.uk/uketd/terms/qualificationname
   qualification_level:
     type: string
-    multiple: false
+    multiple: true
     form:
       required: true
       primary: true
@@ -117,14 +100,6 @@ attributes:
       - "institution_sim"
       - "institution_tesim"
     predicate: http://ethos.library.leeds.ac.uk/uketd/terms/institution
-  current_he_institution:
-    type: string
-    multiple: true
-    form:
-      primary: true
-    index_keys:
-      - "current_he_institution_tesim"
-    predicate: http://ethos.library.leeds.ac.uk/uketd/terms/institution#current
   org_unit:
     type: string
     multiple: true
@@ -217,16 +192,6 @@ attributes:
     index_keys:
       - "ethos_access_rights_tesim"
     predicate: http://www.w3.org/ns/ma-ont#hasAccessConditions
-  source_record:
-    type: string
-    multiple: false
-    form:
-      required: true
-      primary: true
-    index_keys:
-      - "source_record_tesim"
-    predicate: 	http://purl.org/dc/elements/1.1/source
-
 
 
 
@@ -251,25 +216,22 @@ attributes:
 #add_info
 #ethos_access_rights
 
-
-
 ##resource_type
 ##rendering_ids
 ##date_published
 ##media
 ##project_name
 ##pagination
-##official_link (link to copy on EThOS)
-##related_url (link to copy on hosting repository)
+##current_he_institution
+##official_link
+##related_url
 ##license
 ##rights_statement
 ##rights_holder
 ##alternate_identifier
 ##related_identifier
-
 ##library_of_congress_classification
 ##rendering_ids
 
 ##original_doi
 ##draft_doi
-

@@ -6,11 +6,9 @@ module Hyrax
   module Transactions
     module Ethos
       module WorkCreateDecorator
-        # Insert transaction handler steps for processing compound fields
+
         def initialize(container: ::Container, steps: nil)
-          steps = steps.dup.insert(steps.index('change_set.apply'), 
-                                   'change_set.handle_creators',
-                                   'change_set.handle_contributors')
+          steps = steps.dup.insert(steps.index('change_set.apply'), 'change_set.handle_creators')
           super
         end
 
