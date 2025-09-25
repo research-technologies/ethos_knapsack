@@ -84,7 +84,7 @@ extraEnvVars: &envVars
   - name: DB_NAME
     value: ethos-knapsack-staging
   - name: DB_USER
-    value: fcrepo
+    value: postgres
   - name: FCREPO_BASE_PATH
     value: /ethos-knapsack-staging
   - name: FCREPO_HOST
@@ -131,15 +131,15 @@ extraEnvVars: &envVars
     value: ethos-knapsack-staging-redis-master
   - name: REDIS_URL
     value: redis://:$REDIS_PASSWORD@ethos-knapsack-staging-redis-master:6379/0
+  - name: HYRAX_ACTIVE_JOB_QUEUE
+    value: good_job
+  - name: HYRAX_ANALYTICS
+    value: "false"
   - name: CH12N_TOOL
     value: fits_servlet
   - name: FITS_SERVLET_URL
     value: http://ethos-knapsack-staging-fits:8080/fits
-  - name: HYRAX_ACTIVE_JOB_QUEUE
-    value: good_job
   - name: HYRAX_FLEXIBLE
-    value: "false"
-  - name: HYRAX_ACTIVE_JOB_QUEUE
     value: "false"
   - name: HYRAX_VALKYRIE
     value: "true"
@@ -252,7 +252,7 @@ externalFcrepoHost: fcrepo-staging.fcrepo-staging.svc.cluster.local
 
 externalPostgresql:
   host: postgresql.default.svc.cluster.local
-  username: fcrepo
+  username: postgres
   password: $DB_PASSWORD
 
 externalSolrHost: solr.default.svc.cluster.local
