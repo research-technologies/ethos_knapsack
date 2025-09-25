@@ -20,11 +20,6 @@ on:
           - test
           - lint
 
-env:
-  REGISTRY: ghcr.io
-  DOCKER_BUILDKIT: 1
-  COMPOSE_DOCKER_CLI_BUILD: 1
-
 jobs:
   build:
     uses: notch8/actions/.github/workflows/build.yaml@v1.0.4
