@@ -1,5 +1,5 @@
 name: "Build Test Lint"
-run-name: Build of ${{ github.ref_name }} by @${{ github.actor }}
+run-name: Build Test Lint of ${{ github.ref_name }} by @${{ github.actor }}
 on:
   push:
     branches:
@@ -11,11 +11,11 @@ on:
     inputs:
       debug_step:
         required: false
-        description: "Pause the selected step to debug using tmate"
+        description: 'Pause the selected step to debug using tmate'
         type: choice
-        default: ""
+        default: ''
         options:
-          - ""
+          - ''
           - build
           - test
           - lint
@@ -34,6 +34,13 @@ jobs:
       webTarget: hyku-web
       workerTarget: hyku-worker
 
+  test:
+    needs: build
+    uses: notch8/actions/.github/workflows/test.yaml@v1.0.4
+    with:
+      confdir: '/app/samvera/hyrax-webapp/solr/conf'
+      rspec_cmd: "cd .. && gem install semaphore_test_boosters && bundle && rspec_booster --job $CI_NODE_INDEX/$CI_NODE_TOTAL"
+
   lint:
     needs: build
     uses: notch8/actions/.github/workflows/lint.yaml@v1.0.4
@@ -41,15 +48,3 @@ jobs:
       webTarget: hyku-web
       workerTarget: hyku-worker
       rubocop_cmd: "cd .. && bundle && bundle exec rubocop --parallel --format progress --format junit --out rubocop.xml"
-
-  test:
-    needs: build
-    uses: notch8/actions/.github/workflows/test.yaml@v1.0.4
-    with:
-      confdir: "/app/samvera/hyrax-webapp/solr/conf"
-      rspec_cmd: "cd .. && gem install semaphore_test_boosters && bundle && rspec_booster --job $CI_NODE_INDEX/$CI_NODE_TOTAL"
-
-  reports:
-    if: always()
-    needs: [test, lint]
-    uses: notch8/actions/.github/workflows/report.yaml@v1.0.4
