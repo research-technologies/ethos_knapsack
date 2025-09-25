@@ -139,6 +139,8 @@ extraEnvVars: &envVars
     value: fits_servlet
   - name: FITS_SERVLET_URL
     value: http://ethos-knapsack-staging-fits:8080/fits
+  - name: HYRAX_FITS_PATH
+    value: /app/fits/fits.sh
   - name: HYRAX_FLEXIBLE
     value: "false"
   - name: HYRAX_VALKYRIE

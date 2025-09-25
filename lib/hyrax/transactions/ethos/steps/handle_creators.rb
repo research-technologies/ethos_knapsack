@@ -27,10 +27,10 @@ module Hyrax
                 creators[index][creator_field] = value
               end
             end
-            debugger
+            # debugger
             change_set.creator = creators.map(&:to_s)
             STDERR.puts "creators: #{change_set.creator}"
-            debugger
+            # debugger
             Success(change_set)
           rescue NoMethodError => err
             Failure([err.message, change_set])

@@ -96,9 +96,9 @@ extraEnvVars: &envVars
   - name: GOOGLE_ANALYTICS_ID
     value: $GOOGLE_ANALYTICS_ID
   - name: GOOGLE_OAUTH_APP_NAME
-    value: ethos-knapsack-staging
+    value: ethos-knapsack-production
   - name: GOOGLE_OAUTH_APP_VERSION
-    value: '1.0'
+    value: "1.0"
   - name: GOOGLE_OAUTH_PRIVATE_KEY_SECRET
     value: $GOOGLE_OAUTH_PRIVATE_KEY_SECRET
   - name: GOOGLE_OAUTH_PRIVATE_KEY_PATH
@@ -153,6 +153,8 @@ extraEnvVars: &envVars
     value: example@ethos-knapsack.notch8.cloud
   - name: HYKU_FILE_ACL
     value: "false"
+  - name: HYRAX_FITS_PATH
+    value: /app/fits/fits.sh
   - name: HYKU_ADMIN_HOST
     value: ethos-knapsack-production.notch8.cloud
   - name: HYKU_ADMIN_ONLY_TENANT_CREATION
@@ -167,6 +169,8 @@ extraEnvVars: &envVars
     value: ethos-knapsack-production.notch8.cloud
   - name: HYKU_SHOW_BACKTRACE
     value: "true"
+  - name: HYKU_USER_DEFAULT_PASSWORD
+    value: $HYKU_USER_DEFAULT_PASSWORD
   - name: NEGATIVE_CAPTCHA_SECRET
     value: $NEGATIVE_CAPTCHA_SECRET
   - name: SMTP_ADDRESS
@@ -199,6 +203,8 @@ extraEnvVars: &envVars
     value: "8983"
   - name: SOLR_URL
     value: http://admin:$SOLR_ADMIN_PASSWORD@solr.default.svc.cluster.local:8983/solr/
+  - name: SECRET_KEY_BASE
+    value: $SECRET_KEY_BASE
   - name: SENTRY_DSN
     value: $SENTRY_DSN
   - name: SENTRY_ENVIRONMENT
