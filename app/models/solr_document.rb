@@ -59,5 +59,4 @@ class SolrDocument
     array_of_hash = get_model(creator, self['has_model_ssim'].first, 'creator', 'creator_position')
     array_of_hash&.map { |c| [c['creator_family_name'], c['creator_given_name'], c['creator_organization_name']].reject(&:blank?).join(', ') } || []
   end
-
 end

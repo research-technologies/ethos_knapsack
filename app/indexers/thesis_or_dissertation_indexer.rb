@@ -3,7 +3,7 @@
 # Generated via
 #  `rails generate hyrax:work_resource ThesisOrDissertation`
 class ThesisOrDissertationIndexer < Hyrax::ValkyrieWorkIndexer
-#  include Hyrax::Indexer(:basic_metadata)
+  #  include Hyrax::Indexer(:basic_metadata)
   include Hyrax::Indexer(:thesis_or_dissertation)
   include HykuIndexing
 
