@@ -37,7 +37,7 @@
 #<xs:element name="qualificationname" substitutionGroup="dc:type"/>
 #<xs:element name="qualificationlevel" substitutionGroup="dc:type"/>
 
-attributes: 
+attributes:
   creator:
     type: string
     multiple: true
@@ -49,7 +49,7 @@ attributes:
     predicate: http://purl.org/dc/elements/1.1/creator
   qualification_name:
     type: string
-    multiple: false
+    multiple: true
     form:
       required: true
       primary: true
@@ -58,7 +58,7 @@ attributes:
     predicate: http://ethos.library.leeds.ac.uk/uketd/terms/qualificationname
   qualification_level:
     type: string
-    multiple: false
+    multiple: true
     form:
       required: true
       primary: true
@@ -231,44 +231,42 @@ attributes:
     predicate: 	http://ethos.bl.uk/original_identifier
 
 
-#title 
-#alt_title 
-#creator 
-#contributor 
-#abstract 
-#institution 
-#org_unit 
+#title
+#alt_title
+#creator
+#contributor
+#abstract
+#institution
+#org_unit
 #publisher
 #funder (sponsor)
 #fndr_project_ref (grant_number)
-#date_accepted 
+#date_accepted
 #date_submitted (date_issued)
-#language 
-#qualification_name 
+#language
+#qualification_name
 #qualification_level
-#keyword 
-#dewey 
-#add_info 
+#keyword
+#dewey
+#add_info
 #ethos_access_rights
 
-
-
-##resource_type 
-##rendering_ids 
-##date_published 
+##resource_type
+##rendering_ids
+##date_published
 ##media
-##project_name 
-##pagination 
-##official_link (link to copy on EThOS)
-##related_url (link to copy on hosting repository)
+##project_name
+##pagination
+##current_he_institution
+##official_link
+##related_url
 ##license
-##rights_statement 
-##rights_holder 
-##related_identifier 
-
+##rights_statement
+##rights_holder
+##alternate_identifier
+##related_identifier
 ##library_of_congress_classification
-##rendering_ids 
+##rendering_ids
 
-##original_doi 
-##draft_doi 
-
+##original_doi
+##draft_doi

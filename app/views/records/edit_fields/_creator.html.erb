@@ -8,7 +8,7 @@
   <div class="row">
     <div class="col">
       <label class="control-label multi_value required" for="creator" id="creator_label"><%=label_for(term: key, record_class: record.class)%></label>
-     <span class="badge badge-info required-tag">required</span> 
+     <span class="badge badge-info required-tag">required</span>
     </div>
   </div>
   <div class="row">
@@ -44,11 +44,11 @@
     <div class="row creator_personal">
       <div class="form-group col-md-6">
          <label for="creator_orcid" class="form-control-sm">ORCID</label>
-         <input type="text" name="thesis_or_dissertation[creator_orcid][]" id="creator_orcid" class="form-control form-control-sm" placeholder="Creator ORCID" value="<%=c['creator_orcid']%>">    
+         <input type="text" name="thesis_or_dissertation[creator_orcid][]" id="creator_orcid" class="form-control form-control-sm" placeholder="Creator ORCID" value="<%=c['creator_orcid']%>">
       </div>
       <div class="form-group col-md-6">
          <label for="creator_isni" class="form-control-sm">ISNI</label>
-         <input type="text" name="thesis_or_dissertation[creator_isni][]" id="creator_isni" class="form-control form-control-sm" placeholder="Creator ISNI" value="<%=c['creator_isni']%>">    
+         <input type="text" name="thesis_or_dissertation[creator_isni][]" id="creator_isni" class="form-control form-control-sm" placeholder="Creator ISNI" value="<%=c['creator_isni']%>">
       </div>
     </div>
     <input type="hidden" class="creator-position" name="creator_position" value="<%=index+1%>"/>
@@ -73,7 +73,7 @@
       last_group = $(this).closest('.multiple-group').last();
       const clonedCreatorSection = last_group.clone();
       clonedCreatorSection.find('input').val('');
-  
+
       // increment hidden_field counter after cloning
       mg_count = parseInt($('.creator-multiple-group').length) + 1;
       $(clonedCreatorSection).find('input.creator-position').val(mg_count);
@@ -83,7 +83,7 @@
       last_group.after(clonedCreatorSection);
     });
   });
-  
+
   // remove selected creator section
   $(document).on('turbolinks:load', function() {
     return $('body').on('click', '.remove_creator', function(event) {
@@ -98,5 +98,4 @@
 
 
 </script>
-
 

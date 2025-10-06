@@ -9,7 +9,7 @@ module Hyrax
   module Transactions
     module ContainerDecorator
       extend Dry::Container::Mixin
-  
+
       namespace 'change_set' do |ops|
         ops.register "handle_creators" do
           Hyrax::Transactions::Ethos::Steps::HandleCreators.new
@@ -20,6 +20,6 @@ module Hyrax
       end
     end
   end
-end  
+end
 
 Hyrax::Transactions::Container.merge(Hyrax::Transactions::ContainerDecorator)

@@ -1,15 +1,16 @@
-version: '3.8'
 x-app: &app
   build:
     context: .
     target: hyku-web
     cache_from:
-      - ghcr.io/samvera/hyku/base:latest
-      - ghcr.io/samvera-labs/hyku_knapsack:latest
+      - ghcr.io/research-technologies/ethos_knapsack/web:latest
     args:
       BUILDKIT_INLINE_CACHE: 1
       APP_PATH: ./hyrax-webapp
-  image: ghcr.io/samvera-labs/hyku_knapsack:${TAG:-latest}
+  image: ghcr.io/research-technologies/ethos_knapsack/web:${TAG:-latest}
+  env_file:
+    - .env
+    - .env.development
   environment:
     # This line is what makes the knapsack include use the local code instead of the remote gem
     - BUNDLE_LOCAL__HYKU_KNAPSACK=/app/samvera
@@ -40,8 +41,8 @@ networks:
 services:
   adminer:
     extends:
-        file: hyrax-webapp/docker-compose.yml
-        service: adminer
+      file: hyrax-webapp/docker-compose.yml
+      service: adminer
 
   zoo:
     extends:
@@ -49,6 +50,14 @@ services:
       service: zoo
 
   solr:
+    image: ghcr.io/research-technologies/ethos_knapsack/solr:${TAG:-latest}
+    build:
+      context: .
+      target: hyku-solr
+      args:
+        BUILDKIT_INLINE_CACHE: 1
+      cache_from:
+        - ghcr.io/research-technologies/ethos_knapsack/solr:latest
     extends:
       file: hyrax-webapp/docker-compose.yml
       service: solr
@@ -68,13 +77,6 @@ services:
       file: hyrax-webapp/docker-compose.yml
       service: db
 
-  base:
-    extends:
-      file: hyrax-webapp/docker-compose.yml
-      service: base
-    image: ghcr.io/samvera/hyku/base:${TAG:-latest}
-    command: bash -l -c "echo 'base is only used for building base images, which in turn reduces image build times. It does not need to be run'"
-
   web:
     <<: *app
     extends:
@@ -82,10 +84,6 @@ services:
       service: web
     # Uncomment command to access container with out starting bin/web. Useful for debugging or updating Gemfile.lock
     # command: sleep infinity
-    environment:
-      # This line is what makes the knapsack include use the local code instead of the remote gem
-      - BUNDLE_LOCAL__HYKU_KNAPSACK=/app/samvera
-      - BUNDLE_DISABLE_LOCAL_BRANCH_CHECK=true
 
   worker:
     <<: *app
@@ -96,13 +94,11 @@ services:
       context: .
       target: hyku-worker
       cache_from:
-        - ghcr.io/samvera/hyku/base:latest
-        - ghcr.io/samvera-labs/hyku_knapsack/worker:latest
+        - ghcr.io/research-technologies/ethos_knapsack/worker:latest
       args:
         BUILDKIT_INLINE_CACHE: 1
         APP_PATH: ./hyrax-webapp
-        BASE_IMAGE: ${BASE_IMAGE}
-    image: ghcr.io/samvera-labs/hyku_knapsack/worker:${TAG:-latest}
+    image: ghcr.io/research-technologies/ethos_knapsack/worker:${TAG:-latest}
     # Uncomment command to access container with out starting bin/worker. Useful for debugging or updating Gemfile.lock
     # command: sleep infinity
     volumes:
@@ -123,6 +119,13 @@ services:
     extends:
       file: hyrax-webapp/docker-compose.yml
       service: initialize_app
+    command:
+      - >
+        /app/samvera/bin/solrcloud-upload-configset.sh /app/samvera/hyrax-webapp/solr/conf &&
+        /app/samvera/bin/solrcloud-assign-configset.sh &&
+        SOLR_COLLECTION_NAME=hydra-test /app/samvera/bin/solrcloud-assign-configset.sh &&
+        bundle &&
+        /app/samvera/bin/db-migrate-seed.sh
 
   redis:
     extends:

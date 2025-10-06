@@ -13,7 +13,7 @@ module Hyrax
         # @since 3.0.0
         class HandleCreators
           include Dry::Monads[:result]
-  
+
           ##
           # @param [Hyrax::ChangeSet] change_set
           # @param [#user_key] user
@@ -28,12 +28,15 @@ module Hyrax
                 creators[index][creator_field] = value
               end
             end
+            # debugger
             change_set.creator = creators.map(&:to_s)
+            STDERR.puts "creators: #{change_set.creator}"
+            # debugger
             Success(change_set)
           rescue NoMethodError => err
             Failure([err.message, change_set])
           end
-        end 
+        end
       end
     end
   end
