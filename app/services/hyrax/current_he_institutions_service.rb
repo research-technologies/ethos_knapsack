@@ -13,11 +13,11 @@ module Hyrax
     def self.select_active_options
       all_options_hash.map { |e| [e[:label], e[:id]] }
     end
-  
+
     def self.select_active_options_isni
       all_options_hash.map { |e| e[:isni] }
     end
-  
+
     def self.select_active_options_ror
       all_options_hash.map { |e| e[:ror] }
     end
@@ -40,6 +40,5 @@ module Hyrax
         { id: res[:id], label: res[:term], isni: res[:isni], ror: res[:ror], active: res.fetch(:active, true) }.with_indifferent_access
       end
     end
- 
   end
 end

@@ -3,13 +3,14 @@
 require 'nokogiri'
 module Bulkrax
   # Custom XML Entry for British Library's Electronic Theses and Dissertations.
-  class XmlEtdDcEntry < XmlEntry
+  class XmlEtdDcEntry < XmlEntry # rubocop:disable Metrics/ClassLength
     serialize :raw_metadata, JSON
 
     def factory_class
       ThesisOrDissertation
     end
 
+    # rubocop:disable Metrics/AbcSize, Metrics/MethodLength#
     def build_metadata
       raise StandardError, 'Record not found' if record.nil?
       raise StandardError, "Missing source identifier (#{source_identifier})" if raw_metadata[source_identifier].blank?
@@ -28,18 +29,22 @@ module Bulkrax
           end
         end
       end
+      add_additional
+      parsed_metadata['file'] = raw_metadata['file']
+
+      add_local
+      raise StandardError, "title is required" if parsed_metadata['title'].blank?
+      parsed_metadata
+    end
+    # rubocop:enable Metrics/AbcSize, Metrics/MethodLength#
+
+    def add_additional
       add_model
       add_complicated_fields
       add_visibility
       add_rights_statement
       add_admin_set_id
       add_collections
-
-      parsed_metadata['file'] = raw_metadata['file']
-
-      add_local
-      raise StandardError, "title is required" if parsed_metadata['title'].blank?
-      parsed_metadata
     end
 
     def add_model
@@ -102,6 +107,7 @@ module Bulkrax
 
     # @param type [String] This value must match as an element in the ContributorGroupService's
     #        authority.
+    # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     def add_name_field(name_field_prefix, element_name, type: nil)
       elements = record.xpath("//*[name()='#{element_name}']")
       return if elements.blank?
@@ -119,7 +125,7 @@ module Bulkrax
             add_metadata("#{name_field_prefix}_given_name", (separated_name.length > 1 ? separated_name.last : ''), position)
             add_metadata("#{name_field_prefix}_position", position, position)
             if type
-        #      guard_type!(type)
+              #      guard_type!(type)
               add_metadata("#{name_field_prefix}_role", type, position)
             end
             position += 1
@@ -127,6 +133,7 @@ module Bulkrax
         end
       end
     end
+    # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 
     # @return [TrueClass] when the given type is valid
     # @raise [RuntimeError] when the given type is not valid

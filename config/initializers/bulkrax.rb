@@ -4,20 +4,18 @@
 
 Rails.application.config.after_initialize do
   Bulkrax.setup do |config|
-
     config.parsers += [
       { name: " XML - UKETD DC Parser", class_name: "Bulkrax::XmlEtdDcParser", partial: "xml_fields" }
     ]
 
-#    config.fill_in_blank_source_identifiers = ->(obj, index) { "#{Site.instance.account.name}-#{obj.importerexporter.id}-#{index}" }
-
+    #    config.fill_in_blank_source_identifiers = ->(obj, index) { "#{Site.instance.account.name}-#{obj.importerexporter.id}-#{index}" }
   end
-  Bulkrax::Importer::DEFAULT_OBJECT_TYPES = ['work']
+  Bulkrax::Importer::DEFAULT_OBJECT_TYPES = ['work'].freeze
 end
 
-Bulkrax::ObjectFactoryInterface.base_permitted_attributes += [:creator_family_name, :creator_given_name, :creator_isni, :creator_orcid, :contributor_role, :contributor_family_name, :contributor_given_name]
+Bulkrax::ObjectFactoryInterface.base_permitted_attributes += [:creator_family_name, :creator_given_name, :creator_isni, :creator_orcid, :contributor_role, :contributor_family_name,
+                                                              :contributor_given_name]
 
-
-#Rails.application.config.to_prepare do
+# Rails.application.config.to_prepare do
 #  Hyku.default_bulkrax_field_mappings = ActiveSupport::HashWithIndifferentAccess.new(a: 1)
-#end
+# end
