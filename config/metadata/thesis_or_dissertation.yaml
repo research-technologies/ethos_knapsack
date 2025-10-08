@@ -49,7 +49,7 @@ attributes:
     predicate: http://purl.org/dc/elements/1.1/creator
   qualification_name:
     type: string
-    multiple: true
+    multiple: false
     form:
       required: true
       primary: true
@@ -58,7 +58,7 @@ attributes:
     predicate: http://ethos.library.leeds.ac.uk/uketd/terms/qualificationname
   qualification_level:
     type: string
-    multiple: true
+    multiple: false
     form:
       required: true
       primary: true
