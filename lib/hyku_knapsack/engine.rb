@@ -59,7 +59,7 @@ module HykuKnapsack
     end
 
     config.after_initialize do
-      Hyrax::DerivativeService.services = [
+      ::Hyrax::DerivativeService.services = [
         IiifPrint::PluggableDerivativeService
       ]
 

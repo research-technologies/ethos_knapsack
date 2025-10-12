@@ -49,7 +49,7 @@ attributes:
     predicate: http://purl.org/dc/elements/1.1/creator
   qualification_name:
     type: string
-    multiple: true
+    multiple: false
     form:
       required: true
       primary: true
@@ -58,7 +58,7 @@ attributes:
     predicate: http://ethos.library.leeds.ac.uk/uketd/terms/qualificationname
   qualification_level:
     type: string
-    multiple: true
+    multiple: false
     form:
       required: true
       primary: true
@@ -100,6 +100,14 @@ attributes:
       - "institution_sim"
       - "institution_tesim"
     predicate: http://ethos.library.leeds.ac.uk/uketd/terms/institution
+  current_he_institution:
+    type: string
+    multiple: false
+    form:
+      primary: true
+    index_keys:
+      - "current_he_institution_tesim"
+    predicate: http://ethos.library.leeds.ac.uk/uketd/terms/institution#current
   org_unit:
     type: string
     multiple: true
@@ -192,8 +200,35 @@ attributes:
     index_keys:
       - "ethos_access_rights_tesim"
     predicate: http://www.w3.org/ns/ma-ont#hasAccessConditions
-
-
+  source_record:
+    type: string
+    multiple: false
+    form:
+      required: true
+      primary: true
+    index_keys:
+      - "source_record_tesim"
+    predicate: 	http://purl.org/dc/elements/1.1/source
+  alternate_identifier:
+    type: string
+    multiple: false
+    form:
+      required: false
+      primary: true
+      multiple: false
+    index_keys:
+      - "alternate_identifier_tesim"
+    predicate: 	http://purl.org/dc/terms/provenance
+  original_identifier:
+    type: string
+    multiple: false
+    form:
+      required: true
+      primary: true
+      multiple: false
+    index_keys:
+      - "original_identifier_ssi"
+    predicate: 	http://ethos.bl.uk/original_identifier
 
 
 #title

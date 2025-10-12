@@ -7,7 +7,9 @@ module Hyrax
     module Ethos
       module WorkCreateDecorator
         def initialize(container: ::Container, steps: nil)
-          steps = steps.dup.insert(steps.index('change_set.apply'), 'change_set.handle_creators')
+          steps = steps.dup.insert(steps.index('change_set.apply'),
+                                   'change_set.handle_creators',
+                                   'change_set.handle_contributors')
           super
         end
       end
