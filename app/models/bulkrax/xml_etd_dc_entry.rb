@@ -52,7 +52,7 @@ module Bulkrax
     end
 
     def complicated_elements
-      %w[authoridentifier_isni authoridentifier_orcid dewey subject doi alternate_identifier language advisor creator] # maybe embargo_date
+      %w[authoridentifier_isni authoridentifier_orcid dewey subject doi other_identifier language advisor creator] # maybe embargo_date
     end
 
     def add_complicated_fields
@@ -60,7 +60,7 @@ module Bulkrax
       add_dewey
       add_subject
       add_doi
-      add_alternate_identifier
+      add_other_identifier
       add_language
       add_creator
       add_advisor
@@ -80,7 +80,7 @@ module Bulkrax
     end
 
     def add_subject
-      add_one_to_many_element('subject', 'subject', nil)
+      add_one_to_many_element('ethos_subject', 'subject', nil)
     end
 
     # @todo consider how we might put this "configuration logic" in the parser where it's a bit more visible
@@ -88,8 +88,8 @@ module Bulkrax
       add_complicated_element('doi', 'identifier', 'dcterms:DOI')
     end
 
-    def add_alternate_identifier
-      add_complicated_element('alternate_identifier', 'identifier', 'dcterms:URI')
+    def add_other_identifier
+      add_complicated_element('other_identifier', 'identifier', 'dcterms:URI')
     end
 
     def add_language

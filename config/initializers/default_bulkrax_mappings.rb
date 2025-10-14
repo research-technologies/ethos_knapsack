@@ -25,7 +25,7 @@ parser_mappings = {
   'language' => { from: ['language'] }, # type="dcterms:ISO639-2"
   'keyword' => { from: ['coverage'], split: /\s*;\s*/ },
   'dewey' => { from: ['subject'] }, # type="dcterms:DDC"
-  'subject' => { from: ['subject'] },
+  'ethos_subject' => { from: ['subject'] },
   'ethos_access_rights' => { from: ['accessRights'] },
   'embargo_date' => { from: ['embargodate'] },
   'ethos_identifier' => { from: ['source'] },
@@ -33,7 +33,7 @@ parser_mappings = {
   'referenced_by' => { from: ['isReferencedBy'] },
   'oai_identifier' => { from: ['provenance'] },
   'bl_cat_identifier' => { from: ['relation'] },
-  'alternate_identifier' => { from: ['identifier'] }, # type="dcterms:URI"
+  'other_identifier' => { from: ['identifier'] }, # type="dcterms:URI"
   'source_record' => { from: ['source'], source_identifier: true },
   'parents' => { from: ['parents'], split: /\s*[;|]\s*/, related_parents_field_mapping: true },
   'children' => { from: ['children'], split: /\s*[;|]\s*/, related_children_field_mapping: true }

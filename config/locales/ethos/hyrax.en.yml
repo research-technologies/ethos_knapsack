@@ -13,6 +13,7 @@ en:
         grant_number: "Grant Number"
         date_issued: "Date Awarded"
         keyword: "Keywords"
+        ethos_subject: "Subject"
         dewey: "DDC Subject"
         ethos_access_rights: "Accessible?"
         embargo_date: "Embargo"
