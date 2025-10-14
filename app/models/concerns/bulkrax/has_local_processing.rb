@@ -9,8 +9,8 @@ module Bulkrax::HasLocalProcessing
     #    parsed_metadata['resource_type'] = ['ThesisOrDissertation Doctoral thesis'] if parser.is_a? Bulkrax::XmlEtdDcParser
     #    parsed_metadata['creator_search'] = parsed_metadata&.[]('creator_search')&.map { |c| c.values.join(', ') }
     parsed_metadata["qualification_name"] = set_qualification_name if parsed_metadata["qualification_name"]
-#    parsed_metadata['record_level_file_version_declaration'] = ActiveModel::Type::Boolean.new.cast parsed_metadata['record_level_file_version_declaration']
-#    set_institutional_relationships
+    #    parsed_metadata['record_level_file_version_declaration'] = ActiveModel::Type::Boolean.new.cast parsed_metadata['record_level_file_version_declaration']
+    #    set_institutional_relationships
 
     parsed_metadata['ethos_identifier'] = Rack::Utils.parse_query(URI(parsed_metadata['source_record']).query)['uin']
     compound_fields = {
@@ -30,44 +30,44 @@ module Bulkrax::HasLocalProcessing
     end
     set_funder
   end
-  # rubocop:enable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
   def set_funder
     funders = []
     grants = []
     # split funder awards on ; oh no... funder_names too!
     if parsed_metadata.key?('funder')
-      if parsed_metadata['funder'].first['funder_name']&.include?(' ; ')
-        funders = parsed_metadata['funder'].first['funder_name'].split(' ; ')
-      else
-        funders = [parsed_metadata['funder']&.first['funder_name']]
-      end
+      funders = if parsed_metadata['funder'].first['funder_name']&.include?(' ; ')
+                  parsed_metadata['funder'].first['funder_name'].split(' ; ')
+                else
+                  [parsed_metadata['funder']&.first&.[]('funder_name')]
+                end
 
-      if parsed_metadata['funder'].first['funder_award']&.include?(' ; ')
-        grants = parsed_metadata['funder'].first['funder_award'].split(' ; ')
-      else
-        grants = [parsed_metadata['funder']&.first['funder_award']]
-      end
+      grants = if parsed_metadata['funder'].first['funder_award']&.include?(' ; ')
+                 parsed_metadata['funder'].first['funder_award'].split(' ; ')
+               else
+                 [parsed_metadata['funder']&.first&.[]('funder_award')]
+               end
     end
-    parsed_metadata['funder']=[]
-    funders.each_with_index do | funder, index |
+    parsed_metadata['funder'] = []
+    funders.each_with_index do |funder, index|
       parsed_metadata['funder'] = [] if parsed_metadata['funder'].blank?
-      funder_obj = {'funder_name' => funder, 'funder_award' => []}
-      if index == (funders.count-1) #we have no more funders so you get all the grants
-        funder_obj['funder_award'] = grants if not grants.blank?
-      else
-        funder_obj['funder_award'] << grants.shift if not grants.blank?
+      funder_obj = { 'funder_name' => funder, 'funder_award' => [] }
+      if index == (funders.count - 1) # we have no more funders so you get all the grants
+        funder_obj['funder_award'] = grants if grants.present?
+      elsif grants.present?
+        funder_obj['funder_award'] << grants.shift
       end
       parsed_metadata['funder'] << funder_obj
     end
   end
+  # rubocop:enable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
   def set_qualification_name
     if parsed_metadata['qualification_name'].gsub(/\s+/, "").downcase.tr('.', '').include?('phd')
       'PhD'
     else
       parsed_metadata['qualification_name']
-    end 
+    end
   end
 
   # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
