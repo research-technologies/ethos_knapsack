@@ -156,7 +156,7 @@ attributes:
     index_keys:
       - "keyword_tesim"
     predicate: http://purl.org/dc/terms/coverage
-  subject: # Subject <dc:subject> (when not caught by other rules)
+  ethos_subject: # Subject <dc:subject> (when not caught by other rules)
     type: string
     multiple: true
     form:
@@ -246,7 +246,7 @@ attributes:
     index_keys:
       - "bl_cat_identifier_tesim"
     predicate: 	http://ethos.bl.uk/bl_catalogue_identifier
-  alternate_identifier: #Other Identifier <dc:identifier xsi:type="dcterms:URI">
+  other_identifier: #Other Identifier <dc:identifier xsi:type="dcterms:URI">
     type: string
     multiple: false
     form:
@@ -254,9 +254,8 @@ attributes:
       primary: true
       multiple: false
     index_keys:
-      - "alternate_identifier_tesim"
-    predicate: http://ethos.bl.uk/alternate_identifier
-
+      - "other_identifier_tesim"
+    predicate: http://ethos.bl.uk/other_identifier
   source_record: # Old EThOS URL <dc:source>
     type: string
     multiple: false
