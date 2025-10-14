@@ -155,7 +155,7 @@ attributes:
       primary: true
     index_keys:
       - "keyword_tesim"
-    predicate: http://purl.org/dc/elements/1.1/subject
+    predicate: http://purl.org/dc/terms/coverage
   subject: # Subject <dc:subject> (when not caught by other rules)
     type: string
     multiple: true
