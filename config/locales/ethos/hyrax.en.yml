@@ -22,7 +22,7 @@ en:
         referenced_by: "Referenced By"
         oai_identifier: "Source ID"
         bl_cat_identifier: "BL Catalogue ID [Aleph]"
-        alternate_identifier: "Other Identifier"
+        other_identifier: "Other Identifier"
         source_record: "Old EThOS URL"
         additional_info: "Notes"
 

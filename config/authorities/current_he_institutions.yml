@@ -255,8 +255,8 @@ terms:
     isni: 0000 0001 0710 330X
     ror: https://ror.org/01rv4p989
     active: true
+  - id: National Trust
     term: National Trust
-    id: National Trust
     isni: 0000 0001 2353 7415
     ror: https://ror.org/03md96v89
     active: true
