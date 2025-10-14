@@ -21,16 +21,12 @@ module Hyrax
           # @return [Dry::Monads::Result]
           def call(change_set)
             funders = []
-            debugger
-            change_set.input_params['funder']&.each_with_index do | funder, index |
+            change_set.input_params['funder']&.each_with_index do |funder, index|
               next if funder['funder_name'].blank?
               funders[index] = {} if funders[index].nil?
-              funders[index]=funder
+              funders[index] = funder
             end
-            debugger
             change_set.funder = funders.map(&:to_s)
-            STDERR.puts "funders: #{change_set.funder}"
-            debugger
             Success(change_set)
           rescue NoMethodError => err
             Failure([err.message, change_set])

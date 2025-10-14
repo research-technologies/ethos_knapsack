@@ -106,7 +106,7 @@ module Bulkrax
         end
       end
     end
-    
+
     # This is very similar to adding a complicated element, but here we set the parsed_metadata directly wchi will
     # allow us to do things like setting two ditinct hyrax fields from multiple instances of the same element
     # that have different attributes
@@ -116,7 +116,7 @@ module Bulkrax
       elements.each do |el|
         el.children.each do |child|
           content = child.content
-          parsed_metadata[element_label]=[] if not parsed_metadata.has_key? element_label
+          parsed_metadata[element_label] = [] unless parsed_metadata.key? element_label
           parsed_metadata[element_label] << content if content.present? && el.attr('type') == type_value
         end
       end

@@ -6,21 +6,20 @@ module Bulkrax::HasLocalProcessing
   # to add a custom property from outside of the import data
   # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
   def add_local
-#    parsed_metadata['resource_type'] = ['ThesisOrDissertation Doctoral thesis'] if parser.is_a? Bulkrax::XmlEtdDcParser
-#    parsed_metadata['creator_search'] = parsed_metadata&.[]('creator_search')&.map { |c| c.values.join(', ') }
+    #    parsed_metadata['resource_type'] = ['ThesisOrDissertation Doctoral thesis'] if parser.is_a? Bulkrax::XmlEtdDcParser
+    #    parsed_metadata['creator_search'] = parsed_metadata&.[]('creator_search')&.map { |c| c.values.join(', ') }
     parsed_metadata["qualification_name"] = set_qualification_name if parsed_metadata["qualification_name"]
     parsed_metadata['record_level_file_version_declaration'] = ActiveModel::Type::Boolean.new.cast parsed_metadata['record_level_file_version_declaration']
     set_institutional_relationships
 
-    debugger
     parsed_metadata['ethos_identifier'] = Rack::Utils.parse_query(URI(parsed_metadata['source_record']).query)['uin']
     compound_fields = {
       'creator' => ['family_name', 'given_name', 'orcid', 'isni'],
-      'contributor' => ['role', 'family_name', 'given_name'],
+      'contributor' => ['role', 'family_name', 'given_name']
     }
 
     # split funder awards on ; todo possibly funder_names too!
-    parsed_metadata['funder']&.each do | funder |
+    parsed_metadata['funder']&.each do |funder|
       funder['funder_award'] = funder['funder_award'].blank? ? [] : funder['funder_award'].split(';')
     end
 
