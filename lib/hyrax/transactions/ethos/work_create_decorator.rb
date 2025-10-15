@@ -9,7 +9,8 @@ module Hyrax
         def initialize(container: ::Container, steps: nil)
           steps = steps.dup.insert(steps.index('change_set.apply'),
                                    'change_set.handle_creators',
-                                   'change_set.handle_contributors')
+                                   'change_set.handle_contributors',
+                                   'change_set.handle_funders')
           super
         end
       end
