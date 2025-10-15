@@ -1,3 +1,28 @@
 en:
   hyrax:
     product_name: "EThOS"
+  simple_form:
+    labels:
+      defaults:
+        contributor: "Supervisor(s)"
+        qualification_name: "Qualification Name"
+        qualification_level: "Qualification Level"
+        current_he_institution: "Current Institution"
+        org_unit: "Department"
+        funder: "Sponsor/Funder"
+        grant_number: "Grant Number"
+        date_issued: "Date Awarded"
+        keyword: "Keywords"
+        ethos_subject: "Subject"
+        dewey: "DDC Subject"
+        ethos_access_rights: "Accessible?"
+        embargo_date: "Embargo"
+        ethos_identifier: "EThOS ID"
+        doi: "DOI"
+        referenced_by: "Referenced By"
+        oai_identifier: "Source ID"
+        bl_cat_identifier: "BL Catalogue ID [Aleph]"
+        other_identifier: "Other Identifier"
+        source_record: "Old EThOS URL"
+        additional_info: "Notes"
+

@@ -52,16 +52,18 @@ module Bulkrax
     end
 
     def complicated_elements
-      %w[authoridentifier_isni authoridentifier_orcid subject identifier language provenance source relation advisor creator] # maybe embargo_date
+      %w[authoridentifier_isni authoridentifier_orcid dewey subject doi other_identifier language advisor creator] # maybe embargo_date
     end
 
     def add_complicated_fields
       add_authoridentifier
+      add_dewey
       add_subject
-      add_identifier
+      add_doi
+      add_other_identifier
       add_language
       add_creator
-      add_contributor
+      add_advisor
 
       # alt identifier
     end
@@ -73,13 +75,21 @@ module Bulkrax
     end
 
     # @todo consider how we might put this "configuration logic" in the parser where it's a bit more visible
+    def add_dewey
+      add_one_to_many_element('dewey', 'subject', 'dcterms:DDC')
+    end
+
     def add_subject
-      add_complicated_element('subject', 'subject', 'dcterms:Ddc')
+      add_one_to_many_element('ethos_subject', 'subject', nil)
     end
 
     # @todo consider how we might put this "configuration logic" in the parser where it's a bit more visible
-    def add_identifier
-      add_complicated_element('identifier', 'identifier', 'dcterms:DOI')
+    def add_doi
+      add_complicated_element('doi', 'identifier', 'dcterms:DOI')
+    end
+
+    def add_other_identifier
+      add_complicated_element('other_identifier', 'identifier', 'dcterms:URI')
     end
 
     def add_language
@@ -97,11 +107,26 @@ module Bulkrax
       end
     end
 
+    # This is very similar to adding a complicated element, but here we set the parsed_metadata directly wchi will
+    # allow us to do things like setting two ditinct hyrax fields from multiple instances of the same element
+    # that have different attributes
+    def add_one_to_many_element(element_label, element_name, type_value)
+      elements = record.xpath("//*[name()='#{element_name}']")
+      return if elements.blank?
+      elements.each do |el|
+        el.children.each do |child|
+          content = child.content
+          parsed_metadata[element_label] = [] unless parsed_metadata.key? element_label
+          parsed_metadata[element_label] << content if content.present? && el.attr('type') == type_value
+        end
+      end
+    end
+
     def add_creator
       add_name_field('creator', 'creator')
     end
 
-    def add_contributor
+    def add_advisor
       add_name_field('contributor', 'advisor', type: 'Supervisor')
     end
 
