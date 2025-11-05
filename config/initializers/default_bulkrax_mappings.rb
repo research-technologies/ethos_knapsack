@@ -3,7 +3,7 @@
 ## Set custom bulkrax parser field mappings for app
 parser_mappings = {
   'title' => { from: ['title'] },
-  'alt_title' => { from: ['alternative'] },
+  'alternative_title' => { from: ['alternative'] },
   'creator_family_name' => { from: ['creator'], object: 'creator', skip_object_for_model_names: ['FileSet'] },
   'creator_given_name' => { from: ['creator'], object: 'creator', skip_object_for_model_names: ['FileSet'] },
   'creator_position' => { from: ['creator'], object: 'creator', skip_object_for_model_names: ['FileSet'] },
@@ -28,13 +28,13 @@ parser_mappings = {
   'ethos_subject' => { from: ['subject'] },
   'ethos_access_rights' => { from: ['accessRights'] },
   'embargo_date' => { from: ['embargodate'] },
-  'ethos_identifier' => { from: ['source'] },
   'doi' => { from: ['identifier'] }, # type="dcterms:DOI"
+  'other_identifier' => { from: ['identifier'] }, # type="dcterms:URI"
   'referenced_by' => { from: ['isReferencedBy'] },
   'oai_identifier' => { from: ['provenance'] },
   'bl_cat_identifier' => { from: ['relation'] },
-  'other_identifier' => { from: ['identifier'] }, # type="dcterms:URI"
-  'source_record' => { from: ['source'], source_identifier: true },
+  'ethos_identifier' => { from: ['source'], source_identifier: true }, # derived from the uin parameter of the <dc:source>
+  #  'source_record' => { from: ['source'], source_identifier: true },
   'parents' => { from: ['parents'], split: /\s*[;|]\s*/, related_parents_field_mapping: true },
   'children' => { from: ['children'], split: /\s*[;|]\s*/, related_children_field_mapping: true }
 }
