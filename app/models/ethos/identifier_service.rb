@@ -9,7 +9,7 @@ module Ethos
   # is included, because this module overrides the #assign_id method that
   # comes from including Hyrax::WorkBehavior.
   module IdentifierService
-    ID_PREFIX = "bl.uk.ethos."
+    ID_PREFIX = "stuck-to-the-front-"
 
     # mint
     # Mints a new ID for use in Fedora/Solr of new records, which is an ID that
