@@ -196,16 +196,16 @@ attributes:
     index_keys:
       - "embargo_date_ssi"
     predicate: https://www.rioxx.net/profiles/#rioxxterms:record_public_release_date
-  ethos_identifier: #Where we kee the OAI stryle ID used for resolving old links <dc:source> (only uin prarm value)
-    type: string
+  ethos_identifier: # Old EThOS ID <dc:source>
+    type: string     
     multiple: false
     form:
-      required: true
+      required: false
       primary: true
       multiple: false
     index_keys:
       - "ethos_identifier_ssi"
-    predicate: 	http://ethos.bl.uk/original_identifier
+    predicate: http://purl.org/dc/elements/1.1/source
   doi: # DOI <dc:identifier xsi:type="dcterms:DOI">
     type: string
     multiple: false
@@ -256,16 +256,16 @@ attributes:
     index_keys:
       - "other_identifier_tesim"
     predicate: http://ethos.bl.uk/other_identifier
-  source_record: # Old EThOS URL <dc:source>
-    type: string
-    multiple: false
-    form:
-      required: true
-      primary: true
-      multiple: false
-    index_keys:
-      - "source_record_tesim"
-    predicate: 	http://purl.org/dc/elements/1.1/source
+      #  source_record: # Old EThOS URL <dc:source>
+      #type: string
+      #multiple: false
+      #form:
+      #required: false
+      #primary: true
+      #multiple: false
+      #index_keys:
+      #- "source_record_tesim"
+      #predicate: 	http://purl.org/dc/elements/1.1/source
   additional_info: # iNotes <NOT USED?>
     type: string
     multiple: true
@@ -275,6 +275,14 @@ attributes:
     index_keys:
       - "additional_info_tesim"
     predicate: http://purl.org/ontology/bibo/Note
+  geospatial_location:
+    type: set
+    multiple: false
+    form:
+      primary: false
+    index_keys:
+      - "geospatial_location_llsim"
+    predicate: http://xmlns.com/foaf/0.1/based_near
 
 
 #  publisher: # COMMERCIAL PUBLISHER <NOT USED>
