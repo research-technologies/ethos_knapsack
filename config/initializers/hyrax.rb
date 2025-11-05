@@ -6,9 +6,10 @@ Rails.application.config.after_initialize do
   Hyrax.config do |config|
     # Injected via `rails g hyrax:work_resource ThesisOrDissertation`
     config.register_curation_concern :thesis_or_dissertation
-
     config.enable_noids = true
   end
 end
 
 Qa::Authorities::Local.register_subauthority('qualification_names', 'Qa::Authorities::Local::FileBasedAuthority')
+Qa::Authorities::Local.register_subauthority('current_he_institutions', 'Qa::Authorities::Local::FileBasedAuthority')
+Qa::Authorities::Local.register_subauthority('contributor_roles', 'Qa::Authorities::Local::FileBasedAuthority')

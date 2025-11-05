@@ -13,17 +13,18 @@ module Hyrax
         # @since 3.0.0
         class HandleContributors
           include Dry::Monads[:result]
-  
+
           ##
           # @param [Hyrax::ChangeSet] change_set
           # @param [#user_key] user
           #
           # @return [Dry::Monads::Result]
           def call(change_set)
-            contributors=[]
-            ['contributor_family_name', 'contributor_given_name', 'contributor_orcid', 'contributor_isni'].each do | contributor_field |
-              change_set.input_params[contributor_field].each_with_index do | value, index |
-                contributors[index]={} if contributors[index].nil?
+            contributors = []
+            ['contributor_role', 'contributor_family_name', 'contributor_given_name'].each do |contributor_field|
+              next if change_set.input_params[contributor_field].blank?
+              change_set.input_params[contributor_field].each_with_index do |value, index|
+                contributors[index] = {} if contributors[index].nil?
                 contributors[index][contributor_field] = value
               end
             end
@@ -32,7 +33,7 @@ module Hyrax
           rescue NoMethodError => err
             Failure([err.message, change_set])
           end
-        end 
+        end
       end
     end
   end
