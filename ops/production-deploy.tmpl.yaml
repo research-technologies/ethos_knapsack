@@ -49,10 +49,10 @@ extraVolumeMounts: &volMounts
 ingress:
   enabled: true
   hosts:
-    - host: "ethos-knapsack-production.notch8.cloud"
+    - host: "blethoshyku.com"
       paths:
         - path: /
-    - host: "*.ethos-knapsack-production.notch8.cloud"
+    - host: "*.blethoshyku.com"
       paths:
         - path: /
   annotations: {
@@ -62,8 +62,8 @@ ingress:
   }
   tls:
     - hosts:
-        - "ethos-knapsack-production.notch8.cloud"
-        - "*.ethos-knapsack-production.notch8.cloud"
+        - "blethoshyku.com"
+        - "*.blethoshyku.com"
       secretName: ethos-knapsack-production-tls
 
 extraEnvVars: &envVars
@@ -148,25 +148,25 @@ extraEnvVars: &envVars
   - name: HYKU_BLOCK_VALKYRIE_REDIRECT
     value: "false"
   - name: HYKU_CONTACT_EMAIL
-    value: example@ethos-knapsack.notch8.cloud
+    value: info@blethoshyku.com
   - name: HYKU_CONTACT_EMAIL_TO
-    value: example@ethos-knapsack.notch8.cloud
+    value: info@blethoshyku.com
   - name: HYKU_FILE_ACL
     value: "false"
   - name: HYRAX_FITS_PATH
     value: /app/fits/fits.sh
   - name: HYKU_ADMIN_HOST
-    value: ethos-knapsack-production.notch8.cloud
+    value: blethoshyku.com
   - name: HYKU_ADMIN_ONLY_TENANT_CREATION
     value: "false"
   - name: HYKU_ALLOW_SIGNUP
     value: "false"
   - name: HYKU_DEFAULT_HOST
-    value: "%{tenant}.ethos-knapsack-production.notch8.cloud"
+    value: "%{tenant}.blethoshyku.com"
   - name: HYKU_MULTITENANT
     value: "true"
   - name: HYKU_ROOT_HOST
-    value: ethos-knapsack-production.notch8.cloud
+    value: blethoshyku.com
   - name: HYKU_SHOW_BACKTRACE
     value: "true"
   - name: HYKU_USER_DEFAULT_PASSWORD
