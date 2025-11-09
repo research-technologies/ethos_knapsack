@@ -6,7 +6,7 @@ Rails.application.config.after_initialize do
   Hyrax.config do |config|
     # Injected via `rails g hyrax:work_resource ThesisOrDissertation`
     config.register_curation_concern :thesis_or_dissertation
-    config.enable_noids = true
+    config.enable_noids = false
   end
 end
 

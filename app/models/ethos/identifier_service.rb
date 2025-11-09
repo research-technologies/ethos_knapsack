@@ -1,4 +1,4 @@
-require 'securerandom'
+#require 'securerandom'
 
 module Ethos
   # Absolutely insistent on sequential numeric IDs, these are inherently risky,
@@ -14,7 +14,7 @@ module Ethos
     # We use Rails cache to store the last one created and we increment after we access it
     # This number will only go up, it won't revert or decrease should a) the object not 
     # end up getting created or b) the object is deleted... In some small way, we have 
-    # just made Hyrax into EPrints
+    # just made Hyrax into EPrints :/
     # @return [String] a new ID
     def self.mint
       begin
@@ -29,12 +29,5 @@ module Ethos
       !!!ActiveFedora::SolrService.query("id:#{id}", rows: 1).first
     end
 
-    private
-
-      ## This overrides the default behavior, which is to ask Fedora for an id
-      # @see ActiveFedora::Persistence.assign_id
-      def assign_id
-        Ethos::IdentifierService.mint
-      end
   end
 end
