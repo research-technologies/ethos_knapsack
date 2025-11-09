@@ -14,14 +14,14 @@ Rails.application.config.after_initialize do
   Bulkrax::Importer::DEFAULT_OBJECT_TYPES = ['work'].freeze
 end
 
-Bulkrax::ObjectFactoryInterface.base_permitted_attributes += [:creator_family_name, :creator_given_name, :creator_isni, :creator_orcid, :contributor_role, :contributor_family_name, :contributor_given_name, :funder_name, :funder_award]
-
+Bulkrax::ObjectFactoryInterface.base_permitted_attributes += [:creator_family_name, :creator_given_name, :creator_isni, :creator_orcid, :contributor_role, :contributor_family_name,
+                                                              :contributor_given_name, :funder_name, :funder_award]
 
 # Override bulkrax (9.1.0 4bb4426) we don't want to be found by id, this is so we can add legacy ids in
 Bulkrax::ObjectFactoryInterface.class_eval do
-    def find
-      search_by_identifier || nil
-    end
+  def find
+    search_by_identifier || nil
+  end
 end
 
 # Rails.application.config.to_prepare do

@@ -11,7 +11,7 @@ module Hyrax
     end
 
     def self.select_active_options
-      authority.all.select{|a| a['active']}.map do |element|
+      authority.all.select { |a| a['active'] }.map do |element|
         [element[:label], element[:id]]
       end
     end

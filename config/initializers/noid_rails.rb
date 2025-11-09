@@ -1,10 +1,10 @@
+# frozen_string_literal: true
 # This is a fix for a bug in Hyrax where under certain circumstances the minter
 # stops issuing new IDs, preventing new objects from being created.
 # See https://github.com/samvera/hyrax/issues/3128 for more details.
 ::Noid::Rails.config.identifier_in_use = lambda do |id|
   ActiveFedora::Base.exist?(id) || ActiveFedora::Base.gone?(id)
 end
-
 
 # Use the last set of items to creat the tree path in Fedora
 # because all of our ids have a first set that match.
@@ -19,7 +19,7 @@ end
         (head.scan(/..?/)[-5..-2] + [identifier]).join('/')
       else
         (head.scan(/..?/).first(4) + [identifier]).join('/')
-     end
+      end
     end
   end
 end

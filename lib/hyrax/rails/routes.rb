@@ -9,7 +9,7 @@ module ActionDispatch::Routing
     def curation_concerns_basic_routes(&block) # rubocop:disable Metrics/MethodLength
       resources :upload_sets, only: [:edit, :update]
 
-      namespace :hyrax, path: :concern do
+      namespace :hyrax, path: :concern do # rubocop:disable Metrics/BlockLength
         namespaced_resources 'workflow_actions', only: [:update]
         concerns_to_route.each do |curation_concern_name|
           namespaced_resources curation_concern_name, except: [:index], &block
@@ -56,7 +56,7 @@ module ActionDispatch::Routing
     #   namespace "hyrax", path: :concern do
     #     resources "my_work", except: [:index]
     #   end
-    def namespaced_resources(target, opts = {}, &block)
+    def namespaced_resources(target, opts = {}, &block) # rubocop:disable Metrics/MethodLength
       if target == 'thesis_or_dissertations'
         opts[:constraints] ||= {}
         opts[:constraints][:id] ||= /[^\/]+/
