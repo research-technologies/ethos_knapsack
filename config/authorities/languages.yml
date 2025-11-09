@@ -1,0 +1,1522 @@
+terms:
+- id: eng
+  term: English
+  active: true
+- id: gla
+  term: "Gaelic; Scottish Gaelic"
+  active: true
+- id: gle
+  term: Irish
+  active: true
+- id: cym
+  term: Welsh
+  active: true
+- id: aar
+  term: Afar
+  active: true
+- id: abk
+  term: Abkhazian
+  active: true
+- id: ace
+  term: Achinese
+  active: true
+- id: ach
+  term: Acoli
+  active: true
+- id: ada
+  term: Adangme
+  active: true
+- id: ady
+  term: "Adyghe; Adygei"
+  active: true
+- id: afa
+  term: "Afro-Asiatic languages"
+  active: true
+- id: afh
+  term: Afrihili
+  active: true
+- id: afr
+  term: Afrikaans
+  active: true
+- id: ain
+  term: Ainu
+  active: true
+- id: aka
+  term: Akan
+  active: true
+- id: akk
+  term: Akkadian
+  active: true
+- id: alb
+  term: Albanian
+  active: true
+- id: ale
+  term: Aleut
+  active: true
+- id: alg
+  term: "Algonquian languages"
+  active: true
+- id: alt
+  term: "Southern Altai"
+  active: true
+- id: amh
+  term: Amharic
+  active: true
+- id: ang
+  term: English, Old (ca.450-1100)
+  active: true
+- id: anp
+  term: Angika
+  active: true
+- id: apa
+  term: "Apache languages"
+  active: true
+- id: ara
+  term: Arabic
+  active: true
+- id: arc
+  term: "Official Aramaic (700-300 BCE); Imperial Aramaic (700-300 BCE)"
+  active: true
+- id: arg
+  term: Aragonese
+  active: true
+- id: arm
+  term: Armenian
+  active: true
+- id: arn
+  term: "Mapudungun; Mapuche"
+  active: true
+- id: arp
+  term: Arapaho
+  active: true
+- id: art
+  term: "Artificial languages"
+  active: true
+- id: arw
+  term: Arawak
+  active: true
+- id: asm
+  term: Assamese
+  active: true
+- id: ast
+  term: "Asturian; Bable; Leonese; Asturleonese"
+  active: true
+- id: ath
+  term: "Athapascan languages"
+  active: true
+- id: aus
+  term: "Australian languages"
+  active: true
+- id: ava
+  term: Avaric
+  active: true
+- id: ave
+  term: Avestan
+  active: true
+- id: awa
+  term: Awadhi
+  active: true
+- id: aym
+  term: Aymara
+  active: true
+- id: aze
+  term: Azerbaijani
+  active: true
+- id: bad
+  term: "Banda languages"
+  active: true
+- id: bai
+  term: "Bamileke languages"
+  active: true
+- id: bak
+  term: Bashkir
+  active: true
+- id: bal
+  term: Baluchi
+  active: true
+- id: bam
+  term: Bambara
+  active: true
+- id: ban
+  term: Balinese
+  active: true
+- id: baq
+  term: Basque
+  active: true
+- id: bas
+  term: Basa
+  active: true
+- id: bat
+  term: "Baltic languages"
+  active: true
+- id: bej
+  term: "Beja; Bedawiyet"
+  active: true
+- id: bel
+  term: Belarusian
+  active: true
+- id: bem
+  term: Bemba
+  active: true
+- id: ben
+  term: Bengali
+  active: true
+- id: ber
+  term: "Berber languages"
+  active: true
+- id: bho
+  term: Bhojpuri
+  active: true
+- id: bih
+  term: "Bihari languages"
+  active: true
+- id: bik
+  term: Bikol
+  active: true
+- id: bin
+  term: "Bini; Edo"
+  active: true
+- id: bis
+  term: Bislama
+  active: true
+- id: bla
+  term: Siksika
+  active: true
+- id: bnt
+  term: "Bantu languages"
+  active: true
+- id: bod
+  term: Tibetan
+  active: true
+- id: bos
+  term: Bosnian
+  active: true
+- id: bra
+  term: Braj
+  active: true
+- id: bre
+  term: Breton
+  active: true
+- id: btk
+  term: "Batak languages"
+  active: true
+- id: bua
+  term: Buriat
+  active: true
+- id: bug
+  term: Buginese
+  active: true
+- id: bul
+  term: Bulgarian
+  active: true
+- id: bur
+  term: Burmese
+  active: true
+- id: byn
+  term: "Blin; Bilin"
+  active: true
+- id: cad
+  term: Caddo
+  active: true
+- id: cai
+  term: "Central American Indian languages"
+  active: true
+- id: car
+  term: "Galibi Carib"
+  active: true
+- id: cat
+  term: "Catalan; Valencian"
+  active: true
+- id: cau
+  term: "Caucasian languages"
+  active: true
+- id: ceb
+  term: Cebuano
+  active: true
+- id: cel
+  term: "Celtic languages"
+  active: true
+- id: ces
+  term: Czech
+  active: true
+- id: cha
+  term: Chamorro
+  active: true
+- id: chb
+  term: Chibcha
+  active: true
+- id: che
+  term: Chechen
+  active: true
+- id: chg
+  term: Chagatai
+  active: true
+- id: chi
+  term: Chinese
+  active: true
+- id: chk
+  term: Chuukese
+  active: true
+- id: chm
+  term: Mari
+  active: true
+- id: chn
+  term: "Chinook jargon"
+  active: true
+- id: cho
+  term: Choctaw
+  active: true
+- id: chp
+  term: "Chipewyan; Dene Suline"
+  active: true
+- id: chr
+  term: Cherokee
+  active: true
+- id: chu
+  term: "Church Slavic; Old Slavonic; Church Slavonic; Old Bulgarian; Old Church Slavonic"
+  active: true
+- id: chv
+  term: Chuvash
+  active: true
+- id: chy
+  term: Cheyenne
+  active: true
+- id: cmc
+  term: "Chamic languages"
+  active: true
+- id: cnr
+  term: Montenegrin
+  active: true
+- id: cop
+  term: Coptic
+  active: true
+- id: cor
+  term: Cornish
+  active: true
+- id: cos
+  term: Corsican
+  active: true
+- id: cpe
+  term: "Creoles and pidgins, English based"
+  active: true
+- id: cpf
+  term: "Creoles and pidgins, French-based"
+  active: true
+- id: cpp
+  term: "Creoles and pidgins, Portuguese-based"
+  active: true
+- id: cre
+  term: Cree
+  active: true
+- id: crh
+  term: "Crimean Tatar; Crimean Turkish"
+  active: true
+- id: crp
+  term: "Creoles and pidgins"
+  active: true
+- id: csb
+  term: Kashubian
+  active: true
+- id: cus
+  term: "Cushitic languages"
+  active: true
+- id: cze
+  term: Czech
+  active: true
+- id: dak
+  term: Dakota
+  active: true
+- id: dan
+  term: Danish
+  active: true
+- id: dar
+  term: Dargwa
+  active: true
+- id: day
+  term: "Land Dayak languages"
+  active: true
+- id: del
+  term: Delaware
+  active: true
+- id: den
+  term: "Slave (Athapascan)"
+  active: true
+- id: deu
+  term: German
+  active: true
+- id: dgr
+  term: "Tlicho; Dogrib"
+  active: true
+- id: din
+  term: Dinka
+  active: true
+- id: div
+  term: "Divehi; Dhivehi; Maldivian"
+  active: true
+- id: doi
+  term: Dogri
+  active: true
+- id: dra
+  term: "Dravidian languages"
+  active: true
+- id: dsb
+  term: "Lower Sorbian"
+  active: true
+- id: dua
+  term: Duala
+  active: true
+- id: dum
+  term: Dutch, Middle (ca.1050-1350)
+  active: true
+- id: dut
+  term: "Dutch; Flemish"
+  active: true
+- id: dyu
+  term: Dyula
+  active: true
+- id: dzo
+  term: Dzongkha
+  active: true
+- id: efi
+  term: Efik
+  active: true
+- id: egy
+  term: "Egyptian (Ancient)"
+  active: true
+- id: eka
+  term: Ekajuk
+  active: true
+- id: ell
+  term: Greek, Modern (1453-)
+  active: true
+- id: elx
+  term: Elamite
+  active: true
+- id: enm
+  term: English, Middle (1100-1500)
+  active: true
+- id: epo
+  term: Esperanto
+  active: true
+- id: est
+  term: Estonian
+  active: true
+- id: eus
+  term: Basque
+  active: true
+- id: ewe
+  term: Ewe
+  active: true
+- id: ewo
+  term: Ewondo
+  active: true
+- id: fan
+  term: Fang
+  active: true
+- id: fao
+  term: Faroese
+  active: true
+- id: fas
+  term: Persian
+  active: true
+- id: fat
+  term: Fanti
+  active: true
+- id: fij
+  term: Fijian
+  active: true
+- id: fil
+  term: "Filipino; Pilipino"
+  active: true
+- id: fin
+  term: Finnish
+  active: true
+- id: fiu
+  term: "Finno-Ugrian languages"
+  active: true
+- id: fon
+  term: Fon
+  active: true
+- id: fra
+  term: French
+  active: true
+- id: fre
+  term: French
+  active: true
+- id: frm
+  term: French, Middle (ca.1400-1600)
+  active: true
+- id: fro
+  term: French, Old (842-ca.1400)
+  active: true
+- id: frr
+  term: "Northern Frisian"
+  active: true
+- id: frs
+  term: "Eastern Frisian"
+  active: true
+- id: fry
+  term: "Western Frisian"
+  active: true
+- id: ful
+  term: Fulah
+  active: true
+- id: fur
+  term: Friulian
+  active: true
+- id: gaa
+  term: Ga
+  active: true
+- id: gay
+  term: Gayo
+  active: true
+- id: gba
+  term: Gbaya
+  active: true
+- id: gem
+  term: "Germanic languages"
+  active: true
+- id: geo
+  term: Georgian
+  active: true
+- id: ger
+  term: German
+  active: true
+- id: gez
+  term: Geez
+  active: true
+- id: gil
+  term: Gilbertese
+  active: true
+- id: glg
+  term: Galician
+  active: true
+- id: glv
+  term: Manx
+  active: true
+- id: gmh
+  term: German, Middle High (ca.1050-1500)
+  active: true
+- id: goh
+  term: German, Old High (ca.750-1050)
+  active: true
+- id: gon
+  term: Gondi
+  active: true
+- id: gor
+  term: Gorontalo
+  active: true
+- id: got
+  term: Gothic
+  active: true
+- id: grb
+  term: Grebo
+  active: true
+- id: grc
+  term: Greek, Ancient (to 1453)
+  active: true
+- id: gre
+  term: Greek, Modern (1453-)
+  active: true
+- id: grn
+  term: Guarani
+  active: true
+- id: gsw
+  term: "Swiss German; Alemannic; Alsatian"
+  active: true
+- id: guj
+  term: Gujarati
+  active: true
+- id: gwi
+  term: Gwich'in
+  active: true
+- id: hai
+  term: Haida
+  active: true
+- id: hat
+  term: "Haitian; Haitian Creole"
+  active: true
+- id: hau
+  term: Hausa
+  active: true
+- id: haw
+  term: Hawaiian
+  active: true
+- id: heb
+  term: Hebrew
+  active: true
+- id: her
+  term: Herero
+  active: true
+- id: hil
+  term: Hiligaynon
+  active: true
+- id: him
+  term: "Himachali languages; Western Pahari languages"
+  active: true
+- id: hin
+  term: Hindi
+  active: true
+- id: hit
+  term: Hittite
+  active: true
+- id: hmn
+  term: "Hmong; Mong"
+  active: true
+- id: hmo
+  term: "Hiri Motu"
+  active: true
+- id: hrv
+  term: Croatian
+  active: true
+- id: hsb
+  term: "Upper Sorbian"
+  active: true
+- id: hun
+  term: Hungarian
+  active: true
+- id: hup
+  term: Hupa
+  active: true
+- id: hye
+  term: Armenian
+  active: true
+- id: iba
+  term: Iban
+  active: true
+- id: ibo
+  term: Igbo
+  active: true
+- id: ice
+  term: Icelandic
+  active: true
+- id: ido
+  term: Ido
+  active: true
+- id: iii
+  term: "Sichuan Yi; Nuosu"
+  active: true
+- id: ijo
+  term: "Ijo languages"
+  active: true
+- id: iku
+  term: Inuktitut
+  active: true
+- id: ile
+  term: "Interlingue; Occidental"
+  active: true
+- id: ilo
+  term: Iloko
+  active: true
+- id: ina
+  term: "Interlingua (International Auxiliary Language Association)"
+  active: true
+- id: inc
+  term: "Indic languages"
+  active: true
+- id: ind
+  term: Indonesian
+  active: true
+- id: ine
+  term: "Indo-European languages"
+  active: true
+- id: inh
+  term: Ingush
+  active: true
+- id: ipk
+  term: Inupiaq
+  active: true
+- id: ira
+  term: "Iranian languages"
+  active: true
+- id: iro
+  term: "Iroquoian languages"
+  active: true
+- id: isl
+  term: Icelandic
+  active: true
+- id: ita
+  term: Italian
+  active: true
+- id: jav
+  term: Javanese
+  active: true
+- id: jbo
+  term: Lojban
+  active: true
+- id: jpn
+  term: Japanese
+  active: true
+- id: jpr
+  term: Judeo-Persian
+  active: true
+- id: jrb
+  term: Judeo-Arabic
+  active: true
+- id: kaa
+  term: Kara-Kalpak
+  active: true
+- id: kab
+  term: Kabyle
+  active: true
+- id: kac
+  term: "Kachin; Jingpho"
+  active: true
+- id: kal
+  term: "Kalaallisut; Greenlandic"
+  active: true
+- id: kam
+  term: Kamba
+  active: true
+- id: kan
+  term: Kannada
+  active: true
+- id: kar
+  term: "Karen languages"
+  active: true
+- id: kas
+  term: Kashmiri
+  active: true
+- id: kat
+  term: Georgian
+  active: true
+- id: kau
+  term: Kanuri
+  active: true
+- id: kaw
+  term: Kawi
+  active: true
+- id: kaz
+  term: Kazakh
+  active: true
+- id: kbd
+  term: Kabardian
+  active: true
+- id: kha
+  term: Khasi
+  active: true
+- id: khi
+  term: "Khoisan languages"
+  active: true
+- id: khm
+  term: "Central Khmer"
+  active: true
+- id: kho
+  term: "Khotanese; Sakan"
+  active: true
+- id: kik
+  term: "Kikuyu; Gikuyu"
+  active: true
+- id: kin
+  term: Kinyarwanda
+  active: true
+- id: kir
+  term: "Kirghiz; Kyrgyz"
+  active: true
+- id: kmb
+  term: Kimbundu
+  active: true
+- id: kok
+  term: Konkani
+  active: true
+- id: kom
+  term: Komi
+  active: true
+- id: kon
+  term: Kongo
+  active: true
+- id: kor
+  term: Korean
+  active: true
+- id: kos
+  term: Kosraean
+  active: true
+- id: kpe
+  term: Kpelle
+  active: true
+- id: krc
+  term: Karachay-Balkar
+  active: true
+- id: krl
+  term: Karelian
+  active: true
+- id: kro
+  term: "Kru languages"
+  active: true
+- id: kru
+  term: Kurukh
+  active: true
+- id: kua
+  term: "Kuanyama; Kwanyama"
+  active: true
+- id: kum
+  term: Kumyk
+  active: true
+- id: kur
+  term: Kurdish
+  active: true
+- id: kut
+  term: Kutenai
+  active: true
+- id: lad
+  term: Ladino
+  active: true
+- id: lah
+  term: Lahnda
+  active: true
+- id: lam
+  term: Lamba
+  active: true
+- id: lao
+  term: Lao
+  active: true
+- id: lat
+  term: Latin
+  active: true
+- id: lav
+  term: Latvian
+  active: true
+- id: lez
+  term: Lezghian
+  active: true
+- id: lim
+  term: "Limburgan; Limburger; Limburgish"
+  active: true
+- id: lin
+  term: Lingala
+  active: true
+- id: lit
+  term: Lithuanian
+  active: true
+- id: lol
+  term: Mongo
+  active: true
+- id: loz
+  term: Lozi
+  active: true
+- id: ltz
+  term: "Luxembourgish; Letzeburgesch"
+  active: true
+- id: lua
+  term: Luba-Lulua
+  active: true
+- id: lub
+  term: Luba-Katanga
+  active: true
+- id: lug
+  term: Ganda
+  active: true
+- id: lui
+  term: Luiseno
+  active: true
+- id: lun
+  term: Lunda
+  active: true
+- id: luo
+  term: "Luo (Kenya and Tanzania)"
+  active: true
+- id: lus
+  term: Lushai
+  active: true
+- id: mac
+  term: Macedonian
+  active: true
+- id: mad
+  term: Madurese
+  active: true
+- id: mag
+  term: Magahi
+  active: true
+- id: mah
+  term: Marshallese
+  active: true
+- id: mai
+  term: Maithili
+  active: true
+- id: mak
+  term: Makasar
+  active: true
+- id: mal
+  term: Malayalam
+  active: true
+- id: man
+  term: Mandingo
+  active: true
+- id: mao
+  term: Maori
+  active: true
+- id: map
+  term: "Austronesian languages"
+  active: true
+- id: mar
+  term: Marathi
+  active: true
+- id: mas
+  term: Masai
+  active: true
+- id: may
+  term: Malay
+  active: true
+- id: mdf
+  term: Moksha
+  active: true
+- id: mdr
+  term: Mandar
+  active: true
+- id: men
+  term: Mende
+  active: true
+- id: mga
+  term: Irish, Middle (900-1200)
+  active: true
+- id: mic
+  term: Mi'kmaq; Micmac
+  active: true
+- id: min
+  term: Minangkabau
+  active: true
+- id: mis
+  term: "Uncoded languages"
+  active: true
+- id: mkd
+  term: Macedonian
+  active: true
+- id: mkh
+  term: "Mon-Khmer languages"
+  active: true
+- id: mlg
+  term: Malagasy
+  active: true
+- id: mlt
+  term: Maltese
+  active: true
+- id: mnc
+  term: Manchu
+  active: true
+- id: mni
+  term: Manipuri
+  active: true
+- id: mno
+  term: "Manobo languages"
+  active: true
+- id: moh
+  term: Mohawk
+  active: true
+- id: mon
+  term: Mongolian
+  active: true
+- id: mos
+  term: Mossi
+  active: true
+- id: mri
+  term: Maori
+  active: true
+- id: msa
+  term: Malay
+  active: true
+- id: mul
+  term: "Multiple languages"
+  active: true
+- id: mun
+  term: "Munda languages"
+  active: true
+- id: mus
+  term: Creek
+  active: true
+- id: mwl
+  term: Mirandese
+  active: true
+- id: mwr
+  term: Marwari
+  active: true
+- id: mya
+  term: Burmese
+  active: true
+- id: myn
+  term: "Mayan languages"
+  active: true
+- id: myv
+  term: Erzya
+  active: true
+- id: nah
+  term: "Nahuatl languages"
+  active: true
+- id: nai
+  term: "North American Indian languages"
+  active: true
+- id: nap
+  term: Neapolitan
+  active: true
+- id: nau
+  term: Nauru
+  active: true
+- id: nav
+  term: "Navajo; Navaho"
+  active: true
+- id: nbl
+  term: Ndebele, South; South Ndebele
+  active: true
+- id: nde
+  term: Ndebele, North; North Ndebele
+  active: true
+- id: ndo
+  term: Ndonga
+  active: true
+- id: nds
+  term: "Low German; Low Saxon; German, Low; Saxon, Low"
+  active: true
+- id: nep
+  term: Nepali
+  active: true
+- id: new
+  term: "Nepal Bhasa; Newari"
+  active: true
+- id: nia
+  term: Nias
+  active: true
+- id: nic
+  term: "Niger-Kordofanian languages"
+  active: true
+- id: niu
+  term: Niuean
+  active: true
+- id: nld
+  term: "Dutch; Flemish"
+  active: true
+- id: nno
+  term: "Norwegian Nynorsk; Nynorsk, Norwegian"
+  active: true
+- id: nob
+  term: Bokmål, Norwegian; Norwegian Bokmål
+  active: true
+- id: nog
+  term: Nogai
+  active: true
+- id: non
+  term: Norse, Old
+  active: true
+- id: nor
+  term: Norwegian
+  active: true
+- id: nqo
+  term: N'Ko
+  active: true
+- id: nso
+  term: "Pedi; Sepedi; Northern Sotho"
+  active: true
+- id: nub
+  term: "Nubian languages"
+  active: true
+- id: nwc
+  term: "Classical Newari; Old Newari; Classical Nepal Bhasa"
+  active: true
+- id: nya
+  term: "Chichewa; Chewa; Nyanja"
+  active: true
+- id: nym
+  term: Nyamwezi
+  active: true
+- id: nyn
+  term: Nyankole
+  active: true
+- id: nyo
+  term: Nyoro
+  active: true
+- id: nzi
+  term: Nzima
+  active: true
+- id: oci
+  term: "Occitan (post 1500)"
+  active: true
+- id: oji
+  term: Ojibwa
+  active: true
+- id: ori
+  term: Oriya
+  active: true
+- id: orm
+  term: Oromo
+  active: true
+- id: osa
+  term: Osage
+  active: true
+- id: oss
+  term: "Ossetian; Ossetic"
+  active: true
+- id: ota
+  term: Turkish, Ottoman (1500-1928)
+  active: true
+- id: oto
+  term: "Otomian languages"
+  active: true
+- id: paa
+  term: "Papuan languages"
+  active: true
+- id: pag
+  term: Pangasinan
+  active: true
+- id: pal
+  term: Pahlavi
+  active: true
+- id: pam
+  term: "Pampanga; Kapampangan"
+  active: true
+- id: pan
+  term: "Panjabi; Punjabi"
+  active: true
+- id: pap
+  term: Papiamento
+  active: true
+- id: pau
+  term: Palauan
+  active: true
+- id: peo
+  term: Persian, Old (ca.600-400 B.C.)
+  active: true
+- id: per
+  term: Persian
+  active: true
+- id: phi
+  term: "Philippine languages"
+  active: true
+- id: phn
+  term: Phoenician
+  active: true
+- id: pli
+  term: Pali
+  active: true
+- id: pol
+  term: Polish
+  active: true
+- id: pon
+  term: Pohnpeian
+  active: true
+- id: por
+  term: Portuguese
+  active: true
+- id: pra
+  term: "Prakrit languages"
+  active: true
+- id: pro
+  term: Provençal, Old (to 1500); Occitan, Old (to 1500)
+  active: true
+- id: pus
+  term: "Pushto; Pashto"
+  active: true
+- id: qaa-qtz
+  term: "Reserved for local use"
+  active: true
+- id: que
+  term: Quechua
+  active: true
+- id: raj
+  term: Rajasthani
+  active: true
+- id: rap
+  term: Rapanui
+  active: true
+- id: rar
+  term: "Rarotongan; Cook Islands Maori"
+  active: true
+- id: roa
+  term: "Romance languages"
+  active: true
+- id: roh
+  term: Romansh
+  active: true
+- id: rom
+  term: Romany
+  active: true
+- id: ron
+  term: "Romanian; Moldavian; Moldovan"
+  active: true
+- id: rum
+  term: "Romanian; Moldavian; Moldovan"
+  active: true
+- id: run
+  term: Rundi
+  active: true
+- id: rup
+  term: "Aromanian; Arumanian; Macedo-Romanian"
+  active: true
+- id: rus
+  term: Russian
+  active: true
+- id: sad
+  term: Sandawe
+  active: true
+- id: sag
+  term: Sango
+  active: true
+- id: sah
+  term: Yakut
+  active: true
+- id: sai
+  term: "South American Indian languages"
+  active: true
+- id: sal
+  term: "Salishan languages"
+  active: true
+- id: sam
+  term: "Samaritan Aramaic"
+  active: true
+- id: san
+  term: Sanskrit
+  active: true
+- id: sas
+  term: Sasak
+  active: true
+- id: sat
+  term: Santali
+  active: true
+- id: scn
+  term: Sicilian
+  active: true
+- id: sco
+  term: Scots
+  active: true
+- id: sel
+  term: Selkup
+  active: true
+- id: sem
+  term: "Semitic languages"
+  active: true
+- id: sga
+  term: Irish, Old (to 900)
+  active: true
+- id: sgn
+  term: "Sign Languages"
+  active: true
+- id: shn
+  term: Shan
+  active: true
+- id: sid
+  term: Sidamo
+  active: true
+- id: sin
+  term: "Sinhala; Sinhalese"
+  active: true
+- id: sio
+  term: "Siouan languages"
+  active: true
+- id: sit
+  term: "Sino-Tibetan languages"
+  active: true
+- id: sla
+  term: "Slavic languages"
+  active: true
+- id: slk
+  term: Slovak
+  active: true
+- id: slo
+  term: Slovak
+  active: true
+- id: slv
+  term: Slovenian
+  active: true
+- id: sma
+  term: "Southern Sami"
+  active: true
+- id: sme
+  term: "Northern Sami"
+  active: true
+- id: smi
+  term: "Sami languages"
+  active: true
+- id: smj
+  term: "Lule Sami"
+  active: true
+- id: smn
+  term: "Inari Sami"
+  active: true
+- id: smo
+  term: Samoan
+  active: true
+- id: sms
+  term: "Skolt Sami"
+  active: true
+- id: sna
+  term: Shona
+  active: true
+- id: snd
+  term: Sindhi
+  active: true
+- id: snk
+  term: Soninke
+  active: true
+- id: sog
+  term: Sogdian
+  active: true
+- id: som
+  term: Somali
+  active: true
+- id: son
+  term: "Songhai languages"
+  active: true
+- id: sot
+  term: Sotho, Southern
+  active: true
+- id: spa
+  term: "Spanish; Castilian"
+  active: true
+- id: sqi
+  term: Albanian
+  active: true
+- id: srd
+  term: Sardinian
+  active: true
+- id: srn
+  term: "Sranan Tongo"
+  active: true
+- id: srp
+  term: Serbian
+  active: true
+- id: srr
+  term: Serer
+  active: true
+- id: ssa
+  term: "Nilo-Saharan languages"
+  active: true
+- id: ssw
+  term: Swati
+  active: true
+- id: suk
+  term: Sukuma
+  active: true
+- id: sun
+  term: Sundanese
+  active: true
+- id: sus
+  term: Susu
+  active: true
+- id: sux
+  term: Sumerian
+  active: true
+- id: swa
+  term: Swahili
+  active: true
+- id: swe
+  term: Swedish
+  active: true
+- id: syc
+  term: "Classical Syriac"
+  active: true
+- id: syr
+  term: Syriac
+  active: true
+- id: tah
+  term: Tahitian
+  active: true
+- id: tai
+  term: "Tai languages"
+  active: true
+- id: tam
+  term: Tamil
+  active: true
+- id: tat
+  term: Tatar
+  active: true
+- id: tel
+  term: Telugu
+  active: true
+- id: tem
+  term: Timne
+  active: true
+- id: ter
+  term: Tereno
+  active: true
+- id: tet
+  term: Tetum
+  active: true
+- id: tgk
+  term: Tajik
+  active: true
+- id: tgl
+  term: Tagalog
+  active: true
+- id: tha
+  term: Thai
+  active: true
+- id: tib
+  term: Tibetan
+  active: true
+- id: tig
+  term: Tigre
+  active: true
+- id: tir
+  term: Tigrinya
+  active: true
+- id: tiv
+  term: Tiv
+  active: true
+- id: tkl
+  term: Tokelau
+  active: true
+- id: tlh
+  term: "Klingon; tlhIngan-Hol"
+  active: true
+- id: tli
+  term: Tlingit
+  active: true
+- id: tmh
+  term: Tamashek
+  active: true
+- id: tog
+  term: "Tonga (Nyasa)"
+  active: true
+- id: ton
+  term: "Tonga (Tonga Islands)"
+  active: true
+- id: tpi
+  term: "Tok Pisin"
+  active: true
+- id: tsi
+  term: Tsimshian
+  active: true
+- id: tsn
+  term: Tswana
+  active: true
+- id: tso
+  term: Tsonga
+  active: true
+- id: tuk
+  term: Turkmen
+  active: true
+- id: tum
+  term: Tumbuka
+  active: true
+- id: tup
+  term: "Tupi languages"
+  active: true
+- id: tur
+  term: Turkish
+  active: true
+- id: tut
+  term: "Altaic languages"
+  active: true
+- id: tvl
+  term: Tuvalu
+  active: true
+- id: twi
+  term: Twi
+  active: true
+- id: tyv
+  term: Tuvinian
+  active: true
+- id: udm
+  term: Udmurt
+  active: true
+- id: uga
+  term: Ugaritic
+  active: true
+- id: uig
+  term: "Uighur; Uyghur"
+  active: true
+- id: ukr
+  term: Ukrainian
+  active: true
+- id: umb
+  term: Umbundu
+  active: true
+- id: und
+  term: Undetermined
+  active: true
+- id: urd
+  term: Urdu
+  active: true
+- id: uzb
+  term: Uzbek
+  active: true
+- id: vai
+  term: Vai
+  active: true
+- id: ven
+  term: Venda
+  active: true
+- id: vie
+  term: Vietnamese
+  active: true
+- id: vol
+  term: Volapük
+  active: true
+- id: vot
+  term: Votic
+  active: true
+- id: wak
+  term: "Wakashan languages"
+  active: true
+- id: wal
+  term: "Wolaitta; Wolaytta"
+  active: true
+- id: war
+  term: Waray
+  active: true
+- id: was
+  term: Washo
+  active: true
+- id: wel
+  term: Welsh
+  active: true
+- id: wen
+  term: "Sorbian languages"
+  active: true
+- id: wln
+  term: Walloon
+  active: true
+- id: wol
+  term: Wolof
+  active: true
+- id: xal
+  term: "Kalmyk; Oirat"
+  active: true
+- id: xho
+  term: Xhosa
+  active: true
+- id: yao
+  term: Yao
+  active: true
+- id: yap
+  term: Yapese
+  active: true
+- id: yid
+  term: Yiddish
+  active: true
+- id: yor
+  term: Yoruba
+  active: true
+- id: ypk
+  term: "Yupik languages"
+  active: true
+- id: zap
+  term: Zapotec
+  active: true
+- id: zbl
+  term: "Blissymbols; Blissymbolics; Bliss"
+  active: true
+- id: zen
+  term: Zenaga
+  active: true
+- id: zgh
+  term: "Standard Moroccan Tamazight"
+  active: true
+- id: zha
+  term: "Zhuang; Chuang"
+  active: true
+- id: zho
+  term: Chinese
+  active: true
+- id: znd
+  term: "Zande languages"
+  active: true
+- id: zul
+  term: Zulu
+  active: true
+- id: zun
+  term: Zuni
+  active: true
+- id: zxx
+  term: "No linguistic content; Not applicable"
+  active: true
+- id: zza
+  term: "Zaza; Dimili; Dimli; Kirdki; Kirmanjki; Zazaki"
+  active: true

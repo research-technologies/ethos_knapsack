@@ -39,15 +39,6 @@
 
 attributes:
   # Title will appear first...
-  alternative_title: # Alternative Title <dcterms:alternative>
-    type: string
-    multiple: true
-    form:
-      required: false
-      primary: true
-    index_keys:
-      - "alternative_title_tesim"
-    predicate: http://purl.org/dc/terms/alternative
   creator: # Creator <dc:creator>
     type: string
     multiple: true
@@ -57,23 +48,16 @@ attributes:
     index_keys:
       - "creator_tesim"
     predicate: http://purl.org/dc/elements/1.1/creator
-  contributor: # Supervisor <uketdterms:advisor>
+  language: # LANGUAGE <dc:language xsi:type="dcterms:ISO639-2">
     type: string
     multiple: true
     form:
+      required: true
       primary: true
+      multiple: true
     index_keys:
-      - "contributor_tesim"
-    predicate: http://purl.org/dc/elements/1.1/contributor
-  abstract: #ABSTRACT <dcterms:abstract>
-    type: string
-    multiple: true
-    form:
-      required: false
-      primary: true
-    index_keys:
-      - "abstract_tesim"
-    predicate: http://purl.org/dc/elements/1.1/abstract
+      - "language_tesim"
+    predicate: http://purl.org/dc/elements/1.1/language
   qualification_name: # Qualification Name <uketdterms:qualificationname>
     type: string
     multiple: false
@@ -94,15 +78,6 @@ attributes:
     index_keys:
       - "qualification_level_tesim"
     predicate: http://ethos.library.leeds.ac.uk/uketd/terms/qualificationlevel
-  institution: # INSTITUION <dc:publisher>
-    type: string
-    multiple: true
-    form:
-      primary: true
-    index_keys:
-      - "institution_sim"
-      - "institution_tesim"
-    predicate: http://ethos.library.leeds.ac.uk/uketd/terms/institution
   current_he_institution: # CURRENT INSTITUTION <uketdterms:institution>
     type: string
     multiple: false
@@ -113,6 +88,41 @@ attributes:
     index_keys:
       - "current_he_institution_tesim"
     predicate: http://ethos.library.leeds.ac.uk/uketd/terms/institution#current
+  alternative_title: # Alternative Title <dcterms:alternative>
+    type: string
+    multiple: true
+    form:
+      required: false
+      primary: true
+    index_keys:
+      - "alternative_title_tesim"
+    predicate: http://purl.org/dc/terms/alternative
+  contributor: # Supervisor <uketdterms:advisor>
+    type: string
+    multiple: true
+    form:
+      primary: true
+    index_keys:
+      - "contributor_tesim"
+    predicate: http://purl.org/dc/elements/1.1/contributor
+  abstract: #ABSTRACT <dcterms:abstract>
+    type: string
+    multiple: true
+    form:
+      required: false
+      primary: true
+    index_keys:
+      - "abstract_tesim"
+    predicate: http://purl.org/dc/elements/1.1/abstract
+  institution: # INSTITUION <dc:publisher>
+    type: string
+    multiple: true
+    form:
+      primary: true
+    index_keys:
+      - "institution_sim"
+      - "institution_tesim"
+    predicate: http://ethos.library.leeds.ac.uk/uketd/terms/institution
   org_unit: # DEPARTMENT <uketdterms:department>
     type: string
     multiple: true
@@ -137,16 +147,6 @@ attributes:
     index_keys:
       - "date_issued_tesim"
     predicate: http://purl.org/dc/terms/issued
-  language: # LANGUAGE <dc:language xsi:type="dcterms:ISO639-2">
-    type: string
-    multiple: true
-    form:
-      required: true
-      primary: true
-      multiple: true
-    index_keys:
-      - "language_tesim"
-    predicate: http://purl.org/dc/elements/1.1/language
   keyword: # KEYWORDS  <dc:subject> (<dc:coverage> in load data)
     type: string
     multiple: true
@@ -275,15 +275,6 @@ attributes:
     index_keys:
       - "additional_info_tesim"
     predicate: http://purl.org/ontology/bibo/Note
-  geospatial_location:
-    type: set
-    multiple: false
-    form:
-      primary: false
-    index_keys:
-      - "geospatial_location_llsim"
-    predicate: http://xmlns.com/foaf/0.1/based_near
-
 
 #  publisher: # COMMERCIAL PUBLISHER <NOT USED>
 #    type: string
