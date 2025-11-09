@@ -1,0 +1,7 @@
+<% record = f.object.model %>
+<%= f.input key,
+    label: label_for(term: key, record_class: record.class),
+    hint: hint_for(term: key, record_class: record.class),
+    input_html: { class: 'form-control' },
+    required: f.object.required?(key),
+    disabled: true %>

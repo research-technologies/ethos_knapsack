@@ -1,0 +1,98 @@
+<% template = f.object.model.class.to_s.underscore %>
+
+<% f.object.attributes[key].empty? ? funders = [{}] : funders = f.object.attributes[key].map{|f| eval(f.gsub(/^\d+~/,''))} %>
+
+<% funders.each_with_index do |funder, index| %>
+  <div class="row">
+    <div class="col-md-12">
+      <label for="funder" class="control-label">Sponsor / Funder</label>
+    </div>
+  </div>
+
+  <div class="multiple-group <%=key%>-multiple-group">
+
+    <div class="row funder_name">
+      <div class="form-group col-md-1 funder-position-display">
+        <%= index+1 %>
+      </div>
+      <div class="form-group col-md-7">
+        <input type="text" name="thesis_or_dissertation[funder][][funder_name]" id="funder_name" class="form-control form-control-sm" placeholder="Funder Name" value="<%=funder['funder_name']%>">
+      </div>
+
+    <% funder_award_list = funder.dig("funder_award").presence || [''] %>
+      <div class="form-group col-md-4">
+      <% funder_award_list.each do |funder_award| %>
+        <div class="multiple-group funder-award-multiple-group">
+          <input type="text" name="thesis_or_dissertation[funder][][funder_award][]" id="funder_award" class="form-control form-control-sm" placeholder="Grant Number" value="<%=funder_award%>">
+        </div>
+        <a href="#" style="color:red;"  class="remove_funder_award form-group">
+          <span class="glyphicon glyphicon-remove"></span>
+          <span class="controls-remove-text">Remove</span>
+        </a> | 
+        <a href='#' class="add_funder_award funder_award form-group">
+          <span class="glyphicon glyphicon-plus"></span> Add another
+        </a>
+       <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+  <a href="#" style="color:red;"  class="remove_funder form-group">
+    <span class="glyphicon glyphicon-remove"></span>
+    <span class="controls-remove-text">Remove</span>
+  </a> | <a href="#" class="add_funder">Add another Sponsor / Funder</a>
+  <br/>
+  <br/>
+<script>
+
+  $(document).on('turbolinks:load', function() {
+    return $('body').on('click', '.add_funder', function(event) {
+      event.preventDefault();
+      last_group = $(this).siblings('.funder-multiple-group').last();
+      const clonedFunderSection = last_group.clone();
+      clonedFunderSection.find('input').val('');
+      // increment hidden_field counter after cloning
+      mg_count = parseInt($('.funder-multiple-group').length) + 1;
+      $(clonedFunderSection).find('input.funder-position').val(mg_count);
+      $(clonedFunderSection).find('.funder-position-display').html(mg_count);
+
+      // add the cloned section at the end of the funder list
+      last_group.after(clonedFunderSection);
+      
+    });
+  });
+
+  // remove last funder section
+  $(document).on('turbolinks:load', function() {
+    return $('body').on('click', '.remove_funder', function(event) {
+      event.preventDefault();
+      if ($('.funder-multiple-group').length > 1 ) {
+        $(this).siblings('.funder-multiple-group').last().remove();
+      }
+    });
+  });
+
+  $(document).on('turbolinks:load', function() {
+    return $('body').on('click', '.add_funder_award', function(event) {
+      event.preventDefault();
+      last_group = $(this).siblings('.funder-award-multiple-group').last();
+      console.log(last_group);
+      const clonedFunderAwardSection = last_group.clone();
+      clonedFunderAwardSection.find('input').val('');
+
+      // add the cloned section at the end of the funder list
+      last_group.after(clonedFunderAwardSection);
+    });
+  });
+
+  $(document).on('turbolinks:load', function() {
+    return $('body').on('click', '.remove_funder_award', function(event) {
+      event.preventDefault();
+      if ($(this).siblings('.funder-award-multiple-group').length > 1 ) {
+        $(this).siblings('.funder-award-multiple-group').last().remove();
+      }
+    });
+  });
+
+</script>

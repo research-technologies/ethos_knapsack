@@ -21,7 +21,8 @@ module Hyrax
           # @return [Dry::Monads::Result]
           def call(change_set)
             contributors = []
-            ['contributor_family_name', 'contributor_given_name', 'contributor_orcid', 'contributor_isni'].each do |contributor_field|
+            ['contributor_role', 'contributor_family_name', 'contributor_given_name'].each do |contributor_field|
+              next if change_set.input_params[contributor_field].blank?
               change_set.input_params[contributor_field].each_with_index do |value, index|
                 contributors[index] = {} if contributors[index].nil?
                 contributors[index][contributor_field] = value

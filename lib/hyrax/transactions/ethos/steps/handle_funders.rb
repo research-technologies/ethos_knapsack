@@ -11,7 +11,7 @@ module Hyrax
         # If no user is given, simply passes as a `Success`.
         #
         # @since 3.0.0
-        class HandleCreators
+        class HandleFunders
           include Dry::Monads[:result]
 
           ##
@@ -20,18 +20,13 @@ module Hyrax
           #
           # @return [Dry::Monads::Result]
           def call(change_set)
-            creators = []
-            ['creator_family_name', 'creator_given_name', 'creator_orcid', 'creator_isni'].each do |creator_field|
-              next if change_set.input_params[creator_field].blank?
-              change_set.input_params[creator_field].each_with_index do |value, index|
-                creators[index] = {} if creators[index].nil?
-                creators[index][creator_field] = value
-              end
+            funders = []
+            change_set.input_params['funder']&.each_with_index do |funder, index|
+              next if funder['funder_name'].blank?
+              funders[index] = {} if funders[index].nil?
+              funders[index] = funder
             end
-            # debugger
-            change_set.creator = creators.map(&:to_s)
-            STDERR.puts "creators: #{change_set.creator}"
-            # debugger
+            change_set.funder = funders.map(&:to_s)
             Success(change_set)
           rescue NoMethodError => err
             Failure([err.message, change_set])
