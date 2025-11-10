@@ -2,6 +2,8 @@
 
 module Bulkrax
   class XmlEtdDcParser < XmlParser # rubocop:disable Metrics/ClassLength
+    include UketdXmlRendererBehaviour
+
     def self.export_supported?
       true
     end
@@ -72,7 +74,7 @@ module Bulkrax
     end
 
     def records_split_count
-      1000
+      1000000
     end
 
     def create_new_entries
@@ -116,145 +118,24 @@ module Bulkrax
         folder_count += 1
 
         doc = XML::Document.string('<oai_dc:dcCollection xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc"/>')
-
+        renderer = Bulkrax::UketdXmlRendererBehaviour
         group.each do |entry|
           uketddc_node = XML::Node.new('uketddc')
-          uketd_dc_namespaces.each do |ns, ns_url|
-            add_namespace(uketddc_node, ns.to_s, ns_url)
+          renderer.uketd_dc_namespaces.each do |ns, ns_url|
+            renderer.add_namespace(uketddc_node, ns.to_s, ns_url)
           end
           uketddc_node['xsi:schemaLocation'] = "http://naca.central.cranfield.ac.uk/ethos-oai/2.0/uketd_dc.xsd"
           doc.root << uketddc_node
           entry.parsed_metadata.each do |key, value|
             unnumbered_key = key.gsub(/_\d+$/, '')
-            next unless uketd_tags.key?(unnumbered_key.to_sym)
-            render(unnumbered_key, value, uketddc_node)
+            next unless renderer.uketd_tags.key?(unnumbered_key.to_sym)
+            renderer.render(unnumbered_key, value, uketddc_node)
           end
         end
         doc.save(setup_export_file(folder_count), indent: true, encoding: XML::Encoding::UTF_8)
       end
     end
     # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
-
-    def render(key, value, uketddc_node)
-      send("render_#{key}", key, value, uketddc_node)
-    rescue NoMethodError
-      uketddc_node << XML::Node.new("#{uketd_tags[key.to_sym]}:#{key}", value)
-    end
-
-    def render_creator(key, value, uketddc_node)
-      value.each do |v|
-        uketddc_node << XML::Node.new("#{uketd_tags[key.to_sym]}:#{key}", "#{v['creator_family_name']}, #{v['creator_given_name']}")
-      end
-    end
-
-    def render_advisor(key, value, uketddc_node)
-      value.each do |v|
-        uketddc_node << XML::Node.new("#{uketd_tags[key.to_sym]}:#{key}", "#{v['contributor_family_name']}, #{v['contributor_given_name']}")
-      end
-    end
-
-    def render_sponsor(key, value, uketddc_node)
-      uketddc_node << XML::Node.new("#{uketd_tags[key.to_sym]}:#{key}", value.join(' ; '))
-    end
-
-    def render_grantnumber(key, value, uketddc_node)
-      value.each do |v|
-        uketddc_node << XML::Node.new("#{uketd_tags[key.to_sym]}:#{key}", v)
-      end
-    end
-
-    def render_language(key, value, uketddc_node)
-      language_node = XML::Node.new("#{uketd_tags[key.to_sym]}:#{key}", value)
-      XML::Attr.new(language_node, "xsi:type", "dcterms:ISO639-2")
-      uketddc_node << language_node
-    end
-
-    def render_identifier_doi(_key, value, uketddc_node)
-      identifier_node = XML::Node.new("#{uketd_tags['identifier_doi'.to_sym]}:identifier", value)
-      XML::Attr.new(identifier_node, "xsi:type", "dcterms:DOI")
-      uketddc_node << identifier_node
-    end
-
-    def render_identifier_other_identifier(_key, value, uketddc_node)
-      identifier_node = XML::Node.new("#{uketd_tags['identifier_other_identifier'.to_sym]}:identifier", value)
-      XML::Attr.new(identifier_node, "xsi:type", "dcterms:URI")
-      uketddc_node << identifier_node
-    end
-
-    def render_authoridentifier_isni(_key, value, uketddc_node)
-      value.each do |v|
-        identifier_node = XML::Node.new("#{uketd_tags['authoridentifier_isni'.to_sym]}:authoridentifier", v)
-        XML::Attr.new(identifier_node, "xsi:type", "uketdterms:ISNI")
-        uketddc_node << identifier_node
-      end
-    end
-
-    def render_authoridentifier_orcid(_key, value, uketddc_node)
-      value.each do |v|
-        identifier_node = XML::Node.new("#{uketd_tags['authoridentifier_orcid'.to_sym]}:authoridentifier", v)
-        XML::Attr.new(identifier_node, "xsi:type", "uketdterms:ORCID")
-        uketddc_node << identifier_node
-      end
-    end
-
-    def render_subject_ethos_subject(_key, value, uketddc_node)
-      uketddc_node << XML::Node.new("#{uketd_tags['subject_ethos_subject'.to_sym]}:subject", value)
-    end
-
-    def render_subject_dewey(_key, value, uketddc_node)
-      subject_node = XML::Node.new("#{uketd_tags['subject_dewey'.to_sym]}:subject", value)
-      XML::Attr.new(subject_node, "xsi:type", "dcterms:DDC")
-      uketddc_node << subject_node
-    end
-
-    # rubocop:disable Metrics/MethodLength
-    def uketd_tags
-      {
-        relation: 'dc',
-        title: 'dc',
-        creator: 'dc',
-        authoridentifier_isni: 'uketdterms', # xsi:type="uketdterms:ISNI"
-        authoridentifier_orcid: 'uketdterms', # xsi:type="uketdterms:ORCID"
-        advisor: 'uketdterms',
-        institution: 'uketdterms',
-        department: 'uketdterms',
-        publisher: 'dc',
-        issued: 'dcterms',
-        abstract: 'dcterms',
-        alternative: 'dcterms',
-        subject_dewey: 'dc', # xsi:type="dcterms:DDC"
-        subject_ethos_subject: 'dc',
-        coverage: 'dc',
-        type: 'dc',
-        qualificationlevel: 'uketdterms',
-        embargodate: 'uketdterms',
-        sponsor: 'uketdterms',
-        grantnumber: 'uketdterms',
-        language: 'dc', # xsi:type="dcterms:ISO639-2"
-        isReferencedBy: 'dcterms',
-        identifier_doi: 'dc', # xsi:type="dcterms:DOI"
-        identifier_other_identifier: 'dc', # xsi:type="dcterms:URI"
-        provenance: 'dcterms',
-        source: 'dc',
-        accessRights: 'dcterms'
-      }
-    end
-    # rubocop:enable Metrics/MethodLength
-
-    def uketd_dc_namespaces
-      {
-        oai_dc: "http://www.openarchives.org/OAI/2.0/oai_dc/",
-        xsi: "http://www.w3.org/2001/XMLSchema-instance",
-        dc: "http://purl.org/dc/elements/1.1/",
-        dcterms: "http://purl.org/dc/terms/",
-        uketdterms: "http://naca.central.cranfield.ac.uk/ethos-oai/terms/",
-        uketd_dc: "http://naca.central.cranfield.ac.uk/ethos-oai/2.0/"
-      }
-    end
-
-    def add_namespace(node, ns, ns_url)
-      node.namespaces.namespace = XML::Namespace.new(node, ns, ns_url)
-    end
 
     # in the parser as it is specific to the format
     def setup_export_file(folder_count)

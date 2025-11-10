@@ -136,8 +136,8 @@ attributes:
     multiple: true
     form:
       primary: true
-    indax_keys:
-      - "sponsor_tesim"
+    index_keys:
+      - "funder_tesim"
     predicate: http://ethos.library.leeds.ac.uk/uketd/terms/sponsor
   date_issued: #DATE AWARDED <dcterms:issued>
     type: string
