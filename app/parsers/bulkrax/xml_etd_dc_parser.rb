@@ -74,7 +74,7 @@ module Bulkrax
     end
 
     def records_split_count
-      1000000
+      1_000_000
     end
 
     def create_new_entries

@@ -19,4 +19,4 @@ Qa::Authorities::Local.register_subauthority('contributor_roles', 'Qa::Authoriti
 
 # Load the uketd_dc OAI provider
 require 'oai/provider/metadata_format/uketd_dc'
-OAI::Provider::Base.register_format(OAI::Provider::Metadata::UketdDc.instance) 
+OAI::Provider::Base.register_format(OAI::Provider::Metadata::UketdDc.instance)
