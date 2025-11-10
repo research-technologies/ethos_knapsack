@@ -16,4 +16,7 @@ class ThesisOrDissertation < Hyrax::Work
   #  )
 
   prepend OrderAlready.for(:creator)
+  def assign_id
+    super
+  end
 end

@@ -12,10 +12,6 @@ module Bulkrax::HasLocalProcessing
     #    parsed_metadata['record_level_file_version_declaration'] = ActiveModel::Type::Boolean.new.cast parsed_metadata['record_level_file_version_declaration']
     #    set_institutional_relationships
 
-    # We expect a source_record here even if it is an auto-generated bulkrax one
-    # removing in favour of directly using ethos_identifier in the source mapping and using that field as the source_identifier
-    # requires that just the identifier strings are parsed in via the XML <source> tag
-    # parsed_metadata['ethos_identifier'] = ethos_identifier_from_url(parsed_metadata['source_record'].first) || parsed_metadata['source_record']
     compound_fields = {
       'creator' => ['family_name', 'given_name', 'orcid', 'isni'],
       'contributor' => ['role', 'family_name', 'given_name']

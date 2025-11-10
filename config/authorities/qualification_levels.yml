@@ -1,0 +1,7 @@
+terms:
+- id: Doctoral
+  term: Doctoral
+  active: true
+- id: Masters
+  term: Masters
+  active: false
