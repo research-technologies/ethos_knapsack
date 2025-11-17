@@ -21,11 +21,9 @@ Qa::Authorities::Local.register_subauthority('contributor_roles', 'Qa::Authoriti
 require 'oai/provider/metadata_format/uketd_dc'
 OAI::Provider::Base.register_format(OAI::Provider::Metadata::UketdDc.instance)
 
-SolrDocument.class_eval do 
-
+SolrDocument.class_eval do
   use_extension(Blacklight::Document::UketdDc)
   def to_uketd_dc
     export_as('uketd_dc_xml')
   end
-
 end

@@ -14,7 +14,7 @@ parser_mappings = {
   'contributor_role' => { from: ['advisor'], object: 'contributor' },
   'contributor_position' => { from: ['advisor'], object: 'contributor' },
   'abstract' => { from: ['abstract'] },
-  'qualification_name' => { from: ['type'] },
+  'qualification_name' => { from: ['qualificationname'] },
   'qualification_level' => { from: ['qualificationlevel'] },
   'ethos_institution' => { from: ['publisher'] },
   'current_he_institution' => { from: ['institution'] },
@@ -23,11 +23,9 @@ parser_mappings = {
   'funder_award' => { from: ['grantnumber'], object: "funder", split: /\s*;\s*/ },
   'date_issued' => { from: ['issued'] },
   'language' => { from: ['language'] }, # type="dcterms:ISO639-2"
-#  'ethos_subject' => { from: ['coverage'], split: /\s*;\s*/ },
-  'ethos_subject' => { from: ['subject'], split: /\s*;\s*/ },
+  'ethos_subject' => { from: ['coverage'] },
   'dewey' => { from: ['subject'] }, # type="dcterms:DDC"
-#  'keyword' => { from: ['subject'] },
-  'keyword' => { from: ['coverage'] },
+  'keyword' => { from: ['subject'], split: /\s*;\s*/ },
   'ethos_access_rights' => { from: ['accessRights'] },
   'embargo_date' => { from: ['embargodate'] },
   'doi' => { from: ['identifier'] }, # type="dcterms:DOI"

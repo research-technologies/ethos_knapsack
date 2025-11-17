@@ -164,7 +164,7 @@ attributes:
       primary: true
       multiple: true
     index_keys:
-      - "subject_ssi"
+      - "subject_tesim"
     predicate: http://purl.org/dc/elements/1.1/subject
   dewey: # DEWEY <dc:subject xsi:type="dcterms:DDC">
     type: string

@@ -32,6 +32,7 @@ module Bulkrax
         key.gsub(/_(tesim|ssim|ssi)$/, '')
       end
 
+      # rubocop:disable Rails/Present
       def render(key, value, uketddc_node)
         return if key.nil?
         send("render_#{key}", key, value, uketddc_node)
@@ -39,7 +40,7 @@ module Bulkrax
         # We can do this as if it weren't a single string (accidentally in an array)
         # then it would have a render_thing method defined
         value = value.first if value.is_a?(Array)
-        return if key == "coverage" and oai_pmh # Arrant nonsense
+        return if (key == "coverage") && oai_pmh
         uketddc_node << XML::Node.new("#{uketd_tags[key.to_sym]}:#{key}", value) unless value.blank?
       end
 
@@ -125,8 +126,9 @@ module Bulkrax
       end
 
       def render_subject_keyword(_key, value, uketddc_node)
-        value = value.first if value.is_a?(Array)
-        uketddc_node << XML::Node.new("#{uketd_tags['subject_keyword'.to_sym]}:subject", value) unless value.blank?
+        value.each do |v|
+          uketddc_node << XML::Node.new("#{uketd_tags['subject_keyword'.to_sym]}:subject", v) unless v.blank?
+        end
       end
 
       def render_subject_dewey(_key, value, uketddc_node)
@@ -135,6 +137,7 @@ module Bulkrax
         XML::Attr.new(subject_node, "xsi:type", "dcterms:DDC")
         uketddc_node << subject_node unless value.blank?
       end
+      # rubocop:enable Rails/Present
 
       def uketd_tag(key)
         if hyrax_to_uketd_tags.key?(key.to_sym)
@@ -162,7 +165,7 @@ module Bulkrax
           subject_dewey: 'dc', # xsi:type="dcterms:DDC"
           subject_keyword: 'dc',
           coverage: 'dc',
-          type: 'dc',
+          qualificationname: 'uketdterms',
           qualificationlevel: 'uketdterms',
           embargodate: 'uketdterms',
           sponsor: 'uketdterms',
@@ -190,9 +193,9 @@ module Bulkrax
           date_issued: 'issued',
           abstract: 'abstract',
           dewey: 'subject_dewey', # xsi:type="dcterms:DDC"
-          subject: 'subject_keyword',
-          keyword: 'coverage',
-          qualification_name: 'type',
+          subject: 'coverage',
+          keyword: 'subject_keyword',
+          qualification_name: 'qualificationname',
           qualification_level: 'qualificationlevel',
           embargo_date: 'embargodate',
           funder: 'sponsor',
