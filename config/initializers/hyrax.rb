@@ -27,3 +27,11 @@ SolrDocument.class_eval do
     export_as('uketd_dc_xml')
   end
 end
+
+HyraxHelper.module_eval do
+  def available_translations
+    {
+      'en' => 'English',
+    }
+  end
+end

@@ -25,6 +25,7 @@ module Bulkrax
           render(uketd_tag(k), value, uketddc_node)
           seen << k
         end
+        render("type", "Thesis or Dissertation", uketddc_node)
         uketddc_node
       end
 
@@ -153,6 +154,7 @@ module Bulkrax
           relation: 'dc',
           title: 'dc',
           creator: 'dc',
+          type: 'dc',
           authoridentifier_isni: 'uketdterms', # xsi:type="uketdterms:ISNI"
           authoridentifier_orcid: 'uketdterms', # xsi:type="uketdterms:ORCID"
           advisor: 'uketdterms',
@@ -205,7 +207,7 @@ module Bulkrax
           other_identifier: 'identifier_other_identifier', # xsi:type="dcterms:URI"
           oai_identifier: 'provenance',
           ethos_identifier: 'source',
-          ethos_access_rights: 'accessRights'
+          ethos_access_rights: 'accessRights',
         }
       end
       # rubocop:enable Metrics/MethodLength

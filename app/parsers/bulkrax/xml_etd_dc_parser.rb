@@ -131,6 +131,7 @@ module Bulkrax
             next unless renderer.uketd_tags.key?(unnumbered_key.to_sym)
             renderer.render(unnumbered_key, value, uketddc_node)
           end
+          renderer.render("type", "Thesis or Dissertation", uketddc_node)
         end
         doc.save(setup_export_file(folder_count), indent: true, encoding: XML::Encoding::UTF_8)
       end
