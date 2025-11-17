@@ -39,7 +39,8 @@ module Bulkrax
         # We can do this as if it weren't a single string (accidentally in an array)
         # then it would have a render_thing method defined
         value = value.first if value.is_a?(Array)
-        uketddc_node << XML::Node.new("#{uketd_tags[key.to_sym]}:#{key}", value)
+        return if key == "coverage" and oai_pmh # Arrant nonsense
+        uketddc_node << XML::Node.new("#{uketd_tags[key.to_sym]}:#{key}", value) unless value.blank?
       end
 
       def render_creator(key, value, uketddc_node)
@@ -52,8 +53,8 @@ module Bulkrax
           isnis << v['creator_isni'] if v['creator_isni']
         end
         return unless oai_pmh
-        render('authoridentifier_orcid', orcids, uketddc_node)
-        render('authoridentifier_isni', isnis, uketddc_node)
+        render('authoridentifier_orcid', orcids, uketddc_node) unless orcids.blank?
+        render('authoridentifier_isni', isnis, uketddc_node) unless isnis.blank?
       end
 
       def render_advisor(key, value, uketddc_node)
@@ -70,7 +71,7 @@ module Bulkrax
           value.each do |v|
             v = eval(v) if v.is_a?(String) # rubocop:disable Security/Eval
             names << v['funder_name'] if v['funder_name']
-            awards << v['funder_award'] if v['funder_award'].present?
+            awards << v['funder_award'] unless v['funder_award'].blank?
           end
           render('grantnumber', awards, uketddc_node)
         else
@@ -82,7 +83,7 @@ module Bulkrax
       def render_grantnumber(key, value, uketddc_node)
         value.each do |v|
           v = v.first if v.is_a?(Array)
-          uketddc_node << XML::Node.new("#{uketd_tags[key.to_sym]}:#{key}", v) unless v.nil?
+          uketddc_node << XML::Node.new("#{uketd_tags[key.to_sym]}:#{key}", v) unless v.blank?
         end
       end
 
@@ -90,28 +91,28 @@ module Bulkrax
         value = value.first if value.is_a?(Array)
         language_node = XML::Node.new("#{uketd_tags[key.to_sym]}:#{key}", value)
         XML::Attr.new(language_node, "xsi:type", "dcterms:ISO639-2")
-        uketddc_node << language_node
+        uketddc_node << language_node unless value.blank?
       end
 
       def render_identifier_doi(_key, value, uketddc_node)
         value = value.first if value.is_a?(Array)
         identifier_node = XML::Node.new("#{uketd_tags['identifier_doi'.to_sym]}:identifier", value)
         XML::Attr.new(identifier_node, "xsi:type", "dcterms:DOI")
-        uketddc_node << identifier_node
+        uketddc_node << identifier_node unless value.blank?
       end
 
       def render_identifier_other_identifier(_key, value, uketddc_node)
         value = value.first if value.is_a?(Array)
         identifier_node = XML::Node.new("#{uketd_tags['identifier_other_identifier'.to_sym]}:identifier", value)
         XML::Attr.new(identifier_node, "xsi:type", "dcterms:URI")
-        uketddc_node << identifier_node
+        uketddc_node << identifier_node unless value.blank?
       end
 
       def render_authoridentifier_isni(_key, value, uketddc_node)
         value.each do |v|
           identifier_node = XML::Node.new("#{uketd_tags['authoridentifier_isni'.to_sym]}:authoridentifier", v)
           XML::Attr.new(identifier_node, "xsi:type", "uketdterms:ISNI")
-          uketddc_node << identifier_node
+          uketddc_node << identifier_node unless v.blank?
         end
       end
 
@@ -119,20 +120,20 @@ module Bulkrax
         value.each do |v|
           identifier_node = XML::Node.new("#{uketd_tags['authoridentifier_orcid'.to_sym]}:authoridentifier", v)
           XML::Attr.new(identifier_node, "xsi:type", "uketdterms:ORCID")
-          uketddc_node << identifier_node
+          uketddc_node << identifier_node unless v.blank?
         end
       end
 
-      def render_subject_ethos_subject(_key, value, uketddc_node)
+      def render_subject_keyword(_key, value, uketddc_node)
         value = value.first if value.is_a?(Array)
-        uketddc_node << XML::Node.new("#{uketd_tags['subject_ethos_subject'.to_sym]}:subject", value)
+        uketddc_node << XML::Node.new("#{uketd_tags['subject_keyword'.to_sym]}:subject", value) unless value.blank?
       end
 
       def render_subject_dewey(_key, value, uketddc_node)
         value = value.first if value.is_a?(Array)
         subject_node = XML::Node.new("#{uketd_tags['subject_dewey'.to_sym]}:subject", value)
         XML::Attr.new(subject_node, "xsi:type", "dcterms:DDC")
-        uketddc_node << subject_node
+        uketddc_node << subject_node unless value.blank?
       end
 
       def uketd_tag(key)
@@ -159,7 +160,7 @@ module Bulkrax
           abstract: 'dcterms',
           alternative: 'dcterms',
           subject_dewey: 'dc', # xsi:type="dcterms:DDC"
-          subject_ethos_subject: 'dc',
+          subject_keyword: 'dc',
           coverage: 'dc',
           type: 'dc',
           qualificationlevel: 'uketdterms',
@@ -183,14 +184,14 @@ module Bulkrax
           alternative_title: 'alternative',
           creator: 'creator',
           contributor: 'advisor',
-          institution: 'publisher',
+          ethos_institution: 'publisher',
           current_he_institution: 'institution',
           org_unit: 'department',
           date_issued: 'issued',
           abstract: 'abstract',
           dewey: 'subject_dewey', # xsi:type="dcterms:DDC"
-          subject: 'subject_ethos_subject',
-          keywords: 'coverage',
+          subject: 'subject_keyword',
+          keyword: 'coverage',
           qualification_name: 'type',
           qualification_level: 'qualificationlevel',
           embargo_date: 'embargodate',

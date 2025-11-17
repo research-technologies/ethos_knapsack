@@ -114,7 +114,7 @@ attributes:
     index_keys:
       - "abstract_tesim"
     predicate: http://purl.org/dc/elements/1.1/abstract
-  institution: # INSTITUION <dc:publisher>
+  ethos_institution: # INSTITUION <dc:publisher>
     type: string
     multiple: true
     form:
@@ -147,7 +147,7 @@ attributes:
     index_keys:
       - "date_issued_tesim"
     predicate: http://purl.org/dc/terms/issued
-  keyword: # KEYWORDS  <dc:subject> (<dc:coverage> in load data)
+  keyword: # KEYWORDS  <dc:subject> (with no attribute) 
     type: string
     multiple: true
     form:
@@ -156,7 +156,7 @@ attributes:
     index_keys:
       - "keyword_tesim"
     predicate: http://purl.org/dc/terms/coverage
-  ethos_subject: # Subject <dc:subject> (when not caught by other rules)
+  ethos_subject: # Subject <dc:coverage> 
     type: string
     multiple: true
     form:

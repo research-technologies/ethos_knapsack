@@ -16,16 +16,18 @@ parser_mappings = {
   'abstract' => { from: ['abstract'] },
   'qualification_name' => { from: ['type'] },
   'qualification_level' => { from: ['qualificationlevel'] },
-  'institution' => { from: ['publisher'] },
+  'ethos_institution' => { from: ['publisher'] },
   'current_he_institution' => { from: ['institution'] },
   'org_unit' => { from: ['department'] },
   'funder_name' => { from: ['sponsor'], object: "funder" },
   'funder_award' => { from: ['grantnumber'], object: "funder", split: /\s*;\s*/ },
   'date_issued' => { from: ['issued'] },
   'language' => { from: ['language'] }, # type="dcterms:ISO639-2"
-  'keyword' => { from: ['coverage'], split: /\s*;\s*/ },
+#  'ethos_subject' => { from: ['coverage'], split: /\s*;\s*/ },
+  'ethos_subject' => { from: ['subject'], split: /\s*;\s*/ },
   'dewey' => { from: ['subject'] }, # type="dcterms:DDC"
-  'ethos_subject' => { from: ['subject'] },
+#  'keyword' => { from: ['subject'] },
+  'keyword' => { from: ['coverage'] },
   'ethos_access_rights' => { from: ['accessRights'] },
   'embargo_date' => { from: ['embargodate'] },
   'doi' => { from: ['identifier'] }, # type="dcterms:DOI"

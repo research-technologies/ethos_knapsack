@@ -67,11 +67,7 @@ module Bulkrax::HasLocalProcessing
   # rubocop:enable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
   def set_qualification_name
-    if parsed_metadata['qualification_name'].gsub(/\s+/, "").downcase.tr('.', '').include?('phd')
-      'PhD'
-    else
-      parsed_metadata['qualification_name']
-    end
+    parsed_metadata['qualification_name'].gsub(/^\s*Thesis\s*/, "").tr('().', '')
   end
 
   # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity

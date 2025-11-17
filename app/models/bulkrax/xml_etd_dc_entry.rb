@@ -111,7 +111,7 @@ module Bulkrax
     end
 
     def add_subject
-      add_one_to_many_element('ethos_subject', 'subject', nil)
+      add_one_to_many_element('keyword', 'subject', nil)
     end
 
     # @todo consider how we might put this "configuration logic" in the parser where it's a bit more visible
@@ -336,7 +336,7 @@ module Bulkrax
     # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 
     def many_to_one_elements
-      %w[doi other_identifier dewey ethos_subject] # maybe embargo_date
+      %w[doi other_identifier dewey keyword] # maybe embargo_date
     end
 
     # On export the key becomes the from and the from becomes the destination. It is the opposite of the import because we are moving data the opposite direction
