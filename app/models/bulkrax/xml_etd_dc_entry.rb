@@ -219,6 +219,7 @@ module Bulkrax
     # Metadata required by Bulkrax for round-tripping
     def build_system_metadata
       parsed_metadata['id'] = hyrax_record.id
+      parsed_metadata[key_for_export('visibility')] = hyrax_record.visibility
       source_id = hyrax_record.send(work_identifier)
       # Because ActiveTriples::Relation does not respond to #to_ary we can't rely on Array.wrap universally
       source_id = source_id.to_a if source_id.is_a?(ActiveTriples::Relation)
@@ -341,7 +342,7 @@ module Bulkrax
     end
 
     # On export the key becomes the from and the from becomes the destination. It is the opposite of the import because we are moving data the opposite direction
-    # metadata that does not have a specific Bulkrax entry is mapped to the key name, as matching keys coming in are mapped by the csv parser automatically
+    # metadata that does not have a specific Bulkrax entry is mapped to the key name, as matching keys coming in are mapped by the parser automatically
     def key_for_export(key)
       clean_key = key_without_numbers(key)
       unnumbered_key = mapping[clean_key] ? mapping[clean_key]['from'].first : clean_key

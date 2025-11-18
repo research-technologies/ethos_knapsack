@@ -33,8 +33,8 @@ parser_mappings = {
   'referenced_by' => { from: ['isReferencedBy'] },
   'oai_identifier' => { from: ['provenance'] },
   'bl_cat_identifier' => { from: ['relation'] },
+  'visibility' => {from: ['audience'] },
   'ethos_identifier' => { from: ['source'], source_identifier: true }, # derived from the uin parameter of the <dc:source>
-  #  'source_record' => { from: ['source'], source_identifier: true },
   'parents' => { from: ['parents'], split: /\s*[;|]\s*/, related_parents_field_mapping: true },
   'children' => { from: ['children'], split: /\s*[;|]\s*/, related_children_field_mapping: true }
 }

@@ -41,7 +41,7 @@ module Bulkrax
         # We can do this as if it weren't a single string (accidentally in an array)
         # then it would have a render_thing method defined
         value = value.first if value.is_a?(Array)
-        return if (key == "coverage") && oai_pmh
+        return if ['coverage', 'audience'].include?(key) && oai_pmh
         uketddc_node << XML::Node.new("#{uketd_tags[key.to_sym]}:#{key}", value) unless value.blank?
       end
 
@@ -177,6 +177,7 @@ module Bulkrax
           identifier_doi: 'dc', # xsi:type="dcterms:DOI"
           identifier_other_identifier: 'dc', # xsi:type="dcterms:URI"
           provenance: 'dcterms',
+          audience: 'dcterms',
           source: 'dc',
           accessRights: 'dcterms'
         }
@@ -208,6 +209,7 @@ module Bulkrax
           oai_identifier: 'provenance',
           ethos_identifier: 'source',
           ethos_access_rights: 'accessRights',
+          visibility: 'audience',
         }
       end
       # rubocop:enable Metrics/MethodLength
