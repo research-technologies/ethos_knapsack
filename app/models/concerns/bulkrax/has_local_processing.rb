@@ -30,11 +30,6 @@ module Bulkrax::HasLocalProcessing
     set_funder
   end
 
-  def ethos_identifier_from_url(possible_url)
-    return Rack::Utils.parse_query(URI(possible_url).query)['uin'] if possible_url&.match?(URI.regexp)
-    false
-  end
-
   def set_funder
     funders = []
     grants = []

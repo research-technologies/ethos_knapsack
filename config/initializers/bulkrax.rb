@@ -9,7 +9,7 @@ Rails.application.config.after_initialize do
     ]
 
     #    config.fill_in_blank_source_identifiers = ->(obj, index) { "#{Site.instance.account.name}-#{obj.importerexporter.id}-#{index}" }
-    config.fill_in_blank_source_identifiers = ->(obj, index) { "uk.bl.ethos.#{obj.importerexporter.id}-#{index}" }
+    config.fill_in_blank_source_identifiers = ->(_obj, _index) { "uk.bl.ethos.#{::Ethos::IdentifierService.mint}" }
   end
   Bulkrax::Importer::DEFAULT_OBJECT_TYPES = ['work'].freeze
 end

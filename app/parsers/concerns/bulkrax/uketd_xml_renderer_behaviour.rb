@@ -209,7 +209,7 @@ module Bulkrax
           oai_identifier: 'provenance',
           ethos_identifier: 'source',
           ethos_access_rights: 'accessRights',
-          visibility: 'audience',
+          visibility: 'audience'
         }
       end
       # rubocop:enable Metrics/MethodLength

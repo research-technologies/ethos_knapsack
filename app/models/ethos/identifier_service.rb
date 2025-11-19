@@ -16,6 +16,7 @@ module Ethos
     # just made Hyrax into EPrints :/
     # @return [String] a new ID
     def self.mint
+      new_id = nil
       loop do
         new_id = Rails.cache.fetch("thesis_id") { 1 }
         Rails.cache.write("thesis_id", (new_id + 1))

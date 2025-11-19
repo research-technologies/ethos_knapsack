@@ -64,7 +64,7 @@ module Bulkrax
       parsed_metadata['file'] = raw_metadata['file']
 
       add_local
-      raise StandardError, "title is required" if parsed_metadata['title'].blank?
+      validate
       parsed_metadata
     end
     # rubocop:enable Metrics/AbcSize, Metrics/MethodLength#
@@ -76,6 +76,18 @@ module Bulkrax
       add_rights_statement
       add_admin_set_id
       add_collections
+    end
+
+    def validate
+      #      raise StandardError, "title is required" if parsed_metadata['title'].blank?
+      return unless (existing_record = existing_record_by_oai_identifier?)
+      raise StandardError, "There is an existing record with the same oai_identifier #{parsed_metadata['oai_identifier']} : #{existing_record}"
+    end
+
+    def existing_record_by_oai_identifier?
+      return nil if parsed_metadata['oai_identifier'].blank?
+      match = Hyrax.query_service.custom_query.find_by_property_value(property: 'oai_identifier', value: parsed_metadata['oai_identifier'], search_field: 'oai_identifier_ssi')
+      match
     end
 
     def add_model

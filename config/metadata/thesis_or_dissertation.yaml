@@ -52,7 +52,7 @@ attributes:
     type: string
     multiple: true
     form:
-      required: true
+      required: false
       primary: true
       multiple: true
     index_keys:
@@ -62,7 +62,7 @@ attributes:
     type: string
     multiple: false
     form:
-      required: true
+      required: false
       primary: true
       multiple: false
     index_keys:
@@ -72,7 +72,7 @@ attributes:
     type: string
     multiple: false
     form:
-      required: true
+      required: false
       primary: true
       multiple: false
     index_keys:
@@ -82,7 +82,7 @@ attributes:
     type: string
     multiple: false
     form:
-      required: true
+      required: false
       primary: true
       multiple: false
     index_keys:

@@ -31,7 +31,7 @@ end
 HyraxHelper.module_eval do
   def available_translations
     {
-      'en' => 'English',
+      'en' => 'English'
     }
   end
 end
