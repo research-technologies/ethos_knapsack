@@ -16,7 +16,7 @@ en:
         keyword: "Keywords"
         ethos_subject: "Subject Discipline"
         dewey: "DDC Subject"
-        ethos_access_rights: "Accessible?"
+        ethos_access_rights: "Is source file restricted?"
         embargo_date: "Embargo"
         ethos_identifier: "EThOS ID"
         doi: "DOI"

@@ -54,6 +54,7 @@ module Bulkrax
         elements = record.xpath("//*[name()='#{element_name}']")
         next if elements.blank?
         elements.each do |el|
+          delete_metadata(element_name) if el.children.blank?
           el.children.each do |child|
             content = child.content
             add_metadata(element_name, content) if content.present?
@@ -61,7 +62,7 @@ module Bulkrax
         end
       end
       add_additional
-      parsed_metadata['file'] = raw_metadata['file']
+      # parsed_metadata['file'] = raw_metadata['file']
 
       add_local
       validate
@@ -87,6 +88,7 @@ module Bulkrax
     def existing_record_by_oai_identifier?
       return nil if parsed_metadata['oai_identifier'].blank?
       match = Hyrax.query_service.custom_query.find_by_property_value(property: 'oai_identifier', value: parsed_metadata['oai_identifier'], search_field: 'oai_identifier_ssi')
+      return nil if match && match.ethos_identifier == parsed_metadata['ethos_identifier'] # dont' match yourself mate
       match
     end
 
@@ -143,6 +145,7 @@ module Bulkrax
       elements = record.xpath("//*[name()='#{element_name}']")
       return if elements.blank?
       elements.each do |el|
+        delete_metadata(element_label) if el.children.blank? && el.attr('type') == type_value
         el.children.each do |child|
           content = child.content
           add_metadata(element_label, content) if content.present? && el.attr('type') == type_value
@@ -153,10 +156,12 @@ module Bulkrax
     # This is very similar to adding a complicated element, but here we set the parsed_metadata directly which will
     # allow us to do things like setting two ditinct hyrax fields from multiple instances of the same element
     # that have different attributes
+    # rubocop:disable Metrics/AbcSize
     def add_one_to_many_element(element_label, element_name, type_value)
       elements = record.xpath("//*[name()='#{element_name}']")
       return if elements.blank?
       elements.each do |el|
+        delete_metadata(element_label) if el.children.blank? && el.attr('type') == type_value
         el.children.each do |child|
           content = child.content
           content = content.split(Regexp.new(importerexporter.field_mapping[element_label]['split'])) if importerexporter.field_mapping[element_label].key?('split')
@@ -165,6 +170,7 @@ module Bulkrax
         end
       end
     end
+    # rubocop:enable Metrics/AbcSize
 
     def add_creator
       add_name_field('creator', 'creator')
@@ -201,6 +207,19 @@ module Bulkrax
           end
         end
       end
+    end
+
+    def delete_metadata(node_name)
+      # Here we delete the data from tags that are present but empty!
+      # TODO work out what to do for multiple fields.... one <dc:subject></dc:subject> means we delete a keyword, but which one!
+      # Workaround == we know when we are dealing with multiples and we use the fact that we will parse
+      # ; delimited lists to present modified lists
+      fields = field_to(node_name)
+      fields.each do |field|
+        parsed_metadata[field] = nil
+      end
+
+      # More TODO we also need to check attributes... as <dc:subject xsi:type="DDC"/> means remove a dewey
     end
 
     # @return [TrueClass] when the given type is valid

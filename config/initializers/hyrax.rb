@@ -28,6 +28,13 @@ SolrDocument.class_eval do
   end
 end
 
+::CatalogController.class_eval do 
+  self.blacklight_config.oai[:document][:set_fields] = [
+    {:label=>"Subject Discipline", :solr_field=>"subject_sim"},
+#    {:label=>"Institution", :solr_field=>"current_he_institution_sim"}
+  ]
+end
+
 HyraxHelper.module_eval do
   def available_translations
     {

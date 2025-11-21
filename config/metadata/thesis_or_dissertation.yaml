@@ -51,13 +51,18 @@ attributes:
   language: # LANGUAGE <dc:language xsi:type="dcterms:ISO639-2">
     type: string
     multiple: true
+    facetable: true
     form:
       required: false
       primary: true
       multiple: true
     index_keys:
       - "language_tesim"
+      - "language_sim"
     predicate: http://purl.org/dc/elements/1.1/language
+    view:
+      render_as: "faceted"
+      html_dl: true
   qualification_name: # Qualification Name <uketdterms:qualificationname>
     type: string
     multiple: false
@@ -87,7 +92,11 @@ attributes:
       multiple: false
     index_keys:
       - "current_he_institution_tesim"
+      - "current_he_institution_sim"
     predicate: http://ethos.library.leeds.ac.uk/uketd/terms/institution#current
+    view:
+      render_as: "faceted"
+      html_dl: true
   alternative_title: # Alternative Title <dcterms:alternative>
     type: string
     multiple: true
@@ -120,9 +129,8 @@ attributes:
     form:
       primary: true
     index_keys:
-      - "institution_sim"
       - "institution_tesim"
-    predicate: http://ethos.library.leeds.ac.uk/uketd/terms/institution
+    predicate: http://purl.org/dc/elements/1.1/publisher
   org_unit: # DEPARTMENT <uketdterms:department>
     type: string
     multiple: true
@@ -155,7 +163,11 @@ attributes:
       primary: true
     index_keys:
       - "keyword_tesim"
+      - "keyword_sim"
     predicate: http://purl.org/dc/terms/coverage
+    view:
+      render_as: "faceted"
+      html_dl: true
   ethos_subject: # Subject <dc:coverage> 
     type: string
     multiple: true
@@ -165,7 +177,11 @@ attributes:
       multiple: true
     index_keys:
       - "subject_tesim"
+      - "subject_sim"
     predicate: http://purl.org/dc/elements/1.1/subject
+    view:
+      render_as: "faceted"
+      html_dl: true
   dewey: # DEWEY <dc:subject xsi:type="dcterms:DDC">
     type: string
     multiple: true

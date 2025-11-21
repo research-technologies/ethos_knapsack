@@ -23,16 +23,16 @@ end
 # hashes of fieldnames and produce appropropiate XML tags of the form:
 #          <ns:tagname xsi:type="hashkey">hashvalue</ns:tagname>
 
-module Blacklight::Document::DublinCore
-  # dublin core elements are mapped against the #dublin_core_field_names whitelist.
-  def export_as_oai_dc_xml
-    xml = Builder::XmlMarkup.new
-    xml.tag!("oai_dc:dc",
-             'xmlns:oai_dc' => "http://www.openarchives.org/OAI/2.0/oai_dc/",
-             'xmlns:dc' => "http://purl.org/dc/elements/1.1/",
-             'xmlns:dcterms' => "http://purl.org/dc/terms/",
-             'xmlns:xsi' => "http://www.w3.org/2001/XMLSchema-instance",
-             'xsi:schemaLocation' => %(http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd))
-    xml.target!
-  end
-end
+#module Blacklight::Document::DublinCore
+#  # dublin core elements are mapped against the #dublin_core_field_names whitelist.
+#  def export_as_oai_dc_xml
+#    xml = Builder::XmlMarkup.new
+#    xml.tag!("oai_dc:dc",
+#             'xmlns:oai_dc' => "http://www.openarchives.org/OAI/2.0/oai_dc/",
+#             'xmlns:dc' => "http://purl.org/dc/elements/1.1/",
+#             'xmlns:dcterms' => "http://purl.org/dc/terms/",
+#             'xmlns:xsi' => "http://www.w3.org/2001/XMLSchema-instance",
+#             'xsi:schemaLocation' => %(http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd))
+#    xml.target!
+#  end
+#end
