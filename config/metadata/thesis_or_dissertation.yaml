@@ -72,7 +72,11 @@ attributes:
       multiple: false
     index_keys:
       - "qualification_name_tesim"
+      - "qualification_name_sim"
     predicate: http://ethos.library.leeds.ac.uk/uketd/terms/qualificationname
+    view:
+      render_as: "faceted"
+      html_dl: true
   qualification_level: # Qualification Level <uketdterms:qualificationlevel>
     type: string
     multiple: false
@@ -129,8 +133,12 @@ attributes:
     form:
       primary: true
     index_keys:
-      - "institution_tesim"
+      - "ethos_institution_tesim"
+      - "ethos_institution_sim"
     predicate: http://purl.org/dc/elements/1.1/publisher
+    view:
+      render_as: "faceted"
+      html_dl: true
   org_unit: # DEPARTMENT <uketdterms:department>
     type: string
     multiple: true
@@ -146,7 +154,11 @@ attributes:
       primary: true
     index_keys:
       - "funder_tesim"
+      - "funder_sim"
     predicate: http://ethos.library.leeds.ac.uk/uketd/terms/sponsor
+    view:
+      render_as: "faceted"
+      html_dl: true
   date_issued: #DATE AWARDED <dcterms:issued>
     type: string
     multiple: true
@@ -154,7 +166,11 @@ attributes:
       primary: true
     index_keys:
       - "date_issued_tesim"
+      - "date_issued_sim"
     predicate: http://purl.org/dc/terms/issued
+    view:
+      render_as: "faceted"
+      html_dl: true
   keyword: # KEYWORDS  <dc:subject> (with no attribute) 
     type: string
     multiple: true
@@ -191,7 +207,11 @@ attributes:
       multiple: true
     index_keys:
       - "dewey_tesim"
+      - "dewey_sim"
     predicate: http://purl.org/dc/terms/DDC
+    view:
+      render_as: "faceted"
+      html_dl: true
   ethos_access_rights: # Accessible? <dcterms:accessRights>
     type: string
     multiple: false
@@ -201,7 +221,11 @@ attributes:
       multiple: false
     index_keys:
       - "ethos_access_rights_tesim"
+      - "ethos_access_rights_sim"
     predicate: http://www.w3.org/ns/ma-ont#hasAccessConditions
+    view:
+      render_as: "faceted"
+      html_dl: true
   embargo_date: # Embargo <uketdterms:embargodate>
     type: string
     multiple: false

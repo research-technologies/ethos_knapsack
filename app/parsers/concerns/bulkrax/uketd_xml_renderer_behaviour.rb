@@ -127,7 +127,11 @@ module Bulkrax
       end
 
       def render_subject_keyword(_key, value, uketddc_node)
-        uketddc_node << XML::Node.new("#{uketd_tags['subject_keyword'.to_sym]}:subject", value.join(' ; ')) unless value.blank?
+        if value.is_a?(Array)
+          uketddc_node << XML::Node.new("#{uketd_tags['subject_keyword'.to_sym]}:subject", value.join(' ; ')) unless value.blank?
+        else
+          uketddc_node << XML::Node.new("#{uketd_tags['subject_keyword'.to_sym]}:subject", value) unless value.blank?
+        end
       end
 
       def render_subject_dewey(_key, value, uketddc_node)

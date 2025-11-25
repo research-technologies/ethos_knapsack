@@ -126,12 +126,18 @@ module Bulkrax
           end
           uketddc_node['xsi:schemaLocation'] = "http://naca.central.cranfield.ac.uk/ethos-oai/2.0/uketd_dc.xsd"
           doc.root << uketddc_node
+          subjects = []
           entry.parsed_metadata.each do |key, value|
             unnumbered_key = key.gsub(/_\d+$/, '')
             next unless renderer.uketd_tags.key?(unnumbered_key.to_sym)
+            if unnumbered_key == 'subject_keyword'
+              subjects << value
+              next
+            end
             renderer.render(unnumbered_key, value, uketddc_node)
           end
           renderer.render("type", "Thesis or Dissertation", uketddc_node)
+          renderer.render("subject_keyword", subjects, uketddc_node)
         end
         doc.save(setup_export_file(folder_count), indent: true, encoding: XML::Encoding::UTF_8)
       end

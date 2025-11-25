@@ -30,9 +30,16 @@ end
 
 ::CatalogController.class_eval do
   blacklight_config.oai[:document][:set_fields] = [
-    { label: "Subject Discipline", solr_field: "subject_sim" }
-    #    {:label=>"Institution", :solr_field=>"current_he_institution_sim"}
+    { label: "Subject Discipline", solr_field: "subject_sim" },
+    { label: "Institution", solr_field: "current_he_institution_sim" }
   ]
+
+  blacklight_config.add_facet_field 'qualification_name_sim', label: "Qualification Name", limit: 5
+  blacklight_config.add_facet_field 'ethos_institution_sim', label: "Institution", limit: 5
+  blacklight_config.add_facet_field 'current_he_institution_sim', label: "Current Institution", limit: 5
+  blacklight_config.add_facet_field 'funder_sim', label: "Funder / Sponsor", limit: 5
+  blacklight_config.add_facet_field 'date_issued_sim', label: "Date Awarded", limit: 5
+  blacklight_config.add_facet_field 'dewey_sim', label: "Dewey", limit: 5
 end
 
 HyraxHelper.module_eval do

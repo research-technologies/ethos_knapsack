@@ -21,17 +21,16 @@ module Hyrax
           # @return [Dry::Monads::Result]
           def call(change_set)
             creators = []
+            updated = false
             ['creator_family_name', 'creator_given_name', 'creator_orcid', 'creator_isni'].each do |creator_field|
+              updated = true if change_set.input_params.key?(creator_field)
               next if change_set.input_params[creator_field].blank?
               change_set.input_params[creator_field].each_with_index do |value, index|
                 creators[index] = {} if creators[index].nil?
                 creators[index][creator_field] = value
               end
             end
-            # debugger
-            change_set.creator = creators.map(&:to_s)
-            STDERR.puts "creators: #{change_set.creator}"
-            # debugger
+            change_set.creator = creators.map(&:to_s) if updated
             Success(change_set)
           rescue NoMethodError => err
             Failure([err.message, change_set])
