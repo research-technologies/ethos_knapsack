@@ -6,7 +6,7 @@ module Valkyrie
       module ResourceConverterDecorator
         # Converts the Valkyrie Resource into an ActiveRecord object
         # @return [ORM::Resource]
-        def convert!
+        def convert! # rubocop:disable Metrics/AbcSize
           return super unless resource.class == ::ThesisOrDissertation
           # Here we make a third choice foor when there is a resource.id but no existing object but we
           # _do_ use that resource id for the new object rather than mint one (this is to catch the historical EThOS IDs)
