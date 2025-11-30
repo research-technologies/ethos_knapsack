@@ -34,8 +34,8 @@ end
     { label: "Institution", solr_field: "current_he_institution_sim" }
   ]
 
-  # I hope there is a better way to re-order facets 
-  # Remove the ones that are set by hyku 
+  # I hope there is a better way to re-order facets
+  # Remove the ones that are set by hyku
   blacklight_config.facet_fields.delete(:keyword_sim)
   blacklight_config.facet_fields.delete(:subject_sim)
   blacklight_config.facet_fields.delete(:language_sim)
@@ -50,7 +50,6 @@ end
 
   # blacklight_config.add_facet_field 'dewey_sim', label: "Dewey", limit: 5
   # blacklight_config.add_facet_field 'ethos_institution_sim', label: "Institution", limit: 5
-
 end
 
 HyraxHelper.module_eval do
