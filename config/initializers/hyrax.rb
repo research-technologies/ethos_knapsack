@@ -30,7 +30,8 @@ end
 
 ::CatalogController.class_eval do
   blacklight_config.oai[:document][:set_fields] = [
-    { label: "Subject Discipline", solr_field: "subject_sim" },
+#    { label: "Subject Discipline", solr_field: "subject_sim" },
+#    { label: "Full Text", solr_field: "referenced_by_ssi" },
     { label: "Institution", solr_field: "current_he_institution_sim" }
   ]
 
