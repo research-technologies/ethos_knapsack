@@ -1,744 +1,1065 @@
 terms:
+  - id: Wrexham University
+    term: Wrexham University
+    isni: 0000 0001 0729 939X
+    ror: https://ror.org/048kc0s52
+    wikidata: Q3400501
+    grid: grid.4862.8
+    active: true
+  - id: Wessex Institute of Technology
+    term: Wessex Institute of Technology
+    isni: 0000 0004 0458 519X
+    ror: https://ror.org/01thz0w07
+    wikidata: Q7984141
+    grid: grid.426350.6
+    active: true
   - id: Abertay University
     term: Abertay University
     isni: 0000 0001 0339 8665
     ror: https://ror.org/04mwwnx67
+    wikidata: Q1505925
+    grid: grid.44361.34
     active: true
   - id: Aberystwyth University
     term: Aberystwyth University
     isni: 0000 0001 2168 2483
     ror: https://ror.org/015m2p889
+    wikidata: Q319761
+    grid: grid.8186.7
     active: true
   - id: Anglia Ruskin University
     term: Anglia Ruskin University
     isni: 0000 0001 2299 5510
     ror: https://ror.org/0009t4v78
+    wikidata: Q540751
+    grid: grid.5115.0
     active: true
   - id: Aston University
     term: Aston University
     isni: 0000 0004 0376 4727
     ror: https://ror.org/05j0ve876
+    wikidata: Q750066
+    grid: grid.7273.1
     active: true
   - id: Bangor University
     term: Bangor University
     isni: 0000 0001 1882 0937
     ror: https://ror.org/006jb1a24
+    wikidata: Q790029
+    grid: grid.7362.0
     active: true
   - id: Bath Spa University
     term: Bath Spa University
     isni: 0000 0001 2034 9451
     ror: https://ror.org/0038jbq24
+    wikidata: Q3091754
+    grid: grid.252874.e
     active: true
   - id: Birkbeck, University of London
     term: Birkbeck, University of London
     isni: 0000 0001 2324 0507
     ror: https://ror.org/02mb95055
+    wikidata: Q375606
+    grid: grid.88379.3d
     active: true
   - id: Birmingham City University
     term: Birmingham City University
     isni: 0000 0001 2180 2449
     ror: https://ror.org/00t67pt25
+    wikidata: Q3547145
+    grid: grid.19822.30
     active: true
   - id: Bournemouth University
     term: Bournemouth University
     isni: 0000 0001 0728 4630
     ror: https://ror.org/05wwcw481
+    wikidata: Q3182943
+    grid: grid.17236.31
     active: true
-  - id: Brunel University
-    term: Brunel University
+  - id: Brunel University of London
+    term: Brunel University of London
     isni: 0000 0001 0724 6933
     ror: https://ror.org/00dn4t376
+    wikidata: Q932411
+    grid: grid.7728.a
     active: true
-  - id: Bucks New University
-    term: Bucks New University
-    isni: 0000 0004 5904 9407
+  - id: Buckinghamshire New University
+    term: Buckinghamshire New University
+    isni: 0000 0001 2154 0135
     ror: https://ror.org/02q3bak66
+    wikidata: Q448403
+    grid: grid.411820.e
     active: true
   - id: Canterbury Christ Church University
     term: Canterbury Christ Church University
     isni: 0000 0001 0249 951X
     ror: https://ror.org/0489ggv38
+    wikidata: Q3182956
+    grid: grid.127050.1
     active: true
   - id: Cardiff Metropolitan University
     term: Cardiff Metropolitan University
-    isni: 0000 0004 5905 4281
+    isni: 0000 0001 2034 1556
     ror: https://ror.org/00bqvf857
+    wikidata: Q5038449
+    grid: grid.47170.35
     active: true
   - id: Cardiff University
     term: Cardiff University
     isni: 0000 0001 0807 5670
     ror: https://ror.org/03kk7td41
+    wikidata: Q1035745
+    grid: grid.5600.3
     active: true
   - id: City, University of London
     term: City, University of London
     isni: 0000 0004 1936 8497
     ror: https://ror.org/04489at23
+    wikidata: Q1094046
+    grid: grid.28577.3f
     active: true
   - id: Courtauld Institute of Art
     term: Courtauld Institute of Art
     isni: 0000 0004 1936 850X
     ror: https://ror.org/052411t69
+    wikidata: Q734266
+    grid: grid.424182.9
     active: true
   - id: Coventry University
     term: Coventry University
     isni: 0000 0001 0675 4565
     ror: https://ror.org/01tgmhj36
+    wikidata: Q1138080
+    grid: grid.8096.7
     active: true
   - id: Cranfield University
     term: Cranfield University
     isni: 0000 0001 0679 2190
     ror: https://ror.org/05cncd958
+    wikidata: Q181177
+    grid: grid.12026.37
     active: true
   - id: De Montfort University
     term: De Montfort University
     isni: 0000 0001 2153 2936
     ror: https://ror.org/0312pnr83
+    wikidata: Q3551402
+    grid: grid.48815.30
     active: true
   - id: Durham University
     term: Durham University
     isni: 0000 0000 8700 0572
     ror: https://ror.org/01v29qb04
+    wikidata: Q458393
+    grid: grid.8250.f
     active: true
   - id: Edge Hill University
     term: Edge Hill University
     isni: 0000 0000 8794 7109
     ror: https://ror.org/028ndzd53
+    wikidata: Q937482
+    grid: grid.255434.1
     active: true
   - id: Edinburgh Napier University
     term: Edinburgh Napier University
     isni: 0000 0001 2348 339X
     ror: https://ror.org/03zjvnn91
+    wikidata: Q1277357
+    grid: grid.20409.3f
     active: true
-  - id: Falmouth University
-    term: Falmouth University
-    isni: 0000 0004 4909 1126
-    ror: https://ror.org/022gstf70
+  - id: Exeter and Plymouth Peninsula Medical School
+    term: Exeter and Plymouth Peninsula Medical School
     active: true
   - id: Glasgow Caledonian University
     term: Glasgow Caledonian University
     isni: 0000 0001 0669 8188
     ror: https://ror.org/03dvm1235
+    wikidata: Q1353139
+    grid: grid.5214.2
     active: true
   - id: Glasgow School of Art
     term: Glasgow School of Art
     isni: 0000 0004 0404 8837
     ror: https://ror.org/01s033b11
+    wikidata: Q748106
+    grid: grid.420422.2
     active: true
-  - id: Goldsmiths, University of London
-    term: Goldsmiths, University of London
+  - id: Goldsmiths University of London
+    term: Goldsmiths University of London
     isni: 0000 0001 2191 6040
     ror: https://ror.org/01khx4a30
+    wikidata: Q528231
+    grid: grid.15874.3f
     active: true
   - id: Guildhall School of Music and Drama
     term: Guildhall School of Music and Drama
     isni: 0000 0001 1954 5658
     ror: https://ror.org/05v7fvh88
+    wikidata: Q1419737
+    grid: grid.434939.0
     active: true
   - id: Harper Adams University
     term: Harper Adams University
     isni: 0000 0001 2167 3798
     ror: https://ror.org/00z20c921
+    wikidata: Q5663364
+    grid: grid.417899.a
+    active: true
+  - id: Henley Business School
+    term: Henley Business School
+    isni: 0000 0001 0741 8387
     active: true
   - id: Heriot-Watt University
     term: Heriot-Watt University
     isni: 0000 0001 0656 7444
     ror: https://ror.org/04mghma93
+    wikidata: Q1610024
+    grid: grid.9531.e
+    active: true
+  - id: Heythrop College, University of London
+    term: Heythrop College, University of London
+    isni: 0000 0001 1088 9446
+    ror: https://ror.org/044gr8720
+    wikidata: Q641609
+    grid: grid.450939.2
+    active: true
+  - id: Hult International Business School
+    term: Hult International Business School
     active: true
   - id: Imperial College London
     term: Imperial College London
-    isni: 0000 0001 2188 9740
+    isni: 0000 0001 2113 8111
     ror: https://ror.org/041kmwe10
+    wikidata: Q189022
+    grid: grid.7445.2
     active: true
   - id: Institute of Advanced Legal Studies
     term: Institute of Advanced Legal Studies
     isni: 0000 0004 0530 4986
+    ror: https://ror.org/016qzbe65
+    wikidata: Q14566210
     active: true
   - id: Institute of Cancer Research
     term: Institute of Cancer Research
     isni: 0000 0001 1499 0189
-    active: true
-  - id: Institute of Classical Studies
-    term: Institute of Classical Studies
-    isni: 0000 0001 2165 647X
-    ror: https://ror.org/052411t69
+    ror: https://ror.org/043jzw605
+    wikidata: Q6039999
+    grid: grid.18886.3f
     active: true
   - id: Institute of Commonwealth Studies
     term: Institute of Commonwealth Studies
     isni: 0000 0004 0619 5240
+    ror: https://ror.org/02n1ntd57
+    wikidata: Q6040106
     active: true
   - id: Institute of Historical Research
     term: Institute of Historical Research
     isni: 0000 0001 1941 8034
+    ror: https://ror.org/04e8nyq62
+    wikidata: Q6040373
     active: true
   - id: Keele University
     term: Keele University
     isni: 0000 0004 0415 6205
     ror: https://ror.org/00340yn33
+    wikidata: Q1737734
+    grid: grid.9757.c
     active: true
   - id: King's College London
     term: King's College London
     isni: 0000 0001 2322 6764
     ror: https://ror.org/0220mzb33
+    wikidata: Q245247
+    grid: grid.13097.3c
     active: true
   - id: Kingston University
     term: Kingston University
-    isni: 0000 0001 0536 3773
     ror: https://ror.org/0517ce304
+    wikidata: grid.461489.6
+    grid: 
     active: true
   - id: Lambeth Palace Library
     term: Lambeth Palace Library
-    isni: 0000 0001 2243 2670
+    isni: 0000 0001 2242 5921
     ror: https://ror.org/000p2wp51
+    grid: 
     active: true
   - id: Lancaster University
     term: Lancaster University
-    isni: 0000 0004 5907 4995
+    isni: 0000 0000 8190 6402
     ror: https://ror.org/04f2nsd36
+    wikidata: Q262854
+    grid: grid.9835.7
     active: true
   - id: Leeds Beckett University
     term: Leeds Beckett University
     isni: 0000 0001 0745 8880
     ror: https://ror.org/02xsh5r57
+    wikidata: Q2392351
+    grid: grid.10346.30
     active: true
   - id: Liverpool Hope University
     term: Liverpool Hope University
-    isni: 0000 0000 9506 877X
+    isni: 0000 0000 8508 6421
     ror: https://ror.org/03ctjbj91
+    wikidata: Q1818020
+    grid: grid.146189.3
     active: true
   - id: Liverpool John Moores University
     term: Liverpool John Moores University
-    isni: 0000 0001 2185 1558
+    isni: 0000 0004 0368 0654
     ror: https://ror.org/04zfme737
+    wikidata: Q1627967
+    grid: grid.4425.7
     active: true
   - id: Liverpool School of Tropical Medicine
     term: Liverpool School of Tropical Medicine
     isni: 0000 0004 1936 9764
     ror: https://ror.org/03svjbs84
+    wikidata: Q3835531
+    grid: grid.48004.38
     active: true
   - id: London Business School
     term: London Business School
     isni: 0000 0004 0425 3400
     ror: https://ror.org/001c2sn75
+    wikidata: Q1481050
+    grid: grid.14868.33
     active: true
   - id: London Metropolitan University
     term: London Metropolitan University
     isni: 0000 0001 2221 0023
     ror: https://ror.org/00ae33288
+    wikidata: Q1869028
+    grid: grid.23231.31
     active: true
   - id: London School of Economics and Political Science
     term: London School of Economics and Political Science
-    isni: 0000 0004 5903 3130
+    isni: 0000 0001 0789 5319
     ror: https://ror.org/0090zs177
+    wikidata: Q174570
+    grid: grid.13063.37
     active: true
-  - id: London School of Hygiene and Tropical Medicine
-    term: London School of Hygiene and Tropical Medicine
+  - id: London School of Hygiene & Tropical Medicine
+    term: London School of Hygiene & Tropical Medicine
     isni: 0000 0004 0425 469X
     ror: https://ror.org/00a0jsq62
+    wikidata: Q1126189
+    grid: grid.8991.9
+    active: true
+  - id: London School of Theology
+    term: London School of Theology
+    isni: 0000 0001 0710 0678
+    ror: https://ror.org/045y10908
+    wikidata: Q1710482
+    grid: grid.462506.3
     active: true
   - id: London South Bank University
     term: London South Bank University
     isni: 0000 0001 2112 2291
     ror: https://ror.org/02vwnat91
+    wikidata: Q289348
+    grid: grid.4756.0
     active: true
   - id: Loughborough University
     term: Loughborough University
     isni: 0000 0004 1936 8542
     ror: https://ror.org/04vg4w365
+    wikidata: Q1434547
+    grid: grid.6571.5
     active: true
   - id: Manchester Metropolitan University
     term: Manchester Metropolitan University
     isni: 0000 0001 0790 5329
     ror: https://ror.org/02hstj355
+    wikidata: Q1888771
+    grid: grid.25627.34
     active: true
   - id: Middlesex University
     term: Middlesex University
     isni: 0000 0001 0710 330X
     ror: https://ror.org/01rv4p989
-    active: true
-  - id: National Trust
-    term: National Trust
-    isni: 0000 0001 2353 7415
-    ror: https://ror.org/03md96v89
-    active: true
-  - id: Newcastle University
-    term: Newcastle University
-    isni: 0000 0001 0462 7212
-    ror: https://ror.org/01kj2bm70
+    wikidata: Q1760791
+    grid: grid.15822.3c
     active: true
   - id: Northumbria University
     term: Northumbria University
     isni: 0000 0001 2196 5555
     ror: https://ror.org/049e6bc10
+    wikidata: Q2503794
+    grid: grid.42629.3b
     active: true
   - id: Nottingham Trent University
     term: Nottingham Trent University
     isni: 0000 0001 0727 0669
     ror: https://ror.org/04xyxjd90
+    wikidata: Q2002619
+    grid: grid.12361.37
     active: true
   - id: Open University
     term: Open University
     isni: 0000 0000 9606 9301
     ror: https://ror.org/05mzfcs16
+    wikidata: Q2413375
+    grid: grid.10837.3d
     active: true
   - id: Oxford Brookes University
     term: Oxford Brookes University
     isni: 0000 0001 0726 8331
     ror: https://ror.org/04v2twj65
+    wikidata: Q132478
+    grid: grid.7628.b
     active: true
   - id: Oxford Centre for Mission Studies
     term: Oxford Centre for Mission Studies
     isni: 0000 0000 9738 9841
+    ror: https://ror.org/040059s22
+    wikidata: Q7115269
+    grid: grid.512203.7
     active: true
   - id: Queen Margaret University
     term: Queen Margaret University
     isni: 0000 0004 0398 1641
     ror: https://ror.org/002g3cb31
+    wikidata: Q915989
+    grid: grid.104846.f
     active: true
-  - id: Queen Mary, University of London
-    term: Queen Mary, University of London
+  - id: Queen Mary University of London
+    term: Queen Mary University of London
     isni: 0000 0001 2171 1133
     ror: https://ror.org/026zzn846
+    wikidata: Q195668
+    grid: grid.4868.2
     active: true
   - id: Queen's University Belfast
     term: Queen's University Belfast
     isni: 0000 0004 0374 7521
     ror: https://ror.org/00hswnk62
-    active: true
-  - id: Ravensbourne University London
-    term: Ravensbourne University London
-    isni: 0000 0000 8610 0475
-    ror: https://ror.org/001htc678
+    wikidata: Q877925
+    grid: grid.4777.3
     active: true
   - id: Regent's University London
     term: Regent's University London
     isni: 0000 0004 0516 1006
     ror: https://ror.org/04tvt8c73
+    wikidata: Q7308066
+    grid: grid.449469.2
     active: true
   - id: Robert Gordon University
     term: Robert Gordon University
     isni: 0000 0001 2324 1681
     ror: https://ror.org/04f0qj703
+    wikidata: Q1788342
+    grid: grid.59490.31
+    active: true
+  - id: Rothamsted Research
+    term: Rothamsted Research
+    isni: 0000 0001 0649 3844
+    ror: https://ror.org/0347fy350
+    wikidata: Q1326711
+    grid: grid.418374.d
     active: true
   - id: Royal Academy of Music
     term: Royal Academy of Music
     isni: 0000 0004 0430 8475
     ror: https://ror.org/045bx8592
+    wikidata: Q1144673
+    grid: grid.421653.7
     active: true
   - id: Royal Central School of Speech and Drama
     term: Royal Central School of Speech and Drama
     isni: 0000 0004 0422 5274
     ror: https://ror.org/05wtfef22
+    wikidata: Q981195
+    grid: grid.417786.b
     active: true
   - id: Royal College of Art
     term: Royal College of Art
     isni: 0000 0004 0425 5385
     ror: https://ror.org/01egahc47
+    wikidata: Q1753535
+    grid: grid.42167.36
     active: true
   - id: Royal College of Music
     term: Royal College of Music
     isni: 0000 0001 2155 0536
     ror: https://ror.org/04kwn3124
+    wikidata: Q304985
+    grid: grid.421665.2
     active: true
-  - id: Royal Holloway, University of London
-    term: Royal Holloway, University of London
+  - id: Royal Holloway University of London
+    term: Royal Holloway University of London
     isni: 0000 0001 2188 881X
     ror: https://ror.org/04g2vpn86
+    wikidata: Q1202039
+    grid: grid.4970.a
     active: true
-  - id: Royal Veterinary College, University of London
-    term: Royal Veterinary College, University of London
+  - id: Royal Veterinary College
+    term: Royal Veterinary College
     isni: 0000 0004 0425 573X
     ror: https://ror.org/01wka8n18
+    wikidata: Q268411
+    grid: grid.20931.39
     active: true
-  - id: School of Advanced Study, University of London
-    term: School of Advanced Study, University of London
+  - id: School of Advanced Study
+    term: School of Advanced Study
     isni: 0000 0001 2167 4256
     ror: https://ror.org/039594g80
+    wikidata: Q2248856
+    grid: grid.467451.5
     active: true
   - id: Sheffield Hallam University
     term: Sheffield Hallam University
     isni: 0000 0001 0303 540X
     ror: https://ror.org/019wt1929
+    wikidata: Q1752117
+    grid: grid.5884.1
     active: true
-  - id: SOAS, University of London
-    term: SOAS, University of London
-    isni: 0000 0001 2108 3878
+  - id: SOAS University of London
+    term: SOAS University of London
+    isni: 0000 0004 0425 5983
     ror: https://ror.org/04vrxay34
+    wikidata: Q220144
+    grid: grid.22631.34
     active: true
-  - id: Solent University
-    term: Solent University
+  - id: Southampton Solent University
+    term: Southampton Solent University
     isni: 0000 0000 9723 6888
     ror: https://ror.org/05xydav19
+    wikidata: Q2065695
+    grid: grid.31044.32
     active: true
   - id: St George's, University of London
     term: St George's, University of London
     isni: 0000 0000 8546 682X
     ror: https://ror.org/040f08y74
+    wikidata: Q772421
+    grid: grid.264200.2
     active: true
-  - id: St Mary's University, Twickenham
-    term: St Mary's University, Twickenham
+  - id: St Mary's University Twickenham London
+    term: St Mary's University Twickenham London
     isni: 0000 0004 5903 394X
     ror: https://ror.org/0067fqk38
+    wikidata: Q2321391
+    grid: grid.417907.c
     active: true
-  - id: Staffordshire University
-    term: Staffordshire University
+  - id: University of Staffordshire
+    term: University of Staffordshire
     isni: 0000 0001 0686 3366
     ror: https://ror.org/00d6k8y35
+    wikidata: Q1534573
+    grid: grid.19873.34
     active: true
   - id: Swansea University
     term: Swansea University
     isni: 0000 0001 0658 8800
     ror: https://ror.org/053fq8t95
+    wikidata: Q1420500
+    grid: grid.4827.9
     active: true
   - id: Tavistock and Portman NHS Foundation Trust
     term: Tavistock and Portman NHS Foundation Trust
-    isni: 0000 0004 0496 7112
+    isni: 0000 0001 2348 6224
     ror: https://ror.org/04fx4cs28
+    wikidata: Q164641
+    grid: grid.501021.7
     active: true
   - id: Teesside University
     term: Teesside University
     isni: 0000 0001 2325 1783
     ror: https://ror.org/03z28gk75
+    wikidata: Q3695910
+    grid: grid.26597.3f
     active: true
-  - id: UCL Institute of Education
-    term: UCL Institute of Education
-    isni: 0000 0001 2190 6782
+  - id: Trinity Laban Conservatoire of Music and Dance
+    term: Trinity Laban Conservatoire of Music and Dance
+    isni: 0000 0001 0660 361X
+    ror: https://ror.org/01gx2kf62
+    wikidata: Q379124
+    grid: grid.421855.f
     active: true
-  - id: Ulster University
-    term: Ulster University
+  - id: UCL Institute of Education (IOE)
+    term: UCL Institute of Education (IOE)
+    isni: 0000 0004 9454 5799
+    active: true
+  - id: University of Ulster
+    term: University of Ulster
     isni: 0000 0001 0551 9715
     ror: https://ror.org/01yp9g959
+    wikidata: Q2096524
+    grid: grid.12641.30
     active: true
   - id: University College London
     term: University College London
     isni: 0000 0001 2190 1201
     ror: https://ror.org/02jx3x895
+    wikidata: Q193196
+    grid: grid.83440.3b
     active: true
   - id: University for the Creative Arts
     term: University for the Creative Arts
     isni: 0000 0000 9830 6702
     ror: https://ror.org/04r0ks517
+    wikidata: Q2598272
+    grid: grid.51008.3c
     active: true
   - id: University of Aberdeen
     term: University of Aberdeen
     isni: 0000 0004 1936 7291
     ror: https://ror.org/016476m91
+    wikidata: Q270532
+    grid: grid.7107.1
     active: true
   - id: University of Bath
     term: University of Bath
     isni: 0000 0001 2162 1699
     ror: https://ror.org/002h8g185
+    wikidata: Q1422458
+    grid: grid.7340.0
     active: true
   - id: University of Bedfordshire
     term: University of Bedfordshire
-    isni: 0000 0004 5906 8819
+    isni: 0000 0000 9882 7057
     ror: https://ror.org/0400avk24
+    wikidata: Q3047150
+    grid: grid.15034.33
     active: true
   - id: University of Birmingham
     term: University of Birmingham
     isni: 0000 0004 1936 7486
     ror: https://ror.org/03angcq70
+    wikidata: Q223429
+    grid: grid.6572.6
     active: true
   - id: University of Bolton
     term: University of Bolton
     isni: 0000 0001 2166 3186
     ror: https://ror.org/01t884y44
+    wikidata: Q1683230
+    grid: grid.36076.34
     active: true
   - id: University of Bradford
     term: University of Bradford
     isni: 0000 0004 0379 5283
     ror: https://ror.org/00vs8d940
+    wikidata: Q954035
+    grid: grid.6268.a
     active: true
   - id: University of Brighton
     term: University of Brighton
     isni: 0000 0001 2107 3784
     ror: https://ror.org/04kp2b655
+    wikidata: Q3056813
+    grid: grid.12477.37
     active: true
   - id: University of Bristol
     term: University of Bristol
     isni: 0000 0004 1936 7603
     ror: https://ror.org/0524sp257
+    wikidata: Q459506
+    grid: grid.5337.2
     active: true
   - id: University of Buckingham
     term: University of Buckingham
     isni: 0000 0000 9479 0090
     ror: https://ror.org/03kd28f18
+    wikidata: Q2010561
+    grid: grid.90685.32
     active: true
   - id: University of Cambridge
     term: University of Cambridge
     isni: 0000 0001 2188 5934
     ror: https://ror.org/013meh722
+    wikidata: Q35794
+    grid: grid.5335.0
     active: true
-  - id: University of Central Lancashire
-    term: University of Central Lancashire
+  - id: University of Lancashire
+    term: University of Lancashire
     isni: 0000 0001 2167 3843
     ror: https://ror.org/010jbqd54
+    wikidata: Q1857773
+    grid: grid.7943.9
     active: true
   - id: University of Chester
     term: University of Chester
-    isni: 0000 0004 5906 0681
+    isni: 0000 0001 0683 9016
     ror: https://ror.org/01drpwb22
+    wikidata: Q762243
+    grid: grid.43710.31
     active: true
   - id: University of Chichester
     term: University of Chichester
     isni: 0000 0001 0739 2308
     ror: https://ror.org/029tw2407
+    wikidata: Q3551577
+    grid: grid.266161.4
     active: true
   - id: University of Cumbria
     term: University of Cumbria
-    isni: 0000 0001 2185 7685
+    isni: 0000 0000 8761 3918
     ror: https://ror.org/05gd22996
+    wikidata: Q1861974
+    grid: grid.266218.9
     active: true
   - id: University of Derby
     term: University of Derby
     isni: 0000 0001 2232 4004
     ror: https://ror.org/02yhrrk59
+    wikidata: Q3183295
+    grid: grid.57686.3a
     active: true
   - id: University of Dundee
     term: University of Dundee
     isni: 0000 0004 0397 2876
     ror: https://ror.org/03h2bxq36
+    wikidata: Q1249005
+    grid: grid.8241.f
     active: true
   - id: University of East Anglia
     term: University of East Anglia
     isni: 0000 0001 1092 7967
     ror: https://ror.org/026k5mg93
+    wikidata: Q1045828
+    grid: grid.8273.e
     active: true
   - id: University of East London
     term: University of East London
     isni: 0000 0001 2189 1306
     ror: https://ror.org/057jrqr44
+    wikidata: Q1345942
+    grid: grid.60969.30
     active: true
   - id: University of Edinburgh
     term: University of Edinburgh
     isni: 0000 0004 1936 7988
     ror: https://ror.org/01nrxwf90
+    wikidata: Q160302
+    grid: grid.4305.2
     active: true
   - id: University of Essex
     term: University of Essex
     isni: 0000 0001 0942 6946
     ror: https://ror.org/02nkf1q06
+    wikidata: Q1075104
+    grid: grid.8356.8
     active: true
   - id: University of Exeter
     term: University of Exeter
     isni: 0000 0004 1936 8024
     ror: https://ror.org/03yghzc09
+    wikidata: Q1414861
+    grid: grid.8391.3
     active: true
   - id: University of Glasgow
     term: University of Glasgow
     isni: 0000 0001 2193 314X
     ror: https://ror.org/00vtgdb53
+    wikidata: Q192775
+    grid: grid.8756.c
     active: true
   - id: University of Gloucestershire
     term: University of Gloucestershire
     isni: 0000 0001 2191 9137
     ror: https://ror.org/00wygct11
+    wikidata: Q1816872
+    grid: grid.21027.36
     active: true
   - id: University of Greenwich
     term: University of Greenwich
     isni: 0000 0001 0806 5472
     ror: https://ror.org/00bmj0a71
+    wikidata: Q1896148
+    grid: grid.36316.31
     active: true
   - id: University of Hertfordshire
     term: University of Hertfordshire
     isni: 0000 0001 2161 9644
     ror: https://ror.org/0267vjk41
+    wikidata: Q1745633
+    grid: grid.5846.f
     active: true
   - id: University of Huddersfield
     term: University of Huddersfield
     isni: 0000 0001 0719 6059
     ror: https://ror.org/05t1h8f27
+    wikidata: Q3056815
+    grid: grid.15751.37
     active: true
   - id: University of Hull
     term: University of Hull
     isni: 0000 0004 0412 8669
     ror: https://ror.org/04nkhwh30
+    wikidata: Q1474019
+    grid: grid.9481.4
     active: true
   - id: University of Kent
     term: University of Kent
     isni: 0000 0001 2232 2818
     ror: https://ror.org/00xkeyj56
+    wikidata: Q1516684
+    grid: grid.9759.2
     active: true
   - id: University of Leeds
     term: University of Leeds
     isni: 0000 0004 1936 8403
     ror: https://ror.org/024mrxd33
+    wikidata: Q503424
+    grid: grid.9909.9
     active: true
   - id: University of Leicester
     term: University of Leicester
     isni: 0000 0004 1936 8411
     ror: https://ror.org/04h699437
+    wikidata: Q1333399
+    grid: grid.9918.9
     active: true
   - id: University of Lincoln
     term: University of Lincoln
     isni: 0000 0004 0420 4262
     ror: https://ror.org/03yeq9x20
+    wikidata: Q2738646
+    grid: grid.36511.30
     active: true
   - id: University of Liverpool
     term: University of Liverpool
     isni: 0000 0004 1936 8470
     ror: https://ror.org/04xs57h96
+    wikidata: Q499510
+    grid: grid.10025.36
     active: true
   - id: University of London
     term: University of London
     isni: 0000 0001 2161 2573
     ror: https://ror.org/04cw6st05
+    wikidata: Q170027
+    grid: grid.4464.2
     active: true
   - id: University of Manchester
     term: University of Manchester
     isni: 0000 0001 2166 2407
     ror: https://ror.org/027m9bs27
+    wikidata: Q230899
+    grid: grid.5379.8
+    active: true
+  - id: Newcastle University
+    term: Newcastle University
+    isni: 0000 0001 0462 7212
+    ror: https://ror.org/01kj2bm70
+    wikidata: Q837164
+    grid: grid.1006.7
     active: true
   - id: University of Northampton
     term: University of Northampton
-    isni: 0000 0000 8646 6223
     ror: https://ror.org/04jp2hx10
+    wikidata: grid.44870.3f
+    grid: 
     active: true
   - id: University of Nottingham
     term: University of Nottingham
     isni: 0000 0004 1936 8868
     ror: https://ror.org/01ee9ar58
+    wikidata: Q472316
+    grid: grid.4563.4
     active: true
   - id: University of Oxford
     term: University of Oxford
     isni: 0000 0004 1936 8948
     ror: https://ror.org/052gg0110
+    wikidata: Q34433
+    grid: grid.4991.5
     active: true
   - id: University of Plymouth
     term: University of Plymouth
     isni: 0000 0001 2219 0747
     ror: https://ror.org/008n7pv89
+    wikidata: Q1711558
+    grid: grid.11201.33
     active: true
   - id: University of Portsmouth
     term: University of Portsmouth
     isni: 0000 0001 0728 6636
     ror: https://ror.org/03ykbk197
+    wikidata: Q2744209
+    grid: grid.4701.2
     active: true
   - id: University of Reading
     term: University of Reading
     isni: 0000 0004 0457 9566
     ror: https://ror.org/05v62cm79
+    wikidata: Q1432632
+    grid: grid.9435.b
     active: true
   - id: University of Roehampton
     term: University of Roehampton
     isni: 0000 0001 0468 7274
     ror: https://ror.org/043071f54
+    wikidata: Q939607
+    grid: grid.35349.38
     active: true
   - id: University of Salford
     term: University of Salford
     isni: 0000 0004 0460 5971
     ror: https://ror.org/01tmqtf75
+    wikidata: Q2738622
+    grid: grid.8752.8
     active: true
   - id: University of Sheffield
     term: University of Sheffield
     isni: 0000 0004 1936 9262
     ror: https://ror.org/05krs5044
+    wikidata: Q823917
+    grid: grid.11835.3e
     active: true
   - id: University of South Wales
     term: University of South Wales
-    isni: 0000 0004 5907 2711
+    isni: 0000 0004 1936 9035
     ror: https://ror.org/02mzn7s88
+    wikidata: Q1971174
+    grid: grid.410658.e
     active: true
   - id: University of Southampton
     term: University of Southampton
     isni: 0000 0004 1936 9297
     ror: https://ror.org/01ryk1543
+    wikidata: Q76473
+    grid: grid.5491.9
     active: true
   - id: University of St Andrews
     term: University of St Andrews
-    isni: 0000 0004 5905 9680
+    isni: 0000 0001 0721 1626
     ror: https://ror.org/02wn5qz54
+    wikidata: Q216273
+    grid: grid.11914.3c
     active: true
   - id: University of Stirling
     term: University of Stirling
     isni: 0000 0001 2248 4331
     ror: https://ror.org/045wgfr59
+    wikidata: Q963530
+    grid: grid.11918.30
     active: true
   - id: University of Strathclyde
     term: University of Strathclyde
-    isni: 0000 0004 1936 8139
+    isni: 0000 0001 2113 8138
     ror: https://ror.org/00n3w3b69
+    wikidata: Q1859178
+    grid: grid.11984.35
     active: true
   - id: University of Sunderland
     term: University of Sunderland
     isni: 0000 0001 0555 9901
     ror: https://ror.org/04p55hr04
+    wikidata: Q1094742
+    grid: grid.7110.7
     active: true
   - id: University of Surrey
     term: University of Surrey
     isni: 0000 0004 0407 4824
     ror: https://ror.org/00ks66431
+    wikidata: Q546976
+    grid: grid.5475.3
     active: true
   - id: University of Sussex
     term: University of Sussex
     isni: 0000 0004 1936 7590
     ror: https://ror.org/00ayhx656
+    wikidata: Q1161297
+    grid: grid.12082.39
     active: true
   - id: University of the Arts London
     term: University of the Arts London
     isni: 0000 0000 8517 0017
     ror: https://ror.org/04cnfrn26
+    wikidata: Q2065666
+    grid: grid.20364.33
     active: true
-  - id: University of the Highlands & Islands
-    term: University of the Highlands & Islands
+  - id: University of the Highlands and Islands
+    term: University of the Highlands and Islands
     isni: 0000 0001 2189 1357
     ror: https://ror.org/02s08xt61
+    wikidata: Q1470817
+    grid: grid.23378.3d
     active: true
   - id: University of the West of England
     term: University of the West of England
     isni: 0000 0001 2034 5266
     ror: https://ror.org/02nwg5t34
+    wikidata: Q2002520
+    grid: grid.6518.a
     active: true
   - id: University of the West of Scotland
     term: University of the West of Scotland
-    isni: 0000 0000 5904 3849
+    isni: 0000 0001 1091 500X
     ror: https://ror.org/04w3d2v20
+    wikidata: Q1296153
+    grid: grid.15756.30
     active: true
-  - id: University of Wales, Trinity Saint David
-    term: University of Wales, Trinity Saint David
-    isni: 0000 0004 5905 5030
+  - id: University of Wales Trinity Saint David
+    term: University of Wales Trinity Saint David
+    isni: 0000 0000 9280 9077
     ror: https://ror.org/05gkzcc88
+    wikidata: Q3551774
+    grid: grid.12362.34
     active: true
   - id: University of Warwick
     term: University of Warwick
     isni: 0000 0000 8809 1613
     ror: https://ror.org/01a77tt86
+    wikidata: Q865528
+    grid: grid.7372.1
     active: true
   - id: University of West London
     term: University of West London
     isni: 0000 0001 2185 7124
     ror: https://ror.org/03e5mzp60
+    wikidata: Q2007778
+    grid: grid.81800.31
     active: true
   - id: University of Westminster
     term: University of Westminster
     isni: 0000 0000 9046 8598
     ror: https://ror.org/04ycpbx82
+    wikidata: Q1247544
+    grid: grid.12896.34
     active: true
   - id: University of Winchester
     term: University of Winchester
     isni: 0000 0000 9422 2878
     ror: https://ror.org/03fmjzx88
+    wikidata: Q3551690
+    grid: grid.267454.6
     active: true
   - id: University of Wolverhampton
     term: University of Wolverhampton
     isni: 0000 0001 0693 5374
     ror: https://ror.org/01k2y1055
+    wikidata: Q1816202
+    grid: grid.6374.6
+    active: true
+  - id: University of Worcester
+    term: University of Worcester
+    isni: 0000 0001 0679 8269
+    ror: https://ror.org/00v6s9648
+    wikidata: Q3036648
+    grid: grid.189530.6
     active: true
   - id: University of York
     term: University of York
     isni: 0000 0004 1936 9668
     ror: https://ror.org/04m01e293
+    wikidata: Q967165
+    grid: grid.5685.e
     active: true
   - id: Warburg Institute
     term: Warburg Institute
     isni: 0000 0004 0375 2566
-    active: true
-  - id: Wrexham Glyndwr University
-    term: Wrexham Glyndwr University
-    isni: 0000 0001 0729 939X
-    ror: https://ror.org/048kc0s52
+    ror: https://ror.org/055ttrf22
+    wikidata: Q683095
     active: true
   - id: York St John University
     term: York St John University
     isni: 0000 0004 0598 9700
     ror: https://ror.org/00z5fkj61
+    wikidata: Q8055565
+    grid: grid.23695.3b
     active: true
