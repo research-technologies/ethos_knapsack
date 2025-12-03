@@ -65,7 +65,7 @@ module Bulkrax
       # parsed_metadata['file'] = raw_metadata['file']
 
       add_local
-      validate
+      validate_oai_identifier
       parsed_metadata
     end
     # rubocop:enable Metrics/AbcSize, Metrics/MethodLength#
@@ -79,8 +79,7 @@ module Bulkrax
       add_collections
     end
 
-    def validate
-      #      raise StandardError, "title is required" if parsed_metadata['title'].blank?
+    def validate_oai_identifier
       return unless (existing_record = existing_record_by_oai_identifier?)
       raise StandardError, "There is an existing record with the same oai_identifier #{parsed_metadata['oai_identifier']} : #{existing_record}"
     end

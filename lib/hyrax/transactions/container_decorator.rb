@@ -5,6 +5,7 @@
 require_dependency '../lib/hyrax/transactions/ethos/steps/handle_creators'
 require_dependency '../lib/hyrax/transactions/ethos/steps/handle_contributors'
 require_dependency '../lib/hyrax/transactions/ethos/steps/handle_funders'
+require_dependency '../lib/hyrax/transactions/ethos/steps/handle_validate_new_work'
 
 module Hyrax
   module Transactions
@@ -20,6 +21,9 @@ module Hyrax
         end
         ops.register "handle_funders" do
           Hyrax::Transactions::Ethos::Steps::HandleFunders.new
+        end
+        ops.register "handle_validate_new_work" do
+          Hyrax::Transactions::Ethos::Steps::HandleValidateNewWork.new
         end
       end
     end
