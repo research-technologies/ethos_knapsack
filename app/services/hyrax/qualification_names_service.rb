@@ -10,6 +10,12 @@ module Hyrax
       end
     end
 
+    def self.select_all_option_ids
+      authority.all.map do |element|
+        [element[:id], element[:id]]
+      end
+    end
+
     def self.label(id)
       authority.find(id).fetch('term')
     end
