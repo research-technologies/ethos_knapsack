@@ -1,85 +1,505 @@
 terms:
-- id: PhD
-  term: PhD
-  active: true
-- id: DBA
-  term: DBA
-  active: true
-- id: DClinPsy
-  term: DClinPsy
-  active: true
-- id: DDS
-  term: DDS
-  active: true
-- id: DEdPsy
-  term: DEdPsy
-  active: true
-- id: DHRes
-  term: DHRes
-  active: true
-- id: DLitt
-  term: DLitt
-  active: true
-- id: DMin
-  term: DMin
-  active: true
-- id: DPhil
-  term: DPhil
-  active: true
-- id: DMus
-  term: DMus
-  active: true
-- id: DPT
-  term: DPT
-  active: true
-- id: DrPH
-  term: DrPH
-  active: true
-- id: DSc
-  term: DSc
-  active: true
-- id: DSocSci
-  term: DSocSci
-  active: true
-- id: EdD
-  term: EdD
-  active: true
-- id: EngD
-  term: EngD
-  active: true
-- id: HScD
-  term: HScD
-  active: true
-- id: LLM
-  term: LLM
-  active: true
-- id: MA
-  term: MA
-  active: true
-- id: MD
-  term: MD
-  active: true
-- id: MBA
-  term: MBA
-  active: true
-- id: MLitt
-  term: MLitt
-  active: true
-- id: MPhil
-  term: MPhil
-  active: true
-- id: MRes
-  term: MRes
-  active: true
-- id: MSc
-  term: MSc
-  active: true
-- id: MSt
-  term: MSt
-  active: true
-- id: ProfDoc
-  term: ProfDoc
-  active: true
-- id: ThD
-  term: ThD
-  active: true
+  - id: DClinPsy
+    term: D Clin Psy
+  - id: ApEdChPsyD
+    term: Thesis (Ap.Ed.Ch.Psy.D.)
+  - id: ApEdChildPsyD
+    term: Thesis (Ap.Ed.Child.Psy.D.)
+  - id: AppEdCPsyD
+    term: Thesis (App.Ed.C.Psy.D.)
+  - id: AppPsychD
+    term: Thesis (App.Psych.D.)
+  - id: ClinD
+    term: Thesis (Clin.D.)
+  - id: ClinPsychD
+    term: Thesis (Clin.Psych.D.)
+  - id: DAppChPsy
+    term: Thesis (D.App.Ch.Psy.)
+  - id: DAppEdand Child Psy
+    term: Thesis (D.App.Ed.and Child Psy.)
+  - id: DAppEdChild Psy
+    term: Thesis (D.App.Ed.Child Psy.)
+  - id: DArch
+    term: Thesis (D.Arch.)
+  - id: D Art
+    term: Thesis (D. Art)
+  - id: DArts
+    term: Thesis (D.Arts)
+  - id: DBio
+    term: Thesis (D.Bio.)
+  - id: DBiomSc
+    term: Thesis (D.Biom.Sc.)
+  - id: DBiomSci
+    term: Thesis (D.Biom.Sci.)
+  - id: DBmS
+    term: Thesis (D.Bm.S.)
+  - id: DBmSc
+    term: Thesis (D.Bm.Sc.)
+  - id: DCLD
+    term: Thesis (D.C.L.D.)
+  - id: DCPsyc
+    term: Thesis (D.C.Psyc.)
+  - id: DCS
+    term: Thesis (D.C.S.)
+  - id: DCliPrac
+    term: Thesis (D.Cli.Prac.)
+  - id: DClinDen
+    term: Thesis (D.Clin.Den.)
+  - id: DClinSc
+    term: Thesis (D.Clin.Sc.)
+  - id: DClincPrac
+    term: Thesis (D.Clinc.Prac.)
+  - id: DConsOrg
+    term: Thesis (D.Cons.Org.)
+  - id: DCounPsy
+    term: Thesis (D.Coun.Psy.)
+  - id: DCrimJ
+    term: Thesis (D.Crim.J.)_doc
+  - id: DDLic
+    term: Thesis (D.D.Lic.)
+  - id: DDent
+    term: Thesis (D.Dent.)
+  - id: DEdPsyc
+    term: Thesis (D.Ed.Psyc.)
+  - id: DEntPhysics
+    term: Thesis (D.Ent.Physics)
+  - id: DHEd
+    term: Thesis (D.H.Ed.)
+  - id: DHR
+    term: Thesis (D.H.R.)
+  - id: DHSC
+    term: Thesis (D.H.S.C.)
+  - id: DHSM
+    term: Thesis (D.H.S.M.)
+  - id: DHSocCPr
+    term: Thesis (D.H.Soc.C.Pr.)
+  - id: DHSocSc
+    term: Thesis (D.H.Soc.Sc.)
+  - id: D Health Care
+    term: Thesis (D. Health Care)
+  - id: DHealth Res
+    term: Thesis (D.Health Res.)
+  - id: DHealth Sc
+    term: Thesis (D.Health Sc.)
+  - id: DHealth Sci
+    term: Thesis (D.Health Sci.)
+  - id: D Health Soc Care
+    term: Thesis (D. Health Soc. Care)
+  - id: DHealthPsych
+    term: Thesis (D.HealthPsych.)
+  - id: DHlth
+    term: Thesis (D.Hlth.)
+  - id: DInfSc
+    term: Thesis (D.Inf.Sc.)
+  - id: DInfSec
+    term: Thesis (D.Inf.Sec.)
+  - id: DIntCrimJ
+    term: Thesis (D.Int.Crim.J.)
+  - id: DLaw
+    term: Thesis (D.Law)
+  - id: DLaws
+    term: Thesis (D.Laws)
+  - id: DMEth
+    term: Thesis (D.M.Eth.)
+  - id: DMP
+    term: Thesis (D.M.P.)
+  - id: DMSci
+    term: Thesis (D.M.Sci.)
+  - id: DMW
+    term: Thesis (D.M.W.)
+  - id: DManagement
+    term: Thesis (D.Management)
+  - id: DMedImg
+    term: Thesis (D.Med.Img.)
+  - id: DMedSc
+    term: Thesis (D.Med.Sc.)
+  - id: DMusArts
+    term: Thesis (D.Mus.Arts)
+  - id: DNursSci
+    term: Thesis (D.Nurs.Sci.)
+  - id: DOT
+    term: Thesis (D.O.T.)
+  - id: DPM
+    term: Thesis (D.P.M.)
+  - id: DPhysio
+    term: Thesis (D.Physio.)
+  - id: DProfPrac
+    term: Thesis (D.Prof.Prac.)
+  - id: DPsychCouns
+    term: Thesis (D.Psych.Couns.)
+  - id: D Psychoanalytic Psychotherapy
+    term: Thesis (D. Psychoanalytic Psychotherapy)
+  - id: DPubAdmin
+    term: Thesis (D.Pub.Admin.)
+  - id: DSC
+    term: Thesis (D.S.C.)
+  - id: DSc(Med
+    term: Thesis (D.Sc.(Med.))
+  - id: DSci
+    term: Thesis (D.Sci.)
+  - id: DSocWMan
+    term: Thesis (D.Soc.W.Man.)
+  - id: DSport
+    term: Thesis (D.Sport)
+  - id: DSyRM
+    term: Thesis (D.Sy.R.M.)
+  - id: D Tourism
+    term: Thesis (D. Tourism)
+  - id: DVSc
+    term: Thesis (D.V.Sc.)
+  - id: DVM
+    term: Thesis (D.VM.)
+  - id: DMA
+    term: Thesis (DMA)
+  - id: Doctor of Law
+    term: Thesis (Doctor of Law)
+  - id: Doctor of Laws
+    term: Thesis (Doctor of Laws)
+  - id: DPhil
+    term: Thesis (DPhil.)
+  - id: DPsychotherapy
+    term: Thesis (DPsychotherapy)
+  - id: EEdPsy
+    term: Thesis (E.Ed.Psy.)
+  - id: ForenPsychD
+    term: Thesis (Foren.Psych.D.)
+  - id: LLD
+    term: Thesis (LL.D.)
+  - id: MusDoc
+    term: Thesis (Mus.Doc.)
+  - id: PD
+    term: Thesis (P.D.)
+  - id: PDFA
+    term: Thesis (P.D.F.A.)
+  - id: post-doctoral
+    term: Thesis (post-doctoral)
+  - id: ProDRes
+    term: Thesis (Pro.D.Res.)
+  - id: ProfDoc
+    term: Thesis (Prof.Doc.)
+  - id: PsyD
+    term: Thesis (PsyD)
+  - id: AppEdPsyD
+    term: Thesis (App.Ed.Psy.D.)
+  - id: Arts D
+    term: Thesis (Arts D.)
+  - id: BSc
+    term: Thesis (B.Sc.)
+  - id: Child PsyD
+    term: Thesis (Child Psy.D.)
+  - id: ClinPsyD
+    term: Thesis (Clin.Psy.D.)
+  - id: DAHP
+    term: Thesis (D.A.H.P.)
+  - id: DAgriFood
+    term: Thesis (D.Agri.Food)
+  - id: DAppEd
+    term: Thesis (D.App.Ed.)
+  - id: DAppEdChPsy
+    term: Thesis (D.App.Ed.Ch.Psy.)
+  - id: DAppEdPsy
+    term: Thesis (D.App.Ed.Psy.)
+  - id: DAppPsych
+    term: Thesis (D.App.Psych.)
+  - id: DAppSocRes
+    term: Thesis (D.App.Soc.Res.)
+  - id: DBA
+    term: Thesis (D.B.A.)
+  - id: DBMS
+    term: Thesis (D.B.M.S.)
+  - id: DBS
+    term: Thesis (D.B.S.)
+  - id: DBiomedSc
+    term: Thesis (D.Biomed.Sc.)
+  - id: DBiomedSci
+    term: Thesis (D.Biomed.Sci.)
+  - id: DCM
+    term: Thesis (D.C.M.)
+  - id: DCPsy
+    term: Thesis (D.C.Psy.)
+  - id: DCPsych
+    term: Thesis (D.C.Psych.)
+  - id: DChEdPsy
+    term: Thesis (D.Ch.Ed.Psy.)
+  - id: DChEdPsych
+    term: Thesis (D.Ch.Ed.Psych.)
+  - id: DChPsy
+    term: Thesis (D.Ch.Psy.)
+  - id: DChPsych
+    term: Thesis (D.Ch.Psych.)
+  - id: DChild
+    term: Thesis (D.Child)
+  - id: DClinDent
+    term: Thesis (D.Clin.Dent.)
+  - id: DClinP
+    term: Thesis (D.Clin.P.)
+  - id: DClinPrac
+    term: Thesis (D.Clin.Prac.)
+  - id: DClinPsy
+    term: Thesis (D.Clin.Psy.)
+  - id: DClinPsych
+    term: Thesis (D.Clin.Psych.)
+  - id: DClinPsychol
+    term: Thesis (D.Clin.Psychol.)
+  - id: DClinPysch
+    term: Thesis (D.Clin.Pysch.)
+  - id: DClinRes
+    term: Thesis (D.Clin.Res.)
+  - id: DClinSci
+    term: Thesis (D.Clin.Sci.)
+  - id: DCounPsych
+    term: Thesis (D.Coun.Psych.)
+  - id: DCouns
+    term: Thesis (D.Couns.)
+  - id: DCounsPsy
+    term: Thesis (D.Couns.Psy.)
+  - id: DCounsPsych
+    term: Thesis (D.Couns.Psych.)
+  - id: DCrim
+    term: Thesis (D.Crim.)
+  - id: DCrimJ
+    term: Thesis (D.Crim.J.)
+  - id: DCrimJus
+    term: Thesis (D.Crim.Jus.)
+  - id: DD
+    term: Thesis (D.D.)
+  - id: DDS
+    term: Thesis (D.D.S.)
+  - id: DDSc
+    term: Thesis (D.D.Sc.)
+  - id: DDSci
+    term: Thesis (D.D.Sci.)
+  - id: DData Sc
+    term: Thesis (D.Data Sc.)
+  - id: DDentSci
+    term: Thesis (D.Dent.Sci.)
+  - id: DECAP
+    term: Thesis (D.E.C.A.P.)
+  - id: DEd
+    term: Thesis (D.Ed.)
+  - id: DEdCPsy
+    term: Thesis (D.Ed.C.Psy.)
+  - id: DEdChPsy
+    term: Thesis (D.Ed.Ch.Psy.)
+  - id: DEdChPsych
+    term: Thesis (D.Ed.Ch.Psych.)
+  - id: DEdChiPsy
+    term: Thesis (D.Ed.Chi.Psy.)
+  - id: DEdPhys
+    term: Thesis (D.Ed.Phys.)
+  - id: DEdPsy
+    term: Thesis (D.Ed.Psy.)
+  - id: DEdPsych
+    term: Thesis (D.Ed.Psych.)
+  - id: DEdPsychol
+    term: Thesis (D.Ed.Psychol.)
+  - id: DEng
+    term: Thesis (D.Eng.)
+  - id: DFA
+    term: Thesis (D.F.A.)
+  - id: D Fine Art
+    term: Thesis (D. Fine Art)
+  - id: DForenClinPsy
+    term: Thesis (D.Foren.Clin.Psy.)
+  - id: DForenPsy
+    term: Thesis (D.Foren.Psy.)
+  - id: DGov
+    term: Thesis (D.Gov.)
+  - id: DHC
+    term: Thesis (D.H.C.)
+  - id: DHPE
+    term: Thesis (D.H.P.E.)
+  - id: DHPsy
+    term: Thesis (D.H.Psy.)
+  - id: DHPsych
+    term: Thesis (D.H.Psych.)
+  - id: DHRes
+    term: Thesis (D.H.Res.)
+  - id: DHS
+    term: Thesis (D.H.S.)
+  - id: DHSc
+    term: Thesis (D.H.Sc.)
+  - id: DHSci
+    term: Thesis (D.H.Sci.)
+  - id: DHSocC
+    term: Thesis (D.H.Soc.C.)
+  - id: DHealth
+    term: Thesis (D.Health)
+  - id: DHealth Psy
+    term: Thesis (D.Health Psy.)
+  - id: DHealth Psych
+    term: Thesis (D.Health Psych.)
+  - id: D Healthcare
+    term: Thesis (D. Healthcare)
+  - id: DHealthPsy
+    term: Thesis (D.HealthPsy.)
+  - id: DInfSci
+    term: Thesis (D.Inf.Sci.)
+  - id: DLang
+    term: Thesis (D.Lang.)
+  - id: DLegal
+    term: Thesis (D.Legal)
+  - id: DLit
+    term: Thesis (D.Lit.)
+  - id: DLitt
+    term: Thesis (D.Litt.)
+  - id: DM
+    term: Thesis (D.M.)
+  - id: DMA
+    term: Thesis (D.M.A.)
+  - id: DMan
+    term: Thesis (D.Man.)
+  - id: DMedEth
+    term: Thesis (D.Med.Eth.)
+  - id: DMedSci
+    term: Thesis (D.Med.Sci)
+  - id: DMin
+    term: Thesis (D.Min.)
+  - id: DMus
+    term: Thesis (D.Mus.)
+  - id: DNP
+    term: Thesis (D.N.P.)
+  - id: DNSc
+    term: Thesis (D.N.Sc.)
+  - id: DNurs
+    term: Thesis (D.Nurs.)
+  - id: DNursSc
+    term: Thesis (D.Nurs.Sc.)
+  - id: DNursing
+    term: Thesis (D.Nursing)
+  - id: DOBPsych
+    term: Thesis (D.O.B.Psych.)
+  - id: DOccPsy
+    term: Thesis (D.Occ.Psy.)
+  - id: DOccPsych
+    term: Thesis (D.Occ.Psych.)
+  - id: DOccTh
+    term: Thesis (D.Occ.Th.)
+  - id: DPA
+    term: Thesis (D.P.A.)
+  - id: DPH
+    term: Thesis (D.P.H.)
+  - id: DPP
+    term: Thesis (D.P.P.)
+  - id: DPT
+    term: Thesis (D.P.T.)
+  - id: DPaedDent
+    term: Thesis (D.Paed.Dent.)
+  - id: DPharm
+    term: Thesis (D.Pharm.)
+  - id: DPhil
+    term: Thesis (D.Phil.)
+  - id: DProf
+    term: Thesis (D.Prof.)
+  - id: DProfCounsPsy
+    term: Thesis (D.Prof.Couns.Psy.)
+  - id: DProfHW
+    term: Thesis (D.Prof.H.W.)
+  - id: DPsy
+    term: Thesis (D.Psy.)
+  - id: DPsych
+    term: Thesis (D.Psych.)
+  - id: DPsychol
+    term: Thesis (D.Psychol.)
+  - id: DSW
+    term: Thesis (D.S.W.)
+  - id: DSc
+    term: Thesis (D.Sc.)
+  - id: DSocCare
+    term: Thesis (D.Soc.Care)
+  - id: DSocPrac
+    term: Thesis (D.Soc.Prac.)
+  - id: DSocSci
+    term: Thesis (D.Soc.Sci.)
+  - id: DSocW
+    term: Thesis (D.Soc.W.)
+  - id: DSocWork
+    term: Thesis (D.Soc.Work)
+  - id: DSport ExPsy
+    term: Thesis (D.Sport Ex.Psy.)
+  - id: DSport ExSci
+    term: Thesis (D.Sport Ex.Sci.)
+  - id: DSysPsych
+    term: Thesis (D.Sys.Psych.)
+  - id: DTech
+    term: Thesis (D.Tech.)
+  - id: DTh
+    term: Thesis (D.Th.)
+  - id: DThM
+    term: Thesis (D.Th.M.)
+  - id: DThe
+    term: Thesis (D.The.)
+  - id: DThe& Min
+    term: Thesis (D.The.& Min.)
+  - id: DTheMin
+    term: Thesis (D.The.Min.)
+  - id: DV & MS
+    term: Thesis (D.V. & M.S.)
+  - id: DVM
+    term: Thesis (D.V.M.)
+  - id: DVM&S
+    term: Thesis (D.V.M.&S.)
+  - id: DVMS
+    term: Thesis (D.V.M.S.)
+  - id: DVetMed
+    term: Thesis (D.Vet.Med.)
+  - id: DClinPsy
+    term: Thesis (DClinPsy)
+  - id: DDS
+    term: Thesis (DDS.)
+  - id: DECAP
+    term: Thesis (DECAP)
+  - id: DrPH
+    term: Thesis (Dr.P.H.)
+  - id: DSc
+    term: Thesis (DSc.)
+  - id: EdD
+    term: Thesis (Ed.D.)
+  - id: EdPsyD
+    term: Thesis (Ed.Psy.D.)
+  - id: EdPsychD
+    term: Thesis (Ed.Psych.D.)
+  - id: EdD
+    term: Thesis (EdD)
+  - id: EngD
+    term: Thesis (Eng.D.)
+  - id: EntD
+    term: Thesis (Ent.D.)
+  - id: ForenClinPsyD
+    term: Thesis (Foren.Clin.Psy.D.)
+  - id: ForenPsyD
+    term: Thesis (Foren.Psy.D.)
+  - id: JD
+    term: Thesis (J.D.)
+  - id: LLD
+    term: Thesis (L.L.D.)
+  - id: LicDD
+    term: Thesis (Lic.D.D.)
+  - id: LittD
+    term: Thesis (Litt.D.)
+  - id:  LLD
+    term: Thesis ( LL.D.)
+  - id: MD
+    term: Thesis (M.D.)
+  - id: MD
+    term: Thesis (MD.)
+  - id: other
+    term: Thesis (other)
+  - id: PhD
+    term: Thesis (Ph.D.)
+  - id: PharmD
+    term: Thesis (Pharm.D.)
+  - id: PhD
+    term: Thesis (PhD)
+  - id: ProfD
+    term: Thesis (Prof.D.)
+  - id: PsyD
+    term: Thesis (Psy.D.)
+  - id: PsychD
+    term: Thesis (Psych.D.)
+  - id: SocScD
+    term: Thesis (Soc.Sc.D.)
+  - id: SocSciD
+    term: Thesis (Soc.Sci.D.)
+  - id: ThD
+    term: Thesis (Th.D.)
