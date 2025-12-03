@@ -54,18 +54,16 @@ end
 end
 
 BlacklightOaiProvider::SolrSet.class_eval do
-
   def self.sets_from_facets(facet_results)
     sets = Array.wrap(@fields).map do |f|
       facet_results.fetch(f[:solr_field], [])
-         .each_slice(2)
-         .select{ |t| t[0] != '' } # added to avoid choking on empty values
-         .map { |t| new("#{f[:label]}:#{t.first}") }
+                   .each_slice(2)
+                   .select { |t| t[0] != '' } # added to avoid choking on empty values
+                   .map { |t| new("#{f[:label]}:#{t.first}") }
     end.flatten
 
     sets.empty? ? nil : sets
   end
-
 end
 
 HyraxHelper.module_eval do
