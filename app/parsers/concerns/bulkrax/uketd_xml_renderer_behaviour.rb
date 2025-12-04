@@ -50,7 +50,9 @@ module Bulkrax
         isnis = []
         value.each do |v|
           v = eval(v) if v.is_a?(String) # rubocop:disable Security/Eval
-          uketddc_node << XML::Node.new("#{uketd_tags[key.to_sym]}:#{key}", "#{v['creator_family_name']}, #{v['creator_given_name']}")
+          if( name = render_name v['creator_given_name'], v['creator_family_name'])
+            uketddc_node << XML::Node.new("#{uketd_tags[key.to_sym]}:#{key}",name)
+          end
           orcids << v['creator_orcid'] if v['creator_orcid']
           isnis << v['creator_isni'] if v['creator_isni']
         end
@@ -62,8 +64,17 @@ module Bulkrax
       def render_advisor(key, value, uketddc_node)
         value.each do |v|
           v = eval(v) if v.is_a?(String) # rubocop:disable Security/Eval
-          uketddc_node << XML::Node.new("#{uketd_tags[key.to_sym]}:#{key}", "#{v['contributor_family_name']}, #{v['contributor_given_name']}")
+          if(name = render_name v['contributor_given_name'], v['contributor_family_name'])
+            uketddc_node << XML::Node.new("#{uketd_tags[key.to_sym]}:#{key}",name)
+          end
         end
+      end
+
+      def render_name(given, family)
+        return nil if family.blank? && given.blank?
+        return given if family.blank?
+        return family if given.blank?
+        "#{family}, #{given}"
       end
 
       def render_sponsor(key, value, uketddc_node)
@@ -75,14 +86,14 @@ module Bulkrax
             names << v['funder_name'] if v['funder_name']
             awards << v['funder_award'] unless v['funder_award'].blank?
           end
-          render('grantnumber', awards, uketddc_node)
+          #render('grantnumber', awards, uketddc_node)
         else
           names = value
         end
         uketddc_node << XML::Node.new("#{uketd_tags[key.to_sym]}:#{key}", names.join(' ; '))
       end
 
-      def render_grantnumber(key, value, uketddc_node)
+      def _render_grantnumber(key, value, uketddc_node)
         value.each do |v|
           v = v.first if v.is_a?(Array)
           uketddc_node << XML::Node.new("#{uketd_tags[key.to_sym]}:#{key}", v) unless v.blank?

@@ -195,8 +195,13 @@ module Bulkrax
             separated_name = name.split(/\s*,\s*/)
             next if separated_name.blank?
             # @todo consier using https://rubygems.org/gems/namae for name parsing
-            add_metadata("#{name_field_prefix}_family_name", (separated_name.first || ''), position)
-            add_metadata("#{name_field_prefix}_given_name", (separated_name.length > 1 ? separated_name.last : ''), position)
+            # if we have only one name then treat as mononymous an store in given_name
+            if separated_name.length > 1
+              add_metadata("#{name_field_prefix}_family_name", (separated_name.first || ''), position)
+              add_metadata("#{name_field_prefix}_given_name", (separated_name.last || ''), position)
+            else
+              add_metadata("#{name_field_prefix}_given_name", (separated_name.first || ''), position)
+            end
             add_metadata("#{name_field_prefix}_position", position, position)
             if type
               #      guard_type!(type)

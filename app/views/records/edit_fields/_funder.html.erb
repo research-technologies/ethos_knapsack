@@ -2,13 +2,13 @@
 
 <% f.object.attributes[key].empty? ? funders = [{}] : funders = f.object.attributes[key].map{|f| eval(f.gsub(/^\d+~/,''))} %>
 
-<% funders.each_with_index do |funder, index| %>
-  <div class="row">
-    <div class="col-md-12">
-      <label for="funder" class="control-label">Sponsor / Funder</label>
-    </div>
+<div class="row">
+  <div class="col-md-12">
+    <label for="funder" class="control-label">Sponsor / Funder</label>
   </div>
+</div>
 
+<% funders.each_with_index do |funder, index| %>
   <div class="multiple-group <%=key%>-multiple-group">
 
     <div class="row funder_name">
@@ -18,12 +18,12 @@
       <div class="form-group col-md-7">
         <input type="text" name="thesis_or_dissertation[funder][][funder_name]" id="funder_name" class="form-control form-control-sm" placeholder="Funder Name" value="<%=funder['funder_name']%>">
       </div>
-
-    <% funder_award_list = funder.dig("funder_award").presence || [''] %>
+   <!-- 
+    <%# funder_award_list = funder.dig("funder_award").presence || [''] %>
       <div class="form-group col-md-4">
-      <% funder_award_list.each do |funder_award| %>
+      <%# funder_award_list.each do |funder_award| %>
         <div class="multiple-group funder-award-multiple-group">
-          <input type="text" name="thesis_or_dissertation[funder][][funder_award][]" id="funder_award" class="form-control form-control-sm" placeholder="Grant Number" value="<%=funder_award%>">
+          <input type="text" name="thesis_or_dissertation[funder][][funder_award][]" id="funder_award" class="form-control form-control-sm" placeholder="Grant Number" value="<%#=funder_award%>">
         </div>
         <a href="#" style="color:red;"  class="remove_funder_award form-group">
           <span class="glyphicon glyphicon-remove"></span>
@@ -32,8 +32,9 @@
         <a href='#' class="add_funder_award funder_award form-group">
           <span class="glyphicon glyphicon-plus"></span> Add another
         </a>
-       <% end %>
-      </div>
+       <%# end %>
+       </div>
+   -->
     </div>
   </div>
 <% end %>

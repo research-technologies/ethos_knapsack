@@ -19,13 +19,7 @@ module Hyrax
           #
           # @return [Dry::Monads::Result]
           def call(change_set)
-            debugger
-            missing_fields=[]
-            required_fields = ['title', 'creator', 'qualification_name', 'qualification_level', 'current_he_institution', 'date_issued', 'language', 'oai_identifier']
-            required_fields.each do | required_field |
-              missing_fields << required_field if change_set.input_params[required_field].blank?
-            end
-            raise StandardError, "The following required fields are absent: #{missing_fields.join(', ')}" if missing_fields.count > 0
+            # Moved validation to Bulkrax monkey patch (config/intitalizers/bulkrax.rb)
             Success(change_set)
           rescue NoMethodError => err
             Failure([err.message, change_set])

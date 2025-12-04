@@ -20,7 +20,7 @@ parser_mappings = {
   'current_he_institution' => { from: ['institution'] },
   'org_unit' => { from: ['department'] },
   'funder_name' => { from: ['sponsor'], object: "funder" },
-  'funder_award' => { from: ['grantnumber'], object: "funder", split: /\s*;\s*/ },
+#  'funder_award' => { from: ['grantnumber'], object: "funder", split: /\s*;\s*/ },
   'date_issued' => { from: ['issued'] },
   'language' => { from: ['language'] }, # type="dcterms:ISO639-2"
   'ethos_subject' => { from: ['coverage'] },
