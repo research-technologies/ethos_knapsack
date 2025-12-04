@@ -1,18 +1,4 @@
 terms:
-  - id: Wrexham University
-    term: Wrexham University
-    isni: 0000 0001 0729 939X
-    ror: https://ror.org/048kc0s52
-    wikidata: Q3400501
-    grid: grid.4862.8
-    active: true
-  - id: Wessex Institute of Technology
-    term: Wessex Institute of Technology
-    isni: 0000 0004 0458 519X
-    ror: https://ror.org/01thz0w07
-    wikidata: Q7984141
-    grid: grid.426350.6
-    active: true
   - id: Abertay University
     term: Abertay University
     isni: 0000 0001 0339 8665
@@ -1055,6 +1041,20 @@ terms:
     isni: 0000 0004 0375 2566
     ror: https://ror.org/055ttrf22
     wikidata: Q683095
+    active: true
+  - id: Wessex Institute of Technology
+    term: Wessex Institute of Technology
+    isni: 0000 0004 0458 519X
+    ror: https://ror.org/01thz0w07
+    wikidata: Q7984141
+    grid: grid.426350.6
+    active: true
+  - id: Wrexham University
+    term: Wrexham University
+    isni: 0000 0001 0729 939X
+    ror: https://ror.org/048kc0s52
+    wikidata: Q3400501
+    grid: grid.4862.8
     active: true
   - id: York St John University
     term: York St John University
