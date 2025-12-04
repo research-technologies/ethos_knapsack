@@ -14,7 +14,8 @@ Rails.application.config.after_initialize do
   Bulkrax::Importer::DEFAULT_OBJECT_TYPES = ['work'].freeze
 end
 
-Bulkrax::ObjectFactoryInterface.base_permitted_attributes += [:creator_family_name, :creator_given_name, :creator_isni, :creator_orcid, :contributor_role, :contributor_family_name, :contributor_given_name, :funder_name, :funder_award]
+Bulkrax::ObjectFactoryInterface.base_permitted_attributes += [:creator_family_name, :creator_given_name, :creator_isni, :creator_orcid, :contributor_role, :contributor_family_name,
+                                                              :contributor_given_name, :funder_name, :funder_award]
 
 # Override bulkrax (9.1.0 4bb4426) we don't want to be found by id, this is so we can add legacy ids in
 Bulkrax::ObjectFactoryInterface.class_eval do
@@ -30,14 +31,13 @@ Bulkrax::ValkyrieObjectFactory.class_eval do
     attrs = super.merge(alternate_ids: [source_identifier_value])
                  .symbolize_keys
 
-    debugger
     unless update
-      missing_fields=[]
+      missing_fields = []
       required_fields = [:title, :creator, :qualification_name, :qualification_level, :current_he_institution, :date_issued, :language, :oai_identifier]
-      required_fields.each do | required_field |
+      required_fields.each do |required_field|
         missing_fields << required_field if attrs[required_field].blank?
       end
-      raise StandardError, "The following required fields are absent: #{missing_fields.map{|mf| mf.to_s}.join(', ')}" if missing_fields.count > 0
+      raise StandardError, "The following required fields are absent: #{missing_fields.map(&:to_s).join(', ')}" if missing_fields.count.positive?
     end
     attrs
   end

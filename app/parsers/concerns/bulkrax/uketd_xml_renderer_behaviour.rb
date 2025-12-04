@@ -50,8 +50,8 @@ module Bulkrax
         isnis = []
         value.each do |v|
           v = eval(v) if v.is_a?(String) # rubocop:disable Security/Eval
-          if( name = render_name v['creator_given_name'], v['creator_family_name'])
-            uketddc_node << XML::Node.new("#{uketd_tags[key.to_sym]}:#{key}",name)
+          if (name = render_name v['creator_given_name'], v['creator_family_name'])
+            uketddc_node << XML::Node.new("#{uketd_tags[key.to_sym]}:#{key}", name)
           end
           orcids << v['creator_orcid'] if v['creator_orcid']
           isnis << v['creator_isni'] if v['creator_isni']
@@ -64,8 +64,8 @@ module Bulkrax
       def render_advisor(key, value, uketddc_node)
         value.each do |v|
           v = eval(v) if v.is_a?(String) # rubocop:disable Security/Eval
-          if(name = render_name v['contributor_given_name'], v['contributor_family_name'])
-            uketddc_node << XML::Node.new("#{uketd_tags[key.to_sym]}:#{key}",name)
+          if (name = render_name v['contributor_given_name'], v['contributor_family_name'])
+            uketddc_node << XML::Node.new("#{uketd_tags[key.to_sym]}:#{key}", name)
           end
         end
       end
@@ -86,7 +86,7 @@ module Bulkrax
             names << v['funder_name'] if v['funder_name']
             awards << v['funder_award'] unless v['funder_award'].blank?
           end
-          #render('grantnumber', awards, uketddc_node)
+          # render('grantnumber', awards, uketddc_node)
         else
           names = value
         end

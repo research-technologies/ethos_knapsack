@@ -181,7 +181,7 @@ module Bulkrax
 
     # @param type [String] This value must match as an element in the ContributorGroupService's
     #        authority.
-    # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+    # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     def add_name_field(name_field_prefix, element_name, type: nil)
       elements = record.xpath("//*[name()='#{element_name}']")
       return if elements.blank?
@@ -212,6 +212,7 @@ module Bulkrax
         end
       end
     end
+    # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
     def delete_metadata(node_name)
       # Here we delete the data from tags that are present but empty!
