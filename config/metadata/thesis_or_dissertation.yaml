@@ -192,8 +192,9 @@ attributes:
       primary: true
       multiple: true
     index_keys:
-      - "subject_tesim"
+      - "ethos_subject_tesim"
       - "subject_sim"
+      - "ethos_subject_sim"
     predicate: http://purl.org/dc/elements/1.1/subject
     view:
       render_as: "faceted"
