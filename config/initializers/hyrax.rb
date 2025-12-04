@@ -41,7 +41,7 @@ end
   blacklight_config.facet_fields.delete(:subject_sim)
   blacklight_config.facet_fields.delete(:language_sim)
   # Then add all in correct order
- # blacklight_config.add_facet_field 'subject_sim', label: "Subject discipline", limit: 5
+  # blacklight_config.add_facet_field 'subject_sim', label: "Subject discipline", limit: 5
   blacklight_config.add_facet_field 'ethos_subject_sim', label: "Subject Discipline", limit: 5
   blacklight_config.add_facet_field 'keyword_sim', limit: 5
   blacklight_config.add_facet_field 'date_issued_sim', label: "Date Awarded", limit: 5, sort: 'index'
