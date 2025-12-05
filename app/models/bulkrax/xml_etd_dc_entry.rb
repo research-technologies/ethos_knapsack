@@ -54,6 +54,7 @@ module Bulkrax
         elements = record.xpath("//*[name()='#{element_name}']")
         next if elements.blank?
         elements.each do |el|
+          delete_metadata(element_name) if el.children.blank?
           el.children.each do |child|
             content = child.content
             add_metadata(element_name, content) if content.present?
@@ -61,10 +62,10 @@ module Bulkrax
         end
       end
       add_additional
-      parsed_metadata['file'] = raw_metadata['file']
+      # parsed_metadata['file'] = raw_metadata['file']
 
       add_local
-      raise StandardError, "title is required" if parsed_metadata['title'].blank?
+      validate_oai_identifier
       parsed_metadata
     end
     # rubocop:enable Metrics/AbcSize, Metrics/MethodLength#
@@ -76,6 +77,18 @@ module Bulkrax
       add_rights_statement
       add_admin_set_id
       add_collections
+    end
+
+    def validate_oai_identifier
+      return unless (existing_record = existing_record_by_oai_identifier?)
+      raise StandardError, "There is an existing record with the same oai_identifier #{parsed_metadata['oai_identifier']} : #{existing_record}"
+    end
+
+    def existing_record_by_oai_identifier?
+      return nil if parsed_metadata['oai_identifier'].blank?
+      match = Hyrax.query_service.custom_query.find_by_property_value(property: 'oai_identifier', value: parsed_metadata['oai_identifier'], search_field: 'oai_identifier_ssi')
+      return nil if match && match.ethos_identifier == parsed_metadata['ethos_identifier'] # dont' match yourself mate
+      match
     end
 
     def add_model
@@ -111,7 +124,7 @@ module Bulkrax
     end
 
     def add_subject
-      add_one_to_many_element('ethos_subject', 'subject', nil)
+      add_one_to_many_element('keyword', 'subject', nil)
     end
 
     # @todo consider how we might put this "configuration logic" in the parser where it's a bit more visible
@@ -131,6 +144,7 @@ module Bulkrax
       elements = record.xpath("//*[name()='#{element_name}']")
       return if elements.blank?
       elements.each do |el|
+        delete_metadata(element_label) if el.children.blank? && el.attr('type') == type_value
         el.children.each do |child|
           content = child.content
           add_metadata(element_label, content) if content.present? && el.attr('type') == type_value
@@ -141,17 +155,21 @@ module Bulkrax
     # This is very similar to adding a complicated element, but here we set the parsed_metadata directly which will
     # allow us to do things like setting two ditinct hyrax fields from multiple instances of the same element
     # that have different attributes
+    # rubocop:disable Metrics/AbcSize
     def add_one_to_many_element(element_label, element_name, type_value)
       elements = record.xpath("//*[name()='#{element_name}']")
       return if elements.blank?
       elements.each do |el|
+        delete_metadata(element_label) if el.children.blank? && el.attr('type') == type_value
         el.children.each do |child|
           content = child.content
+          content = content.split(Regexp.new(importerexporter.field_mapping[element_label]['split'])) if importerexporter.field_mapping[element_label].key?('split')
           parsed_metadata[element_label] = [] unless parsed_metadata.key? element_label
           parsed_metadata[element_label] << content if content.present? && el.attr('type') == type_value
         end
       end
     end
+    # rubocop:enable Metrics/AbcSize
 
     def add_creator
       add_name_field('creator', 'creator')
@@ -163,7 +181,7 @@ module Bulkrax
 
     # @param type [String] This value must match as an element in the ContributorGroupService's
     #        authority.
-    # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+    # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     def add_name_field(name_field_prefix, element_name, type: nil)
       elements = record.xpath("//*[name()='#{element_name}']")
       return if elements.blank?
@@ -177,8 +195,13 @@ module Bulkrax
             separated_name = name.split(/\s*,\s*/)
             next if separated_name.blank?
             # @todo consier using https://rubygems.org/gems/namae for name parsing
-            add_metadata("#{name_field_prefix}_family_name", (separated_name.first || ''), position)
-            add_metadata("#{name_field_prefix}_given_name", (separated_name.length > 1 ? separated_name.last : ''), position)
+            # if we have only one name then treat as mononymous an store in given_name
+            if separated_name.length > 1
+              add_metadata("#{name_field_prefix}_family_name", (separated_name.first || ''), position)
+              add_metadata("#{name_field_prefix}_given_name", (separated_name.last || ''), position)
+            else
+              add_metadata("#{name_field_prefix}_given_name", (separated_name.first || ''), position)
+            end
             add_metadata("#{name_field_prefix}_position", position, position)
             if type
               #      guard_type!(type)
@@ -188,6 +211,20 @@ module Bulkrax
           end
         end
       end
+    end
+    # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+
+    def delete_metadata(node_name)
+      # Here we delete the data from tags that are present but empty!
+      # TODO work out what to do for multiple fields.... one <dc:subject></dc:subject> means we delete a keyword, but which one!
+      # Workaround == we know when we are dealing with multiples and we use the fact that we will parse
+      # ; delimited lists to present modified lists
+      fields = field_to(node_name)
+      fields.each do |field|
+        parsed_metadata[field] = nil
+      end
+
+      # More TODO we also need to check attributes... as <dc:subject xsi:type="DDC"/> means remove a dewey
     end
 
     # @return [TrueClass] when the given type is valid
@@ -218,6 +255,7 @@ module Bulkrax
     # Metadata required by Bulkrax for round-tripping
     def build_system_metadata
       parsed_metadata['id'] = hyrax_record.id
+      parsed_metadata[key_for_export('visibility')] = hyrax_record.visibility
       source_id = hyrax_record.send(work_identifier)
       # Because ActiveTriples::Relation does not respond to #to_ary we can't rely on Array.wrap universally
       source_id = source_id.to_a if source_id.is_a?(ActiveTriples::Relation)
@@ -336,11 +374,11 @@ module Bulkrax
     # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 
     def many_to_one_elements
-      %w[doi other_identifier dewey ethos_subject] # maybe embargo_date
+      %w[doi other_identifier dewey keyword] # maybe embargo_date
     end
 
     # On export the key becomes the from and the from becomes the destination. It is the opposite of the import because we are moving data the opposite direction
-    # metadata that does not have a specific Bulkrax entry is mapped to the key name, as matching keys coming in are mapped by the csv parser automatically
+    # metadata that does not have a specific Bulkrax entry is mapped to the key name, as matching keys coming in are mapped by the parser automatically
     def key_for_export(key)
       clean_key = key_without_numbers(key)
       unnumbered_key = mapping[clean_key] ? mapping[clean_key]['from'].first : clean_key

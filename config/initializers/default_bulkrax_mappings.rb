@@ -14,18 +14,18 @@ parser_mappings = {
   'contributor_role' => { from: ['advisor'], object: 'contributor' },
   'contributor_position' => { from: ['advisor'], object: 'contributor' },
   'abstract' => { from: ['abstract'] },
-  'qualification_name' => { from: ['type'] },
+  'qualification_name' => { from: ['qualificationname'] },
   'qualification_level' => { from: ['qualificationlevel'] },
-  'institution' => { from: ['publisher'] },
+  'ethos_institution' => { from: ['publisher'] },
   'current_he_institution' => { from: ['institution'] },
   'org_unit' => { from: ['department'] },
   'funder_name' => { from: ['sponsor'], object: "funder" },
-  'funder_award' => { from: ['grantnumber'], object: "funder", split: /\s*;\s*/ },
+  #  'funder_award' => { from: ['grantnumber'], object: "funder", split: /\s*;\s*/ },
   'date_issued' => { from: ['issued'] },
   'language' => { from: ['language'] }, # type="dcterms:ISO639-2"
-  'keyword' => { from: ['coverage'], split: /\s*;\s*/ },
+  'ethos_subject' => { from: ['coverage'] },
   'dewey' => { from: ['subject'] }, # type="dcterms:DDC"
-  'ethos_subject' => { from: ['subject'] },
+  'keyword' => { from: ['subject'], split: /\s*;\s*/ },
   'ethos_access_rights' => { from: ['accessRights'] },
   'embargo_date' => { from: ['embargodate'] },
   'doi' => { from: ['identifier'] }, # type="dcterms:DOI"
@@ -33,8 +33,8 @@ parser_mappings = {
   'referenced_by' => { from: ['isReferencedBy'] },
   'oai_identifier' => { from: ['provenance'] },
   'bl_cat_identifier' => { from: ['relation'] },
+  'visibility' => { from: ['audience'] },
   'ethos_identifier' => { from: ['source'], source_identifier: true }, # derived from the uin parameter of the <dc:source>
-  #  'source_record' => { from: ['source'], source_identifier: true },
   'parents' => { from: ['parents'], split: /\s*[;|]\s*/, related_parents_field_mapping: true },
   'children' => { from: ['children'], split: /\s*[;|]\s*/, related_children_field_mapping: true }
 }

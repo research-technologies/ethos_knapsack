@@ -51,28 +51,37 @@ attributes:
   language: # LANGUAGE <dc:language xsi:type="dcterms:ISO639-2">
     type: string
     multiple: true
+    facetable: true
     form:
-      required: true
+      required: false
       primary: true
       multiple: true
     index_keys:
       - "language_tesim"
+      - "language_sim"
     predicate: http://purl.org/dc/elements/1.1/language
+    view:
+      render_as: "faceted"
+      html_dl: true
   qualification_name: # Qualification Name <uketdterms:qualificationname>
     type: string
     multiple: false
     form:
-      required: true
+      required: false
       primary: true
       multiple: false
     index_keys:
       - "qualification_name_tesim"
+      - "qualification_name_sim"
     predicate: http://ethos.library.leeds.ac.uk/uketd/terms/qualificationname
+    view:
+      render_as: "faceted"
+      html_dl: true
   qualification_level: # Qualification Level <uketdterms:qualificationlevel>
     type: string
     multiple: false
     form:
-      required: true
+      required: false
       primary: true
       multiple: false
     index_keys:
@@ -82,12 +91,16 @@ attributes:
     type: string
     multiple: false
     form:
-      required: true
+      required: false
       primary: true
       multiple: false
     index_keys:
       - "current_he_institution_tesim"
+      - "current_he_institution_sim"
     predicate: http://ethos.library.leeds.ac.uk/uketd/terms/institution#current
+    view:
+      render_as: "faceted"
+      html_dl: true
   alternative_title: # Alternative Title <dcterms:alternative>
     type: string
     multiple: true
@@ -114,15 +127,18 @@ attributes:
     index_keys:
       - "abstract_tesim"
     predicate: http://purl.org/dc/elements/1.1/abstract
-  institution: # INSTITUION <dc:publisher>
+  ethos_institution: # INSTITUION <dc:publisher>
     type: string
     multiple: true
     form:
       primary: true
     index_keys:
-      - "institution_sim"
-      - "institution_tesim"
-    predicate: http://ethos.library.leeds.ac.uk/uketd/terms/institution
+      - "ethos_institution_tesim"
+      - "ethos_institution_sim"
+    predicate: http://purl.org/dc/elements/1.1/publisher
+    view:
+      render_as: "faceted"
+      html_dl: true
   org_unit: # DEPARTMENT <uketdterms:department>
     type: string
     multiple: true
@@ -136,9 +152,13 @@ attributes:
     multiple: true
     form:
       primary: true
-    indax_keys:
-      - "sponsor_tesim"
+    index_keys:
+      - "funder_tesim"
+      - "funder_sim"
     predicate: http://ethos.library.leeds.ac.uk/uketd/terms/sponsor
+    view:
+      render_as: "faceted"
+      html_dl: true
   date_issued: #DATE AWARDED <dcterms:issued>
     type: string
     multiple: true
@@ -146,8 +166,12 @@ attributes:
       primary: true
     index_keys:
       - "date_issued_tesim"
+      - "date_issued_sim"
     predicate: http://purl.org/dc/terms/issued
-  keyword: # KEYWORDS  <dc:subject> (<dc:coverage> in load data)
+    view:
+      render_as: "faceted"
+      html_dl: true
+  keyword: # KEYWORDS  <dc:subject> (with no attribute) 
     type: string
     multiple: true
     form:
@@ -155,8 +179,12 @@ attributes:
       primary: true
     index_keys:
       - "keyword_tesim"
+      - "keyword_sim"
     predicate: http://purl.org/dc/terms/coverage
-  ethos_subject: # Subject <dc:subject> (when not caught by other rules)
+    view:
+      render_as: "faceted"
+      html_dl: true
+  ethos_subject: # Subject <dc:coverage> 
     type: string
     multiple: true
     form:
@@ -164,8 +192,13 @@ attributes:
       primary: true
       multiple: true
     index_keys:
-      - "subject_ssi"
+      - "ethos_subject_tesim"
+      - "subject_sim"
+      - "ethos_subject_sim"
     predicate: http://purl.org/dc/elements/1.1/subject
+    view:
+      render_as: "faceted"
+      html_dl: true
   dewey: # DEWEY <dc:subject xsi:type="dcterms:DDC">
     type: string
     multiple: true
@@ -175,7 +208,11 @@ attributes:
       multiple: true
     index_keys:
       - "dewey_tesim"
+      - "dewey_sim"
     predicate: http://purl.org/dc/terms/DDC
+    view:
+      render_as: "faceted"
+      html_dl: true
   ethos_access_rights: # Accessible? <dcterms:accessRights>
     type: string
     multiple: false
@@ -185,7 +222,11 @@ attributes:
       multiple: false
     index_keys:
       - "ethos_access_rights_tesim"
+      - "ethos_access_rights_sim"
     predicate: http://www.w3.org/ns/ma-ont#hasAccessConditions
+    view:
+      render_as: "faceted"
+      html_dl: true
   embargo_date: # Embargo <uketdterms:embargodate>
     type: string
     multiple: false
@@ -204,7 +245,7 @@ attributes:
       primary: true
       multiple: false
     index_keys:
-      - "ethos_identifier_ssi"
+      - "ethos_identifier_tesim"
     predicate: http://purl.org/dc/elements/1.1/source
   doi: # DOI <dc:identifier xsi:type="dcterms:DOI">
     type: string

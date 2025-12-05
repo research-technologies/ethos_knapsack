@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 module Hyrax
-  module QualificationNamesService
+  module EthosAccessRightsService
     mattr_accessor :authority
-    self.authority = Qa::Authorities::Local.subauthority_for('qualification_names')
+    self.authority = Qa::Authorities::Local.subauthority_for('ethos_access_rights')
 
     def self.select_all_options
       authority.all.map do |element|
@@ -10,9 +10,9 @@ module Hyrax
       end
     end
 
-    def self.select_all_option_ids
-      authority.all.map do |element|
-        [element[:id], element[:id]]
+    def self.select_active_options
+      authority.all.select { |a| a['active'] }.map do |element|
+        [element[:label], element[:id]]
       end
     end
 

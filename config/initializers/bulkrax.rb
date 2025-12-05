@@ -9,7 +9,7 @@ Rails.application.config.after_initialize do
     ]
 
     #    config.fill_in_blank_source_identifiers = ->(obj, index) { "#{Site.instance.account.name}-#{obj.importerexporter.id}-#{index}" }
-    config.fill_in_blank_source_identifiers = ->(obj, index) { "uk.bl.ethos.#{obj.importerexporter.id}-#{index}" }
+    config.fill_in_blank_source_identifiers = ->(_obj, _index) { "uk.bl.ethos.#{::Ethos::IdentifierService.mint}" }
   end
   Bulkrax::Importer::DEFAULT_OBJECT_TYPES = ['work'].freeze
 end
@@ -24,6 +24,21 @@ Bulkrax::ObjectFactoryInterface.class_eval do
   end
 end
 
-# Rails.application.config.to_prepare do
-#  Hyku.default_bulkrax_field_mappings = ActiveSupport::HashWithIndifferentAccess.new(a: 1)
-# end
+# Override bulkrax (9.1.0 4bb4426) We only want to force title and creator to '' if we are not updating
+# This will allow partial XML updates to not clobber title and creator
+Bulkrax::ValkyrieObjectFactory.class_eval do
+  def transform_attributes(update: false)
+    attrs = super.merge(alternate_ids: [source_identifier_value])
+                 .symbolize_keys
+
+    unless update
+      missing_fields = []
+      required_fields = [:title, :creator, :qualification_name, :qualification_level, :current_he_institution, :date_issued, :language, :oai_identifier]
+      required_fields.each do |required_field|
+        missing_fields << required_field if attrs[required_field].blank?
+      end
+      raise StandardError, "The following required fields are absent: #{missing_fields.map(&:to_s).join(', ')}" if missing_fields.count.positive?
+    end
+    attrs
+  end
+end

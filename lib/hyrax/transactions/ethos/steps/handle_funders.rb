@@ -22,6 +22,7 @@ module Hyrax
           def call(change_set)
             funders = []
             change_set.input_params['funder']&.each_with_index do |funder, index|
+              # if change_set.input_params.key?('funder')
               next if funder['funder_name'].blank?
               funders[index] = {} if funders[index].nil?
               funders[index] = funder
