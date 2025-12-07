@@ -22,10 +22,38 @@ require 'oai/provider/metadata_format/uketd_dc'
 OAI::Provider::Base.register_format(OAI::Provider::Metadata::UketdDc.instance)
 
 SolrDocument.class_eval do
+
   use_extension(Blacklight::Document::UketdDc)
   def to_uketd_dc
     export_as('uketd_dc_xml')
   end
+
+  # Add field to the solrDocument (required before nwe fields will appear in catalog controller:w
+
+  attribute :alternative_title, Hyrax::SolrDocument::Metadata::Solr::Array, 'alternative_title_tesim'
+  attribute :creator, Hyrax::SolrDocument::Metadata::Solr::Array, 'creator_tesim'
+  attribute :contributor, Hyrax::SolrDocument::Metadata::Solr::Array, 'contributor_tesim'
+  attribute :abstract, Hyrax::SolrDocument::Metadata::Solr::Array, 'abstract_tesim'
+  attribute :qualification_name, Hyrax::SolrDocument::Metadata::Solr::Array, 'qualification_name_tesim'
+  attribute :qualification_level, Hyrax::SolrDocument::Metadata::Solr::Array, 'qualification_level_tesim'
+  attribute :institution, Hyrax::SolrDocument::Metadata::Solr::Array, 'institution_tesim'
+  attribute :current_he_institution, Hyrax::SolrDocument::Metadata::Solr::Array, 'current_he_institution_tesim'
+  attribute :org_unit, Hyrax::SolrDocument::Metadata::Solr::Array, 'org_unit_tesim'
+  attribute :sponsor, Hyrax::SolrDocument::Metadata::Solr::Array, 'sponsor_tesim'
+  attribute :date_accepted, Hyrax::SolrDocument::Metadata::Solr::Array, 'date_accepted_tesim'
+  attribute :date_issued, Hyrax::SolrDocument::Metadata::Solr::Array, 'date_issued_tesim'
+  attribute :language, Hyrax::SolrDocument::Metadata::Solr::Array, 'language_tesim'
+  attribute :keyword, Hyrax::SolrDocument::Metadata::Solr::Array, 'keyword_tesim'
+  attribute :ethos_subject, Hyrax::SolrDocument::Metadata::Solr::Array, 'ethos_subject_tesim'
+  attribute :dewey, Hyrax::SolrDocument::Metadata::Solr::Array, 'dewey_tesim'
+  attribute :ethos_access_rights, Hyrax::SolrDocument::Metadata::Solr::Array, 'ethos_access_rights_tesim'
+  attribute :embargo_date, Hyrax::SolrDocument::Metadata::Solr::Array, 'embargo_date_tesim'
+  attribute :doi, Hyrax::SolrDocument::Metadata::Solr::Array, 'doi_tesim'
+  attribute :referenced_by, Hyrax::SolrDocument::Metadata::Solr::Array, 'referenced_by_tesim'
+  attribute :oai_identifier, Hyrax::SolrDocument::Metadata::Solr::Array, 'oai_identifier_tesim'
+  attribute :source_record, Hyrax::SolrDocument::Metadata::Solr::Array, 'source_record_tesim'
+  attribute :licence, Hyrax::SolrDocument::Metadata::Solr::Array, 'licence_tesim'
+
 end
 
 ::CatalogController.class_eval do
@@ -40,6 +68,7 @@ end
   blacklight_config.facet_fields.delete(:keyword_sim)
   blacklight_config.facet_fields.delete(:subject_sim)
   blacklight_config.facet_fields.delete(:language_sim)
+
   # Then add all in correct order
   # blacklight_config.add_facet_field 'subject_sim', label: "Subject discipline", limit: 5
   blacklight_config.add_facet_field 'ethos_subject_sim', label: "Subject Discipline", limit: 5
@@ -50,8 +79,52 @@ end
   blacklight_config.add_facet_field 'language_sim', limit: 5
   blacklight_config.add_facet_field 'current_he_institution_sim', label: "University", limit: 5
 
-  # blacklight_config.add_facet_field 'dewey_sim', label: "Dewey", limit: 5
-  # blacklight_config.add_facet_field 'ethos_institution_sim', label: "Institution", limit: 5
+  # solr fields to be displayed in the show (single result) view
+  # The ordering of the field names is the order of the display
+
+  blacklight_config.show_fields.delete(:alternative_title_tesim)
+  blacklight_config.show_fields.delete(:creator_tesim)
+  blacklight_config.show_fields.delete(:contributor_tesim)
+  blacklight_config.show_fields.delete(:abstract_tesim)
+  blacklight_config.show_fields.delete(:language_tesim)
+  blacklight_config.show_fields.delete(:keyword_tesim)
+
+  blacklight_config.add_show_field 'alternative_title_tesim'
+  blacklight_config.add_show_field 'creator_tesim'
+  blacklight_config.add_show_field 'contributor_tesim'
+  blacklight_config.add_show_field 'abstract_tesim'
+  blacklight_config.add_show_field 'qualification_name_tesim'
+  blacklight_config.add_show_field 'qualification_level_tesim'
+  blacklight_config.add_show_field 'institution_tesim'
+  blacklight_config.add_show_field 'current_he_institution_tesim'
+  blacklight_config.add_show_field 'org_unit_tesim'
+  blacklight_config.add_show_field 'sponsor_tesim'
+  blacklight_config.add_show_field 'date_accepted_tesim'
+  blacklight_config.add_show_field 'date_issued_tesim'
+  blacklight_config.add_show_field 'language_tesim'
+  blacklight_config.add_show_field 'keyword_tesim'
+  blacklight_config.add_show_field 'ethos_subject_tesim'
+  blacklight_config.add_show_field 'dewey_tesim'
+  blacklight_config.add_show_field 'ethos_access_rights_tesim'
+  blacklight_config.add_show_field 'embargo_date_tesim'
+  blacklight_config.add_show_field 'doi_tesim'
+  blacklight_config.add_show_field 'referenced_by_tesim'
+  blacklight_config.add_show_field 'oai_identifier_tesim'
+  blacklight_config.add_show_field 'source_record_tesim'
+  blacklight_config.add_show_field 'licence_tesim'
+
+  # Adavnaced search fields
+  blacklight_config.add_search_field('qualification_name') do |field|
+      field.solr_parameters = {
+        "spellcheck.dictionary": "qualification_name"
+      }
+      solr_name = 'qualification_name_tesim'
+      field.solr_local_parameters = {
+        qf: solr_name,
+        pf: solr_name
+      }
+    end
+
 end
 
 BlacklightOaiProvider::SolrSet.class_eval do

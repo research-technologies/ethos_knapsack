@@ -1,0 +1,32 @@
+<%# OVERRIDE hyrax-doi to support dynamic metadata %>
+<%# TODO: remove after hyrax-doi gem v0.2.0 and code is removed %>
+<%# hyrax-doi doesn't work post hyrax v3.0.0 %>
+<% if Hyrax.config.flexible? %>
+  <% view_options_for(presenter).each do |field, options| %>
+    <%= presenter.attribute_to_html(conform_field(field, options), conform_options(field, options)) %>
+  <% end %>
+<% else %>
+  <%# Copied from hyrax-doi v0.2.0 %>
+
+  <%= presenter.attribute_to_html(:alternative_title, html_dl: true) %>
+  <%= presenter.attribute_to_html(:creator, html_dl: true) %>
+  <%= presenter.attribute_to_html(:contributor, html_dl: true) %>
+  <%= presenter.attribute_to_html(:abstract, html_dl: true) %>
+  <%= presenter.attribute_to_html(:qualification_name, render_as: :faceted, html_dl: true) %>
+  <%= presenter.attribute_to_html(:qualification_level, html_dl: true) %>
+  <%= presenter.attribute_to_html(:institution, html_dl: true) %>
+  <%= presenter.attribute_to_html(:current_he_institution, render_as: :faceted, html_dl: true) %>
+  <%= presenter.attribute_to_html(:org_unit, html_dl: true) %>
+  <%= presenter.attribute_to_html(:sponsor, render_as: :faceted, html_dl: true) %>
+  <%= presenter.attribute_to_html(:date_issued, render_as: :faceted, html_dl: true) %>
+  <%= presenter.attribute_to_html(:language, render_as: :faceted, html_dl: true) %>
+  <%= presenter.attribute_to_html(:keyword, render_as: :faceted, html_dl: true) %>
+  <%= presenter.attribute_to_html(:ethos_subject, render_as: :faceted, html_dl: true) %>
+  <%= presenter.attribute_to_html(:dewey, html_dl: true) %>
+  <%= presenter.attribute_to_html(:ethos_access_rights, html_dl: true) %>
+  <%= presenter.attribute_to_html(:embargo_date, html_dl: true) %>
+  <%= presenter.attribute_to_html(:doi, render_as: :external_link, html_dl: true) if respond_to?(:render_doi?) && render_doi?(presenter) %>
+  <%= presenter.attribute_to_html(:referenced_by, render_as: :external_link, html_dl: true) %>
+  <%= presenter.attribute_to_html(:oai_identifier, html_dl: true) %>
+  <%= presenter.attribute_to_html(:licence, html_dl: true) %>
+<% end %>
