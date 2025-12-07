@@ -25,7 +25,7 @@
   <%= presenter.attribute_to_html(:dewey, html_dl: true) %>
   <%= presenter.attribute_to_html(:ethos_access_rights, html_dl: true) %>
   <%= presenter.attribute_to_html(:embargo_date, html_dl: true) %>
-  <%= presenter.attribute_to_html(:doi, render_as: :external_link, html_dl: true) if respond_to?(:render_doi?) && render_doi?(presenter) %>
+  <%= presenter.attribute_to_html(:doi, html_dl: true) %>
   <%= presenter.attribute_to_html(:referenced_by, render_as: :external_link, html_dl: true) %>
   <%= presenter.attribute_to_html(:oai_identifier, html_dl: true) %>
   <%= presenter.attribute_to_html(:licence, html_dl: true) %>

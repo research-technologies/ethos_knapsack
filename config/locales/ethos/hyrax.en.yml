@@ -28,3 +28,28 @@ en:
   blacklight:
     search:
       start_over: Clear Filters
+      fields:
+        alternative_title: Alternative Title
+        creator: Creator
+        contributor: Supervisor(s)
+        abstract: Abstract
+        qualification_name: Qualification Name
+        qualification_level: Qualification Level
+        institution: Insitution
+        current_he_institution: Current Institution
+        org_unit: Department
+        sponsor: Sponsor/Funder
+        publisher: Commercial Publisher
+        date_accepted: Date Submitted
+        date_issued: Date Awarded
+        language: Language
+        keyword: Keywords
+        ethos_subject: Subject
+        dewey: DDC Subject
+        ethos_access_rights: Accessible
+        embargo_date: Embargo
+        doi: DOI
+        referenced_by: Referenced By
+        oai_identifier: Source ID
+        source_record: Old EThOS URL
+        licence: Licence

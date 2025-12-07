@@ -235,7 +235,7 @@ attributes:
       primary: true
       multiple: false
     index_keys:
-      - "embargo_date_ssi"
+      - "embargo_date_ssim"
     predicate: https://www.rioxx.net/profiles/#rioxxterms:record_public_release_date
   ethos_identifier: # Old EThOS ID <dc:source>
     type: string     
@@ -255,7 +255,7 @@ attributes:
       primary: true
       multiple: false
     index_keys:
-      - "doi_ssi"
+      - "doi_ssim"
     predicate: 	http://purl.org/dc/elements/1.1/identifier
   referenced_by: # Referenced By <dcterms:isReferencedBy>
     type: string
@@ -265,7 +265,7 @@ attributes:
       primary: true
       multiple: false
     index_keys:
-      - "referenced_by_ssi"
+      - "referenced_by_ssim"
     predicate: 	http://ethos.bl.uk/original_identifier
   oai_identifier: # Source ID <dcterms:provenance>
     type: string
@@ -275,7 +275,7 @@ attributes:
       primary: true
       multiple: false
     index_keys:
-      - "oai_identifier_ssi"
+      - "oai_identifier_ssim"
     predicate: http://www.openarchives.org/OAI/2.0/oai-identifier
   bl_cat_identifier: #BL Catalogue ID <dc:relation>
     type: string
@@ -313,8 +313,8 @@ attributes:
     form:
       primary: false
     index_keys:
-      - "license_sim"
       - "license_tesim"
+      - "license_sim"
     predicate: http://purl.org/dc/terms/license 
   additional_info: # iNotes <NOT USED?>
     type: string
