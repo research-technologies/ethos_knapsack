@@ -41,6 +41,15 @@ module Bulkrax
       }
     end
 
+    # Overriding read_data to introduce strict parsing, to stop Nokogiri quietly removing unescaped ampersands
+    def self.read_data(path)
+      # This doesn't cope with BOM sequences:
+      # Nokogiri::XML(open(path), nil, 'UTF-8').remove_namespaces!
+      po = Nokogiri::XML::ParseOptions.new.strict
+      Nokogiri::XML(open(path), nil, nil, po).remove_namespaces!
+    end
+
+
     # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     def build_metadata
       raise StandardError, 'Record not found' if record.nil?
