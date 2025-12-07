@@ -49,7 +49,6 @@ module Bulkrax
       Nokogiri::XML(open(path), nil, nil, po).remove_namespaces!
     end
 
-
     # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     def build_metadata
       raise StandardError, 'Record not found' if record.nil?
