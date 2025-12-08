@@ -16,6 +16,10 @@ module Hyrax
       end
     end
 
+    def self.select_all_option_just_ids
+      authority.all.map { |e| e[:id] }
+    end
+
     def self.label(id)
       authority.find(id).fetch('term')
     end

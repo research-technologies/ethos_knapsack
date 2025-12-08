@@ -22,6 +22,10 @@ module Hyrax
       all_options_hash.map { |e| e[:ror] }
     end
 
+    def self.select_active_options_id
+      all_options_hash.map { |e| e[:id] }
+    end
+
     def self.label(id)
       authority.find(id).fetch('term')
     end
@@ -36,7 +40,7 @@ module Hyrax
     end
 
     def self.all_options_hash
-      terms.map do |res|
+      authority.all.map do |res|
         { id: res[:id], label: res[:term], isni: res[:isni], ror: res[:ror], active: res.fetch(:active, true) }.with_indifferent_access
       end
     end
