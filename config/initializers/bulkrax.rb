@@ -27,18 +27,23 @@ end
 # Override bulkrax (9.1.0 4bb4426) We only want to force title and creator to '' if we are not updating
 # This will allow partial XML updates to not clobber title and creator
 Bulkrax::ValkyrieObjectFactory.class_eval do
-  def transform_attributes(update: false)
+  def transform_attributes(update: false) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
     attrs = super.merge(alternate_ids: [source_identifier_value])
                  .symbolize_keys
 
     unless update
       missing_fields = []
-      #      required_fields = [:title, :creator, :qualification_name, :qualification_level, :current_he_institution, :date_issued, :language, :oai_identifier]
       required_fields = [:title, :creator, :qualification_name, :qualification_level, :current_he_institution, :date_issued, :language]
       required_fields.each do |required_field|
         missing_fields << required_field if attrs[required_field].blank?
       end
       raise StandardError, "The following required fields are absent: #{missing_fields.map(&:to_s).join(', ')}" if missing_fields.count.positive?
+    end
+    unless attrs[:current_he_institution].blank? || Hyrax::CurrentHeInstitutionsService.select_active_options_id.include?(attrs[:current_he_institution])
+      raise StandardError, "The Current Institution value was not found in the authority file (#{attrs[:current_he_institution]})"
+    end
+    unless attrs[:qualification_name].blank? || Hyrax::QualificationNamesService.select_all_option_just_ids.include?(attrs[:qualification_name])
+      raise StandardError, "The Qualification Name value was not found in the authority file (#{attrs[:qualification_name]})"
     end
     attrs
   end
