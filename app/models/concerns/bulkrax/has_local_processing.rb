@@ -7,6 +7,7 @@ module Bulkrax::HasLocalProcessing
   # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
   def add_local
     parsed_metadata["qualification_name"] = set_qualification_name if parsed_metadata["qualification_name"]
+    parsed_metadata["qualification_level"] = set_qualification_level
     parsed_metadata["ethos_access_rights"] = set_ethos_access_rights if parsed_metadata["ethos_access_rights"]
 
     compound_fields = {
@@ -66,4 +67,9 @@ module Bulkrax::HasLocalProcessing
   def set_ethos_access_rights
     parsed_metadata['ethos_access_rights'].downcase
   end
+
+  def set_qualification_level
+    "Doctoral"
+  end
+
 end
