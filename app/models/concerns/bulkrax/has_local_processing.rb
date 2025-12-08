@@ -71,5 +71,4 @@ module Bulkrax::HasLocalProcessing
   def set_qualification_level
     "Doctoral"
   end
-
 end
