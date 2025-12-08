@@ -34,7 +34,7 @@ Bulkrax::ValkyrieObjectFactory.class_eval do
     unless update
       missing_fields = []
       # required fields removed for initial load of legacy data
-      # :oai_identifier, :qualification_name, :qualification_level 
+      # :oai_identifier, :qualification_name, :qualification_level
       required_fields = [:title, :creator, :current_he_institution, :date_issued, :language]
       required_fields.each do |required_field|
         missing_fields << required_field if attrs[required_field].blank?
