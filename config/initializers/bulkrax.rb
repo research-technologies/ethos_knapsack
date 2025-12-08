@@ -44,9 +44,9 @@ Bulkrax::ValkyrieObjectFactory.class_eval do
     unless attrs[:current_he_institution].blank? || Hyrax::CurrentHeInstitutionsService.select_active_options_id.include?(attrs[:current_he_institution])
       raise StandardError, "The Current Institution value was not found in the authority file (#{attrs[:current_he_institution]})"
     end
-    unless attrs[:qualification_name].blank? || Hyrax::QualificationNamesService.select_all_option_just_ids.include?(attrs[:qualification_name])
-      raise StandardError, "The Qualification Name value was not found in the authority file (#{attrs[:qualification_name]})"
-    end
+    #    unless attrs[:qualification_name].blank? || Hyrax::QualificationNamesService.select_all_option_just_ids.include?(attrs[:qualification_name])
+    #      raise StandardError, "The Qualification Name value was not found in the authority file (#{attrs[:qualification_name]})"
+    #    end
     attrs
   end
 end
