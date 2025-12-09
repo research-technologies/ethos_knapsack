@@ -1,9 +1,10 @@
+# frozen_string_literal: true
 require 'nokogiri'
 
 xml_file = 'data/EThOS_FullLoadFile_251208.xml'
 puts "Reading the big XML"
 po = Nokogiri::XML::ParseOptions.new.huge.strict
-doc = Nokogiri::XML(open(xml_file),nil,'UTF-8',po).remove_namespaces!
+doc = Nokogiri::XML(open(xml_file), nil, 'UTF-8', po).remove_namespaces!
 puts "Read that now we loop..."
 
 xml = <<~EOF
@@ -18,13 +19,13 @@ limit = 100_000
 file_name = chunk.dup
 dir_name = "data_#{chunk}"
 FileUtils.mkdir_p dir_name
-doc.xpath("/dcCollection/uketddc").each_with_index do | uketd, index |
+doc.xpath("/dcCollection/uketddc").each_with_index do |uketd, index|
   rec = uketd.clone
   new_doc.root << rec
-  if (index+1) % chunk == 0
-    File.open(File.join(dir_name,"#{file_name}.xml"), 'w') {|f| f.write(new_doc.to_s) }
-    file_name = file_name+chunk
+  if ((index + 1) % chunk).zero?
+    File.open(File.join(dir_name, "#{file_name}.xml"), 'w') { |f| f.write(new_doc.to_s) }
+    file_name += chunk
     new_doc = Nokogiri::XML(xml)
   end
-  break if (index+1) == limit
+  break if (index + 1) == limit
 end
