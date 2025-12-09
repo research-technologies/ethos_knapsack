@@ -72,10 +72,10 @@ end
   blacklight_config.add_facet_field 'ethos_subject_sim', label: "Subject Discipline", limit: 5
   blacklight_config.add_facet_field 'keyword_sim', limit: 5
   blacklight_config.add_facet_field 'date_issued_sim', label: "Date Awarded", limit: 5, sort: 'index'
-  blacklight_config.add_facet_field 'qualification_name_sim', label: "Qualification Name", limit: 5
+  blacklight_config.add_facet_field 'qualification_name_sim', label: "Qualification Name", limit: 5, single: true
   blacklight_config.add_facet_field 'funder_sim', label: "Funder / Sponsor", limit: 5
   blacklight_config.add_facet_field 'language_sim', limit: 5
-  blacklight_config.add_facet_field 'current_he_institution_sim', label: "University", limit: 5
+  blacklight_config.add_facet_field 'current_he_institution_sim', label: "University", limit: 5, single: true
 
   # solr fields to be displayed in the show (single result) view
   # The ordering of the field names is the order of the display
