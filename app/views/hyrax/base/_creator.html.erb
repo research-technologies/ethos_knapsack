@@ -1,0 +1,14 @@
+<dt>Creator</dt>
+<dd>
+  <% presenter.creator.each do | c | %>
+    <% author = eval(c) %>
+    <%= author['creator_family_name']%>, <%= author['creator_given_name'] %>
+    <% if author['creator_orcid'] %>
+      (<%= author['creator_orcid'] %>)
+    <% end %>
+    <% if author['creator_isni'] %>
+      (<%= author['creator_isni'] %>)
+    <% end %>
+
+  <% end %>
+</dd>

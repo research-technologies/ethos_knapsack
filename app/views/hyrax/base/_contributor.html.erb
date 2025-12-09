@@ -1,0 +1,13 @@
+<dt>Supervisor(s)</dt>
+<dd>
+  <% presenter.contributor.each do | c | %>
+    <% supervisor = eval(c) %>
+    <%= supervisor['contributor_family_name']%>, <%= supervisor['contributor_given_name'] %>
+    <% if supervisor['contributor_orcid'] %>
+      (<%= supervisor['contributor_orcid'] %>)
+    <% end %>
+    <% if supervisor['contributor_isni'] %>
+      (<%= supervisor['contributor_isni'] %>)
+    <% end %>
+  <% end %>
+</dd>
