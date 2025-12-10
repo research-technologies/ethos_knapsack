@@ -41,7 +41,7 @@ module Bulkrax
         # We can do this as if it weren't a single string (accidentally in an array)
         # then it would have a render_thing method defined
         value = value.first if value.is_a?(Array)
-        return if ['coverage', 'audience'].include?(key) && oai_pmh
+        return if ['coverage', 'audience', 'provenance'].include?(key) && oai_pmh
         uketddc_node << XML::Node.new("#{uketd_tags[key.to_sym]}:#{key}", value) unless value.blank?
       end
 

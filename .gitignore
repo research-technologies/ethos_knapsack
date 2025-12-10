@@ -12,3 +12,8 @@ scratch.md
 file_cache/
 .bash_history
 /.cache
+/data*
+*.OLD
+*.DISABLED
+.vim*
+.less*
