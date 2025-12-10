@@ -1,20 +1,20 @@
+# frozen_string_literal: true
 module WorkShowHelper
-
   def render_isni_or_orcid_url(id, type)
     id = id.strip.chomp('/').split('/').last
     new_id = id.delete('\n').delete('\t').gsub(/[^a-z0-9X]/, '')
     uri = URI.parse(new_id)
-    if (uri.scheme.present? &&  uri.host.present?)
+    if uri.scheme.present? && uri.host.present?
       domain = uri
       domain.to_s
-    elsif (uri.scheme.present? == false && uri.path.present?)
+    elsif uri.scheme.present? == false && uri.path.present?
       split_path(uri, type)
-    elsif (uri.scheme.present? == false && uri.host.present? == false)
+    elsif uri.scheme.present? == false && uri.host.present? == false
       create_isni_and_orcid_url(new_id, type)
     end
   end
 
-  #The uri looks like  `#<URI::Generic orcid.org/0000-0002-1825-0097>` hence the need to split_path;
+  # The uri looks like  `#<URI::Generic orcid.org/0000-0002-1825-0097>` hence the need to split_path;
   # `split_domain_from_path` returns `["orcid.org", "0000-0002-1825-0097"]`
   # get_type is subsctracting a sub array from the main array eg (["orcid", "org"] - ["org"]) and returns ["orcid"]
   def split_path(uri, type)
@@ -42,5 +42,4 @@ module WorkShowHelper
       host.to_s
     end
   end
-
 end
