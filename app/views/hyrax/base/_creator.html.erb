@@ -1,14 +1,31 @@
 <dt>Creator</dt>
 <dd>
-  <% presenter.creator.each do | c | %>
+  <ul class="tabular">
+  <% presenter.creator.each_with_index do | c, index | %>
     <% author = eval(c) %>
-    <%= author['creator_family_name']%>, <%= author['creator_given_name'] %>
-    <% if author['creator_orcid'] %>
-      (<%= author['creator_orcid'] %>)
-    <% end %>
-    <% if author['creator_isni'] %>
-      (<%= author['creator_isni'] %>)
-    <% end %>
+      <li class="attribute <%= section %>-creator <%= 'collapse' if index > 4 %>">
+        <span itemprop="creator" style="float:left">
+          <%= author['creator_family_name']%>, <%= author['creator_given_name'] %>
+        </span>
 
-  <% end %>
+        <span itemprop="creator">
+          <% if author['creator_orcid'] || author['creator_isni'] %>
+            <span style="float:left" >&nbsp;</span>
+              <% if author['creator_orcid'].present? %>
+                  <a href='<%= render_isni_or_orcid_url("#{author['creator_orcid']}", "orcid") %>' target="_blank"><%= image_tag 'orcid.png', class: "img-responsive", alt: 'ORCID', style: 'float:left; margin-top: 3px;', height: '16', width: '16' %></a>
+              <% end %>
+
+              <% if author['creator_orcid'] && author['creator_isni'] %>
+                <span style="float:left">&nbsp;</span>
+              <% end %>
+
+              <% if author['creator_isni'].present? %>
+                <a href='<%= render_isni_or_orcid_url("#{author['creator_isni']}", "isni") %>' target="_blank"><%= image_tag 'isni.png', class: "img-responsive", alt: 'ISNI', style: 'float:left; margin-top: 3px', height: '16', width: '26' %></a>
+              <% end %>
+              <span>&nbsp;</span>
+          <% end %>
+        </span>
+      </li>
+    <% end %>
+  </ul>
 </dd>

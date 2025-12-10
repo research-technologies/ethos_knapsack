@@ -1,13 +1,31 @@
 <dt>Supervisor(s)</dt>
 <dd>
-  <% presenter.contributor.each do | c | %>
+  <ul class="tabular">
+  <% presenter.contributor.each_with_index do | c, index | %>
     <% supervisor = eval(c) %>
-    <%= supervisor['contributor_family_name']%>, <%= supervisor['contributor_given_name'] %>
-    <% if supervisor['contributor_orcid'] %>
-      (<%= supervisor['contributor_orcid'] %>)
+      <li class="attribute <%= section %>-contributor <%= 'collapse' if index > 4 %>">
+        <span itemprop="contributor" style="float:left">
+          <%= supervisor['contributor_family_name']%>, <%= supervisor['contributor_given_name'] %>
+        </span>
+
+        <span itemprop="contributor">
+          <span style="float:left" >&nbsp;</span>
+            <% if supervisor['contributor_orcid'] || supervisor['contributor_isni'] %>
+              <% if supervisor['contributor_orcid'].present? %>
+                  <a href='<%= render_isni_or_orcid_url("#{supervisor['contributor_orcid']}", "orcid") %>' target="_blank"><%= image_tag 'orcid.png', class: "img-responsive", alt: 'ORCID', style: 'float:left; margin-top: 3px;', height: '16', width: '16' %></a>
+              <% end %>
+
+              <% if supervisor['contributor_orcid'] && supervisor['contributor_isni'] %>
+                <span style="float:left">&nbsp;</span>
+              <% end %>
+
+              <% if supervisor['contributor_isni'].present? %>
+                <a href='<%= render_isni_or_orcid_url("#{supervisor['contributor_isni']}", "isni") %>' target="_blank"><%= image_tag 'isni.png', class: "img-responsive", alt: 'ISNI', style: 'float:left; margin-top: 3px', height: '16', width: '26' %></a>
+              <% end %>
+            <% end %>
+          <span>&nbsp;</span>
+        </span>
+      </li>
     <% end %>
-    <% if supervisor['contributor_isni'] %>
-      (<%= supervisor['contributor_isni'] %>)
-    <% end %>
-  <% end %>
+  </ul>
 </dd>

@@ -10,7 +10,9 @@
 
   <%= presenter.attribute_to_html(:alternative_title, html_dl: true) %>
   <%= render "hyrax/base/creator", presenter: presenter, section: "metadata" %>
-  <%= render "hyrax/base/contributor", presenter: presenter, section: "metadata" %>
+  <% unless presenter.contributor.blank? %>
+    <%= render "hyrax/base/contributor", presenter: presenter, section: "metadata" %>
+  <% end %>
   <%= presenter.attribute_to_html(:abstract, html_dl: true) %>
   <%= presenter.attribute_to_html(:qualification_name, render_as: :faceted, html_dl: true) %>
   <%= presenter.attribute_to_html(:qualification_level, html_dl: true) %>
