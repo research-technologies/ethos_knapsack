@@ -1,0 +1,9 @@
+  <%= render "hyrax/base/creator", presenter: presenter, section: "metadata" %>
+  <%= presenter.attribute_to_html(:qualification_name, render_as: :faceted, html_dl: true) %>
+  <%= presenter.attribute_to_html(:current_he_institution, render_as: :faceted, html_dl: true) %>
+  <%= presenter.attribute_to_html(:date_issued, render_as: :faceted, html_dl: true) %>
+
+<div class="show-actions">
+  <a class="btn btn-default devise-button" target="_blank" href="<%=presenter.referenced_by.first%>">View in source repository</a>
+</div>
+<br/>

@@ -1,0 +1,13 @@
+<div class="metadata-group">
+<dt>Funder(s)</dt>
+<dd>
+  <ul class="tabular">
+  <% presenter.funder.each do | funder_obj | %>
+    <% funder = eval funder_obj %>
+    <li class="attribute attribute-language">
+      <span itemprop="inFunder"><a href="/catalog?f%5Bfunder_sim%5D%5B%5D=<%=funder%>&amp;locale=en"><%= funder['funder_name'] %></a></span>
+    </li>
+  <% end %>
+  </ul>
+</dd>
+</div>

@@ -36,10 +36,10 @@ SolrDocument.class_eval do
   attribute :abstract, Hyrax::SolrDocument::Metadata::Solr::Array, 'abstract_tesim'
   attribute :qualification_name, Hyrax::SolrDocument::Metadata::Solr::Array, 'qualification_name_tesim'
   attribute :qualification_level, Hyrax::SolrDocument::Metadata::Solr::Array, 'qualification_level_tesim'
-  attribute :institution, Hyrax::SolrDocument::Metadata::Solr::Array, 'institution_tesim'
+  attribute :ethos_institution, Hyrax::SolrDocument::Metadata::Solr::Array, 'ethos_institution_tesim'
   attribute :current_he_institution, Hyrax::SolrDocument::Metadata::Solr::Array, 'current_he_institution_tesim'
   attribute :org_unit, Hyrax::SolrDocument::Metadata::Solr::Array, 'org_unit_tesim'
-  attribute :sponsor, Hyrax::SolrDocument::Metadata::Solr::Array, 'sponsor_tesim'
+  attribute :funder, Hyrax::SolrDocument::Metadata::Solr::Array, 'funder_tesim'
   attribute :date_accepted, Hyrax::SolrDocument::Metadata::Solr::Array, 'date_accepted_tesim'
   attribute :date_issued, Hyrax::SolrDocument::Metadata::Solr::Array, 'date_issued_tesim'
   attribute :language, Hyrax::SolrDocument::Metadata::Solr::Array, 'language_tesim'
@@ -51,6 +51,7 @@ SolrDocument.class_eval do
   attribute :doi, Hyrax::SolrDocument::Metadata::Solr::Array, 'doi_ssim'
   attribute :referenced_by, Hyrax::SolrDocument::Metadata::Solr::Array, 'referenced_by_ssim'
   attribute :oai_identifier, Hyrax::SolrDocument::Metadata::Solr::Array, 'oai_identifier_ssim'
+  attribute :ethos_identifier, Hyrax::SolrDocument::Metadata::Solr::Array, 'ethos_identifier_tesim'
   attribute :licence, Hyrax::SolrDocument::Metadata::Solr::Array, 'licence_tesim'
 end
 
@@ -58,7 +59,7 @@ end
   blacklight_config.oai[:document][:set_fields] = [
     { label: "Subject Discipline", solr_field: "ethos_subject_sim" },
     #    { label: "Full Text", solr_field: "referenced_by_ssi" },
-    { label: "Institution", solr_field: "current_he_institution_sim" }
+    { label: "University", solr_field: "current_he_institution_sim" }
   ]
 
   # I hope there is a better way to re-order facets
@@ -93,10 +94,10 @@ end
   blacklight_config.add_show_field 'abstract_tesim'
   blacklight_config.add_show_field 'qualification_name_tesim'
   blacklight_config.add_show_field 'qualification_level_tesim'
-  blacklight_config.add_show_field 'institution_tesim'
+  blacklight_config.add_show_field 'ethos_institution_tesim'
   blacklight_config.add_show_field 'current_he_institution_tesim'
   blacklight_config.add_show_field 'org_unit_tesim'
-  blacklight_config.add_show_field 'sponsor_tesim'
+  blacklight_config.add_show_field 'funder_tesim'
   blacklight_config.add_show_field 'date_accepted_tesim'
   blacklight_config.add_show_field 'date_issued_tesim'
   blacklight_config.add_show_field 'language_tesim'
@@ -199,4 +200,26 @@ HyraxHelper.module_eval do
       'en' => 'English'
     }
   end
+end
+
+Hyrax::Renderers::AttributeRenderer.class_eval do
+
+  # Draw the dl row for the attribute
+      def render_dl_row
+        return '' if values.blank? && !options[:include_empty]
+
+        markup = %(<div class="metadata-group"><dt>#{label}</dt>\n<dd><ul class='tabular'>)
+
+        attributes = microdata_object_attributes(field).merge(class: "attribute attribute-#{field}")
+
+        values_array = Array(values)
+        values_array.sort! if options[:sort]
+
+        markup += values_array.map do |value|
+          "<li#{html_attributes(attributes)}>#{attribute_value_to_html(value.to_s)}</li>"
+        end.join
+        markup += %(</ul></dd></div>)
+
+        markup.html_safe
+      end
 end
