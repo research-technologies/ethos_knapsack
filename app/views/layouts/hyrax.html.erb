@@ -14,9 +14,6 @@
 
   <body class="<%= body_class %> <%= home_page_theme %> <%= search_results_theme %> <%= show_page_theme %>">
     <%= render_gtm_body(request.original_url) %>
-    <div class="skip-to-content">
-      <%= link_to "Skip to Content", "#skip-to-content" %>
-    </div>
     <%= render '/masthead', placement_class: nil %>
     <%= content_for(:navbar) %>
     <%= content_for(:precontainer_content) %>
