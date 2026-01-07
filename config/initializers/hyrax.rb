@@ -78,6 +78,52 @@ end
   blacklight_config.add_facet_field 'language_sim', limit: 5
   blacklight_config.add_facet_field 'current_he_institution_sim', label: "University", limit: 5, single: true
 
+
+  
+  blacklight_config.index_fields.delete(:keyword_tesim)
+  blacklight_config.index_fields.delete(:depositor_tesim)
+  blacklight_config.index_fields.delete(:contributor_tesim)
+  blacklight_config.index_fields.delete(:language_tesim)
+  blacklight_config.index_fields.delete(:date_uploaded_dtsi)
+  blacklight_config.index_fields.delete(:date_modified_dtsi)
+  blacklight_config.index_fields.delete(:license_tesim)
+
+  blacklight_config.add_index_field 'current_he_institution_tesim', label: "University", itemprop: 'name', if: :render_in_tenant?
+  blacklight_config.add_index_field 'date_issued_tesim', itemprop: 'date_issued', label: "Date awarded", helper_method: :human_readable_date, if: :render_in_tenant?
+
+=begin
+    # solr fields to be displayed in the index (search results) view
+    #   The ordering of the field names is the order of the display
+    config.add_index_field 'title_tesim', label: "Title", itemprop: 'name', if: :render_in_tenant?
+    config.add_index_field 'description_tesim', itemprop: 'description', helper_method: :truncate_and_iconify_auto_link, if: :render_in_tenant?
+    config.add_index_field 'keyword_tesim', itemprop: 'keywords', link_to_facet: 'keyword_sim', if: :render_in_tenant?
+    config.add_index_field 'subject_tesim', itemprop: 'about', link_to_facet: 'subject_sim', if: :render_in_tenant?
+    config.add_index_field 'creator_tesim', itemprop: 'creator', link_to_facet: 'creator_sim', if: :render_in_tenant?
+    config.add_index_field 'date_tesim', itemprop: 'date', if: :render_in_tenant?
+    config.add_index_field 'contributor_tesim', itemprop: 'contributor', link_to_facet: 'contributor_sim', if: :render_in_tenant?
+    config.add_index_field 'proxy_depositor_ssim', label: "Depositor", helper_method: :link_to_profile, if: :render_in_tenant?
+    config.add_index_field 'depositor_tesim', label: "Owner", helper_method: :link_to_profile, if: :render_in_tenant?
+    config.add_index_field 'publisher_tesim', itemprop: 'publisher', link_to_facet: 'publisher_sim', if: :render_in_tenant?
+    config.add_index_field 'based_near_label_tesim', itemprop: 'contentLocation', link_to_facet: 'based_near_label_sim', if: :render_in_tenant?
+    config.add_index_field 'language_tesim', itemprop: 'inLanguage', link_to_facet: 'language_sim', if: :render_in_tenant?
+    config.add_index_field 'date_uploaded_dtsi', itemprop: 'datePublished', helper_method: :human_readable_date, if: :render_in_tenant?
+    config.add_index_field 'date_modified_dtsi', itemprop: 'dateModified', helper_method: :human_readable_date, if: :render_in_tenant?
+    config.add_index_field 'date_created_tesim', itemprop: 'dateCreated', if: :render_in_tenant?
+    config.add_index_field 'rights_statement_tesim', helper_method: :rights_statement_links, if: :render_in_tenant?
+    config.add_index_field 'license_tesim', helper_method: :license_links, if: :render_in_tenant?
+    config.add_index_field 'resource_type_tesim', label: "Resource Type", link_to_facet: 'resource_type_sim', if: :render_in_tenant?
+    config.add_index_field 'file_format_tesim', link_to_facet: 'file_format_sim', if: :render_in_tenant?
+    config.add_index_field 'identifier_tesim', helper_method: :index_field_link, field_name: 'identifier', if: :render_in_tenant?
+    config.add_index_field 'embargo_release_date_dtsi', label: "Embargo release date", helper_method: :human_readable_date, if: :render_in_tenant?
+    config.add_index_field 'lease_expiration_date_dtsi', label: "Lease expiration date", helper_method: :human_readable_date, if: :render_in_tenant?
+    config.add_index_field 'learning_resource_type_tesim', label: "Learning resource type", if: :render_in_tenant?
+    config.add_index_field 'education_level_tesim', label: "Education level", if: :render_in_tenant?
+    config.add_index_field 'audience_tesim', label: "Audience", if: :render_in_tenant?
+    config.add_index_field 'discipline_tesim', label: "Discipline", if: :render_in_tenant?
+
+=end
+
+
   # solr fields to be displayed in the show (single result) view
   # The ordering of the field names is the order of the display
 

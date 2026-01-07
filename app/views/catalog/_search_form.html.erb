@@ -1,0 +1,55 @@
+<% # OVERRIDE: Hyrax v5.0.1 template to include the advanced_search button %>
+<%= form_tag search_form_action, method: :get, class: "search-form", id: "search-form-header", role: "search" do %>
+  <%= render Blacklight::HiddenSearchStateComponent.new(params: search_state.params_for_search.except(:q, :search_field, :qt, :page, :utf8)) %>
+  <%= hidden_field_tag :search_field, 'all_fields' %>
+
+  <div class="search-bar-container">
+    <div class="flex-row flex-1">
+      <div class="search-bar-wrapper search-bar-wrapper-no-mobile-width">
+        <div data-qa="search_box_container" class="search_box_container">
+          <h2 class="visually-hidden"> Search bar </h2>
+          <input autocomplete="off" matinput="" type="text" id="main-search-bar" class="mat-mdc-input-element mat-mdc-autocomplete-trigger search-input-field cdk-text-field-autofill-monitored" aria-label="Search field" placeholder="Search" aria-invalid="false" aria-required="false" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-haspopup="listbox">
+            <div class="search-bar-actions inline-block">
+              <div class="search-bar-actions inline-block ng-star-inserted">
+                <button class="mat-mdc-tooltip-trigger clear-search-btn mdc-icon-button mat-mdc-icon-button mat-unthemed mat-mdc-button-base" aria-label="Clear search text" aria-describedby="cdk-describedby-message-ng-1-74" cdk-describedby-host="ng-1">
+                    <svg height="100%" viewBox="0 -960 960 960" width="100%" fill="#666666" fit="" preserveAspectRatio="xMidYMid meet" focusable="false"><path d="M480-424 284-228q-11 11-28 11t-28-11q-11-11-11-28t11-28l196-196-196-196q-11-11-11-28t11-28q11-11 28-11t28 11l196 196 196-196q11-11 28-11t28 11q11 11 11 28t-11 28L536-480l196 196q11 11 11 28t-11 28q-11 11-28 11t-28-11L480-424Z"></path></svg>
+                </button>
+                <div class="nav-divider"></div>
+              </div>
+              <button _ngcontent-ng-c133002507="" matsuffix="" mat-icon-button="" type="submit" class="mat-mdc-tooltip-trigger search-btn mdc-icon-button mat-mdc-icon-button mat-unthemed mat-mdc-button-base" aria-label="Submit search" aria-describedby="cdk-describedby-message-ng-1-73" cdk-describedby-host="ng-1">
+                <svg height="100%" viewBox="0 -960 960 960" width="100%" fill="#666666" fit="" preserveAspectRatio="xMidYMid meet" focusable="false"><path d="M380-320q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l224 224q11 11 11 28t-11 28q-11 11-28 11t-28-11L532-372q-30 24-69 38t-83 14Zm0-80q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"></path></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="flex-row ng-star-inserted" style="gap: 0.75rem;">
+          <%= link_to "/advanced" do %>
+          <button data-qa="advanced_search_button" class="advanced-search-button basic-button mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base">
+            <span class="mat-mdc-button-persistent-ripple mdc-button__ripple"></span>
+            <span class="mdc-button__label">Advanced search </span>
+          </button>
+        <% end %>
+  
+        </div>
+    </div>
+  </div>
+
+<!--
+        <% if current_user %>
+          <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+
+            <span class="sr-only" data-search-element="label"><%= t("hyrax.search.form.option.all.label_long", application_name: application_name) %></span>
+            <span aria-hidden="true"><%= t("hyrax.search.form.option.all.label_short") %></span>
+          </button>
+          <div class="dropdown-menu dropdown-menu-right">
+            <%= link_to t("hyrax.search.form.option.all.label_long", application_name: application_name), "#", class: "dropdown-item",
+                data: { "search-option" => main_app.search_catalog_path, "search-label" => t("hyrax.search.form.option.all.label_short") } %>
+            <%= link_to t("hyrax.search.form.option.my_works.label_long"), "#", class: "dropdown-item",
+                data: { "search-option" => hyrax.my_works_path, "search-label" => t("hyrax.search.form.option.my_works.label_short") } %>
+            <%= link_to t("hyrax.search.form.option.my_collections.label_long"), "#", class: "dropdown-item",
+                data: { "search-option" => hyrax.my_collections_path, "search-label" => t("hyrax.search.form.option.my_collections.label_short") } %>
+          </div>
+        <% end %>
+-->
+
+<% end %>
