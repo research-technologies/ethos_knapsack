@@ -80,7 +80,7 @@ extraEnvVars: &envVars
   - name: DB_ADAPTER
     value: postgresql
   - name: DB_HOST
-    value: postgresql.default.svc.cluster.local
+    value: postgresql-17.default.svc.cluster.local
   - name: DB_NAME
     value: ethos-knapsack-production
   - name: DB_USER
@@ -253,7 +253,7 @@ solr:
 externalFcrepoHost: fcrepo.fcrepo.svc.cluster.local
 
 externalPostgresql:
-  host: postgresql.default.svc.cluster.local
+  host: postgresql-17.default.svc.cluster.local
   username: postgres
   password: $DB_PASSWORD
 
