@@ -137,7 +137,7 @@ end
   blacklight_config.add_show_field 'alternative_title_tesim'
   blacklight_config.add_show_field 'creator_tesim'
   blacklight_config.add_show_field 'contributor_tesim'
-  blacklight_config.add_show_field 'abstract_tesim'
+  blacklight_config.add_show_field 'abstract_tesim', helper_method: :truncate_and_iconify_auto_link
   blacklight_config.add_show_field 'qualification_name_tesim'
   blacklight_config.add_show_field 'qualification_level_tesim'
   blacklight_config.add_show_field 'ethos_institution_tesim'

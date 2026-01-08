@@ -2,8 +2,14 @@
   <%= presenter.attribute_to_html(:qualification_name, render_as: :faceted, html_dl: true) %>
   <%= presenter.attribute_to_html(:current_he_institution, render_as: :faceted, html_dl: true) %>
   <%= presenter.attribute_to_html(:date_issued, render_as: :faceted, html_dl: true) %>
-
-<div class="show-actions">
-  <a class="btn btn-default devise-button" target="_blank" href="<%=presenter.referenced_by.first%>">View in source repository</a>
-</div>
+  <% unless presenter.referenced_by.blank? %>
+    <div class="show-actions">
+      <%= link_to presenter.referenced_by.first do %>
+        <button class="basic-button mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ethos-button medium">
+          <span class="mat-mdc-button-persistent-ripple mdc-button__ripple"></span>
+          <span class="mdc-button__label">&nbsp; Access Thesis &nbsp;</span>
+        </button>
+      <% end %>
+    </div>
+  <% end %>
 <br/>

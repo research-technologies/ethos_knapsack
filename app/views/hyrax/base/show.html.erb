@@ -59,6 +59,11 @@
     <%# = render 'user_activity', presenter: @presenter %>
 
     <%= render 'show_actions', presenter: @presenter %>
+    <% if current_user %>
+      <%= @presenter.permission_badge %>
+      <%= @presenter.workflow.badge %>
+    <% end %>
+
 
 <span class='hide analytics-event' data-category="work" data-action="work-view" data-name="<%= @presenter.id %>" ></span>
 <% @presenter.member_of_collection_ids.each do |collection_id| %>

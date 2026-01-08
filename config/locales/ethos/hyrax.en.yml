@@ -20,7 +20,7 @@ en:
         embargo_date: "Embargo"
         ethos_identifier: "EThOS ID"
         doi: "DOI"
-        referenced_by: "Referenced By"
+        referenced_by: "Access Thesis"
         oai_identifier: "Source ID"
         bl_cat_identifier: "BL Catalogue ID [Aleph]"
         other_identifier: "Other Identifier"
@@ -35,7 +35,7 @@ en:
         abstract: Abstract
         qualification_name: Qualification Name
         qualification_level: Qualification Level
-        ethos_institution: Awarding Insitution
+        ethos_institution: Awarding Institution
         current_he_institution: University
         org_unit: Department
         funder: Funder(s)
@@ -49,7 +49,7 @@ en:
         ethos_access_rights: Accessible
         embargo_date: Embargo
         doi: DOI
-        referenced_by: Referenced By
+        referenced_by: Access Thesis
         oai_identifier: Source ID
         source_record: Old EThOS URL
         licence: Licence
