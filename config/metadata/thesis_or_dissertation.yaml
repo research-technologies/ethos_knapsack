@@ -48,6 +48,15 @@ attributes:
     index_keys:
       - "creator_tesim"
     predicate: http://purl.org/dc/elements/1.1/creator
+  creator_search: # Creator <dc:creator>
+    type: string
+    multiple: true
+    form:
+      required: false # todo work out validation that make this required
+      primary: true
+    index_keys:
+      - "creator_search_tesim"
+    predicate: http://purl.org/dc/elements/1.1/creator_name
   language: # LANGUAGE <dc:language xsi:type="dcterms:ISO639-2">
     type: string
     multiple: true
@@ -159,6 +168,16 @@ attributes:
     view:
       render_as: "faceted"
       html_dl: true
+  funder_search: 
+    type: string
+    multiple: true
+    form:
+      required: false
+      primary: true
+    index_keys:
+      - "funder_search_tesim"
+      - "funder_search_sim"
+    predicate: http://ethos.library.leeds.ac.uk/uketd/terms/sponsor_name
   date_issued: #DATE AWARDED <dcterms:issued>
     type: string
     multiple: true

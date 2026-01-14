@@ -32,6 +32,7 @@ SolrDocument.class_eval do
 
   attribute :alternative_title, Hyrax::SolrDocument::Metadata::Solr::Array, 'alternative_title_tesim'
   attribute :creator, Hyrax::SolrDocument::Metadata::Solr::Array, 'creator_tesim'
+  attribute :creator_search, Hyrax::SolrDocument::Metadata::Solr::Array, 'creator_search_tesim'
   attribute :contributor, Hyrax::SolrDocument::Metadata::Solr::Array, 'contributor_tesim'
   attribute :abstract, Hyrax::SolrDocument::Metadata::Solr::Array, 'abstract_tesim'
   attribute :qualification_name, Hyrax::SolrDocument::Metadata::Solr::Array, 'qualification_name_tesim'
@@ -40,6 +41,7 @@ SolrDocument.class_eval do
   attribute :current_he_institution, Hyrax::SolrDocument::Metadata::Solr::Array, 'current_he_institution_tesim'
   attribute :org_unit, Hyrax::SolrDocument::Metadata::Solr::Array, 'org_unit_tesim'
   attribute :funder, Hyrax::SolrDocument::Metadata::Solr::Array, 'funder_tesim'
+  attribute :funder_search, Hyrax::SolrDocument::Metadata::Solr::Array, 'funder_search_tesim'
   attribute :date_accepted, Hyrax::SolrDocument::Metadata::Solr::Array, 'date_accepted_tesim'
   attribute :date_issued, Hyrax::SolrDocument::Metadata::Solr::Array, 'date_issued_tesim'
   attribute :language, Hyrax::SolrDocument::Metadata::Solr::Array, 'language_tesim'
@@ -74,12 +76,11 @@ end
   blacklight_config.add_facet_field 'keyword_sim', limit: 5
   blacklight_config.add_facet_field 'date_issued_sim', label: "Date Awarded", limit: 5, sort: 'index'
   blacklight_config.add_facet_field 'qualification_name_sim', label: "Qualification Name", limit: 5, single: true
-  blacklight_config.add_facet_field 'funder_sim', label: "Funder / Sponsor", limit: 5
+  blacklight_config.add_facet_field 'funder_search_sim', label: "Funder / Sponsor", limit: 5
   blacklight_config.add_facet_field 'language_sim', limit: 5
   blacklight_config.add_facet_field 'current_he_institution_sim', label: "University", limit: 5, single: true
-
-
   
+  blacklight_config.index_fields.delete(:creator_tesim)
   blacklight_config.index_fields.delete(:keyword_tesim)
   blacklight_config.index_fields.delete(:depositor_tesim)
   blacklight_config.index_fields.delete(:contributor_tesim)
@@ -88,6 +89,7 @@ end
   blacklight_config.index_fields.delete(:date_modified_dtsi)
   blacklight_config.index_fields.delete(:license_tesim)
 
+  blacklight_config.add_index_field 'creator_search_tesim', label: "Author", itemprop: 'name', if: :render_in_tenant?
   blacklight_config.add_index_field 'current_he_institution_tesim', label: "University", itemprop: 'name', if: :render_in_tenant?
   blacklight_config.add_index_field 'date_issued_tesim', itemprop: 'date_issued', label: "Date awarded", helper_method: :human_readable_date, if: :render_in_tenant?
 
@@ -120,7 +122,6 @@ end
     config.add_index_field 'education_level_tesim', label: "Education level", if: :render_in_tenant?
     config.add_index_field 'audience_tesim', label: "Audience", if: :render_in_tenant?
     config.add_index_field 'discipline_tesim', label: "Discipline", if: :render_in_tenant?
-
 =end
 
 
@@ -157,6 +158,9 @@ end
   blacklight_config.add_show_field 'oai_identifier_ssim'
   blacklight_config.add_show_field 'licence_tesim'
 
+
+  blacklight_config.search_fields.delete(:resource_type)
+
   # This one uses all the defaults set by the solr request handler. Which
   # solr request handler? The one set in config[:default_solr_parameters][:qt],
   # since we aren't specifying it otherwise.
@@ -171,7 +175,85 @@ end
     }
   end
 
-  # Adavnaced search fields
+ #remove fields from advanced search
+=begin
+  blacklight_config.search_fields.delete(:description)
+  blacklight_config.search_fields.delete(:publisher)
+  blacklight_config.search_fields.delete(:date_created)
+  blacklight_config.search_fields.delete(:resource_type)
+  blacklight_config.search_fields.delete(:format)
+  blacklight_config.search_fields.delete(:depositor)
+  blacklight_config.search_fields.delete(:identifier)
+  blacklight_config.search_fields.delete(:language)
+  blacklight_config.search_fields.delete(:based_near_label)
+  blacklight_config.search_fields.delete(:rights_statement)
+  blacklight_config.search_fields.delete(:extent)
+  blacklight_config.search_fields.delete(:advisor)
+  blacklight_config.search_fields.delete(:accessibility_feature)
+  blacklight_config.search_fields.delete(:accessibility_hazard)
+  blacklight_config.search_fields.delete(:accessibility_summary)
+  blacklight_config.search_fields.delete(:additional_information)
+  blacklight_config.search_fields.delete(:audience)
+  blacklight_config.search_fields.delete(:bibliographic_citation)
+  blacklight_config.search_fields.delete(:committee_member)
+  blacklight_config.search_fields.delete(:degree_discipline)
+  blacklight_config.search_fields.delete(:education_level)
+  blacklight_config.search_fields.delete(:degree_grantor)
+  blacklight_config.search_fields.delete(:learning_resource_type)
+  blacklight_config.search_fields.delete(:degree_level)
+  blacklight_config.search_fields.delete(:related_url)
+  blacklight_config.search_fields.delete(:rights_holder)
+  blacklight_config.search_fields.delete(:rights_notes)
+  blacklight_config.search_fields.delete(:size)
+  blacklight_config.search_fields.delete(:table_of_contents)
+=end
+  blacklight_config.search_fields = {}
+
+  # Add fields to advanced search (in the order we want)
+
+  blacklight_config.add_search_field('title') do |field|
+    field.solr_parameters = {
+      "spellcheck.dictionary": "title"
+    }
+    solr_name = 'title_tesim'
+    field.solr_local_parameters = {
+      qf: solr_name,
+      pf: solr_name
+    }
+  end
+
+  blacklight_config.add_search_field('creator_search', label: 'Author') do |field|
+    field.solr_parameters = {
+      "spellcheck.dictionary": "creator_search"
+    }
+    solr_name = 'creator_search_tesim'
+    field.solr_local_parameters = {
+      qf: solr_name,
+      pf: solr_name
+    }
+  end
+
+  blacklight_config.add_search_field('contributor', label: 'Supervisor(s)') do |field|
+    field.solr_parameters = {
+      "spellcheck.dictionary": "doi"
+    }
+    solr_name = 'doi_ssim'
+    field.solr_local_parameters = {
+      qf: solr_name,
+      pf: solr_name
+    }
+  end
+
+  blacklight_config.add_search_field('funder_search', label: 'Funder(s)') do |field|
+    field.solr_parameters = {
+      "spellcheck.dictionary": "funder_search"
+    }
+    solr_name = 'funder_search_tesim'
+    field.solr_local_parameters = {
+      qf: solr_name,
+      pf: solr_name
+    }
+  end
 
   blacklight_config.add_search_field('doi') do |field|
     field.solr_parameters = {
@@ -195,16 +277,11 @@ end
     }
   end
 
-  blacklight_config.add_search_field('qualification_name') do |field|
-    field.solr_parameters = {
-      "spellcheck.dictionary": "qualification_name"
-    }
-    solr_name = 'qualification_name_tesim'
-    field.solr_local_parameters = {
-      qf: solr_name,
-      pf: solr_name
-    }
-  end
+  # supress blacklight view options while we are largely text based
+  blacklight_config.view.delete(:gallery)
+  blacklight_config.view.delete(:masonry)
+  blacklight_config.view.delete(:slideshow)
+
 end
 # rubocop:enable Metrics/BlockLength
 

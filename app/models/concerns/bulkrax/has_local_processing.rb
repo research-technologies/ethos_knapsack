@@ -9,6 +9,7 @@ module Bulkrax::HasLocalProcessing
     parsed_metadata["qualification_name"] = set_qualification_name if parsed_metadata["qualification_name"]
     parsed_metadata["qualification_level"] = set_qualification_level
     parsed_metadata["ethos_access_rights"] = set_ethos_access_rights if parsed_metadata["ethos_access_rights"]
+    parsed_metadata['creator_search'] = parsed_metadata&.[]('creator_search')&.map { |c| c.values.join(', ') }
 
     compound_fields = {
       'creator' => ['family_name', 'given_name', 'orcid', 'isni'],
@@ -47,6 +48,7 @@ module Bulkrax::HasLocalProcessing
     # leave funder unchanged if not present
 
     parsed_metadata['funder'] = []
+    parsed_metadata['funder_search'] = []
     funders.each_with_index do |funder, index|
       parsed_metadata['funder'] = [] if parsed_metadata['funder'].blank?
       funder_obj = { 'funder_name' => funder, 'funder_award' => [] }
@@ -56,6 +58,7 @@ module Bulkrax::HasLocalProcessing
         funder_obj['funder_award'] << grants.shift
       end
       parsed_metadata['funder'] << funder_obj
+      parsed_metadata['funder_search'] << funder
     end
   end
   # rubocop:enable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
