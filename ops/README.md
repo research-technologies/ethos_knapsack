@@ -880,7 +880,7 @@ terraform state rm <resource-type>.<name>
 
 1. **Create a feature branch**
    ```bash
-   git checkout -b infrastructure/your-change-name
+   git checkout -b your-branch-name
    ```
 
 2. **Make your changes**
