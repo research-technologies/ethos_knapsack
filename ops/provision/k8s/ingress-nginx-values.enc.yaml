@@ -1,0 +1,44 @@
+controller:
+    config:
+        allow-snippet-annotations: ENC[AES256_GCM,data:s+pBBw==,iv:ZJ3xfpV6plYltovQ9hthfPTULG3yIz3GyjrcGlW6cik=,tag:KxIDsRke3W4HQIv8YBjRdw==,type:str]
+        use-proxy-protocol: ENC[AES256_GCM,data:HNghdA==,iv:k86jiYvbgEL0L1p/9jYRVr2DkQZet/0gviqqTpG0ttg=,tag:URnEL6JcOOvBXW6/BwijTA==,type:str]
+    service:
+        annotations:
+            service.beta.kubernetes.io/aws-load-balancer-type: ENC[AES256_GCM,data:YzrE,iv:EFKA48qbcRxB0m2AM/pgMjmCeyoYjbbgUCa2Be1sxwc=,tag:3UvYxfn3TY6BCiAUlCqoTw==,type:str]
+            service.beta.kubernetes.io/aws-load-balancer-scheme: ENC[AES256_GCM,data:vjKEXCYPsDmk4TXwlCqB,iv:BmufLyPXGR3A+WGdKwHAa+y7+CGsT4sSov4qFqs7bn0=,tag:d6bxsXf7gfntlIXJhCQAfQ==,type:str]
+            service.beta.kubernetes.io/aws-load-balancer-backend-protocol: ENC[AES256_GCM,data:zlE0,iv:uvyXQRpbZxvnjJO+JPIR42+WdDFhh0AzwXsF/hU/9Dc=,tag:+KovShuC09bRAKlP3AjDhw==,type:str]
+            service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: ENC[AES256_GCM,data:Zxg=,iv:ZrI5qY7gfytTT6UndXeLmxPoNYOM6eFd0kAD9fEiLLE=,tag:CKwyoXyV8wM0JzPhB59XnA==,type:str]
+            service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: ENC[AES256_GCM,data:pg==,iv:io2HgAqz0I4klU1wapHrQ7M1DDwiwS8qEDlwzXy8mgw=,tag:qUefiMNVA8k9LzHs51HQ6Q==,type:str]
+        type: ENC[AES256_GCM,data:E7/ItuCdr8Wns7ZI,iv:zGBGOLJZKdVQ01j5mRX2+cw6atuqTMMaVAt2EFcIneU=,tag:74JWvhcYr16Es71Y9q9m8Q==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2026-01-14T21:12:47Z"
+    mac: ENC[AES256_GCM,data:Iw3mwOU1VahnVAA8KyQaq5Ek4QTNZHL4yUSzirdo28Ke08hDrCHwnYXtIXjP/sKRbyzGXFh67g7FLaCyGjx1Kq8wFF5Vc9G59zzDlY6aD9PUC3xInZ9OhnoUIX/Aepu8aM7ZZDngmE93TcP42nyFGiR++9BqApYpi1Yvf0Smc7k=,iv:skg/rBZkJzjsQ9ZLUEG38BCOFj2nSmS+MRziSi/qIjg=,tag:FkgUY4QwY0Dj2aZrG9w3bg==,type:str]
+    pgp:
+        - created_at: "2026-01-14T21:12:47Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            hQIMA6EyMwI1N4AyAQ/+NWWqZ3E46PQ5xJLNHa4bD/eAXjnA0Zy1V6/riTZYmV4D
+            d+mLf1nzYR+lq+TceilWlawtIrwfRKarYahC+OQ7CyfHZ9WOurDy8mkZYzUaXsc2
+            o96+2f7hzZWrb9e88hHCeFTL2ruyvDuSes8a27zkQjjBa3Izmv5MzlhDCAwqsnhL
+            Yx7YKOYbeNwkl98t3fVcbdo6wXKgYhL3HdDjzByKDVZnb/ykGj3YOjrgHlQbzi4v
+            2LYVgIArL9N3Rpnfh50lOVUvpXwT5dYtp3t6Sbtgo0pldGHCnjoZmQFtfxCSgznL
+            3ev2N2rezmBfGYV2nMDJo+2lUlYxh/w5eVT0C574JewjlY+6kYzfBMg8kRMJdZAu
+            YjjYSV74kKtwrDLxOaMkSb4MTZ2JvJdNVWn+e6fuXBjuGR6zbVg7dGI0zvDlc7bE
+            ENd7DD/0MwsvKwaD/GGLA+VzmRhXGnTWS5N6eqEJ/hAEfCw/Ve+TMkzy7mgqKeIz
+            DMKb70P/MVf+4T9CPvjNyBNS6dtDsL1waISUT6fnwQ5BJF7y3MTrNRP7fr8t8Ht6
+            kt4h8g0hAvJSXDXRGamHvDedHQYXAnihlDGdRDsR+Drjnsu1pcspZIB+Irjtauec
+            Wo1c0OeCk0g2GfHpn/GDunFK0bzOxEp8pfE2wOjz8bIfNQRctHofZTbuoQhCcRrU
+            aAEJAhBKeSTtA3eOAT07zTLOOPmqu7RV2WSwdZVb0goZY5TVvWhwYjV208yl4D3x
+            6Da57RGGBf+tsXLyu7sdIvA0Plc0oHQ7G0ZUlNI2tKaL/DX9JlEljSTJ5i3UKbMo
+            48+/oVyHvlXB
+            =uAy3
+            -----END PGP MESSAGE-----
+          fp: 3B1B168B501A50A1A0D1174BB7D8F807265CA841
+    unencrypted_suffix: _unencrypted
+    version: 3.8.1
