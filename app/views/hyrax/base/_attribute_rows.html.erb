@@ -9,8 +9,7 @@
   <%# Copied from hyrax-doi v0.2.0 %>
 
   <%= presenter.attribute_to_html(:alternative_title, html_dl: true) %>
-  <%= render "hyrax/base/creator", presenter: presenter, section: "metadata" %>
-  <% unless presenter.contributor.blank? %>
+  <% unless presenter.contributor.all?{|c| eval(c).values.all?(&:blank?) } %>
     <%= render "hyrax/base/contributor", presenter: presenter, section: "metadata" %>
   <% end %>
   <%#= presenter.attribute_to_html(:qualification_level, html_dl: true) %>

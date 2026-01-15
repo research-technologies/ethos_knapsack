@@ -1,0 +1,48 @@
+<!-- add body classes to make styling easier -->
+<!DOCTYPE html>
+<html lang="<%= I18n.locale.to_s %>" prefix="og:http://ogp.me/ns#">
+  <head>
+    <%= render partial: 'layouts/head_tag_content' %>
+    <%= content_for(:head) %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cc.cdn.civiccomputing.com/9/cookieControl-9.x.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript" id="" charset="">var config={apiKey:"de4329f10679714823723f6216e8e5a7e7fb1295",product:"COMMUNITY",position:"left",encodeCookie:!0,text:{title:"This site uses cookies to store information on your computer.",intro:"Some of these cookies are essential, while others help us to improve your experience by providing insights into how the site is being used.",acceptSettings:"I accept",rejectSettings:"I do not accept",necessaryTitle:"Necessary cookies",necessaryDescription:"Necessary cookies enable core functionality such as page navigation and access to secure areas. The website cannot function properly without these cookies, and can only be disabled by changing your browser preferences.",
+closeLabel:"Close cookie control",cornerButton:"Set cookie preferences",on:"On",off:"Off",thirdPartyTitle:"Some cookies require your attention",thirdPartyDescription:"Consent for the following cookies could not be automatically revoked. Please follow the link(s) below to opt out manually.",notifyTitle:"Your choice regarding cookies on this site",notifyDescription:"We use cookies to optimise site functionality and give you the best possible experience.",accept:"I accept",reject:"I do not accept",settings:"Settings",
+thirdPartyTitle:"Warning: Some cookies require your attention",thirdPartyDescription:"Consent for some third party cookies can not be automatically revoked. Please follow the link below if you want to opt out of them."},optionalCookies:[{name:"analytics",label:"Analytical cookies",description:"Analytical cookies help us to improve our website by collecting and reporting information on its usage.",cookies:"_ga _gid _gat __utma __utmt __utmb __utmc __utmz __utmv".split(" "),onAccept:function(){gtag("consent",
+"update",{analytics_storage:"granted"});dataLayer.push({civic_cookies_analytics:"consent_given",event:"analytics_consent_given"});window.dispatchEvent(new CustomEvent("cookie_consent_changed"))},onRevoke:function(){gtag("consent","update",{analytics_storage:"denied"});dataLayer.push({civic_cookies_analytics:"consent_revoked",event:"analytics_consent_revoked"});window.dispatchEvent(new CustomEvent("cookie_consent_changed"))}},{name:"marketing",label:"Marketing cookies",description:"We use marketing cookies to help us improve the relevancy of advertising campaigns you receive.",
+cookies:["fr"],onAccept:function(){gtag("consent","update",{ad_storage:"granted",ad_user_data:"granted",ad_personalization:"granted"});dataLayer.push({civic_cookies_marketing:"consent_given",event:"marketing_consent_given"});window.dispatchEvent(new CustomEvent("cookie_consent_changed"))},onRevoke:function(){gtag("consent","update",{ad_storage:"denied",ad_user_data:"denied",ad_personalization:"denied"});dataLayer.push({civic_cookies_marketing:"consent_revoked",event:"marketing_consent_revoked"});
+        window.dispatchEvent(new CustomEvent("cookie_consent_changed"))}}]};CookieControl.load(config);</script>
+
+  </head>
+  <% content_for(:extra_body_classes, 'public-facing') unless params[:controller].match(/^proprietor/) %>
+  <% content_for(:extra_body_classes, ' search-only') if current_account && current_account.search_only %>
+
+  <body class="<%= body_class %> <%= home_page_theme %> <%= search_results_theme %> <%= show_page_theme %>">
+    <%= render_gtm_body(request.original_url) %>
+    <%= render '/masthead', placement_class: nil %>
+    <%= content_for(:navbar) %>
+    <%= content_for(:precontainer_content) %>
+    <div id="content-wrapper" class="container" role="main">
+      <%= render '/flash_msg' %>
+      <%= render_breadcrumbs builder: Hyrax.config.breadcrumb_builder %>
+      <% if content_for?(:page_header) %>
+        <div class="row">
+          <div class="col-12 main-header">
+            <%= yield(:page_header) %>
+          </div>
+        </div>
+      <% end %>
+
+      <a name="skip-to-content" id="skip-to-content"></a>
+      <%= render 'shared/read_only' if Flipflop.read_only? %>
+      <%= content_for?(:content) ? yield(:content) : yield %>
+    </div><!-- /#content-wrapper -->
+    <% if controller.controller_name == 'splash' || controller.controller_name == 'homepage' %>
+      <%= render 'shared/footer' %>
+    <% end %>
+    <%= render 'shared/modal' %>
+  </body>
+</html>

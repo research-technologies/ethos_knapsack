@@ -185,6 +185,18 @@ resource "helm_release" "postgresql" {
   values    = [file("k8s/postgresql-values.yaml")]
 }
 
+resource "helm_release" "postgresql_17" {
+  name             = "postgresql-17"
+  namespace        = "default"
+  create_namespace = false
+
+  repository = "oci://registry-1.docker.io/bitnamicharts"
+  chart      = "postgresql"
+  version    = "16.7.27"
+  
+  values = [file("k8s/postgresql-17-production-values.yaml")]
+}
+
 resource "helm_release" "postgresql-fcrepo" {
   name             = "postgresql"
   namespace        = "fcrepo"
