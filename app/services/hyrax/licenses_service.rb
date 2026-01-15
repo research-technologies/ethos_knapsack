@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 module Hyrax
-  module LanguagesService
+  module LicensesService
     mattr_accessor :authority
-    self.authority = Qa::Authorities::Local.subauthority_for('languages')
+    self.authority = Qa::Authorities::Local.subauthority_for('licenses')
 
     def self.select_all_options
       authority.all.map do |element|
