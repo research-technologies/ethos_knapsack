@@ -1,0 +1,34 @@
+<div class="ethos_work_title_sub">
+  <%= render "hyrax/base/creator", presenter: presenter, section: "metadata" %>
+  <%= presenter.attribute_to_html(:qualification_name, render_as: :faceted, html_dl: true) %>
+  <%= presenter.attribute_to_html(:current_he_institution, render_as: :faceted, html_dl: true) %>
+  <%= presenter.attribute_to_html(:date_issued, render_as: :faceted, html_dl: true) %>
+  <% unless presenter.referenced_by.blank? || presenter.referenced_by.all?(&:blank?) %>
+    <div class="show-actions">
+      <%= link_to presenter.referenced_by.first do %>
+        <button class="basic-button mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ethos-button small">
+          <span class="mat-mdc-button-persistent-ripple mdc-button__ripple"></span>
+          <span class="mdc-button__label">&nbsp; Access Thesis &nbsp;</span>
+        </button>
+      <% end %>
+    </div>
+  <% end %>
+  <% embargo_date = presenter.embargo_date.first %>
+  <% embargo_date_date = DateTime.parse(embargo_date) %>
+  <% embargo_date = nil unless Date.tomorrow.before?(embargo_date_date) %>
+  <% access_rights = presenter.ethos_access_rights.first %>
+  <% if access_rights.present? || embargo_date.present? %>
+    <div class="ethos-restrictions">
+      [
+        <%= presenter.attribute_to_html(:ethos_access_rights, html_dl: true) %>
+        <% if access_rights.present? && embargo_date.present? %>
+          -
+        <% end %>
+        <% if embargo_date.present? %>
+          Embargoed until <%= embargo_date_date.strftime("%B %d, %Y") %> 
+        <% end %>
+      ]
+    </div>
+  <% end %>
+
+</div>

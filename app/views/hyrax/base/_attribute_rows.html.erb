@@ -13,22 +13,26 @@
   <% unless presenter.contributor.blank? %>
     <%= render "hyrax/base/contributor", presenter: presenter, section: "metadata" %>
   <% end %>
-  <%= presenter.attribute_to_html(:abstract, html_dl: true) %>
-  <%= presenter.attribute_to_html(:qualification_name, render_as: :faceted, html_dl: true) %>
-  <%= presenter.attribute_to_html(:qualification_level, html_dl: true) %>
-  <%= presenter.attribute_to_html(:institution, html_dl: true) %>
-  <%= presenter.attribute_to_html(:current_he_institution, render_as: :faceted, html_dl: true) %>
+  <%#= presenter.attribute_to_html(:qualification_level, html_dl: true) %>
+  <%= presenter.attribute_to_html(:ethos_institution, html_dl: true) %>
   <%= presenter.attribute_to_html(:org_unit, html_dl: true) %>
-  <%= presenter.attribute_to_html(:sponsor, render_as: :faceted, html_dl: true) %>
-  <%= presenter.attribute_to_html(:date_issued, render_as: :faceted, html_dl: true) %>
-  <%= presenter.attribute_to_html(:language, render_as: :faceted, html_dl: true) %>
+  <%#= render "hyrax/base/funder", presenter: presenter, section: "metadata" %>
+  <%= presenter.attribute_to_html(:funder_search, render_as: :faceted, label: 'Funder(s)', html_dl: true) %>
+  <%= render "hyrax/base/language", presenter: presenter, section: "metadata" %>
   <%= presenter.attribute_to_html(:keyword, render_as: :faceted, html_dl: true) %>
   <%= presenter.attribute_to_html(:ethos_subject, render_as: :faceted, html_dl: true) %>
-  <%= presenter.attribute_to_html(:dewey, html_dl: true) %>
-  <%= presenter.attribute_to_html(:ethos_access_rights, html_dl: true) %>
-  <%= presenter.attribute_to_html(:embargo_date, html_dl: true) %>
+  <%= render "hyrax/base/dewey", presenter: presenter, section: "metadata" %>
+  <% unless presenter.ethos_access_rights.first.blank? %>
+    <%= presenter.attribute_to_html(:ethos_access_rights, html_dl: true) %>
+  <% end %>
+  <% unless presenter.embargo_date.first.blank? %>
+    <%= presenter.attribute_to_html(:embargo_date, html_dl: true) %> 
+  <% end %>
   <%= presenter.attribute_to_html(:doi, html_dl: true) %>
-  <%= presenter.attribute_to_html(:referenced_by, render_as: :external_link, html_dl: true) %>
-  <%= presenter.attribute_to_html(:oai_identifier, html_dl: true) %>
-  <%= presenter.attribute_to_html(:licence, html_dl: true) %>
+  <% unless presenter.referenced_by.all?(&:blank?) %>
+    <%= presenter.attribute_to_html(:referenced_by, render_as: :external_link, html_dl: true) %>
+  <% end %>
+  <%#= presenter.attribute_to_html(:oai_identifier, html_dl: true) %>
+  <%= presenter.attribute_to_html(:ethos_identifier, html_dl: true) %>
+  <%= presenter.attribute_to_html(:license, html_dl: true) %>
 <% end %>

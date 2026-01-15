@@ -158,7 +158,34 @@ end
       pf: solr_name
     }
   end
+
+  blacklight_config.add_search_field('dewey', include_in_advanced_search: false) do |field|
+    field.solr_parameters = {
+      "spellcheck.dictionary": "dewey"
+    }
+    solr_name = 'dewey_tesim'
+    field.solr_local_parameters = {
+      qf: solr_name,
+      pf: solr_name
+    }
+  end
+
+ 
+  # supress blacklight view options while we are largely text based
+  blacklight_config.view.delete(:gallery)
+  blacklight_config.view.delete(:masonry)
+  blacklight_config.view.delete(:slideshow)
+
+  blacklight_config.sort_fields.delete('date_created_ssi asc')
+  blacklight_config.sort_fields.delete('date_created_ssi desc')
+  blacklight_config.sort_fields.delete('system_modified_dtsi asc')
+  blacklight_config.sort_fields.delete('system_modified_dtsi desc')
+
+  blacklight_config.add_sort_field "date_issued_sim asc", label: "Date Awarded (Ascending)"
+  blacklight_config.add_sort_field "date_issued_sim desc", label: "Date Awarded (Descending)"
+
 end
+
 # rubocop:enable Metrics/BlockLength
 
 # Overrides Hyku WorkShowPresenter
