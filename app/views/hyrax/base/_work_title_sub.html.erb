@@ -14,9 +14,11 @@
     </div>
   <% end %>
   <% embargo_date = presenter.embargo_date.first %>
-  <% embargo_date_date = DateTime.parse(embargo_date) %>
-  <% embargo_date = nil unless Date.tomorrow.before?(embargo_date_date) %>
-  <% access_rights = presenter.ethos_access_rights.first %>
+  <% unless embargo_date.empty? %>
+    <% embargo_date_date = DateTime.parse(embargo_date) %>
+    <% embargo_date = nil unless Date.tomorrow.before?(embargo_date_date) %>
+    <% access_rights = presenter.ethos_access_rights.first %>
+  <% end %>
   <% if access_rights.present? || embargo_date.present? %>
     <div class="ethos-restrictions">
       [
