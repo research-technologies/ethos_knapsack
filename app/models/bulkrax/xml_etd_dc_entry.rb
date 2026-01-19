@@ -74,6 +74,7 @@ module Bulkrax
 
       add_local
       validate_oai_identifier
+      validate_ethos_identifier
       parsed_metadata
     end
     # rubocop:enable Metrics/AbcSize, Metrics/MethodLength#
@@ -96,6 +97,21 @@ module Bulkrax
       return nil if parsed_metadata['oai_identifier'].blank?
       match = Hyrax.query_service.custom_query.find_by_property_value(property: 'oai_identifier', value: parsed_metadata['oai_identifier'], search_field: 'oai_identifier_ssi')
       return nil if match && match.ethos_identifier == parsed_metadata['ethos_identifier'] # dont' match yourself mate
+      match
+    end
+
+    def validate_ethos_identifier
+      # No ethos_identifier in the incoming data so no need to validate
+      return if parsed_metadata['ethos_identifier'].blank?
+      return if existing_record_by_ethos_identifier?
+      # rubocop:disable Layout/LineLength
+      raise StandardError, "The presence of an ethos_identifier (dc:source) in the incoming data suggests an attempt to update an existing record. There is no existing record with the ethos_identifier #{parsed_metadata['ethos_identifier']} so no action will be taken."
+      # rubocop:enable Layout/LineLength
+    end
+
+    def existing_record_by_ethos_identifier?
+      return nil if parsed_metadata['ethos_identifier'].blank?
+      match = Hyrax.query_service.custom_query.find_by_property_value(property: 'ethos_identifier', value: parsed_metadata['ethos_identifier'], search_field: 'ethos_identifier_ssi')
       match
     end
 

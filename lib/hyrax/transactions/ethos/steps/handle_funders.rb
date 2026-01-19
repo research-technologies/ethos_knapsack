@@ -28,7 +28,7 @@ module Hyrax
               funders[index] = funder
             end
             change_set.funder = funders.map(&:to_s)
-            change_set.funder_search = funders.map{ |f| f['funder_name'] }
+            change_set.funder_search = funders.map { |f| f['funder_name'] }
             Success(change_set)
           rescue NoMethodError => err
             Failure([err.message, change_set])

@@ -1,0 +1,12 @@
+<div class="metadata-group">
+<dt>DDC Subject</dt>
+<dd>
+  <ul class="tabular">
+  <% presenter.dewey.each do | ddc | %>
+    <li class="attribute attribute-language">
+      <span itemprop="inDewey"><a href="/catalog?utf8=✓&dewey=660&search_field=advanced"><%= ddc %></a></span>
+    </li>
+  <% end %>
+  </ul>
+</dd>
+</div>

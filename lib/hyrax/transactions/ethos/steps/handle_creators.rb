@@ -7,9 +7,7 @@ module Hyrax
       module Steps
         ##
         # Add a given `::User` as the `#depositor` via a ChangeSet.
-        #
         # If no user is given, simply passes as a `Success`.
-        #
         # @since 3.0.0
         class HandleCreators
           include Dry::Monads[:result]
@@ -19,7 +17,7 @@ module Hyrax
           # @param [#user_key] user
           #
           # @return [Dry::Monads::Result]
-          def call(change_set)
+          def call(change_set) # rubocop:disable Metrics/MethodLength
             creators = []
             updated = false
             ['creator_family_name', 'creator_given_name', 'creator_orcid', 'creator_isni'].each do |creator_field|
