@@ -1,5 +1,16 @@
 kube_config.yml
 k8s/*-values.yaml
 .backend
-.terraform*
 k8s/cloudflare-api-token-secret.yaml
+
+# Terraform state files (stored remotely in PostgreSQL backend)
+*.tfstate
+*.tfstate.*
+terraform.tfstate.backup
+.terraform/
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
