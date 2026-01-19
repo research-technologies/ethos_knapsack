@@ -112,7 +112,6 @@ module Bulkrax
     def existing_record_by_ethos_identifier?
       return nil if parsed_metadata['ethos_identifier'].blank?
       match = Hyrax.query_service.custom_query.find_by_property_value(property: 'ethos_identifier', value: parsed_metadata['ethos_identifier'], search_field: 'ethos_identifier_ssi')
-#      return nil if match && match.ethos_identifier == parsed_metadata['ethos_identifier'] # dont' match yourself mate
       match
     end
 
