@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 module HykuKnapsack
   class OriginalIdController < ApplicationController
-
     def show
       original_id = params[:uin]
       hit = ::Hyrax::SolrService.query("ethos_identifier_tesim:#{original_id}", rows: 1, fl: 'id,has_model_ssim').first
