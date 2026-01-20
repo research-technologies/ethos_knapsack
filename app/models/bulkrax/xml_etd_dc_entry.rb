@@ -20,6 +20,9 @@ module Bulkrax
           invalid_record("Missing #{source_identifier} for #{record.to_h}\n")
           return false
         end
+      else
+        # An identifier is being passed in with dc:source we need to make sure it exists already (i.e. its an update)
+        validate_ethos_identifier identifier
       end
       identifier
     end
@@ -74,7 +77,6 @@ module Bulkrax
 
       add_local
       validate_oai_identifier
-      validate_ethos_identifier
       parsed_metadata
     end
     # rubocop:enable Metrics/AbcSize, Metrics/MethodLength#
@@ -100,18 +102,20 @@ module Bulkrax
       match
     end
 
-    def validate_ethos_identifier
-      # No ethos_identifier in the incoming data so no need to validate
-      return if parsed_metadata['ethos_identifier'].blank?
-      return if existing_record_by_ethos_identifier?
+    def self.validate_ethos_identifier(ethos_identifier)
+      return if existing_record_by_ethos_identifier? ethos_identifier
       # rubocop:disable Layout/LineLength
-      raise StandardError, "The presence of an ethos_identifier (dc:source) in the incoming data suggests an attempt to update an existing record. There is no existing record with the ethos_identifier #{parsed_metadata['ethos_identifier']} so no action will be taken."
+      raise StandardError, "The presence of an ethos_identifier (dc:source) in the incoming data suggests an attempt to update an existing record. There is no existing record with the ethos_identifier #{ethos_identifier} so no action will be taken."
       # rubocop:enable Layout/LineLength
     end
 
-    def existing_record_by_ethos_identifier?
-      return nil if parsed_metadata['ethos_identifier'].blank?
-      match = Hyrax.query_service.custom_query.find_by_property_value(property: 'ethos_identifier', value: parsed_metadata['ethos_identifier'], search_field: 'ethos_identifier_ssi')
+    def self.existing_record_by_ethos_identifier?(ethos_identifier)
+      id = ethos_identifier.gsub(/uk\.bl\.ethos\./, '')
+      begin
+        match = Hyrax.query_service.find_by(id:)
+      rescue Valkyrie::Persistence::ObjectNotFoundError
+        return nil
+      end
       match
     end
 
