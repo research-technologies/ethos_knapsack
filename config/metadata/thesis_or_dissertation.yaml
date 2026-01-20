@@ -265,6 +265,7 @@ attributes:
       multiple: false
     index_keys:
       - "ethos_identifier_tesim"
+      - "ethos_identifier_ssi"
     predicate: http://purl.org/dc/elements/1.1/source
   doi: # DOI <dc:identifier xsi:type="dcterms:DOI">
     type: string
