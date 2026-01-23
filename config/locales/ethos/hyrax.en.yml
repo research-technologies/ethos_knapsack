@@ -54,3 +54,13 @@ en:
         source_record: Old EThOS URL
         licence: Licence
         ethos_identifier: EThOS ID
+  blacklight_advanced_search:
+    all: all
+    any: any
+    form:
+      title: More Search Options
+      search_context: Within search
+      limit_criteria_heading_html: "<strong>AND</strong> have these attributes"
+      query_criteria_heading_html: "<label for='op'>Find items that match</label> %{select_menu} of"
+      sort_label: "Sort results by"
+      start_over: "Clear search"
