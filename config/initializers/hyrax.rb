@@ -54,6 +54,7 @@ SolrDocument.class_eval do
   attribute :referenced_by, Hyrax::SolrDocument::Metadata::Solr::Array, 'referenced_by_ssim'
   attribute :oai_identifier, Hyrax::SolrDocument::Metadata::Solr::Array, 'oai_identifier_ssim'
   attribute :ethos_identifier, Hyrax::SolrDocument::Metadata::Solr::Array, 'ethos_identifier_tesim'
+  attribute :ethos_identifier, Hyrax::SolrDocument::Metadata::Solr::Array, 'ethos_identifier_ssi'
   attribute :licence, Hyrax::SolrDocument::Metadata::Solr::Array, 'licence_tesim'
 end
 
@@ -92,35 +93,8 @@ end
   blacklight_config.add_index_field 'creator_search_tesim', label: "Author", itemprop: 'name', if: :render_in_tenant?
   blacklight_config.add_index_field 'current_he_institution_tesim', label: "University", itemprop: 'name', if: :render_in_tenant?
   blacklight_config.add_index_field 'date_issued_tesim', itemprop: 'date_issued', label: "Date awarded", helper_method: :human_readable_date, if: :render_in_tenant?
+#  blacklight_config.add_index_field 'ethos_identifier_ssi', itemprop: 'ethos_identifier', label: "EThOS ID", if: :render_in_tenant?
 
-  #     # solr fields to be displayed in the index (search results) view
-  #     #   The ordering of the field names is the order of the display
-  #     config.add_index_field 'title_tesim', label: "Title", itemprop: 'name', if: :render_in_tenant?
-  #     config.add_index_field 'description_tesim', itemprop: 'description', helper_method: :truncate_and_iconify_auto_link, if: :render_in_tenant?
-  #     config.add_index_field 'keyword_tesim', itemprop: 'keywords', link_to_facet: 'keyword_sim', if: :render_in_tenant?
-  #     config.add_index_field 'subject_tesim', itemprop: 'about', link_to_facet: 'subject_sim', if: :render_in_tenant?
-  #     config.add_index_field 'creator_tesim', itemprop: 'creator', link_to_facet: 'creator_sim', if: :render_in_tenant?
-  #     config.add_index_field 'date_tesim', itemprop: 'date', if: :render_in_tenant?
-  #     config.add_index_field 'contributor_tesim', itemprop: 'contributor', link_to_facet: 'contributor_sim', if: :render_in_tenant?
-  #     config.add_index_field 'proxy_depositor_ssim', label: "Depositor", helper_method: :link_to_profile, if: :render_in_tenant?
-  #     config.add_index_field 'depositor_tesim', label: "Owner", helper_method: :link_to_profile, if: :render_in_tenant?
-  #     config.add_index_field 'publisher_tesim', itemprop: 'publisher', link_to_facet: 'publisher_sim', if: :render_in_tenant?
-  #     config.add_index_field 'based_near_label_tesim', itemprop: 'contentLocation', link_to_facet: 'based_near_label_sim', if: :render_in_tenant?
-  #     config.add_index_field 'language_tesim', itemprop: 'inLanguage', link_to_facet: 'language_sim', if: :render_in_tenant?
-  #     config.add_index_field 'date_uploaded_dtsi', itemprop: 'datePublished', helper_method: :human_readable_date, if: :render_in_tenant?
-  #     config.add_index_field 'date_modified_dtsi', itemprop: 'dateModified', helper_method: :human_readable_date, if: :render_in_tenant?
-  #     config.add_index_field 'date_created_tesim', itemprop: 'dateCreated', if: :render_in_tenant?
-  #     config.add_index_field 'rights_statement_tesim', helper_method: :rights_statement_links, if: :render_in_tenant?
-  #     config.add_index_field 'license_tesim', helper_method: :license_links, if: :render_in_tenant?
-  #     config.add_index_field 'resource_type_tesim', label: "Resource Type", link_to_facet: 'resource_type_sim', if: :render_in_tenant?
-  #     config.add_index_field 'file_format_tesim', link_to_facet: 'file_format_sim', if: :render_in_tenant?
-  #     config.add_index_field 'identifier_tesim', helper_method: :index_field_link, field_name: 'identifier', if: :render_in_tenant?
-  #     config.add_index_field 'embargo_release_date_dtsi', label: "Embargo release date", helper_method: :human_readable_date, if: :render_in_tenant?
-  #     config.add_index_field 'lease_expiration_date_dtsi', label: "Lease expiration date", helper_method: :human_readable_date, if: :render_in_tenant?
-  #     config.add_index_field 'learning_resource_type_tesim', label: "Learning resource type", if: :render_in_tenant?
-  #     config.add_index_field 'education_level_tesim', label: "Education level", if: :render_in_tenant?
-  #     config.add_index_field 'audience_tesim', label: "Audience", if: :render_in_tenant?
-  #     config.add_index_field 'discipline_tesim', label: "Discipline", if: :render_in_tenant?
 
   # solr fields to be displayed in the show (single result) view
   # The ordering of the field names is the order of the display
@@ -151,6 +125,7 @@ end
   blacklight_config.add_show_field 'ethos_access_rights_tesim'
   blacklight_config.add_show_field 'embargo_date_tesim'
   blacklight_config.add_show_field 'doi_ssim'
+  blacklight_config.add_show_field 'ethos_identifier_ssi'
   blacklight_config.add_show_field 'referenced_by_ssim'
   blacklight_config.add_show_field 'oai_identifier_ssim'
   blacklight_config.add_show_field 'licence_tesim'
@@ -166,41 +141,12 @@ end
     all_names = blacklight_config.show_fields.values.map(&:field).join(" ")
     title_name = 'title_tesim'
     field.solr_parameters = {
-      qf: "#{all_names} #{title_name} id file_format_tesim all_text_tsimv all_text_tsimv",
-      pf: title_name.to_s
+      qf: "ethos_identifier_ssi",
+      pf: "ethos_identifier_ssi",
     }
   end
 
   # remove fields from advanced search
-  #   blacklight_config.search_fields.delete(:description)
-  #   blacklight_config.search_fields.delete(:publisher)
-  #   blacklight_config.search_fields.delete(:date_created)
-  #   blacklight_config.search_fields.delete(:resource_type)
-  #   blacklight_config.search_fields.delete(:format)
-  #   blacklight_config.search_fields.delete(:depositor)
-  #   blacklight_config.search_fields.delete(:identifier)
-  #   blacklight_config.search_fields.delete(:language)
-  #   blacklight_config.search_fields.delete(:based_near_label)
-  #   blacklight_config.search_fields.delete(:rights_statement)
-  #   blacklight_config.search_fields.delete(:extent)
-  #   blacklight_config.search_fields.delete(:advisor)
-  #   blacklight_config.search_fields.delete(:accessibility_feature)
-  #   blacklight_config.search_fields.delete(:accessibility_hazard)
-  #   blacklight_config.search_fields.delete(:accessibility_summary)
-  #   blacklight_config.search_fields.delete(:additional_information)
-  #   blacklight_config.search_fields.delete(:audience)
-  #   blacklight_config.search_fields.delete(:bibliographic_citation)
-  #   blacklight_config.search_fields.delete(:committee_member)
-  #   blacklight_config.search_fields.delete(:degree_discipline)
-  #   blacklight_config.search_fields.delete(:education_level)
-  #   blacklight_config.search_fields.delete(:degree_grantor)
-  #   blacklight_config.search_fields.delete(:learning_resource_type)
-  #   blacklight_config.search_fields.delete(:degree_level)
-  #   blacklight_config.search_fields.delete(:related_url)
-  #   blacklight_config.search_fields.delete(:rights_holder)
-  #   blacklight_config.search_fields.delete(:rights_notes)
-  #   blacklight_config.search_fields.delete(:size)
-  #   blacklight_config.search_fields.delete(:table_of_contents)
   blacklight_config.search_fields = {}
 
   # Add fields to advanced search (in the order we want)
@@ -221,6 +167,28 @@ end
       "spellcheck.dictionary": "creator_search"
     }
     solr_name = 'creator_search_tesim'
+    field.solr_local_parameters = {
+      qf: solr_name,
+      pf: solr_name
+    }
+  end
+
+  blacklight_config.add_search_field('abstract') do |field|
+    field.solr_parameters = {
+      "spellcheck.dictionary": "abstract"
+    }
+    solr_name = 'abstract_tesim'
+    field.solr_local_parameters = {
+      qf: solr_name,
+      pf: solr_name
+    }
+  end
+
+  blacklight_config.add_search_field('date_issued', label: "Date Awarded") do |field|
+    field.solr_parameters = {
+      "spellcheck.dictionary": "date_issued"
+    }
+    solr_name = 'date_issued_tesim'
     field.solr_local_parameters = {
       qf: solr_name,
       pf: solr_name
@@ -260,22 +228,11 @@ end
     }
   end
 
-  blacklight_config.add_search_field('abstract') do |field|
+  blacklight_config.add_search_field('ethos_identifier') do |field|
     field.solr_parameters = {
-      "spellcheck.dictionary": "abstract"
+      "spellcheck.dictionary": "ethos_identifier"
     }
-    solr_name = 'abstract_tesim'
-    field.solr_local_parameters = {
-      qf: solr_name,
-      pf: solr_name
-    }
-  end
-
-  blacklight_config.add_search_field('qualification_name') do |field|
-    field.solr_parameters = {
-      "spellcheck.dictionary": "qualification_name"
-    }
-    solr_name = 'qualification_name_tesim'
+    solr_name = 'ethos_identifier_ssi'
     field.solr_local_parameters = {
       qf: solr_name,
       pf: solr_name
