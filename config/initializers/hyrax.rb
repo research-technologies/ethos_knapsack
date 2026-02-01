@@ -370,3 +370,27 @@ Hyrax::Renderers::AttributeRenderer.class_eval do
     # rubocop:enable Rails/OutputSafety
   end
 end
+
+# Override Hyku override to handle authority labels for facet values (for languages anyway)
+Blacklight::FacetsHelperBehavior.class_eval do
+
+  def render_facet_value(facet_field, item, options = {})
+    deprecated_method(:render_facet_value)
+    facet_config = facet_configuration_for_field(facet_field)
+    if facet_field == "language_sim"
+      facet_item_component(facet_config, item, facet_field, **options).render_facet_value_with_authority_term
+    else
+      facet_item_component(facet_config, item, facet_field, **options).render_facet_value
+    end
+  end
+
+end
+
+# Obvs this will only work for language facet... but that's all we need rn
+Blacklight::FacetItemComponent.class_eval do
+  def render_facet_value_with_authority_term
+    tag.span(class: "facet-label") do
+      link_to_unless(@suppress_link, Hyrax::LanguagesService.term(label), href, class: "facet-select", rel: "nofollow")
+    end + render_facet_count
+  end
+end

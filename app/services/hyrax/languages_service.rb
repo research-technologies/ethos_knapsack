@@ -20,6 +20,10 @@ module Hyrax
       authority.find(id.first).fetch('term')
     end
 
+    def self.term(id)
+      authority.find(id).fetch('term')
+    end
+
     ##
     # @param [String, nil] id identifier of the resource type
     #
