@@ -373,7 +373,6 @@ end
 
 # Override Hyku override to handle authority labels for facet values (for languages anyway)
 Blacklight::FacetsHelperBehavior.class_eval do
-
   def render_facet_value(facet_field, item, options = {})
     deprecated_method(:render_facet_value)
     facet_config = facet_configuration_for_field(facet_field)
@@ -383,7 +382,6 @@ Blacklight::FacetsHelperBehavior.class_eval do
       facet_item_component(facet_config, item, facet_field, **options).render_facet_value
     end
   end
-
 end
 
 # Obvs this will only work for language facet... but that's all we need rn
