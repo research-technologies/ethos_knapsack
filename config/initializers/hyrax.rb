@@ -137,7 +137,7 @@ end
   blacklight_config.search_fields.delete(:all_fields)
   # Re-add the "simple" search fields now we have rejigged all the show fields
   blacklight_config.add_search_field('all_fields', label: 'All Fields', include_in_advanced_search: false) do |field|
-    all_names = config.show_fields.values.map(&:field).join(" ")
+    all_names = blacklight_config.show_fields.values.map(&:field).join(" ")
     title_name = 'title_tesim'
     field.solr_parameters = {
       qf: "#{all_names} #{title_name} file_format_tesim all_text_tsimv all_text_tsimv",
