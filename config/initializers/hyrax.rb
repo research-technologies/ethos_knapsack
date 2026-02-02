@@ -93,8 +93,7 @@ end
   blacklight_config.add_index_field 'creator_search_tesim', label: "Author", itemprop: 'name', if: :render_in_tenant?
   blacklight_config.add_index_field 'current_he_institution_tesim', label: "University", itemprop: 'name', if: :render_in_tenant?
   blacklight_config.add_index_field 'date_issued_tesim', itemprop: 'date_issued', label: "Date awarded", helper_method: :human_readable_date, if: :render_in_tenant?
-#  blacklight_config.add_index_field 'ethos_identifier_ssi', itemprop: 'ethos_identifier', label: "EThOS ID", if: :render_in_tenant?
-
+  #  blacklight_config.add_index_field 'ethos_identifier_ssi', itemprop: 'ethos_identifier', label: "EThOS ID", if: :render_in_tenant?
 
   # solr fields to be displayed in the show (single result) view
   # The ordering of the field names is the order of the display
@@ -138,11 +137,11 @@ end
   blacklight_config.search_fields.delete(:all_fields)
   # Re-add the "simple" search fields now we have rejigged all the show fields
   blacklight_config.add_search_field('all_fields', label: 'All Fields', include_in_advanced_search: false) do |field|
-    all_names = blacklight_config.show_fields.values.map(&:field).join(" ")
+    all_names = config.show_fields.values.map(&:field).join(" ")
     title_name = 'title_tesim'
     field.solr_parameters = {
-      qf: "ethos_identifier_ssi",
-      pf: "ethos_identifier_ssi",
+      qf: "#{all_names} #{title_name} file_format_tesim all_text_tsimv all_text_tsimv",
+      pf: title_name.to_s
     }
   end
 
