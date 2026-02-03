@@ -1,3 +1,10 @@
+<% embargo_date = presenter.embargo_date.first %>
+<% unless embargo_date.blank? %>
+  <% embargo_date_date = DateTime.parse(embargo_date) %>
+  <% embargo_date = nil unless Date.tomorrow.before?(embargo_date_date) %>
+  <% access_rights = presenter.ethos_access_rights.first %>
+<% end %>
+
 <div class="ethos_work_title_sub">
   <dl>
   <%= render "hyrax/base/creator", presenter: presenter, section: "metadata" %>
@@ -13,25 +20,19 @@
           <span class="mdc-button__label">&nbsp; Access thesis from university &nbsp;</span>
         </button>
       <% end %>
-    </div>
-  <% end %>
-  <% embargo_date = presenter.embargo_date.first %>
-  <% unless embargo_date.blank? %>
-    <% embargo_date_date = DateTime.parse(embargo_date) %>
-    <% embargo_date = nil unless Date.tomorrow.before?(embargo_date_date) %>
-    <% access_rights = presenter.ethos_access_rights.first %>
-  <% end %>
   <% if access_rights.present? || embargo_date.present? %>
+    <br/>
     <div class="ethos-restrictions">
-      [
-        <%= presenter.attribute_to_html(:ethos_access_rights, html_dl: true) %>
+      [<%= presenter.attribute_to_html(:ethos_access_rights, html_dl: true) %>
         <% if access_rights.present? && embargo_date.present? %>
           -
         <% end %>
         <% if embargo_date.present? %>
           Embargoed until <%= embargo_date_date.strftime("%B %d, %Y") %> 
-        <% end %>
-      ]
+        <% end %>]
+    </div>
+  <% end %>
+
     </div>
   <% end %>
 </div>
