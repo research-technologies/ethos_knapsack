@@ -73,11 +73,11 @@ end
 
   # Then add all in correct order
   # blacklight_config.add_facet_field 'subject_sim', label: "Subject discipline", limit: 5
-  blacklight_config.add_facet_field 'ethos_subject_sim', label: "Subject Discipline", limit: 5
+  blacklight_config.add_facet_field 'ethos_subject_sim', label: "Subject Discipline", limit: 5, single: true
   blacklight_config.add_facet_field 'keyword_sim', limit: 5
-  blacklight_config.add_facet_field 'date_issued_sim', label: "Date Awarded", limit: 5, sort: 'index'
+  blacklight_config.add_facet_field 'date_issued_sim', label: "Date Awarded", limit: 5, sort: 'index', single: true
   blacklight_config.add_facet_field 'qualification_name_sim', label: "Qualification Name", limit: 5, single: true
-  blacklight_config.add_facet_field 'funder_search_sim', label: "Funder / Sponsor", limit: 5
+  blacklight_config.add_facet_field 'funder_search_sim', label: "Funder(s)", limit: 5
   blacklight_config.add_facet_field 'language_sim', limit: 5
   blacklight_config.add_facet_field 'current_he_institution_sim', label: "University", limit: 5, single: true
 
@@ -231,7 +231,7 @@ end
     field.solr_parameters = {
       "spellcheck.dictionary": "ethos_identifier"
     }
-    solr_name = 'ethos_identifier_ssi'
+    solr_name = 'ethos_identifier_ssi id'
     field.solr_local_parameters = {
       qf: solr_name,
       pf: solr_name
