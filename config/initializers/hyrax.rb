@@ -73,11 +73,11 @@ end
 
   # Then add all in correct order
   # blacklight_config.add_facet_field 'subject_sim', label: "Subject discipline", limit: 5
-  blacklight_config.add_facet_field 'ethos_subject_sim', label: "Subject Discipline", limit: 5
+  blacklight_config.add_facet_field 'ethos_subject_sim', label: "Subject Discipline", limit: 5, single: true
   blacklight_config.add_facet_field 'keyword_sim', limit: 5
-  blacklight_config.add_facet_field 'date_issued_sim', label: "Date Awarded", limit: 5, sort: 'index'
+  blacklight_config.add_facet_field 'date_issued_sim', label: "Date Awarded", limit: 5, sort: 'index', single: true
   blacklight_config.add_facet_field 'qualification_name_sim', label: "Qualification Name", limit: 5, single: true
-  blacklight_config.add_facet_field 'funder_search_sim', label: "Funder / Sponsor", limit: 5
+  blacklight_config.add_facet_field 'funder_search_sim', label: "Funder(s)", limit: 5
   blacklight_config.add_facet_field 'language_sim', limit: 5
   blacklight_config.add_facet_field 'current_he_institution_sim', label: "University", limit: 5, single: true
 
@@ -93,8 +93,7 @@ end
   blacklight_config.add_index_field 'creator_search_tesim', label: "Author", itemprop: 'name', if: :render_in_tenant?
   blacklight_config.add_index_field 'current_he_institution_tesim', label: "University", itemprop: 'name', if: :render_in_tenant?
   blacklight_config.add_index_field 'date_issued_tesim', itemprop: 'date_issued', label: "Date awarded", helper_method: :human_readable_date, if: :render_in_tenant?
-#  blacklight_config.add_index_field 'ethos_identifier_ssi', itemprop: 'ethos_identifier', label: "EThOS ID", if: :render_in_tenant?
-
+  #  blacklight_config.add_index_field 'ethos_identifier_ssi', itemprop: 'ethos_identifier', label: "EThOS ID", if: :render_in_tenant?
 
   # solr fields to be displayed in the show (single result) view
   # The ordering of the field names is the order of the display
@@ -141,8 +140,8 @@ end
     all_names = blacklight_config.show_fields.values.map(&:field).join(" ")
     title_name = 'title_tesim'
     field.solr_parameters = {
-      qf: "ethos_identifier_ssi",
-      pf: "ethos_identifier_ssi",
+      qf: "#{all_names} #{title_name} file_format_tesim all_text_tsimv all_text_tsimv",
+      pf: title_name.to_s
     }
   end
 
@@ -232,7 +231,7 @@ end
     field.solr_parameters = {
       "spellcheck.dictionary": "ethos_identifier"
     }
-    solr_name = 'ethos_identifier_ssi'
+    solr_name = 'ethos_identifier_ssi id'
     field.solr_local_parameters = {
       qf: solr_name,
       pf: solr_name
@@ -325,5 +324,48 @@ Hyrax::Renderers::AttributeRenderer.class_eval do
     # rubocop:disable Rails/OutputSafety
     markup.html_safe
     # rubocop:enable Rails/OutputSafety
+  end
+end
+
+# Override Hyku override to handle authority labels for facet values (for languages anyway)
+Blacklight::FacetsHelperBehavior.class_eval do
+  def render_facet_value(facet_field, item, options = {})
+    deprecated_method(:render_facet_value)
+    facet_config = facet_configuration_for_field(facet_field)
+    if facet_field == "language_sim"
+      facet_item_component(facet_config, item, facet_field, **options).render_facet_value_with_authority_term
+    else
+      facet_item_component(facet_config, item, facet_field, **options).render_facet_value
+    end
+  end
+
+  def render_selected_facet_value(facet_field, item)
+    deprecated_method(:render_selected_facet_value)
+    facet_config = facet_configuration_for_field(facet_field)
+    if facet_field == "language_sim"
+      facet_item_component(facet_config, item, facet_field).render_selected_facet_value_with_authority_term
+    else
+      facet_item_component(facet_config, item, facet_field).render_selected_facet_value
+    end
+  end
+end
+
+# Obvs this will only work for language facet... but that's all we need rn
+Blacklight::FacetItemComponent.class_eval do
+  def render_facet_value_with_authority_term
+    tag.span(class: "facet-label") do
+      link_to_unless(@suppress_link, Hyrax::LanguagesService.term(label), href, class: "facet-select", rel: "nofollow")
+    end + render_facet_count
+  end
+
+  def render_selected_facet_value_with_authority_term
+    tag.span(class: "facet-label") do
+      tag.span(Hyrax::LanguagesService.term(label), class: "selected") +
+        # remove link
+        link_to(href, class: "remove", rel: "nofollow") do
+          tag.span('✖', class: "remove-icon", aria: { hidden: true }) +
+            tag.span(helpers.t(:'blacklight.search.facets.selected.remove'), class: 'sr-only visually-hidden')
+        end
+    end + render_facet_count(classes: ["selected"])
   end
 end
