@@ -23,13 +23,13 @@
   <% if access_rights.present? || embargo_date.present? %>
     <br/>
     <div class="ethos-restrictions">
-      [<%= presenter.attribute_to_html(:ethos_access_rights, html_dl: true) %>
+      <%= presenter.attribute_to_html(:ethos_access_rights, html_dl: true) %>
         <% if access_rights.present? && embargo_date.present? %>
           -
         <% end %>
         <% if embargo_date.present? %>
-          Embargoed until <%= embargo_date_date.strftime("%B %d, %Y") %> 
-        <% end %>]
+          Embargoed until <%= embargo_date_date.strftime("%d %B %Y") %> 
+        <% end %>
     </div>
   <% end %>
 
