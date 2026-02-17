@@ -4,7 +4,31 @@
 <% return if f.object.try(:hidden?, key) %>
 
 <% record = f.object.model %>
-
+<% if record.to_s.match?(/CollectionResource:/) %>
+  <% f.object.attributes[key].empty? ? creators = [] : creators = f.object.attributes[key].map{|c| c.gsub(/^\d+~/,'')} %>
+  <div class="form-group multi_value optional collection_creator managed">
+    <label class="control-label multi_value optional" for="collection_creator" id="collection_creator_label">Creator</label>
+    <p class="help-block">The person or group responsible for the collection. Usually this is the author of the content. Personal names should be entered with the last name first, e.g. "Smith, John.".</p>
+    <ul class="listing" aria-live="polite">
+    <% creators.each do | c | %>
+      <li class="field-wrapper input-group input-append">
+        <input class="string multi_value optional form-control collection_creator form-control multi-text-field" name="collection[creator][]" value="<%=c%>" id="collection_creator" aria-labelledby="collection_creator_label" type="text" fdprocessedid="jqus4"/>
+        <span class="input-group-btn field-controls">
+          <button type="button" class="btn btn-link remove">
+            <span class="glyphicon glyphicon-remove"></span>
+            <span class="controls-remove-text">Remove</span> 
+            <span class="sr-only"> previous <span class="controls-field-name-text"> Creator</span></span>
+          </button>
+        </span>
+      </li>
+    <% end %>
+    </ul>
+    <button type="button" class="btn btn-link add" fdprocessedid="aoilal">
+      <span class="glyphicon glyphicon-plus"></span>
+      <span class="controls-add-text">Add another Creator</span>
+    </button>
+  </div>
+<% else %>
   <div class="row">
     <div class="col">
       <label class="control-label multi_value required" for="creator" id="creator_label"><%=label_for(term: key, record_class: record.class)%></label>
@@ -98,4 +122,4 @@
 
 
 </script>
-
+<% end %>

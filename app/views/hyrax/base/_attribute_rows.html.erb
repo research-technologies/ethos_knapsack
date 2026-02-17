@@ -18,7 +18,9 @@
   <%= render "hyrax/base/language", presenter: presenter, section: "metadata" %>
   <%= presenter.attribute_to_html(:keyword, render_as: :faceted, html_dl: true) %>
   <%= presenter.attribute_to_html(:ethos_subject, render_as: :faceted, html_dl: true) %>
-  <%= render "hyrax/base/dewey", presenter: presenter, section: "metadata" %>
+  <% unless presenter.dewey.all?(&:blank?) %>
+    <%= render "hyrax/base/dewey", presenter: presenter, section: "metadata" %>
+  <% end %>
   <%= presenter.attribute_to_html(:doi, html_dl: true) %>
   <% unless presenter.referenced_by.all?(&:blank?) %>
     <%= presenter.attribute_to_html(:referenced_by, render_as: :external_link, html_dl: true) %>

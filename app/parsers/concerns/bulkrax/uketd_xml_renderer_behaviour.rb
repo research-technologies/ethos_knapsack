@@ -26,6 +26,8 @@ module Bulkrax
           seen << k
         end
         render("type", "Thesis or Dissertation", uketddc_node)
+        url = "#{Rails.application.routes.url_helpers.hyrax_thesis_or_dissertations_url protocol: 'https'}/#{metadata['id']}"
+        render("identifier", url, uketddc_node)
         uketddc_node
       end
 
@@ -189,10 +191,12 @@ module Bulkrax
           isReferencedBy: 'dcterms',
           identifier_doi: 'dc', # xsi:type="dcterms:DOI"
           identifier_other_identifier: 'dc', # xsi:type="dcterms:URI"
+          identifier: 'dc',
           provenance: 'dcterms',
           audience: 'dcterms',
           source: 'dc',
-          accessRights: 'dcterms'
+          accessRights: 'dcterms',
+          license: 'dcterms'
         }
       end
 
@@ -222,7 +226,9 @@ module Bulkrax
           oai_identifier: 'provenance',
           ethos_identifier: 'source',
           ethos_access_rights: 'accessRights',
-          visibility: 'audience'
+          visibility: 'audience',
+          licence: 'license',
+          identifier: 'identifier'
         }
       end
       # rubocop:enable Metrics/MethodLength
