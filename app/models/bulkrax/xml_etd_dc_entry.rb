@@ -323,7 +323,7 @@ module Bulkrax
         end
         values = values.flatten.uniq
         next if values.blank?
-        handle_join_on_export(relationship_key, values, mapping[related_parents_parsed_mapping]['join'].present?)
+        #        handle_join_on_export(relationship_key, values, mapping[related_parents_parsed_mapping]['join'].present?)
       end
     end
     # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
@@ -350,7 +350,6 @@ module Bulkrax
         return unless entry.hyrax_record.respond_to?(key.to_s) || object_key.present?
 
         models_to_skip = Array.wrap(value['skip_object_for_model_names'] || value[:skip_object_for_model_names] || [])
-
         return :build_value if models_to_skip.detect { |model| entry.factory_class.model_name.name == model }
         return :build_object if object_key.present?
 
@@ -367,6 +366,7 @@ module Bulkrax
 
         send(method_name, key, value)
       end
+      parsed_metadata['identifier'] = "#{Rails.application.routes.url_helpers.hyrax_thesis_or_dissertations_url protocol: 'https'}/#{hyrax_record.id}"
     end
 
     def build_object(key, value)
