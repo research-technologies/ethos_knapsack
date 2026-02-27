@@ -2,7 +2,7 @@ apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: letsencrypt-prod
-  namespace: cert-manager
+  # ClusterIssuer is cluster-scoped; do not set namespace (would force Terraform to replace the resource).
 spec:
   acme:
     # The ACME server URL
