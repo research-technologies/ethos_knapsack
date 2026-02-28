@@ -17,7 +17,7 @@ module Bulkrax
         uketd_dc_namespaces.each do |ns, ns_url|
           add_namespace(uketddc_node, ns.to_s, ns_url)
         end
-        uketddc_node['xsi:schemaLocation'] = "http://naca.central.cranfield.ac.uk/ethos-oai/2.0/uketd_dc.xsd"
+        uketddc_node['xsi:schemaLocation'] = "https://ethos.library.leeds.ac.uk/ethos-oai/2.0/uketddc.xsd"
         seen = []
         metadata.each do |key, value|
           k = unsolrize(key)
@@ -239,8 +239,8 @@ module Bulkrax
           xsi: "http://www.w3.org/2001/XMLSchema-instance",
           dc: "http://purl.org/dc/elements/1.1/",
           dcterms: "http://purl.org/dc/terms/",
-          uketdterms: "http://naca.central.cranfield.ac.uk/ethos-oai/terms/",
-          uketd_dc: "http://naca.central.cranfield.ac.uk/ethos-oai/2.0/"
+          uketdterms: "http://ethos.library.leeds.ac.uk/uketd/terms/",
+          uketd_dc: "http://ethos.library.leeds.ac.uk/uketd/"
         }
       end
 
