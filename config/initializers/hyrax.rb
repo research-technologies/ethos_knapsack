@@ -285,14 +285,14 @@ end
 
 # Override BlacklightOaiProvider 7.0.2 to handle Dates as well as DateTimes
 BlacklightOaiProvider::ResumptionToken.class_eval do
-    def encode_conditions
-      encoded_token = @prefix.to_s.dup
-      encoded_token << ".s(#{set})" if set
-      encoded_token << ".f(#{from.to_datetime.utc.xmlschema})" if from
-      encoded_token << ".u(#{self.until.to_datetime.utc.xmlschema})" if self.until
-      encoded_token << ".t(#{total})" if total
-      encoded_token << ":#{last}"
-    end
+  def encode_conditions
+    encoded_token = @prefix.to_s.dup
+    encoded_token << ".s(#{set})" if set
+    encoded_token << ".f(#{from.to_datetime.utc.xmlschema})" if from
+    encoded_token << ".u(#{self.until.to_datetime.utc.xmlschema})" if self.until
+    encoded_token << ".t(#{total})" if total
+    encoded_token << ":#{last}"
+  end
 end
 
 # Overrides blacklight_oai_provider
@@ -310,25 +310,25 @@ BlacklightOaiProvider::SolrSet.class_eval do
 end
 
 # Only show Theses in OAI (no collections)
-BlacklightOaiProvider::SolrDocumentWrapper.class_eval do 
-    def conditions(constraints) # conditions/query derived from options
-      query = search_service.search_builder.merge(sort: "#{solr_timestamp} asc", rows: limit).query
+BlacklightOaiProvider::SolrDocumentWrapper.class_eval do
+  def conditions(constraints) # conditions/query derived from options
+    query = search_service.search_builder.merge(sort: "#{solr_timestamp} asc", rows: limit).query
 
-      query.append_filter_query("has_model_ssim:ThesisOrDissertation")
+    query.append_filter_query("has_model_ssim:ThesisOrDissertation")
 
-      if constraints[:from].present? || constraints[:until].present?
-        from_val = solr_date(constraints[:from])
-        to_val = solr_date(constraints[:until], true)
-        if from_val == to_val
-          query.append_filter_query("#{solr_timestamp}:\"#{from_val}\"")
-        else
-          query.append_filter_query("#{solr_timestamp}:[#{from_val} TO #{to_val}]")
-        end
+    if constraints[:from].present? || constraints[:until].present?
+      from_val = solr_date(constraints[:from])
+      to_val = solr_date(constraints[:until], true)
+      if from_val == to_val
+        query.append_filter_query("#{solr_timestamp}:\"#{from_val}\"")
+      else
+        query.append_filter_query("#{solr_timestamp}:[#{from_val} TO #{to_val}]")
       end
-
-      query.append_filter_query(@set.from_spec(constraints[:set])) if constraints[:set].present?
-      query
     end
+
+    query.append_filter_query(@set.from_spec(constraints[:set])) if constraints[:set].present?
+    query
+  end
 end
 
 HyraxHelper.module_eval do
