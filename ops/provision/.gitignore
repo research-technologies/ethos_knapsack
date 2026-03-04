@@ -14,3 +14,4 @@ override.tf
 override.tf.json
 *_override.tf
 *_override.tf.json
+r2-bl-ethos.secret.tfvars
