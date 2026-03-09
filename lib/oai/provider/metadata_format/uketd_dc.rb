@@ -5,8 +5,8 @@ module OAI::Provider::Metadata
     def initialize
       super
       @prefix = 'uketd_dc'
-      @schema = 'http://naca.central.cranfield.ac.uk/ethos-oai/2.0/uketd_dc.xsd'
-      @namespace = 'http://naca.central.cranfield.ac.uk/ethos-oai/2.0/'
+      @schema = 'http://ethos.library.leeds.ac.uk/ethos-oai/2.0/uketd_dc.xsd'
+      @namespace = 'http://ethos.library.leeds.ac.uk/uketd/'
       @element_namespace = 'dc'
       @fields = [:title, :creator, :subject, :description, :publisher,
                  :contributor, :date, :type, :format, :identifier,
@@ -15,13 +15,13 @@ module OAI::Provider::Metadata
 
     def header_specification
       {
-        'xmlns:uketd_dc' => "http://naca.central.cranfield.ac.uk/ethos-oai/2.0/",
+        'xmlns:uketd_dc' => "http://ethos.library.leeds.ac.uk/uketd/",
         'xmlns:dc' => "http://purl.org/dc/elements/1.1/",
         'xmlns:dcterms' => "http://purl.org/dc/terms/",
         'xmlns:xsi' => "http://www.w3.org/2001/XMLSchema-instance",
         'xsi:schemaLocation' =>
-          %(http://naca.central.cranfield.ac.uk/ethos-oai/2.0/
-            http://naca.central.cranfield.ac.uk/ethos-oai/2.0/uketd_dc.xsd
+          %(http://ethos.library.leeds.ac.uk/uketd/
+            http://ethos.library.leeds.ac.uk/ethos-oai/2.0/uketd_dc.xsd
            ).gsub(/\s+/, ' ')
       }
     end
