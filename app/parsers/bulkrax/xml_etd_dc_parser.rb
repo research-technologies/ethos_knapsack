@@ -124,7 +124,7 @@ module Bulkrax
           renderer.uketd_dc_namespaces.each do |ns, ns_url|
             renderer.add_namespace(uketddc_node, ns.to_s, ns_url)
           end
-          uketddc_node['xsi:schemaLocation'] = "http://naca.central.cranfield.ac.uk/ethos-oai/2.0/uketd_dc.xsd"
+          uketddc_node['xsi:schemaLocation'] = "https://ethos.library.leeds.ac.uk/ethos-oai/2.0/uketddc.xsd"
           doc.root << uketddc_node
           subjects = []
           entry.parsed_metadata.each do |key, value|

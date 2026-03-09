@@ -194,6 +194,7 @@ module Bulkrax
           content = content.split(Regexp.new(importerexporter.field_mapping[element_label]['split'])) if importerexporter.field_mapping[element_label].key?('split')
           parsed_metadata[element_label] = [] unless parsed_metadata.key? element_label
           parsed_metadata[element_label] << content if content.present? && el.attr('type') == type_value
+          parsed_metadata[element_label].flatten!
         end
       end
     end
