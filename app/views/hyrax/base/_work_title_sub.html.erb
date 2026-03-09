@@ -2,8 +2,8 @@
 <% unless embargo_date.blank? %>
   <% embargo_date_date = DateTime.parse(embargo_date) %>
   <% embargo_date = nil unless Date.tomorrow.before?(embargo_date_date) %>
-  <% access_rights = presenter.ethos_access_rights.first %>
 <% end %>
+<% access_rights = presenter.ethos_access_rights.first %>
 
 <div class="ethos_work_title_sub">
   <dl>
@@ -20,18 +20,24 @@
           <span class="mdc-button__label">&nbsp; Access thesis from university &nbsp;</span>
         </button>
       <% end %>
-  <% if access_rights.present? || embargo_date.present? %>
-    <br/>
-    <div class="ethos-restrictions">
-      <%= presenter.attribute_to_html(:ethos_access_rights, html_dl: true) %>
-        <% if access_rights.present? && embargo_date.present? %>
-          -
-        <% end %>
-        <% if embargo_date.present? %>
-          Embargoed until <%= embargo_date_date.strftime("%d %B %Y") %> 
-        <% end %>
-    </div>
-  <% end %>
+  
+      <% if access_rights.present? %>
+        <br/>
+        <div class="ethos-restrictions" style="width: 100%;">
+          <div style="margin: auto; width: 100px;">
+            <%= presenter.ethos_access_rights.first.titleize %>
+          </div>
+        </div>
+      <% end %>
+
+      <% if embargo_date.present? %>
+        <br/>
+        <div class="ethos-restrictions" style="width: 100%;">
+          <div style="margin: auto; width: 250px">
+            Embargoed until <%= embargo_date_date.strftime("%d %B %Y") %> 
+          </div>
+        </div>
+      <% end %>
 
     </div>
   <% end %>
