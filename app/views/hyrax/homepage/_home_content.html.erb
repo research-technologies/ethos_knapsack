@@ -1,10 +1,35 @@
   <article class="homepage_content">
     <div>
-      <h1 class="homepage_title">EThOS</h1>
-      <p class="homepage_intro">E-Theses Online Service (EThOS) was a bibliographic database and union catalogue of electronic theses provided by the British Library, the National Library of the United Kingdom. As of February 2022 EThOS provided access to over 500,000 doctoral theses awarded by over 140 UK higher education institutions, with around 3,000 new thesis records added every month until the British Library cyberattack forced the service to be temporarily taken offline.
-      </p>
+      <h1 class="homepage_title">Search EThOS (E-Theses Online Service)</h1>
+      <p class="homepage_intro">Search the metadata of over 650,000 UK doctoral theses.</p>
 
       <%= render partial: 'catalog/search_form' %>
+
+      <div class="flex-row flex-layout-space-between width-100 welcome-announcements-container">
+        <div class="announcements display-flex flex-column">
+          <header class="flex-column gap-1">
+            <h3 role="heading" aria-level="3" class="announcements-item-title mat-headline-medium">Introducing the interim EThOS service</h3>
+          </header>
+          <article>
+            <p class="homepage_intro">EThOS (eTheses Online Service) is an open access discovery platform for UK doctoral theses, managed by the British Library. This is an interim version of EThOS following on from a cyber-attack on the British Library in 2023. This interim platform holds metadata for theses held in UK Institutional Repositories.
+What do metadata records look like?
+            <br/>
+            <br/>
+            In the platform you can find descriptions of over 650,000 theses from UK universities from the 1700s to the present day. Over 400,000 of these theses are openly available for download from the institutional repository of the awarding university. In many metadata records in EThOS you will find a button ‘Access thesis from university’.  This links to the metadata record of the thesis in the awarding university’s repository, where it is possible to download the thesis, if the university has made it available.
+            <br/><br/>
+            <b>Please note:</b>
+            </p>
+            <ul>
+              <li>while we are continuing to update the platform following on from the cyber-attack, there will be an initial backlog of content to work through</li>
+              <li>not all theses are available for download via the repository of the awarding university.</li>
+            </ul>
+            <p class="homepage_intro">
+              For further details, please refer to our Help and About sections.
+            </p>
+          </article>
+
+        </div>
+      </div>
 
     </div>
   </article>
