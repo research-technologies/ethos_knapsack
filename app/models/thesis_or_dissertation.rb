@@ -21,10 +21,9 @@ class ThesisOrDissertation < Hyrax::Work
   end
 
   # Uncomment this block if you want to add custom indexing behavior:
-#  def to_solr
-#    super.tap do |index_document|
-#      index_document[:creator_search_tesim] = resource.creator.map { |c| c.values.join(', ') }
-#    end
-#  end
-
+  #  def to_solr
+  #    super.tap do |index_document|
+  #      index_document[:creator_search_tesim] = resource.creator.map { |c| c.values.join(', ') }
+  #    end
+  #  end
 end
