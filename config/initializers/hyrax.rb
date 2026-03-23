@@ -59,9 +59,9 @@ SolrDocument.class_eval do
 end
 
 ::CatalogController.class_eval do
+
   blacklight_config.oai[:document][:set_fields] = [
     { label: "Subject Discipline", solr_field: "ethos_subject_sim" },
-    #    { label: "Full Text", solr_field: "referenced_by_ssi" },
     { label: "University", solr_field: "current_he_institution_sim" }
   ]
 
