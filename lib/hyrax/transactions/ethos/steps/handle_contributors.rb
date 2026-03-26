@@ -30,7 +30,10 @@ module Hyrax
                 contributors[index][contributor_field] = value
               end
             end
-            change_set.contributor = contributors.map(&:to_s) if updated
+            if updated
+              change_set.contributor = contributors.map(&:to_s)
+              change_set.contributor_search = contributors.map { |c| "#{c['contributor_given_name']} #{c['contributor_family_name']}" }
+            end
             Success(change_set)
           rescue NoMethodError => err
             Failure([err.message, change_set])

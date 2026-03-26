@@ -127,6 +127,15 @@ attributes:
     index_keys:
       - "contributor_tesim"
     predicate: http://purl.org/dc/elements/1.1/contributor
+  contributor_search: # Creator <uketdterms:advisor>
+    type: string
+    multiple: true
+    form:
+      required: false
+      primary: true
+    index_keys:
+      - "contributor_search_tesim"
+    predicate: http://purl.org/dc/elements/1.1/contributor_name
   abstract: #ABSTRACT <dcterms:abstract>
     type: string
     multiple: true

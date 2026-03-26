@@ -23,6 +23,37 @@ OAI::Provider::Base.register_format(OAI::Provider::Metadata::UketdDc.instance)
 
 # rubocop:disable Metrics/BlockLength
 SolrDocument.class_eval do
+
+=begin
+  use_extension(Hydra::ContentNegotiation)
+      field_semantics.merge!(
+      contributor: 'contributor_tesim',
+      creator: 'creator_tesim',
+      date: 'date_created_tesim',
+      description: 'abstract_tesim',
+      identifier: ['doi_ssi', 'ethos_id_tesim', 'thesis_id_tesim', 'id', 'isbn_tesim'],
+      language: 'language_tesim',
+      publisher: ['publisher_tesim'],
+      relation: ['file_set_ids_ssim', 'related_url_tesim'],
+      rights: 'rights_statement_tesim',
+      subject: 'subject_tesim',
+      title: 'title_tesim',
+      type: 'resource_type_tesim',
+      ispartof: 'series_tesim',
+      tableodcontents: 'contents',
+      issued: 'date_of_award_tesim',
+      abstract: 'abstract_tesim',
+      advisor: 'advisor_tesim',
+      institution: 'awarding_institution_tesim',
+      department: 'department_tesim',
+      authoridentifier: {'uketdterms:ORCID': 'orcid_tesim', 'uketdterms:Local': 'pure_person_tesim'},
+      qualificationlevel: 'qualification_level_tesim',
+      qualificationname: 'qualification_name_tesim',
+      accessrights: 'embargo_note_tesim',
+      embargodate: 'embargo_release_date_dtsi'
+    )
+=end
+
   use_extension(Blacklight::Document::UketdDc)
   def to_uketd_dc
     export_as('uketd_dc_xml')
@@ -34,6 +65,7 @@ SolrDocument.class_eval do
   attribute :creator, Hyrax::SolrDocument::Metadata::Solr::Array, 'creator_tesim'
   attribute :creator_search, Hyrax::SolrDocument::Metadata::Solr::Array, 'creator_search_tesim'
   attribute :contributor, Hyrax::SolrDocument::Metadata::Solr::Array, 'contributor_tesim'
+  attribute :contributor_search, Hyrax::SolrDocument::Metadata::Solr::Array, 'contributor_search_tesim'
   attribute :abstract, Hyrax::SolrDocument::Metadata::Solr::Array, 'abstract_tesim'
   attribute :qualification_name, Hyrax::SolrDocument::Metadata::Solr::Array, 'qualification_name_tesim'
   attribute :qualification_level, Hyrax::SolrDocument::Metadata::Solr::Array, 'qualification_level_tesim'
@@ -195,9 +227,9 @@ end
 
   blacklight_config.add_search_field('contributor', label: 'Supervisor(s)') do |field|
     field.solr_parameters = {
-      "spellcheck.dictionary": "doi"
+      "spellcheck.dictionary": "contributor_search"
     }
-    solr_name = 'doi_ssim'
+    solr_name = 'contributor_search_tesim'
     field.solr_local_parameters = {
       qf: solr_name,
       pf: solr_name
@@ -219,7 +251,7 @@ end
     field.solr_parameters = {
       "spellcheck.dictionary": "doi"
     }
-    solr_name = 'doi_ssim'
+    solr_name = 'doi_ssim referenced_by_ssim'
     field.solr_local_parameters = {
       qf: solr_name,
       pf: solr_name
@@ -359,6 +391,16 @@ Hyrax::Renderers::AttributeRenderer.class_eval do
     # rubocop:enable Rails/OutputSafety
   end
 end
+
+# Override Hyrax 5.0.5 add a target to external links
+Hyrax::Renderers::ExternalLinkAttributeRenderer.class_eval do
+  def li_value(value)
+    auto_link(value, :html => { :target => '_blank', :rel => 'noopener external' }) do |link|
+      "<span class='fa fa-external-link'></span>&nbsp;#{link}"
+    end
+  end
+end
+
 
 # Override Hyku override to handle authority labels for facet values (for languages anyway)
 Blacklight::FacetsHelperBehavior.class_eval do

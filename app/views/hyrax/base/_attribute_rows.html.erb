@@ -39,5 +39,5 @@
     </div>
   <% end %>
   <%= presenter.attribute_to_html(:ethos_identifier, html_dl: true) %>
-  <%= presenter.attribute_to_html(:license, html_dl: true) %>
+  <%= presenter.attribute_to_html(:license, render_as: :external_link, html_dl: true) %>
 <% end %>

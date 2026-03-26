@@ -28,8 +28,10 @@ module Hyrax
                 creators[index][creator_field] = value
               end
             end
-            change_set.creator = creators.map(&:to_s) if updated
-            change_set.creator_search = creators.map { |c| "#{c['creator_given_name']} #{c['creator_family_name']}" }
+            if updated
+              change_set.creator = creators.map(&:to_s)
+              change_set.creator_search = creators.map { |c| "#{c['creator_given_name']} #{c['creator_family_name']}" }
+            end
             Success(change_set)
           rescue NoMethodError => err
             Failure([err.message, change_set])
