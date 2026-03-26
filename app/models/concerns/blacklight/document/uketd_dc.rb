@@ -23,7 +23,7 @@ end
 # hashes of fieldnames and produce appropropiate XML tags of the form:
 #          <ns:tagname xsi:type="hashkey">hashvalue</ns:tagname>
 
-#module Blacklight::Document::DublinCore
+# module Blacklight::Document::DublinCore
 # # dublin core elements are mapped against the #dublin_core_field_names whitelist.
 #  def export_as_oai_dc_xml
 #    xml = Builder::XmlMarkup.new
@@ -35,4 +35,4 @@ end
 #             'xsi:schemaLocation' => %(http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd))
 #    xml.target!
 #  end
-#end
+# end

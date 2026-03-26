@@ -23,36 +23,33 @@ OAI::Provider::Base.register_format(OAI::Provider::Metadata::UketdDc.instance)
 
 # rubocop:disable Metrics/BlockLength
 SolrDocument.class_eval do
-
-=begin
-  use_extension(Hydra::ContentNegotiation)
-      field_semantics.merge!(
-      contributor: 'contributor_tesim',
-      creator: 'creator_tesim',
-      date: 'date_created_tesim',
-      description: 'abstract_tesim',
-      identifier: ['doi_ssi', 'ethos_id_tesim', 'thesis_id_tesim', 'id', 'isbn_tesim'],
-      language: 'language_tesim',
-      publisher: ['publisher_tesim'],
-      relation: ['file_set_ids_ssim', 'related_url_tesim'],
-      rights: 'rights_statement_tesim',
-      subject: 'subject_tesim',
-      title: 'title_tesim',
-      type: 'resource_type_tesim',
-      ispartof: 'series_tesim',
-      tableodcontents: 'contents',
-      issued: 'date_of_award_tesim',
-      abstract: 'abstract_tesim',
-      advisor: 'advisor_tesim',
-      institution: 'awarding_institution_tesim',
-      department: 'department_tesim',
-      authoridentifier: {'uketdterms:ORCID': 'orcid_tesim', 'uketdterms:Local': 'pure_person_tesim'},
-      qualificationlevel: 'qualification_level_tesim',
-      qualificationname: 'qualification_name_tesim',
-      accessrights: 'embargo_note_tesim',
-      embargodate: 'embargo_release_date_dtsi'
-    )
-=end
+  #   use_extension(Hydra::ContentNegotiation)
+  #       field_semantics.merge!(
+  #       contributor: 'contributor_tesim',
+  #       creator: 'creator_tesim',
+  #       date: 'date_created_tesim',
+  #       description: 'abstract_tesim',
+  #       identifier: ['doi_ssi', 'ethos_id_tesim', 'thesis_id_tesim', 'id', 'isbn_tesim'],
+  #       language: 'language_tesim',
+  #       publisher: ['publisher_tesim'],
+  #       relation: ['file_set_ids_ssim', 'related_url_tesim'],
+  #       rights: 'rights_statement_tesim',
+  #       subject: 'subject_tesim',
+  #       title: 'title_tesim',
+  #       type: 'resource_type_tesim',
+  #       ispartof: 'series_tesim',
+  #       tableodcontents: 'contents',
+  #       issued: 'date_of_award_tesim',
+  #       abstract: 'abstract_tesim',
+  #       advisor: 'advisor_tesim',
+  #       institution: 'awarding_institution_tesim',
+  #       department: 'department_tesim',
+  #       authoridentifier: {'uketdterms:ORCID': 'orcid_tesim', 'uketdterms:Local': 'pure_person_tesim'},
+  #       qualificationlevel: 'qualification_level_tesim',
+  #       qualificationname: 'qualification_name_tesim',
+  #       accessrights: 'embargo_note_tesim',
+  #       embargodate: 'embargo_release_date_dtsi'
+  #     )
 
   use_extension(Blacklight::Document::UketdDc)
   def to_uketd_dc
@@ -395,12 +392,11 @@ end
 # Override Hyrax 5.0.5 add a target to external links
 Hyrax::Renderers::ExternalLinkAttributeRenderer.class_eval do
   def li_value(value)
-    auto_link(value, :html => { :target => '_blank', :rel => 'noopener external' }) do |link|
+    auto_link(value, html: { target: '_blank', rel: 'noopener external' }) do |link|
       "<span class='fa fa-external-link'></span>&nbsp;#{link}"
     end
   end
 end
-
 
 # Override Hyku override to handle authority labels for facet values (for languages anyway)
 Blacklight::FacetsHelperBehavior.class_eval do
