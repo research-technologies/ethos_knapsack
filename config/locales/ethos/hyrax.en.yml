@@ -25,6 +25,7 @@ en:
         bl_cat_identifier: "BL Catalogue ID [Aleph]"
         other_identifier: "Other Identifier"
         additional_info: "Notes"
+        license: Licence
   blacklight:
     search:
       start_over: Clear Filters
@@ -44,7 +45,7 @@ en:
         date_issued: Date Awarded
         language: Language
         keyword: Keywords
-        ethos_subject: Subject
+        ethos_subject: Subject Discipline
         dewey: DDC Subject
         ethos_access_rights: Accessible
         embargo_date: Embargo
@@ -54,6 +55,13 @@ en:
         source_record: Old EThOS URL
         licence: Licence
         ethos_identifier: EThOS ID
+        facet:
+          keyword_sim: Keywords
+          ethos_subject_sim: Subject Discipline
+        index:
+          license_tesim: Licence
+        show:
+          keyword: Keywords
   blacklight_advanced_search:
     all: all
     any: any
@@ -64,3 +72,4 @@ en:
       query_criteria_heading_html: "<label for='op'>Find items that match</label> %{select_menu} of"
       sort_label: "Sort results by"
       start_over: "Clear search"
+

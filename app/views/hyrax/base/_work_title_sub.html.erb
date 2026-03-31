@@ -8,15 +8,17 @@
 <div class="ethos_work_title_sub">
   <dl>
   <%= render "hyrax/base/creator", presenter: presenter, section: "metadata" %>
-  <%= presenter.attribute_to_html(:qualification_name, render_as: :faceted, html_dl: true) %>
-  <%= presenter.attribute_to_html(:current_he_institution, render_as: :faceted, html_dl: true) %>
-  <%= presenter.attribute_to_html(:date_issued, render_as: :faceted, html_dl: true) %>
+  <%= presenter.attribute_to_html(:qualification_name, html_dl: true) %>
+  <%= presenter.attribute_to_html(:current_he_institution, html_dl: true) %>
+  <%= presenter.attribute_to_html(:date_issued, html_dl: true) %>
   </dl>
   <% unless presenter.referenced_by.blank? || presenter.referenced_by.all?(&:blank?) %>
     <div class="show-actions">
-      <%= link_to presenter.referenced_by.first do %>
+      <%= link_to presenter.referenced_by.first, target: "_blank", rel: "noopener external" do %>
         <button class="basic-button mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ethos-button small">
           <span class="mat-mdc-button-persistent-ripple mdc-button__ripple"></span>
+          &nbsp;
+          <span class="fa fa-external-link"></span>
           <span class="mdc-button__label">&nbsp; Access thesis from university &nbsp;</span>
         </button>
       <% end %>

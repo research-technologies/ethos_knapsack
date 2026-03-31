@@ -24,7 +24,7 @@ end
 #          <ns:tagname xsi:type="hashkey">hashvalue</ns:tagname>
 
 # module Blacklight::Document::DublinCore
-#  # dublin core elements are mapped against the #dublin_core_field_names whitelist.
+# # dublin core elements are mapped against the #dublin_core_field_names whitelist.
 #  def export_as_oai_dc_xml
 #    xml = Builder::XmlMarkup.new
 #    xml.tag!("oai_dc:dc",

@@ -7,9 +7,7 @@ module Hyrax
       module Steps
         ##
         # Add a given `::User` as the `#depositor` via a ChangeSet.
-        #
         # If no user is given, simply passes as a `Success`.
-        #
         # @since 3.0.0
         class HandleContributors
           include Dry::Monads[:result]
@@ -19,6 +17,7 @@ module Hyrax
           # @param [#user_key] user
           #
           # @return [Dry::Monads::Result]
+          # rubocop:disable Metrics/MethodLength
           def call(change_set)
             contributors = []
             updated = false
@@ -30,11 +29,15 @@ module Hyrax
                 contributors[index][contributor_field] = value
               end
             end
-            change_set.contributor = contributors.map(&:to_s) if updated
+            if updated
+              change_set.contributor = contributors.map(&:to_s)
+              change_set.contributor_search = contributors.map { |c| "#{c['contributor_given_name']} #{c['contributor_family_name']}" }
+            end
             Success(change_set)
           rescue NoMethodError => err
             Failure([err.message, change_set])
           end
+          # rubocop:enable Metrics/MethodLength
         end
       end
     end
