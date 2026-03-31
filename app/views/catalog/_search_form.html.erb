@@ -1,5 +1,5 @@
 <% # OVERRIDE: Hyrax v5.0.1 template to include the advanced_search button %>
-<%= form_tag search_form_action, method: :get, class: "search-form", id: "search-form-header", role: "search" do %>
+<%= form_tag search_form_action, method: :get, class: "search-form", id: "search-form-header", role: "search", onsubmit: "$('.magnifying_glass').hide(); $('.loading_dots').show();" do %>
   <%= render Blacklight::HiddenSearchStateComponent.new(params: search_state.params_for_search.except(:q, :search_field, :qt, :page, :utf8)) %>
   <%= hidden_field_tag :search_field, 'all_fields' %>
 
