@@ -222,7 +222,7 @@ end
     }
   end
 
-  blacklight_config.add_search_field('contributor', label: 'Supervisor(s)') do |field|
+  blacklight_config.add_search_field('contributor_search', label: 'Supervisor(s)') do |field|
     field.solr_parameters = {
       "spellcheck.dictionary": "contributor_search"
     }
