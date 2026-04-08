@@ -2,7 +2,7 @@
 
 module Blacklight
   module SolrDocumentDecorator
-    def to_semantic_values # rubocop:disable Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+    def to_semantic_values # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
       @semantic_value_hash ||= self.class.field_semantics.each_with_object(Hash.new([])) do |(key, field_names), hash|
         # Handles single string field_name or an array of field_names
         value = if field_names.is_a?(Hash)

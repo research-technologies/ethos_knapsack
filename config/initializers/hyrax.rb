@@ -58,7 +58,7 @@ SolrDocument.class_eval do
   language: 'language_tesim',
   publisher: 'current_he_institution_tesim',
   source: 'referenced_by_ssim',
-  subject: ['dewey_tesim','keyword_tesim'],
+  subject: ['dewey_tesim', 'keyword_tesim'],
   title: 'title_tesim'
 )
 
