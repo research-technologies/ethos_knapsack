@@ -16,6 +16,8 @@ module Blacklight
                       get_work_url_by_id(self[field_name])
                     elsif field_name == 'doi_ssim' && self[field_name].present?
                       { 'dcterms:DOI' => self[field_name].first }
+                    elsif field_name == 'dewey_tesim' && self[field_name].present?
+                      { 'dcterms:DDC' => self[field_name].first }
                     else # don't need to test for presence here as nils will get compacted out
                       self[field_name]
                     end
