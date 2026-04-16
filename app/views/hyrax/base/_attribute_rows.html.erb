@@ -31,7 +31,7 @@
         <ul class="tabular">
           <li class="attribute attribute-language">
             <span itemprop="inReferencedBy">
-        EThOS does not have a link to a university copy of this thesis. If you would like to view this thesis, we recommend that you contact <%= presenter.ethos_institution.blank? ? "the university in question" : presenter.ethos_institution.first %>.
+        EThOS does not have a link to a university copy of this thesis. If you would like to view this thesis, we recommend that you contact <%= presenter.current_he_institution.blank? ? "the university in question" : presenter.current_he_institution.first %>.
             </span>
           </li>
         </ul>

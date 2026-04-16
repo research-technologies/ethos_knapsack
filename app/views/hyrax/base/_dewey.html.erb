@@ -4,7 +4,12 @@
   <ul class="tabular">
   <% presenter.dewey.each do | ddc | %>
     <li class="attribute attribute-language">
-      <span itemprop="inDewey"><a href="/catalog?utf8=✓&dewey=<%= ddc %>&search_field=advanced"><%= ddc %></a></span>
+      <%= ddc %>&nbsp;
+      <span itemprop="inDewey"><a href="/catalog?utf8=✓&dewey=<%= ddc %>&search_field=advanced">
+        <button id="ethos-more-ddc"class="basic-button mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ethos-button tiny">
+          <span class="mat-mdc-button-persistent-ripple mdc-button__ripple"></span>
+          <span class="mdc-button__label"><label for="expanded" role="button">Find other theses on this topic</label></span></a></span>
+        </button>
     </li>
   <% end %>
   </ul>
