@@ -18,7 +18,8 @@
       </li>
       <li class="nav-item <%= 'active font-weight-bold' if current_page?(hyrax.contact_path) %>">
         <%#= link_to t(:'hyrax.controls.contact'), hyrax.contact_path, class: "nav-link", aria: current_page?(hyrax.contact_path) ? {current: 'page'} : nil %>
-        <a class="nav-link" aria-current="page" href="https://www.bl.uk/about/contact" target="_blank"><span class="fa fa-external-link"></span> <%= t(:'hyrax.controls.contact') %></a>
+        <!--<a class="nav-link" aria-current="page" href="https://www.bl.uk/about/contact" target="_blank"><span class="fa fa-external-link"></span> <%#= t(:'hyrax.controls.contact') %></a> -->
+        <a class="nav-link" aria-current="page" href="mailto:ethos@bl.uk"><span class="fa fa-external-link"></span> <%= t(:'hyrax.controls.contact') %></a>
       </li>
     </ul>
     <%#= render '/user_util_links' %>
