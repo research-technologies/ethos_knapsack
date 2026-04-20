@@ -28,7 +28,7 @@ en:
         license: Licence
   blacklight:
     search:
-      start_over: Clear Filters
+      ethos_start_over: Clear Filters
       fields:
         alternative_title: Alternative Title
         creator: Author
