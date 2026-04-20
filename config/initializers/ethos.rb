@@ -7,4 +7,4 @@ ApplicationController.class_eval do
   end
 end
 
-Rails.application.config.exceptions_app = Rails.application.routes 
+Rails.application.config.exceptions_app = Rails.application.routes
