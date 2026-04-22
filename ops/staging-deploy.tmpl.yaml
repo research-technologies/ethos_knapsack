@@ -55,6 +55,9 @@ ingress:
     - host: "*.ethos-knapsack-staging.notch8.cloud"
       paths:
         - path: /
+    - host: "ethos-poc.notch8network.com"
+      paths:
+        - path: /
   annotations: {
     kubernetes.io/ingress.class: "nginx",
     nginx.ingress.kubernetes.io/proxy-body-size: "0",
@@ -64,6 +67,13 @@ ingress:
     - hosts:
         - "ethos-knapsack-staging.notch8.cloud"
         - "*.ethos-knapsack-staging.notch8.cloud"
+        # Do NOT add "ethos-poc.notch8network.com" here.
+        # TLS for this host is handled by a Cloudflare Custom Hostname:
+        #   - Edge TLS (browser <-> Cloudflare): Cloudflare-issued cert for ethos-poc.notch8network.com
+        #   - Origin TLS (Cloudflare <-> nginx): nginx presents this LE wildcard cert,
+        #     which Cloudflare accepts because the zone's SSL mode is Full (not strict).
+        # Adding this host here would make cert-manager try to issue an LE cert it can't validate
+        # and isn't needed — Cloudflare Custom Hostnames replaces ACME for this domain.
       secretName: ethos-knapsack-staging-tls
 
 extraEnvVars: &envVars
