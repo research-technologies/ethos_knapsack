@@ -113,7 +113,7 @@ end
   # Then add all in correct order
   # blacklight_config.add_facet_field 'subject_sim', label: "Subject discipline", limit: 5
   blacklight_config.add_facet_field 'ethos_subject_sim', label: "Subject Discipline", limit: 5 # , single: true
-#  blacklight_config.add_facet_field 'keyword_sim', limit: 5
+  #  blacklight_config.add_facet_field 'keyword_sim', limit: 5
   blacklight_config.add_facet_field 'date_issued_sim', label: "Date Awarded", limit: 5, sort: 'index' # , single: true
   blacklight_config.add_facet_field 'qualification_name_sim', label: "Qualification Name", limit: 5 # , single: true
   blacklight_config.add_facet_field 'funder_search_sim', label: "Funder(s)", limit: 5
@@ -453,8 +453,8 @@ Blacklight::FacetItemComponent.class_eval do
 end
 
 # OVERRIDE HYKU and add a static contact page (used by BL instead of form)
+# rubocop:disable Metrics/BlockLength
 ContentBlock.class_eval do
-
   NAME_REGISTRY = {
     marketing: :marketing_text,
     researcher: :featured_researcher,
@@ -478,7 +478,6 @@ ContentBlock.class_eval do
   end
 
   class << self
-
     def registered?(key)
       NAME_REGISTRY.include?(key)
     end
@@ -490,7 +489,6 @@ ContentBlock.class_eval do
     def contact_us_page=(value)
       help_page.update(value:)
     end
-
   end
 end
-
+# rubocop:enable Metrics/BlockLength
