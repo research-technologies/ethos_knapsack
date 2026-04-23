@@ -16,7 +16,7 @@
   <%= presenter.attribute_to_html(:org_unit, html_dl: true) %>
   <%= presenter.attribute_to_html(:funder_search, render_as: :faceted, label: 'Funder(s)', html_dl: true) %>
   <%= render "hyrax/base/language", presenter: presenter, section: "metadata" %>
-  <%= presenter.attribute_to_html(:keyword, render_as: :faceted, html_dl: true) %>
+  <%= presenter.attribute_to_html(:keyword, html_dl: true) %>
   <%= presenter.attribute_to_html(:ethos_subject, render_as: :faceted, html_dl: true) %>
   <% unless presenter.dewey.all?(&:blank?) %>
     <%= render "hyrax/base/dewey", presenter: presenter, section: "metadata" %>
