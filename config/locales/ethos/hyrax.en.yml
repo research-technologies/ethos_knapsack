@@ -1,6 +1,9 @@
 en:
   hyrax:
     product_name: "EThOS"
+    pages:
+      tabs:
+        contact_us_page: Contact Us
   simple_form:
     labels:
       defaults:

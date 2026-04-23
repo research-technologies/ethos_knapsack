@@ -8,3 +8,7 @@ HykuKnapsack::Engine.routes.draw do
   match "/422", to: "errors#rejected", via: :all
   match "/500", to: "errors#internal_server_error", via: :all
 end
+
+Rails.application.routes.draw do
+  get 'contact_us' => 'hyrax/pages#show', key: 'contact_us'
+end

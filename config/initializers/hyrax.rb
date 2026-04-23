@@ -451,3 +451,46 @@ Blacklight::FacetItemComponent.class_eval do
     end + render_facet_count(classes: ["selected"])
   end
 end
+
+# OVERRIDE HYKU and add a static contact page (used by BL instead of form)
+ContentBlock.class_eval do
+
+  NAME_REGISTRY = {
+    marketing: :marketing_text,
+    researcher: :featured_researcher,
+    announcement: :announcement_text,
+    about: :about_page,
+    help: :help_page,
+    terms: :terms_page,
+    agreement: :agreement_page,
+    home_text: :home_text,
+    homepage_about_section_heading: :homepage_about_section_heading,
+    homepage_about_section_content: :homepage_about_section_content,
+    contact_us: :contact_us_page
+  }.freeze
+
+  # NOTE: method defined outside the metaclass wrapper below because
+  # `for` is a reserved word in Ruby.
+  def self.for(key)
+    key = key.respond_to?(:to_sym) ? key.to_sym : key
+    raise ArgumentError, "#{key} is not a ContentBlock name" unless registered?(key)
+    ContentBlock.public_send(NAME_REGISTRY[key])
+  end
+
+  class << self
+
+    def registered?(key)
+      NAME_REGISTRY.include?(key)
+    end
+
+    def contact_us_page
+      find_or_create_by(name: 'help_page')
+    end
+
+    def contact_us_page=(value)
+      help_page.update(value:)
+    end
+
+  end
+end
+
