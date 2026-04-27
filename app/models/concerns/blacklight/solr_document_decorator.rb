@@ -14,10 +14,15 @@ module Blacklight
                   Array.wrap(field_names).map do |field_name|
                     if (field_name == 'id') && self[field_name].present?
                       get_work_url_by_id(self[field_name])
-                    elsif field_name == 'doi_ssim' && self[field_name].present?
-                      { 'dcterms:DOI' => self[field_name].first }
-                    elsif field_name == 'dewey_tesim' && self[field_name].present?
-                      { 'dcterms:DDC' => self[field_name].first }
+#                    elsif field_name == 'doi_ssim' && self[field_name].present?
+#                      { 'dcterms:DOI' => self[field_name].first }
+#                    elsif field_name == 'dewey_tesim' && self[field_name].present?
+#                      { 'dcterms:DDC' => self[field_name].first }
+                    elsif field_name == 'creator_tesim' && self[field_name].present?
+                      c = eval(self[field_name].first)
+                      "#{c['creator_family_name']}, #{c['creator_given_name']}"
+                    elsif field_name == 'contributor_tesim' && self[field_name].present?
+                      self[field_name].map{|contributor| c = eval(contributor); "#{c['contributor_family_name']}, #{c['contributor_given_name']}"}
                     else # don't need to test for presence here as nils will get compacted out
                       self[field_name]
                     end
@@ -57,8 +62,8 @@ module Blacklight
     def value_to_tag(v, xml, field, namespace = "dc")
       if v.is_a?(Hash)
         v.map { |attr, vals| ([*vals] || []).each { |val| xml.tag! "#{namespace}:#{field}", val, attr.end_with?(":Local") ? nil : { "xsi:type" => attr } } }
-      elsif /^#{URI.regexp}$/.match?(v.to_s)
-        xml.tag! "#{namespace}:#{field}", v, { "xsi:type" => "dcterms:URI" }
+#      elsif /^#{URI.regexp}$/.match?(v.to_s)
+#        xml.tag! "#{namespace}:#{field}", v, { "xsi:type" => "dcterms:URI" }
       else
         xml.tag! "#{namespace}:#{field}", v
       end

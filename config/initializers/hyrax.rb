@@ -28,8 +28,8 @@ Blacklight::Document::DublinCore.module_eval do
     xml.tag!("oai_dc:dc",
              'xmlns:oai_dc' => "http://www.openarchives.org/OAI/2.0/oai_dc/",
              'xmlns:dc' => "http://purl.org/dc/elements/1.1/",
-             'xmlns:dcterms' => "http://purl.org/dc/terms/",
-             'xmlns:xsi' => "http://www.w3.org/2001/XMLSchema-instance",
+             #'xmlns:dcterms' => "http://purl.org/dc/terms/",
+             #'xmlns:xsi' => "http://www.w3.org/2001/XMLSchema-instance",
              'xsi:schemaLocation' => %(http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd)) do
       to_semantic_values.select { |field, _values| dublin_core_field_name? field }.each do |field, values|
         Array.wrap(values).each do |v|
@@ -50,11 +50,11 @@ end
 SolrDocument.class_eval do
   use_extension(Hydra::ContentNegotiation)
   field_semantics.merge!(
-  contributor: 'contributor_search_tesim',
-  creator: 'creator_search_tesim',
+  contributor: 'contributor_tesim',
+  creator: 'creator_tesim',
   date: 'date_issued_tesim',
   description: 'abstract_tesim',
-  identifier: ['doi_ssim', 'ethos_identifier_tesim', 'id'],
+  identifier: ['doi_ssim', 'id'],
   language: 'language_tesim',
   publisher: 'current_he_institution_tesim',
   source: 'referenced_by_ssim',
