@@ -288,6 +288,17 @@ end
     }
   end
 
+  blacklight_config.add_search_field('university') do |field|
+    field.solr_parameters = {
+      "spellcheck.dictionary": "current_he_institution"
+    }
+    solr_name = 'current_he_institution_tesim ethos_institution_tesim'
+    field.solr_local_parameters = {
+      qf: solr_name,
+      pf: solr_name
+    }
+  end
+
   # supress blacklight view options while we are largely text based
   blacklight_config.view.delete(:gallery)
   blacklight_config.view.delete(:masonry)

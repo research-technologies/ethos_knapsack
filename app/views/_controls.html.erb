@@ -1,4 +1,9 @@
-<nav class="navbar bg-light navbar-expand-sm justify-content-between align-items-center px-2 py-3 border-bottom" role="navigation" aria-label="Root Menu">
+<div onclick={openMenu()} class="hamburger">
+      <div class="line1"></div>
+      <div class="line2"></div>
+      <div class="line3"></div>
+</div>
+<nav class="menu navbar bg-light navbar-expand-sm justify-content-between align-items-center px-2 py-3 border-bottom" role="navigation" aria-label="Root Menu">
     <ul class="nav navbar-nav col-sm-10">
       <li class="nav-item <%= 'active font-weight-bold' if current_page?(hyrax.root_path) %>">
         <a class="nav-link" href="https://bl.uk" target="_blank"><span class="fa fa-external-link"></span> British Library Website</a>
@@ -24,6 +29,23 @@
     <%#= render '/user_util_links' %>
 
 </nav>
+<script>
+  /* hamburger.js */
+
+  const menu = document.querySelector(".menu");
+  let open;
+
+  function openMenu() {
+    if (open) {
+      menu.style.display = "none";
+      open = false;
+    } else if (!open) {
+      menu.style.display = "block";
+      open = true;
+    }
+  }
+</script>
+
 <nav class="navbar bg-light navbar-expand-sm justify-content-between align-items-center px-2 py-3 border-bottom" role="search" aria-label="Search bar">
   <div class="container">
     <% unless controller.controller_name == 'sessions' %>
