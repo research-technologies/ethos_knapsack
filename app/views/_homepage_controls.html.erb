@@ -1,4 +1,4 @@
-<div onclick={openMenu()} class="hamburger">
+<div class="hamburger">
       <div class="line1"></div>
       <div class="line2"></div>
       <div class="line3"></div>
@@ -30,18 +30,25 @@
 </nav>
 <script>
   /* hamburger.js */
+  $( document ).ready(function() {
 
-  const menu = document.querySelector(".menu");
-  let open;
-
-  function openMenu() {
-    if (open) {
-      menu.style.display = "none";
-      open = false;
-    } else if (!open) {
-      menu.style.display = "block";
-      open = true;
+    const menu = document.querySelector(".menu");
+    let open;
+        
+    function openMenu() {
+      if (open) {
+        menu.style.display = "none";
+        open = false;
+      } else if (!open) {
+        menu.style.display = "block";
+        open = true;
+      }
     }
-  }
+
+    $(".hamburger").on("click", function(){
+      openMenu();
+    });
+  });
 </script>
+
 
