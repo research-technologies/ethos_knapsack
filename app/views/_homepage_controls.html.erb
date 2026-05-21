@@ -48,6 +48,30 @@
     $(".hamburger").on("click", function(){
       openMenu();
     });
+
+    var logo = $("#bl_logo"), // Get the logo
+ 	logoHeight = logo.height(), // Get logo height
+ 	scrollTo = logoHeight;
+
+    $(window).on("scroll", function() {
+      var yPos = $(this).scrollTop(),
+          yPer = (yPos / scrollTo);
+
+      if (yPer < 1) {
+         yPer = 1;
+      }
+
+      var logoPos = ((yPer * logoHeight) - logoHeight); // Calculate position of logo starting from minus the height of itself
+
+      // Change the transform and opacity of the header
+      $('#bl_logo').css({
+        //transform: "translate3d(0," + headerPos + "px,0)",
+    	top: -logoPos,
+        opacity: yPer
+      });
+    
+    });
+
   });
 </script>
 
