@@ -8,11 +8,17 @@ terms:
   - id: ApEdChildPsyD
     term: Thesis (Ap.Ed.Child.Psy.D.)
     active: true
+  - id: AppEdChPsyD
+    term: Thesis (App.Ed.Ch.Psy.D.)
+    active: true
   - id: AppEdCPsyD
     term: Thesis (App.Ed.C.Psy.D.)
     active: true
   - id: AppPsychD
     term: Thesis (App.Psych.D.)
+    active: true
+  - id: ArtsD
+    term: Thesis (Arts.D.)
     active: true
   - id: ClinD
     term: Thesis (Clin.D.)
@@ -82,6 +88,9 @@ terms:
     active: true
   - id: DCrimJ
     term: Thesis (D.Crim.J.)_doc
+    active: true
+  - id: DDataSc
+    term: Thesis (D.DataSc.)
     active: true
   - id: DDLic
     term: Thesis (D.D.Lic.)
@@ -458,8 +467,17 @@ terms:
   - id: DGov
     term: Thesis (D.Gov.)
     active: true
+  - id: Dgov
+    term: Thesis (D.Gov.)
+    active: true
   - id: DHC
     term: Thesis (D.H.C.)
+    active: true
+  - id: DHealthSci
+    term: Thesis (D.Health.Sci.)
+    active: true
+  - id: DHealthSocCare
+    term: Thesis (D.Health.Soc.Care.)
     active: true
   - id: DHPE
     term: Thesis (D.H.P.E.)
@@ -598,6 +616,9 @@ terms:
     active: true
   - id: DPsych
     term: Thesis (D.Psych.)
+    active: true
+  - id: DPsychPsych
+    term: Thesis (D.Psych.Psych.)
     active: true
   - id: DPsychol
     term: Thesis (D.Psychol.)

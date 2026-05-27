@@ -1,6 +1,9 @@
 en:
   hyrax:
     product_name: "EThOS"
+    pages:
+      tabs:
+        contact_us_page: Contact Us
   simple_form:
     labels:
       defaults:
@@ -28,7 +31,7 @@ en:
         license: Licence
   blacklight:
     search:
-      start_over: Clear Filters
+      ethos_start_over: Clear Filters
       fields:
         alternative_title: Alternative Title
         creator: Author
@@ -66,10 +69,9 @@ en:
     all: all
     any: any
     form:
-      title: More Search Options
+      title: Advanced Search
       search_context: Within search
       limit_criteria_heading_html: "<strong>AND</strong> have these attributes"
-      query_criteria_heading_html: "<label for='op'>Find items that match</label> %{select_menu} of"
+      query_criteria_heading_html: "Find items that match %{select_menu} of"
       sort_label: "Sort results by"
-      start_over: "Clear search"
-
+      start_over: "Clear Search"

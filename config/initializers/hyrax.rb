@@ -28,8 +28,8 @@ Blacklight::Document::DublinCore.module_eval do
     xml.tag!("oai_dc:dc",
              'xmlns:oai_dc' => "http://www.openarchives.org/OAI/2.0/oai_dc/",
              'xmlns:dc' => "http://purl.org/dc/elements/1.1/",
-             'xmlns:dcterms' => "http://purl.org/dc/terms/",
-             'xmlns:xsi' => "http://www.w3.org/2001/XMLSchema-instance",
+             # 'xmlns:dcterms' => "http://purl.org/dc/terms/",
+             # 'xmlns:xsi' => "http://www.w3.org/2001/XMLSchema-instance",
              'xsi:schemaLocation' => %(http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd)) do
       to_semantic_values.select { |field, _values| dublin_core_field_name? field }.each do |field, values|
         Array.wrap(values).each do |v|
@@ -50,11 +50,11 @@ end
 SolrDocument.class_eval do
   use_extension(Hydra::ContentNegotiation)
   field_semantics.merge!(
-  contributor: 'contributor_search_tesim',
-  creator: 'creator_search_tesim',
+  contributor: 'contributor_tesim',
+  creator: 'creator_tesim',
   date: 'date_issued_tesim',
   description: 'abstract_tesim',
-  identifier: ['doi_ssim', 'ethos_identifier_tesim', 'id'],
+  identifier: ['doi_ssim', 'id'],
   language: 'language_tesim',
   publisher: 'current_he_institution_tesim',
   source: 'referenced_by_ssim',
@@ -112,13 +112,13 @@ end
 
   # Then add all in correct order
   # blacklight_config.add_facet_field 'subject_sim', label: "Subject discipline", limit: 5
-  blacklight_config.add_facet_field 'ethos_subject_sim', label: "Subject Discipline", limit: 5, single: true
-  blacklight_config.add_facet_field 'keyword_sim', limit: 5
-  blacklight_config.add_facet_field 'date_issued_sim', label: "Date Awarded", limit: 5, sort: 'index', single: true
-  blacklight_config.add_facet_field 'qualification_name_sim', label: "Qualification Name", limit: 5, single: true
+  blacklight_config.add_facet_field 'ethos_subject_sim', label: "Subject Discipline", limit: 5 # , single: true
+  #  blacklight_config.add_facet_field 'keyword_sim', limit: 5
+  blacklight_config.add_facet_field 'date_issued_sim', label: "Date Awarded", limit: 5, sort: 'index' # , single: true
+  blacklight_config.add_facet_field 'qualification_name_sim', label: "Qualification Name", limit: 5 # , single: true
   blacklight_config.add_facet_field 'funder_search_sim', label: "Funder(s)", limit: 5
   blacklight_config.add_facet_field 'language_sim', limit: 5
-  blacklight_config.add_facet_field 'current_he_institution_sim', label: "University", limit: 5, single: true
+  blacklight_config.add_facet_field 'current_he_institution_sim', label: "University", limit: 5 # , single: true
 
   blacklight_config.index_fields.delete(:creator_tesim)
   blacklight_config.index_fields.delete(:keyword_tesim)
@@ -288,6 +288,17 @@ end
     }
   end
 
+  blacklight_config.add_search_field('university') do |field|
+    field.solr_parameters = {
+      "spellcheck.dictionary": "current_he_institution"
+    }
+    solr_name = 'current_he_institution_tesim ethos_institution_tesim'
+    field.solr_local_parameters = {
+      qf: solr_name,
+      pf: solr_name
+    }
+  end
+
   # supress blacklight view options while we are largely text based
   blacklight_config.view.delete(:gallery)
   blacklight_config.view.delete(:masonry)
@@ -451,3 +462,44 @@ Blacklight::FacetItemComponent.class_eval do
     end + render_facet_count(classes: ["selected"])
   end
 end
+
+# OVERRIDE HYKU and add a static contact page (used by BL instead of form)
+# rubocop:disable Metrics/BlockLength
+ContentBlock.class_eval do
+  NAME_REGISTRY = {
+    marketing: :marketing_text,
+    researcher: :featured_researcher,
+    announcement: :announcement_text,
+    about: :about_page,
+    help: :help_page,
+    terms: :terms_page,
+    agreement: :agreement_page,
+    home_text: :home_text,
+    homepage_about_section_heading: :homepage_about_section_heading,
+    homepage_about_section_content: :homepage_about_section_content,
+    contact_us: :contact_us_page
+  }.freeze
+
+  # NOTE: method defined outside the metaclass wrapper below because
+  # `for` is a reserved word in Ruby.
+  def self.for(key)
+    key = key.respond_to?(:to_sym) ? key.to_sym : key
+    raise ArgumentError, "#{key} is not a ContentBlock name" unless registered?(key)
+    ContentBlock.public_send(NAME_REGISTRY[key])
+  end
+
+  class << self
+    def registered?(key)
+      NAME_REGISTRY.include?(key)
+    end
+
+    def contact_us_page
+      find_or_create_by(name: 'help_page')
+    end
+
+    def contact_us_page=(value)
+      help_page.update(value:)
+    end
+  end
+end
+# rubocop:enable Metrics/BlockLength

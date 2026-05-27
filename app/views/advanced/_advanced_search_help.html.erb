@@ -1,20 +1,27 @@
 <%# OVERRIDE Blacklight Advanced Search v7.0.0 to add Search by date %>
 
-<div class='card card-default'>
+<div class='card card-default advanced-search-tips'>
   <div class="card-body">
-    <h4 class="card-title">Search tips</h4>
+    <h3 class="card-title">Search tips</h3>
     <ul class="advanced-help">
-      <li>Select "match all" to require all fields.</li>
-      <li>Select "match any" to find at least one field.</li>
-      <li>Combine keywords and attributes to find specific items.</li>
+      <!--      <li>Select "match all" to require all fields.</li> -->
+      <li>Select 'match all' so every search term you enter must appear in results.</li>
+      <!--      <li>Select "match any" to find at least one field.</li> -->
+      <li>Select 'match any' so at least one search term you enter must appear in results.</li>
+      <!--      <li>Combine keywords and attributes to find specific items.</li> -->
       <%# OVERRIDE begin %>
       <li>Search Date Awarded field with format: YYYY (e.g. 2025).</li>
       <%# OVERRIDE end %>
-      <li>Use quotation marks to search as a phrase.</li>
-      <li>Use "+" before a term to make it required. (Otherwise results matching only some of your terms may be included).</li>
-      <li>Use "-" before a word or phrase to exclude.</li>
-      <li>Use "OR", "AND", and "NOT" to create complex boolean logic. You can use parentheses in your complex expressions.</li>
-      <li>Truncation and wildcards are not supported - word-stemming is done automatically.</li>
+      <!--      <li>Use quotation marks to search as a phrase.</li> -->
+      <li>Use quotation marks (double not single) around words that must appear together as a phrase. (e.g. "History of the Hogarth Press")</li>
+      <!--      <li>Use "+" before a term to make it required. (Otherwise results matching only some of your terms may be included).</li> -->
+      <li>Use '+' before each word or phrase you want required in results.</li>
+      <!--      <li>Use "-" before a word or phrase to exclude.</li> -->
+      <li>Use ' ' before each word or phrase you want excluded from results.</li>
+      <!-- <li>Use "OR", "AND", and "NOT" to create complex boolean logic. You can use parentheses in your complex expressions.</li> -->
+      <li>Use 'AND', 'OR', or 'NOT' between terms to combine or exclude them. Use parentheses to group terms, e.g. (dog OR cat) AND food.</li>
+      <!--      <li>Truncation and wildcards are not supported - word-stemming is done automatically.</li> -->
+      <li>Searches match common word variations automatically, but try alternative forms of names and places if results are missing.</li>
     </ul>
   </div>
 </div>
