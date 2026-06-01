@@ -102,6 +102,16 @@ module Bulkrax
         end
       end
 
+      def _render_qualificationname(key, value, uketddc_node)
+        value = value.first if value.is_a?(Array)
+        uketddc_node << XML::Node.new("#{uketd_tags[key.to_sym]}:#{key}", value) unless value.blank?
+      end
+
+      def render_institution(key, value, uketddc_node)
+        value = value.first if value.is_a?(Array)
+        uketddc_node << XML::Node.new("#{uketd_tags[key.to_sym]}:#{key}", Hyrax::CurrentHeInstitutionsService.label(value)) unless value.blank?
+      end
+
       def render_language(key, value, uketddc_node)
         value = value.first if value.is_a?(Array)
         language_node = XML::Node.new("#{uketd_tags[key.to_sym]}:#{key}", value)
