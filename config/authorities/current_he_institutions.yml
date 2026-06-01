@@ -617,13 +617,6 @@ terms:
     wikidata: Q223429
     grid: grid.6572.6
     active: true
-  - id: University of Bolton
-    term: University of Greater Manchester
-    isni: 0000 0001 2166 3186
-    ror: https://ror.org/01t884y44
-    wikidata: Q1683230
-    grid: grid.36076.34
-    active: true
   - id: University of Bradford
     term: University of Bradford
     isni: 0000 0004 0379 5283
@@ -749,6 +742,13 @@ terms:
     ror: https://ror.org/00wygct11
     wikidata: Q1816872
     grid: grid.21027.36
+    active: true
+  - id: University of Bolton
+    term: University of Greater Manchester
+    isni: 0000 0001 2166 3186
+    ror: https://ror.org/01t884y44
+    wikidata: Q1683230
+    grid: grid.36076.34
     active: true
   - id: University of Greenwich
     term: University of Greenwich
