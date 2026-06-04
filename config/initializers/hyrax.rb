@@ -101,7 +101,7 @@ end
 ::CatalogController.class_eval do
   blacklight_config.oai[:document][:set_fields] = [
     { label: "Subject Discipline", solr_field: "ethos_subject_sim" },
-    { label: "University", solr_field: "current_he_institution_sim" }
+    { label: "University", solr_field: "current_he_institution_sim", helper_method: :current_he_institution_label }
   ]
 
   # I hope there is a better way to re-order facets
@@ -118,7 +118,7 @@ end
   blacklight_config.add_facet_field 'qualification_name_sim', label: "Qualification Name", limit: 5 # , single: true
   blacklight_config.add_facet_field 'funder_search_sim', label: "Funder(s)", limit: 5
   blacklight_config.add_facet_field 'language_sim', limit: 5
-  blacklight_config.add_facet_field 'current_he_institution_sim', label: "University", limit: 5 # , single: true
+  blacklight_config.add_facet_field 'current_he_institution_sim', label: "University", limit: 5, helper_method: :current_he_institution_label # , single: true
 
   blacklight_config.index_fields.delete(:creator_tesim)
   blacklight_config.index_fields.delete(:keyword_tesim)
@@ -130,7 +130,7 @@ end
   blacklight_config.index_fields.delete(:license_tesim)
 
   blacklight_config.add_index_field 'creator_search_tesim', label: "Author", itemprop: 'name', if: :render_in_tenant?
-  blacklight_config.add_index_field 'current_he_institution_tesim', label: "University", itemprop: 'name', if: :render_in_tenant?
+  blacklight_config.add_index_field 'current_he_institution_tesim', label: "University", itemprop: 'name', if: :render_in_tenant?, helper_method: :current_he_institution_label
   blacklight_config.add_index_field 'date_issued_tesim', itemprop: 'date_issued', label: "Date awarded", helper_method: :human_readable_date, if: :render_in_tenant?
   #  blacklight_config.add_index_field 'ethos_identifier_ssi', itemprop: 'ethos_identifier', label: "EThOS ID", if: :render_in_tenant?
 
