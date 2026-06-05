@@ -8,8 +8,10 @@
 <div class="ethos_work_title_sub">
   <dl>
   <%= render "hyrax/base/creator", presenter: presenter, section: "metadata" %>
-  <%= presenter.attribute_to_html(:qualification_name, html_dl: true) %>
-  <%= presenter.attribute_to_html(:current_he_institution, html_dl: true) %>
+  <%#= presenter.attribute_to_html(:qualification_name, html_dl: true) %>
+  <%#= presenter.attribute_to_html(:current_he_institution, html_dl: true) %>
+  <%= render "hyrax/base/qualification_name", presenter: presenter, section: "metadata" %>
+  <%= render "hyrax/base/current_he_institution", presenter: presenter, section: "metadata" %>
   <%= presenter.attribute_to_html(:date_issued, html_dl: true) %>
   </dl>
   <% unless presenter.referenced_by.blank? || presenter.referenced_by.all?(&:blank?) %>

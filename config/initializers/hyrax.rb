@@ -21,7 +21,7 @@ Qa::Authorities::Local.register_subauthority('contributor_roles', 'Qa::Authoriti
 require 'oai/provider/metadata_format/uketd_dc'
 OAI::Provider::Base.register_format(OAI::Provider::Metadata::UketdDc.instance)
 
-Blacklight::Document::DublinCore.module_eval do
+Blacklight::Document::DublinCore.module_eval do # rubocop:disable Metrics/BlockLength
   # dublin core elements are mapped against the #dublin_core_field_names whitelist.
   def export_as_oai_dc_xml # rubocop:disable Metrics/MethodLength
     xml = Builder::XmlMarkup.new
@@ -33,7 +33,7 @@ Blacklight::Document::DublinCore.module_eval do
              'xsi:schemaLocation' => %(http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd)) do
       to_semantic_values.select { |field, _values| dublin_core_field_name? field }.each do |field, values|
         Array.wrap(values).each do |v|
-          value_to_tag(v, xml, field)
+          value_to_tag(translate_authority(v, field), xml, field)
         end
       end
       to_semantic_values.select { |field, _values| dc_terms_field_name? field }.each do |field, values|
@@ -43,6 +43,14 @@ Blacklight::Document::DublinCore.module_eval do
       end
     end
     xml.target!
+  end
+
+  def translate_authority(v, field)
+    if field == :publisher
+      Hyrax::CurrentHeInstitutionsService.label(v)
+    else
+      v
+    end
   end
 end
 
@@ -101,7 +109,7 @@ end
 ::CatalogController.class_eval do
   blacklight_config.oai[:document][:set_fields] = [
     { label: "Subject Discipline", solr_field: "ethos_subject_sim" },
-    { label: "University", solr_field: "current_he_institution_sim" }
+    { label: "University", solr_field: "current_he_institution_sim", helper_method: :current_he_institution_label }
   ]
 
   # I hope there is a better way to re-order facets
@@ -118,7 +126,7 @@ end
   blacklight_config.add_facet_field 'qualification_name_sim', label: "Qualification Name", limit: 5 # , single: true
   blacklight_config.add_facet_field 'funder_search_sim', label: "Funder(s)", limit: 5
   blacklight_config.add_facet_field 'language_sim', limit: 5
-  blacklight_config.add_facet_field 'current_he_institution_sim', label: "University", limit: 5 # , single: true
+  blacklight_config.add_facet_field 'current_he_institution_sim', label: "University", limit: 5, helper_method: :current_he_institution_label # , single: true
 
   blacklight_config.index_fields.delete(:creator_tesim)
   blacklight_config.index_fields.delete(:keyword_tesim)
@@ -130,7 +138,7 @@ end
   blacklight_config.index_fields.delete(:license_tesim)
 
   blacklight_config.add_index_field 'creator_search_tesim', label: "Author", itemprop: 'name', if: :render_in_tenant?
-  blacklight_config.add_index_field 'current_he_institution_tesim', label: "University", itemprop: 'name', if: :render_in_tenant?
+  blacklight_config.add_index_field 'current_he_institution_tesim', label: "University", itemprop: 'name', if: :render_in_tenant?, helper_method: :current_he_institution_label
   blacklight_config.add_index_field 'date_issued_tesim', itemprop: 'date_issued', label: "Date awarded", helper_method: :human_readable_date, if: :render_in_tenant?
   #  blacklight_config.add_index_field 'ethos_identifier_ssi', itemprop: 'ethos_identifier', label: "EThOS ID", if: :render_in_tenant?
 
@@ -356,6 +364,16 @@ BlacklightOaiProvider::SolrSet.class_eval do
     end.flatten
 
     sets.empty? ? nil : sets
+  end
+
+  # Override and offer translation of an authority id into a term if possible
+  def name
+    (field, value) = spec.split(':')
+    if field == "University"
+      "#{field.titleize}: #{Hyrax::CurrentHeInstitutionsService.label(value)}"
+    else
+      spec.titleize.gsub(':', ': ')
+    end
   end
 end
 

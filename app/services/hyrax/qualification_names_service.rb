@@ -21,7 +21,8 @@ module Hyrax
     end
 
     def self.label(id)
-      authority.find(id).fetch('term')
+      id = Array(id).first
+      authority.find(id).fetch('term', '')
     end
 
     ##
