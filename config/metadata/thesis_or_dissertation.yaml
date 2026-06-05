@@ -62,7 +62,7 @@ attributes:
     multiple: true
     facetable: true
     form:
-      required: false
+      required: true
       primary: true
       multiple: true
     index_keys:
@@ -76,7 +76,7 @@ attributes:
     type: string
     multiple: false
     form:
-      required: false
+      required: true
       primary: true
       multiple: false
     index_keys:
@@ -90,7 +90,7 @@ attributes:
     type: string
     multiple: false
     form:
-      required: false
+      required: true
       primary: true
       multiple: false
     index_keys:
@@ -100,7 +100,7 @@ attributes:
     type: string
     multiple: false
     form:
-      required: false
+      required: true
       primary: true
       multiple: false
     index_keys:
