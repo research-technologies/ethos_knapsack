@@ -21,7 +21,7 @@ Qa::Authorities::Local.register_subauthority('contributor_roles', 'Qa::Authoriti
 require 'oai/provider/metadata_format/uketd_dc'
 OAI::Provider::Base.register_format(OAI::Provider::Metadata::UketdDc.instance)
 
-Blacklight::Document::DublinCore.module_eval do
+Blacklight::Document::DublinCore.module_eval do # rubocop:disable Metrics/BlockLength
   # dublin core elements are mapped against the #dublin_core_field_names whitelist.
   def export_as_oai_dc_xml # rubocop:disable Metrics/MethodLength
     xml = Builder::XmlMarkup.new
@@ -33,7 +33,7 @@ Blacklight::Document::DublinCore.module_eval do
              'xsi:schemaLocation' => %(http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd)) do
       to_semantic_values.select { |field, _values| dublin_core_field_name? field }.each do |field, values|
         Array.wrap(values).each do |v|
-          value_to_tag(translate_authority(v,field), xml, field)
+          value_to_tag(translate_authority(v, field), xml, field)
         end
       end
       to_semantic_values.select { |field, _values| dc_terms_field_name? field }.each do |field, values|
@@ -360,7 +360,7 @@ BlacklightOaiProvider::SolrSet.class_eval do
       facet_results.fetch(f[:solr_field], [])
                    .each_slice(2)
                    .select { |t| t[0] != '' } # added to avoid choking on empty values
-        .map { |t| new("#{f[:label]}:#{t.first}" ) }
+                   .map { |t| new("#{f[:label]}:#{t.first}") }
     end.flatten
 
     sets.empty? ? nil : sets

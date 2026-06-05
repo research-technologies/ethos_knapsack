@@ -24,7 +24,7 @@ module Blacklight
                     elsif field_name == 'contributor_tesim' && self[field_name].present?
                       self[field_name].map do |contributor|
                         c = eval(contributor) # rubocop:disable Security/Eval
-                        (c['contributor_family_name'].present? || c['contributor_given_name'].present?) ? "#{c['contributor_family_name']}, #{c['contributor_given_name']}" : nil
+                        c['contributor_family_name'].present? || c['contributor_given_name'].present? ? "#{c['contributor_family_name']}, #{c['contributor_given_name']}" : nil
                       end
                     elsif self[field_name].present? && self[field_name].all?(&:blank?)
                       nil
