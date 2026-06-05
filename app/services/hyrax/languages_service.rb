@@ -17,11 +17,11 @@ module Hyrax
     end
 
     def self.label(id)
-      authority.find(id.first).fetch('term')
+      authority.find(id.first).fetch('term','')
     end
 
     def self.term(id)
-      authority.find(id).fetch('term')
+      authority.find(id).fetch('term','')
     end
 
     ##

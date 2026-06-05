@@ -8,23 +8,21 @@
       <div class="flex-row flex-layout-space-between width-100 welcome-announcements-container">
         <div class="announcements display-flex flex-column">
           <header class="flex-column gap-1">
-            <h2 role="heading" aria-level="3" class="announcements-item-title mat-headline-medium">Introducing the interim EThOS service</h2>
+            <h2 role="heading" aria-level="3" class="announcements-item-title mat-headline-medium">Introducing EThOS</h2>
           </header>
           <article>
-            <p class="homepage_intro">EThOS (eTheses Online Service) is an open access discovery platform for UK doctoral theses, managed by the British Library. This is an interim version of EThOS following on from a cyber-attack on the British Library in 2023. This interim platform holds metadata for theses held in UK Institutional Repositories.
-What do metadata records look like?
-            <br/>
-            <br/>
-            In the platform you can find descriptions of over 650,000 theses from UK universities from the 1700s to the present day. Over 400,000 of these theses are openly available for download from the institutional repository of the awarding university. In many metadata records in EThOS you will find a button ‘Access thesis from university’.  This links to the metadata record of the thesis in the awarding university’s repository, where it is possible to download the thesis, if the university has made it available.
+            <p class="homepage_intro">We are pleased to share that EThOS (E-Theses Online Service) is now available again following restoration work.</p>
+            <p class="homepage_intro">EThOS is an open access discovery platform for UK doctoral theses, managed by the British Library. The platform holds metadata for theses held in UK university repositories.</p>
+            <p class="homepage_intro">In the platform you can find descriptions of over 650,000 theses from UK universities from the 1700s onwards. In many of the records in EThOS you will find a button ‘<b>Access thesis from university</b>’. This links to the metadata record of the thesis in the university repository, where it may be possible to download the thesis, if the university has made it available.
             <br/><br/>
             <b>Please note:</b>
             </p>
             <ul>
-              <li>while we are continuing to update the platform following on from the cyber-attack, there will be an initial backlog of content to work through</li>
-              <li>not all theses are available for download via the repository of the awarding university.</li>
+              <li>we are continuing to update the platform but there will be an initial backlog of content to work through</li>
+              <li>not all theses are available from the university repository.</li>
             </ul>
             <p class="homepage_intro">
-              For further details, please refer to our <%= link_to t(:'hyrax.controls.help'), hyrax.help_path, aria: current_page?(hyrax.help_path) ? {current: 'page'} : nil %> and <%= link_to t(:'hyrax.controls.about'), hyrax.about_path, aria: current_page?(hyrax.about_path) ? {current: 'page'} : nil %> sections.
+              For further details, please refer to our <%= link_to 'FAQs', hyrax.help_path, aria: current_page?(hyrax.help_path) ? {current: 'page'} : nil %> and <%= link_to t(:'hyrax.controls.about'), hyrax.about_path, aria: current_page?(hyrax.about_path) ? {current: 'page'} : nil %> sections.
             </p>
           </article>
 
