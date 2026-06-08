@@ -164,9 +164,10 @@ extraEnvVars: &envVars
   - name: HYRAX_FITS_PATH
     value: /app/fits/fits.sh
   - name: HYKU_ADMIN_HOST
+    # Nginx config below redirects to ethos.blethoshyku.com
     value: blethoshyku.com
   - name: HYKU_ADMIN_ONLY_TENANT_CREATION
-    value: "false"
+    value: "true"
   - name: HYKU_ALLOW_SIGNUP
     value: "false"
   - name: HYKU_DEFAULT_HOST
@@ -333,6 +334,11 @@ nginx:
     real_ip_header X-Forwarded-For;
     real_ip_recursive on;
     include /opt/bitnami/nginx/conf/conf.d/*.conf;
+    server {
+        listen 8080;
+        server_name blethoshyku.com;
+        return 301 https://ethos.blethoshyku.com${DOLLAR}request_uri;
+    }
     server {
         listen 8080;
         server_name _;
