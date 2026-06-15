@@ -512,11 +512,11 @@ ContentBlock.class_eval do
     end
 
     def contact_us_page
-      find_or_create_by(name: 'help_page')
+      find_or_create_by(name: 'contact_us_page')
     end
 
     def contact_us_page=(value)
-      help_page.update(value:)
+      contact_us_page.update(value:)
     end
   end
 end
