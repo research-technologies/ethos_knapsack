@@ -18,7 +18,7 @@
         <div class="nav-divider"></div>
       </li>
       <li class="nav-item <%= 'active font-weight-bold' if current_page?(hyrax.help_path) %>">
-        <%= link_to 'FAQs', hyrax.help_path, class: "nav-link", aria: current_page?(hyrax.help_path) ? {current: 'page'} : nil %>
+        <a class="nav-link" href="/FAQs?locale=en">FAQs</a>
         <div class="nav-divider"></div>
       </li>
       <li class="nav-item <%= 'active font-weight-bold' if current_page?('/contact_us') %>">
