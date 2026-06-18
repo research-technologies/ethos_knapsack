@@ -490,6 +490,7 @@ ContentBlock.class_eval do
     announcement: :announcement_text,
     about: :about_page,
     help: :help_page,
+    FAQs: :help_page,
     terms: :terms_page,
     agreement: :agreement_page,
     home_text: :home_text,

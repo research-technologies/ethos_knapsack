@@ -11,4 +11,5 @@ end
 
 Rails.application.routes.draw do
   get 'contact_us' => 'hyrax/pages#show', key: 'contact_us'
+  get 'FAQs' => 'hyrax/pages#show', key: 'help'
 end
