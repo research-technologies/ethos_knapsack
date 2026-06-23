@@ -177,9 +177,9 @@ extraEnvVars: &envVars
     value: "%{tenant}.blethoshyku.com"
   - name: HYKU_MULTITENANT
     value: "true"
-  - name: HYKU_ROOT_HOST
-    # removed ingress to make this inaccessible
-    value: blethoshyku.com
+  # should default to localhost
+  # - name: HYKU_ROOT_HOST
+  #   value: blethoshyku.com
   - name: HYKU_SHOW_BACKTRACE
     value: "false"
   - name: HYKU_USER_DEFAULT_PASSWORD
