@@ -3,6 +3,6 @@
       <h1>The page you were looking for doesn't exist.</h1>
       <p>You may have mistyped the address or the page may have moved.</p>
     </div>
-    <p><%= link_to "Return EThOS homepage", hyrax.root_path %></p>
+    <p><%= link_to "Return EThOS homepage", ENV.fetch('HYKU_HOMEPAGE_URL', hyrax.root_path) %></p>
   </div>
   <div class="to_bottom">&nbsp;</div>

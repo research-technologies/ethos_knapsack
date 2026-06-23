@@ -52,6 +52,11 @@ ingress:
     - host: "*.blethoshyku.com"
       paths:
         - path: /
+    # blethoshyku.com is only added here to allow for custom nginx error page - see nginx.serverBlock below
+    # This url should give a 404
+    - host: "blethoshyku.com"
+      paths:
+        - path: /
     - host: "ethos.bl.uk"
       paths:
         - path: /
@@ -66,6 +71,9 @@ ingress:
   tls:
     - hosts:
         - "*.blethoshyku.com"
+        # blethoshyku.com is only added here to allow for custom nginx error page - see nginx.serverBlock below
+        # This url should give a 404
+        - "blethoshyku.com"
         # Do NOT add "ethos.bl.uk" here.
         # TLS for this host is handled by a Cloudflare Custom Hostname
       secretName: ethos-knapsack-production-tls
@@ -159,8 +167,11 @@ extraEnvVars: &envVars
     value: "false"
   - name: HYRAX_FITS_PATH
     value: /app/fits/fits.sh
-  - name: HYKU_ADMIN_HOST
-    value: blethoshyku.com
+  # should default to localhost
+  # - name: HYKU_ADMIN_HOST
+  #   value: blethoshyku.com
+  - name: HYKU_HOMEPAGE_URL
+    value: "https://ethos.blethoshyku.com/"
   - name: HYKU_ADMIN_ONLY_TENANT_CREATION
     value: "true"
   - name: HYKU_ALLOW_SIGNUP
@@ -170,7 +181,6 @@ extraEnvVars: &envVars
   - name: HYKU_MULTITENANT
     value: "true"
   - name: HYKU_ROOT_HOST
-    # removed ingress to make this inaccessible
     value: blethoshyku.com
   - name: HYKU_SHOW_BACKTRACE
     value: "false"
@@ -347,6 +357,19 @@ nginx:
 
         include /opt/bitnami/nginx/conf/bots.d/ddos.conf;
         include /opt/bitnami/nginx/conf/bots.d/blockbots.conf;
+
+        error_page 404 /404.html;
+        error_page 500 502 503 504 /500.html;
+
+        location = /404.html {
+          root /app/samvera/hyrax-webapp/public;
+          internal;
+        }
+
+        location = /500.html {
+          root /app/samvera/hyrax-webapp/public;
+          internal;
+        }
 
         location ~ (\.php|\.aspx|\.asp) {
         	return 404;
