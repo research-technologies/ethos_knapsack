@@ -167,8 +167,9 @@ extraEnvVars: &envVars
     value: "false"
   - name: HYRAX_FITS_PATH
     value: /app/fits/fits.sh
-  - name: HYKU_ADMIN_HOST
-    value: blethoshyku.com
+  # should default to localhost
+  # - name: HYKU_ADMIN_HOST
+  #   value: blethoshyku.com
   - name: HYKU_HOMEPAGE_URL
     value: "https://ethos.blethoshyku.com/"
   - name: HYKU_ADMIN_ONLY_TENANT_CREATION
@@ -179,9 +180,8 @@ extraEnvVars: &envVars
     value: "%{tenant}.blethoshyku.com"
   - name: HYKU_MULTITENANT
     value: "true"
-  # should default to localhost
-  # - name: HYKU_ROOT_HOST
-  #   value: blethoshyku.com
+  - name: HYKU_ROOT_HOST
+    value: blethoshyku.com
   - name: HYKU_SHOW_BACKTRACE
     value: "false"
   - name: HYKU_USER_DEFAULT_PASSWORD
