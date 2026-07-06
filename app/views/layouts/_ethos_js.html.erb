@@ -6,7 +6,6 @@
   }
   function get_params(url) {
       var match = url.match(/\?(.*)$/); 
-      console.log(match);
       return match[1];
   }
   function facets() {
@@ -79,22 +78,17 @@
           }
         });
           advanced_search_fields().forEach(function(field){
-          console.log("checking: ", field);
           if(urlParams.has(field)){
             data[field] = urlParams.get(field);
           }
         });
         other_fields().forEach(function(field){
-          console.log("checking: ", field);
           if(urlParams.has(field)){
             data[field] = urlParams.get(field);
           }
         });
 
         window.dataLayer.push(ga_event_data('search_results', 'search_result_click', data));
-        //console.log("check data layer");
-        //event.preventDefault();
-        //return false;
 
     });
     // SEARCH RESULT PAGE LOAD
@@ -112,21 +106,5 @@
         window.dataLayer.push(ga_event_data('search_results', 'page_load', data)); 
     }
 
-  
-
-    if(/^\/concern\/thesis_or_dissertations\//.exec(window.location.pathname)[0]){
-        console.log("HERE in THESIS");
-    }
-
-
-  });
-  $(document).on('page:change', function(body){
-    console.log("PAGE CHANGE");
-    $('a.facet-select').on("turbolinks:click", function(event){
-          console.log("here ###########################");
-          event.preventDefault();
-          return false;
-    });
-  
   });
 </script>
