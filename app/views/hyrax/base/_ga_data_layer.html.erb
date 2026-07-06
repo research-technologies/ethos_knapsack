@@ -1,0 +1,67 @@
+<script>
+  $( document ).ready(function() {
+      window.dataLayer = window.dataLayer || [];
+
+          data = {
+    'event': 'page_load',
+    'page_type': 'record_thesis',
+    'title': '<%= presenter.title.first %>',
+    'author': '<%= presenter.creator_search.join(",") %>',
+    'abstract': "<%= presenter.abstract.first.gsub("\r\n", '\\r\\n') %>",
+    'date_awarded': '<%= presenter.date_issued.first %>',
+    'supervisor': '<%= presenter.contributor_search.join(",") %>',
+    'funder': '<%= presenter.funder_search.join(",") %>',
+    'doi': '<%= presenter.doi %>',
+    'ethos_identifier': '<%= presenter.ethos_identifier.first %>',
+    'subject_discipline': '<%= presenter.ethos_subject.join(",") %>',
+    'qualification_name': '<%= presenter.qualification_name.first %>',
+    'language': '<%= presenter.language.join(",") %>',
+    'department': '<%= presenter.org_unit.first %>',
+    'university': '<%= presenter.current_he_institution.first %>',
+    'ddc_subject': '<%= presenter.dewey.first %>'};
+
+    <% unless presenter.embargo_date.blank? %>
+      data['embargoed_status'] = 'Embargoed until <%= presenter.embargo_release_date %>';
+    <%end%>
+
+    window.dataLayer.push(data);
+  
+    // CLICK READ MORE
+    $('#ethos-abstract-read-more').on("click", function(){
+      console.log("HERE");
+      window.dataLayer = [];
+
+      data['event']='link_click';
+      data['link_click_text'] = $.trim($(this).text());
+      data['link_click_url'] = $(this).attr("href");
+      data['link_click_type'] = "expand accordion";
+
+      window.dataLayer.push(data);
+    });
+
+    // CLICK ACCESS THESIS
+    $('.show-actions a').on("click", function(){
+      window.dataLayer = [];
+
+      data['event']='link_click';
+      data['link_click_text'] = $.trim($(this).text());
+      data['link_click_url'] = $(this).attr("href");
+      data['link_click_type'] = "access thesis";
+
+      window.dataLayer.push(data);
+    });
+
+    // CLICK FIND MORE DEWEY
+    $('#ethos-more-ddc a').on("click", function(){
+      window.dataLayer = [];
+
+      data['event']='link_click';
+      data['link_click_text'] = $.trim($(this).text());
+      data['link_click_url'] = $(this).attr("href");
+      data['link_click_type'] = "find more by topic";
+
+      window.dataLayer.push(data);
+    });
+
+  }); 
+</script>
