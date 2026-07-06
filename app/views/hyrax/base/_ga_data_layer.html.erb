@@ -5,20 +5,20 @@
           data = {
     'event': 'page_load',
     'page_type': 'record_thesis',
-    'title': '<%= presenter.title.first %>',
-    'author': '<%= presenter.creator_search.join(",") %>',
-    'abstract': "<%= presenter.abstract.first.gsub("\r\n", '\\r\\n') %>",
+    'title': '<%= presenter.title&.first %>',
+    'author': '<%= presenter.creator_search&.join(",") %>',
+    'abstract': "<%= presenter.abstract&.first&.gsub("\r\n", '\\r\\n') %>",
     'date_awarded': '<%= presenter.date_issued.first %>',
-    'supervisor': '<%= presenter.contributor_search.join(",") %>',
-    'funder': '<%= presenter.funder_search.join(",") %>',
+    'supervisor': '<%= presenter.contributor_search&.join(",") %>',
+    'funder': '<%= presenter.funder_search&.join(",") %>',
     'doi': '<%= presenter.doi %>',
-    'ethos_identifier': '<%= presenter.ethos_identifier.first %>',
-    'subject_discipline': '<%= presenter.ethos_subject.join(",") %>',
-    'qualification_name': '<%= presenter.qualification_name.first %>',
-    'language': '<%= presenter.language.join(",") %>',
-    'department': '<%= presenter.org_unit.first %>',
-    'university': '<%= presenter.current_he_institution.first %>',
-    'ddc_subject': '<%= presenter.dewey.first %>'};
+    'ethos_identifier': '<%= presenter.ethos_identifier&.first %>',
+    'subject_discipline': '<%= presenter.ethos_subject&.join(",") %>',
+    'qualification_name': '<%= presenter.qualification_name&.first %>',
+    'language': '<%= presenter.language&.join(",") %>',
+    'department': '<%= presenter.org_unit&.first %>',
+    'university': '<%= presenter.current_he_institution&.first %>',
+    'ddc_subject': '<%= presenter.dewey&.first %>'};
 
     <% unless presenter.embargo_date.blank? %>
       data['embargoed_status'] = 'Embargoed until <%= presenter.embargo_release_date %>';
