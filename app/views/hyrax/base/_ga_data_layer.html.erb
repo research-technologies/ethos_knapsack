@@ -23,9 +23,16 @@
     <% unless presenter.embargo_date.blank? %>
       data['embargoed_status'] = 'Embargoed until <%= presenter.embargo_release_date %>';
     <%end%>
+     
+   // update dataLayer on load
+   $( window ).on('load', function(){
+      window.dataLayer.push(data);
+    });
+    // also catch the turbolinks:load context (e.g. click through from search results)
+    $( document ).on('turbolinks:load', function(){
+      window.dataLayer.push(data);
+    });
 
-    window.dataLayer.push(data);
-  
     // CLICK READ MORE
     $('#ethos-abstract-read-more').on("click", function(){
       window.dataLayer = window.dataLayer || [];
