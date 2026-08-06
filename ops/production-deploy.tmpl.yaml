@@ -1,14 +1,14 @@
 fullnameOverride: "ethos-knapsack-production"
 
-replicaCount: 2
+replicaCount: 4
 
 resources:
   limits:
     memory: "4Gi"
-    cpu: "500m"
+    cpu: "1.5"
   requests:
     memory: "2Gi"
-    cpu: "250m"
+    cpu: "750m"
 
 livenessProbe:
   enabled: false
@@ -294,6 +294,27 @@ nginx:
     registry: ghcr.io
     repository: notch8/scripts/bitnamilegacy-nginx
     tag: 1.21.6-debian-11-r21
+  # Serves /system (site branding uploads: logo/banner/favicon) and /branding
+  # (per-tenant branding assets) directly from the shared EFS PVCs so these
+  # requests never tie up a Puma worker
+  # Deliberately does NOT cover /assets/ the way hykuup's fix does: that needs compiled
+  # assets baked into a custom nginx image via CI, which depends on a much
+  # newer notch8/actions workflow version than this repo is pinned to
+  # (v1.0.4 here vs v1.0.10 there) - out of scope for this change. /assets/
+  # is edge-cached by Cloudflare regardless, so the payoff there is smaller.
+  extraVolumes:
+    - name: "uploads"
+      persistentVolumeClaim:
+        claimName: "ethos-knapsack-production-uploads"
+    - name: "branding"
+      persistentVolumeClaim:
+        claimName: "ethos-knapsack-production-branding"
+  extraVolumeMounts:
+    - name: uploads
+      mountPath: /app/samvera/hyrax-webapp/public/system
+      subPath: public-system
+    - name: branding
+      mountPath: /app/samvera/hyrax-webapp/public/branding
   serverBlock: |-
     upstream rails_app {
       server {{ .Values.global.hyraxName }};
@@ -385,7 +406,7 @@ nginx:
         }
 
         # serve static (compiled) assets directly if they exist (for rails production)
-        location ~ ^/(assets|packs|fonts|images|javascripts|stylesheets|swfs|system)/ {
+        location ~ ^/(assets|branding|packs|fonts|images|javascripts|stylesheets|swfs|system)/ {
           try_files ${DOLLAR}uri @rails;
 
           # access_log off;
