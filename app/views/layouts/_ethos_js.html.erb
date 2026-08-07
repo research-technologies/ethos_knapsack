@@ -93,18 +93,35 @@
     });
     // SEARCH RESULT PAGE LOAD
     if(window.location.pathname === '/catalog'){
-        var urlParams = new URLSearchParams(get_params(window.location.href));
-        entries = urlParams.entries();
-        data={};
-        for(const entry of entries) {
-          if(entry[0] === '__cf_chl_f_tk'  || entry[0] === 'utf8' ){
-            continue;
-          }
-          data[entry[0]] = entry[1] || 'na';
+      var urlParams = new URLSearchParams(get_params(window.location.href));
+      entries = urlParams.entries();
+      data={};
+      for(const entry of entries) {
+        if(entry[0] === '__cf_chl_f_tk'  || entry[0] === 'utf8' ){
+          continue;
         }
-        data['results_count'] = $("span.page-entries strong:nth-child(3)").text();
-        window.dataLayer.push(ga_event_data('search_results', 'page_load', data)); 
+        data[entry[0]] = entry[1] || 'na';
+      }
+      data['results_count'] = $("span.page-entries strong:nth-child(3)").text();
+      window.dataLayer.push(ga_event_data('search_results', 'page_load', data)); 
     }
+
+    // also treat turbolinks visits as pageloads
+    $( document ).on('turbolinks:load', function(){
+      if(window.location.pathname === '/catalog'){
+          var urlParams = new URLSearchParams(get_params(window.location.href));
+          entries = urlParams.entries();
+          data={};
+          for(const entry of entries) {
+            if(entry[0] === '__cf_chl_f_tk'  || entry[0] === 'utf8' ){
+              continue;
+            }
+            data[entry[0]] = entry[1] || 'na';
+          }
+          data['results_count'] = $("span.page-entries strong:nth-child(3)").text();
+          window.dataLayer.push(ga_event_data('search_results', 'page_load', data)); 
+      }
+    });
 
   });
 </script>
