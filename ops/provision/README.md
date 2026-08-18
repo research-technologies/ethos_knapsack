@@ -192,18 +192,22 @@ Always run **plan** before apply. Use `./scripts/backup-state.sh` before applyin
 
 These releases are **not** in Terraform; they are managed purely with **Helm**. Values files in `k8s/` are the source of truth; apply changes with `helm upgrade` (from `ops/provision/`, kubeconfig targeting r2-bl-ethos):
 
-| Release        | Namespace | Values file                              |
-|----------------|-----------|------------------------------------------|
-| postgresql     | default   | `k8s/postgresql-values.yaml`              |
-| postgresql-17  | default   | `k8s/postgresql-17-production-values.yaml` |
-| solr           | default   | `k8s/solr-values.yaml`                   |
+| Release        | Namespace     | Values file                              |
+|----------------|---------------|------------------------------------------|
+| postgresql     | default       | `k8s/postgresql-values.yaml`              |
+| postgresql-17  | default       | `k8s/postgresql-17-production-values.yaml` |
+| solr           | default       | `k8s/solr-values.yaml`                   |
+| ingress-nginx  | ingress-nginx | `k8s/ingress-nginx-values.yaml`          |
 
 ```bash
 # From ops/provision/
 helm upgrade postgresql -n default -f k8s/postgresql-values.yaml oci://registry-1.docker.io/bitnamicharts/postgresql
 helm upgrade postgresql-17 -n default -f k8s/postgresql-17-production-values.yaml oci://registry-1.docker.io/bitnamicharts/postgresql --version 16.7.27
 helm upgrade solr -n default -f k8s/solr-values.yaml oci://registry-1.docker.io/bitnamicharts/solr
+helm upgrade ingress-nginx -n ingress-nginx -f k8s/ingress-nginx-values.yaml ingress-nginx/ingress-nginx --version 4.5.2
 ```
+
+Unlike the others, `ingress-nginx-values.yaml` has no secrets in it (just AWS LB annotations and controller tuning), so it's committed as plaintext rather than a SOPS-encrypted `.enc.yaml` — see the exception in `.gitignore`.
 
 All other Helm releases (cert-manager, postgresql in fcrepo/fcrepo-staging, fcrepo, fcrepo-staging) are in Terraform and get values on `terraform apply`.
 
