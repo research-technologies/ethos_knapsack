@@ -1,0 +1,14 @@
+<%# Copied from Hyrax v5.0.1 to remove span with class background-container-gradient - in order to remove gradient hyku wide - theming %>
+<% content_for(:navbar) do %>
+<%= render '/homepage_controls' %>
+<% end %>
+
+<% content_for(:precontainer_content) do %>
+
+  <%= render 'hyrax/homepage/announcement' if controller_name == 'homepage' %>
+
+
+<% end %>
+
+
+<%= render template: 'layouts/hyrax' %>

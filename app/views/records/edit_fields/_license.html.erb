@@ -1,0 +1,2 @@
+<%= f.input :license, as: :select, collection: Hyrax::LicensesService.select_active_options,
+    input_html: { class: 'form-control', multiple: false } %>

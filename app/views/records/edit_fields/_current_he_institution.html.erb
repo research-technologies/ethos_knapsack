@@ -1,0 +1,2 @@
+<%= f.input :current_he_institution, as: :select, collection: Hyrax::CurrentHeInstitutionsService.select_all_options,
+    input_html: { class: 'form-control', multiple: false } %>

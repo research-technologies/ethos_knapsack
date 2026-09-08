@@ -13,3 +13,31 @@
  *= require_tree .
  *= require_self
  */
+
+/* handled in admin UI appearance
+ * body.public-facing{
+  font-family: "Hind", sans-serif;
+}
+*/
+
+body.public-facing .metadata-group dt {
+  width: 20%;
+}
+
+body.public-facing .metadata-group dd {
+  width: 80%;
+}
+
+body.public-facing div.metadata-group {
+  display: flex;
+}
+
+body.public-facing .work-show.metadata-block dl .metadata-group:nth-child(even) {
+    background-color: #F6F6F6;
+    border-radius: 5px;
+}
+
+body.public-facing .work-show.metadata-block dl .metadata-group:nth-child(odd) {
+    background-color: #fff;
+    border-radius: 5px;
+}

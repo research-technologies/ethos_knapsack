@@ -1,0 +1,365 @@
+# Simple yaml config-driven schema which is used to define model attributes,
+# index key names, and form properties.
+#
+# Attributes must have a type but all other configuration options are optional.
+# Please note: If using Valkyrie's Fedora Metadata Adapter, predicates for attributes
+# must be placed here.
+#
+# attributes:
+#   attribute_name:
+#     type: string
+#     multiple: false
+#     index_keys:
+#       - "attribute_name_sim"
+#     form:
+#       required: true
+#       primary: true
+#       multiple: false
+#
+# @see config/metadata/basic_metadata.yaml for an example configuration
+#
+# Generated via
+#  `rails generate hyrax:work_resource ThesisOrDissertation`
+
+# The UKETD terms https://ethos.library.leeds.ac.uk/ethos-oai/2.0/uketdterms.xsd
+#
+#<xs:element name="authoridentifier" substitutionGroup="dc:creator"/>
+#<xs:element name="advisor" substitutionGroup="dc:contributor"/>
+#<xs:element name="sponsor" substitutionGroup="dc:contributor"/>
+#<xs:element name="checksum" substitutionGroup="dc:format"/>
+#<xs:element name="grantnumber" substitutionGroup="dc:identifier"/>
+#<xs:element name="institution" substitutionGroup="dc:publisher"/>
+#<xs:element name="department" substitutionGroup="dc:publisher"/>
+#<xs:element name="commercial" substitutionGroup="dc:publisher"/>
+#<xs:element name="embargotype" substitutionGroup="dc:rights"/>
+#<xs:element name="embargodate" substitutionGroup="dc:rights"/>
+#<xs:element name="embargoreason" substitutionGroup="dc:rights"/>
+#<xs:element name="qualificationname" substitutionGroup="dc:type"/>
+#<xs:element name="qualificationlevel" substitutionGroup="dc:type"/>
+
+attributes:
+  # Title will appear first...
+  creator: # Creator <dc:creator>
+    type: string
+    multiple: true
+    form:
+      required: false # todo work out validation that make this required
+      primary: true
+    index_keys:
+      - "creator_tesim"
+    predicate: http://purl.org/dc/elements/1.1/creator
+  creator_search: # Creator <dc:creator>
+    type: string
+    multiple: true
+    form:
+      required: false # todo work out validation that make this required
+      primary: true
+    index_keys:
+      - "creator_search_tesim"
+    predicate: http://purl.org/dc/elements/1.1/creator_name
+  language: # LANGUAGE <dc:language xsi:type="dcterms:ISO639-2">
+    type: string
+    multiple: true
+    facetable: true
+    form:
+      required: true
+      primary: true
+      multiple: true
+    index_keys:
+      - "language_tesim"
+      - "language_sim"
+    predicate: http://purl.org/dc/elements/1.1/language
+    view:
+      render_as: "faceted"
+      html_dl: true
+  qualification_name: # Qualification Name <uketdterms:qualificationname>
+    type: string
+    multiple: false
+    form:
+      required: true
+      primary: true
+      multiple: false
+    index_keys:
+      - "qualification_name_tesim"
+      - "qualification_name_sim"
+    predicate: http://ethos.library.leeds.ac.uk/uketd/terms/qualificationname
+    view:
+      render_as: "faceted"
+      html_dl: true
+  qualification_level: # Qualification Level <uketdterms:qualificationlevel>
+    type: string
+    multiple: false
+    form:
+      required: true
+      primary: true
+      multiple: false
+    index_keys:
+      - "qualification_level_tesim"
+    predicate: http://ethos.library.leeds.ac.uk/uketd/terms/qualificationlevel
+  current_he_institution: # CURRENT INSTITUTION <uketdterms:institution>
+    type: string
+    multiple: false
+    form:
+      required: true
+      primary: true
+      multiple: false
+    index_keys:
+      - "current_he_institution_tesim"
+      - "current_he_institution_sim"
+    predicate: http://ethos.library.leeds.ac.uk/uketd/terms/institution#current
+    view:
+      render_as: "faceted"
+      html_dl: true
+  alternative_title: # Alternative Title <dcterms:alternative>
+    type: string
+    multiple: true
+    form:
+      required: false
+      primary: true
+    index_keys:
+      - "alternative_title_tesim"
+    predicate: http://purl.org/dc/terms/alternative
+  contributor: # Supervisor <uketdterms:advisor>
+    type: string
+    multiple: true
+    form:
+      primary: true
+    index_keys:
+      - "contributor_tesim"
+    predicate: http://purl.org/dc/elements/1.1/contributor
+  contributor_search: # Creator <uketdterms:advisor>
+    type: string
+    multiple: true
+    form:
+      required: false
+      primary: true
+    index_keys:
+      - "contributor_search_tesim"
+    predicate: http://purl.org/dc/elements/1.1/contributor_name
+  abstract: #ABSTRACT <dcterms:abstract>
+    type: string
+    multiple: true
+    form:
+      required: false
+      primary: true
+    index_keys:
+      - "abstract_tesim"
+    predicate: http://purl.org/dc/elements/1.1/abstract
+  ethos_institution: # INSTITUION <dc:publisher>
+    type: string
+    multiple: true
+    form:
+      primary: true
+    index_keys:
+      - "ethos_institution_tesim"
+      - "ethos_institution_sim"
+    predicate: http://purl.org/dc/elements/1.1/publisher
+    view:
+      render_as: "faceted"
+      html_dl: true
+  org_unit: # DEPARTMENT <uketdterms:department>
+    type: string
+    multiple: true
+    form:
+      primary: true
+    index_keys:
+      - "org_unit_tesim"
+    predicate: http://ethos.library.leeds.ac.uk/uketd/terms/department
+  funder: # SPONSOR / FUNDER <uketdterms:sponsor>
+    type: string
+    multiple: true
+    form:
+      primary: true
+    index_keys:
+      - "funder_tesim"
+      - "funder_sim"
+    predicate: http://ethos.library.leeds.ac.uk/uketd/terms/sponsor
+    view:
+      render_as: "faceted"
+      html_dl: true
+  funder_search: 
+    type: string
+    multiple: true
+    form:
+      required: false
+      primary: true
+    index_keys:
+      - "funder_search_tesim"
+      - "funder_search_sim"
+    predicate: http://ethos.library.leeds.ac.uk/uketd/terms/sponsor_name
+  date_issued: #DATE AWARDED <dcterms:issued>
+    type: string
+    multiple: true
+    form:
+      primary: true
+    index_keys:
+      - "date_issued_tesim"
+      - "date_issued_sim"
+    predicate: http://purl.org/dc/terms/issued
+    view:
+      render_as: "faceted"
+      html_dl: true
+  keyword: # KEYWORDS  <dc:subject> (with no attribute) 
+    type: string
+    multiple: true
+    form:
+      required: false
+      primary: true
+    index_keys:
+      - "keyword_tesim"
+      - "keyword_sim"
+    predicate: http://purl.org/dc/terms/coverage
+    view:
+      render_as: "faceted"
+      html_dl: true
+  ethos_subject: # Subject <dc:coverage> 
+    type: string
+    multiple: true
+    form:
+      required: false
+      primary: true
+      multiple: true
+    index_keys:
+      - "ethos_subject_tesim"
+      - "subject_sim"
+      - "ethos_subject_sim"
+    predicate: http://purl.org/dc/elements/1.1/subject
+    view:
+      render_as: "faceted"
+      html_dl: true
+  dewey: # DEWEY <dc:subject xsi:type="dcterms:DDC">
+    type: string
+    multiple: true
+    form:
+      required: false
+      primary: true
+      multiple: true
+    index_keys:
+      - "dewey_tesim"
+      - "dewey_sim"
+    predicate: http://purl.org/dc/terms/DDC
+    view:
+      render_as: "faceted"
+      html_dl: true
+  ethos_access_rights: # Accessible? <dcterms:accessRights>
+    type: string
+    multiple: false
+    form:
+      required: false
+      primary: true
+      multiple: false
+    index_keys:
+      - "ethos_access_rights_tesim"
+      - "ethos_access_rights_sim"
+    predicate: http://www.w3.org/ns/ma-ont#hasAccessConditions
+    view:
+      render_as: "faceted"
+      html_dl: true
+  embargo_date: # Embargo <uketdterms:embargodate>
+    type: string
+    multiple: false
+    form:
+      required: false
+      primary: true
+      multiple: false
+    index_keys:
+      - "embargo_date_ssim"
+    predicate: https://www.rioxx.net/profiles/#rioxxterms:record_public_release_date
+  ethos_identifier: # Old EThOS ID <dc:source>
+    type: string     
+    multiple: false
+    form:
+      required: false
+      primary: true
+      multiple: false
+    index_keys:
+      - "ethos_identifier_tesim"
+      - "ethos_identifier_ssi"
+    predicate: http://purl.org/dc/elements/1.1/source
+  doi: # DOI <dc:identifier xsi:type="dcterms:DOI">
+    type: string
+    multiple: false
+    form:
+      required: false
+      primary: true
+      multiple: false
+    index_keys:
+      - "doi_ssim"
+    predicate: 	http://purl.org/dc/elements/1.1/identifier
+  referenced_by: # Referenced By <dcterms:isReferencedBy>
+    type: string
+    multiple: false
+    form:
+      required: false
+      primary: true
+      multiple: false
+    index_keys:
+      - "referenced_by_ssim"
+    predicate: 	http://ethos.bl.uk/original_identifier
+  oai_identifier: # Source ID <dcterms:provenance>
+    type: string
+    multiple: false
+    form:
+      required: false
+      primary: true
+      multiple: false
+    index_keys:
+      - "oai_identifier_ssim"
+    predicate: http://www.openarchives.org/OAI/2.0/oai-identifier
+  bl_cat_identifier: #BL Catalogue ID <dc:relation>
+    type: string
+    multiple: false
+    form:
+      required: false
+      primary: true
+      multiple: false
+    index_keys:
+      - "bl_cat_identifier_tesim"
+    predicate: 	http://ethos.bl.uk/bl_catalogue_identifier
+  other_identifier: #Other Identifier <dc:identifier xsi:type="dcterms:URI">
+    type: string
+    multiple: false
+    form:
+      required: false
+      primary: true
+      multiple: false
+    index_keys:
+      - "other_identifier_tesim"
+    predicate: http://ethos.bl.uk/other_identifier
+      #  source_record: # Old EThOS URL <dc:source>
+      #type: string
+      #multiple: false
+      #form:
+      #required: false
+      #primary: true
+      #multiple: false
+      #index_keys:
+      #- "source_record_tesim"
+      #predicate: 	http://purl.org/dc/elements/1.1/source
+  license:
+    type: string
+    multiple: true
+    form:
+      primary: true
+    index_keys:
+      - "license_tesim"
+      - "license_sim"
+    predicate: http://purl.org/dc/terms/license 
+  additional_info: # iNotes <NOT USED?>
+    type: string
+    multiple: true
+    form:
+      required: false
+      primary: true
+    index_keys:
+      - "additional_info_tesim"
+    predicate: http://purl.org/ontology/bibo/Note
+
+#  publisher: # COMMERCIAL PUBLISHER <NOT USED>
+#    type: string
+#    multiple: true
+#    form:
+#      primary: true
+#    index_keys:
+#      - "publisher_tesim"
+#    predicate: http://ethos.library.leeds.ac.uk/uketd/terms/commercial

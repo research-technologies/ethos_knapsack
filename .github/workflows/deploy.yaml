@@ -4,15 +4,16 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Deploy to Environment'
+        description: "Deploy to Environment"
         required: true
-        default: 'friends'
+        default: "staging"
         type: choice
         options:
-          - friends
+          - staging
+          - production
       debug_enabled:
         type: boolean
-        description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
+        description: "Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)"
         required: false
         default: false
 

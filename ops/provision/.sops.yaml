@@ -1,0 +1,12 @@
+# SOPS configuration file
+# This file tells SOPS which encryption key to use
+#
+# To add additional team members:
+# 1. Have them import the SOPS key from 1Password
+# 2. Run: gpg --list-keys --keyid-format LONG
+# 3. Find their key ID (the long string after "pub")
+# 4. Add their key ID to the pgp list below (comma-separated)
+
+creation_rules:
+  - pgp: >-
+      3B1B168B501A50A1A0D1174BB7D8F807265CA841

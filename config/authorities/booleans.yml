@@ -1,0 +1,10 @@
+terms:
+- id: True
+  term: True
+  active: true
+- id: False
+  term: False
+  active: true
+- id: NotSet
+  term: "Not Set"
+  active: false

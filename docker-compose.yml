@@ -3,11 +3,11 @@ x-app: &app
     context: .
     target: hyku-web
     cache_from:
-      - ghcr.io/samvera-labs/hyku_knapsack:latest
+      - ghcr.io/research-technologies/ethos_knapsack/web:latest
     args:
       BUILDKIT_INLINE_CACHE: 1
       APP_PATH: ./hyrax-webapp
-  image: ghcr.io/samvera-labs/hyku_knapsack:${TAG:-latest}
+  image: ghcr.io/research-technologies/ethos_knapsack/web:${TAG:-latest}
   env_file:
     - .env
     - .env.development
@@ -50,7 +50,14 @@ services:
       service: zoo
 
   solr:
-    image: ghcr.io/samvera-labs/hyku_knapsack/solr:${TAG:-latest}
+    image: ghcr.io/research-technologies/ethos_knapsack/solr:${TAG:-latest}
+    build:
+      context: .
+      target: hyku-solr
+      args:
+        BUILDKIT_INLINE_CACHE: 1
+      cache_from:
+        - ghcr.io/research-technologies/ethos_knapsack/solr:latest
     extends:
       file: hyrax-webapp/docker-compose.yml
       service: solr
@@ -87,11 +94,11 @@ services:
       context: .
       target: hyku-worker
       cache_from:
-        - ghcr.io/samvera-labs/hyku_knapsack/worker:latest
+        - ghcr.io/research-technologies/ethos_knapsack/worker:latest
       args:
         BUILDKIT_INLINE_CACHE: 1
         APP_PATH: ./hyrax-webapp
-    image: ghcr.io/samvera-labs/hyku_knapsack/worker:${TAG:-latest}
+    image: ghcr.io/research-technologies/ethos_knapsack/worker:${TAG:-latest}
     # Uncomment command to access container with out starting bin/worker. Useful for debugging or updating Gemfile.lock
     # command: sleep infinity
     volumes:

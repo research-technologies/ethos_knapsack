@@ -1,0 +1,10 @@
+terms:
+- id: open
+  term: Open
+  active: false
+- id: restricted
+  term: Restricted
+  active: true
+- id: NotSet
+  term: "Not Set"
+  active: false

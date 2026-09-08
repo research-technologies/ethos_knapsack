@@ -1,0 +1,77 @@
+en:
+  hyrax:
+    product_name: "EThOS"
+    pages:
+      tabs:
+        contact_us_page: Contact Us
+  simple_form:
+    labels:
+      defaults:
+        contributor: "Supervisor(s)"
+        qualification_name: "Qualification Name"
+        qualification_level: "Qualification Level"
+        current_he_institution: "University"
+        ethos_institution: "Awarding Institution"
+        org_unit: "Department"
+        funder: "Funder"
+        grant_number: "Grant Number"
+        date_issued: "Date Awarded"
+        keyword: "Keywords"
+        ethos_subject: "Subject Discipline"
+        dewey: "DDC Subject"
+        ethos_access_rights: "Is source file restricted?"
+        embargo_date: "Embargo"
+        ethos_identifier: "EThOS ID"
+        doi: "DOI"
+        referenced_by: "Access Thesis"
+        oai_identifier: "Source ID"
+        bl_cat_identifier: "BL Catalogue ID [Aleph]"
+        other_identifier: "Other Identifier"
+        additional_info: "Notes"
+        license: Licence
+  blacklight:
+    search:
+      ethos_start_over: Clear Filters
+      fields:
+        alternative_title: Alternative Title
+        creator: Author
+        contributor: Supervisor(s)
+        abstract: Abstract
+        qualification_name: Qualification Name
+        qualification_level: Qualification Level
+        ethos_institution: Awarding Institution
+        current_he_institution: University
+        org_unit: Department
+        funder: Funder(s)
+        publisher: Commercial Publisher
+        date_accepted: Date Submitted
+        date_issued: Date Awarded
+        language: Language
+        keyword: Keywords
+        ethos_subject: Subject Discipline
+        dewey: DDC Subject
+        ethos_access_rights: Accessible
+        embargo_date: Embargo
+        doi: DOI
+        referenced_by: Access Thesis
+        oai_identifier: Source ID
+        source_record: Old EThOS URL
+        licence: Licence
+        ethos_identifier: EThOS ID
+        facet:
+          keyword_sim: Keywords
+          ethos_subject_sim: Subject Discipline
+        index:
+          license_tesim: Licence
+        show:
+          keyword: Keywords
+  blacklight_advanced_search:
+    all: all
+    any: any
+    form:
+      title: Advanced Search
+      search_context: Within search
+      limit_criteria_heading_html: "<strong>AND</strong> have these attributes"
+      query_criteria_heading_html: "Find items that match %{select_menu} of"
+      sort_label: "Sort results by"
+      start_over: "Clear Search"

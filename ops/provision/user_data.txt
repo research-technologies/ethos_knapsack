@@ -1,0 +1,40 @@
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="==MYBOUNDARY=="
+
+--==MYBOUNDARY==
+Content-Type: text/x-shellscript; charset="us-ascii"
+
+#!/bin/bash
+set -eu
+
+# Bootstrap EKS worker so it can join the cluster (required when Terraform manages this LT)
+/etc/eks/bootstrap.sh "${cluster_name}" \
+  --apiserver-endpoint "${cluster_endpoint}" \
+  --b64-cluster-ca "${cluster_ca}"
+
+--==MYBOUNDARY==
+Content-Type: text/x-shellscript; charset="us-ascii"
+
+#!/bin/bash
+set -eux
+
+echo "Running custom user data script"
+
+# Setup SSH for admin users
+mkdir -p /home/ec2-user/.ssh || true
+chmod 700 /home/ec2-user/.ssh || true
+
+# Add SSH keys from GitHub (matches current AWS LT: orangewolf, aprilrieger, maxkadel)
+${github_users}
+
+chown -R ec2-user:ec2-user /home/ec2-user/.ssh || true
+chmod 600 /home/ec2-user/.ssh/authorized_keys 2>/dev/null || true
+
+%{ if enable_site24x7 && site24x7_key != "" ~}
+# Site24x7 monitoring agent (matches current AWS LT: BritishLibraryEthos group)
+wget -q https://staticdownloads.site24x7.com/server/Site24x7InstallScript.sh
+bash Site24x7InstallScript.sh -i -key=${site24x7_key} -gn="${site24x7_group}" -automation=true -tp="Default Threshold - SERVER" -np="Main" -rule="Main"
+rm -f Site24x7InstallScript.sh
+%{ endif ~}
+
+--==MYBOUNDARY==--

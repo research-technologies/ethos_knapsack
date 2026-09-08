@@ -1,0 +1,48 @@
+<% embargo_date = presenter.embargo_date.first %>
+<% unless embargo_date.blank? %>
+  <% embargo_date_date = DateTime.parse(embargo_date) %>
+  <% embargo_date = nil unless Date.tomorrow.before?(embargo_date_date) %>
+<% end %>
+<% access_rights = presenter.ethos_access_rights.first %>
+
+<div class="ethos_work_title_sub">
+  <dl>
+  <%= render "hyrax/base/creator", presenter: presenter, section: "metadata" %>
+  <%#= presenter.attribute_to_html(:qualification_name, html_dl: true) %>
+  <%#= presenter.attribute_to_html(:current_he_institution, html_dl: true) %>
+  <%= render "hyrax/base/qualification_name", presenter: presenter, section: "metadata" %>
+  <%= render "hyrax/base/current_he_institution", presenter: presenter, section: "metadata" %>
+  <%= presenter.attribute_to_html(:date_issued, html_dl: true) %>
+  </dl>
+  <% unless presenter.referenced_by.blank? || presenter.referenced_by.all?(&:blank?) %>
+    <div class="show-actions">
+      <%= link_to presenter.referenced_by.first, target: "_blank", rel: "noopener external" do %>
+        <button class="basic-button mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ethos-button small">
+          <span class="mat-mdc-button-persistent-ripple mdc-button__ripple"></span>
+          &nbsp;
+          <span class="fa fa-external-link"></span>
+          <span class="mdc-button__label">&nbsp; Access thesis from university &nbsp;</span>
+        </button>
+      <% end %>
+  
+      <% if access_rights.present? %>
+        <br/>
+        <div class="ethos-restrictions" style="width: 100%;">
+          <div style="margin: auto; width: 100px;">
+            <%= presenter.ethos_access_rights.first.titleize %>
+          </div>
+        </div>
+      <% end %>
+
+      <% if embargo_date.present? %>
+        <br/>
+        <div class="ethos-restrictions" style="width: 100%;">
+          <div style="margin: auto; width: 250px">
+            Embargoed until <%= embargo_date_date.strftime("%d %B %Y") %> 
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+  <% end %>
+</div>
