@@ -3,9 +3,8 @@
 # Load the uketd_dc OAI provider
 require 'oai/provider/metadata_format/uketd_dc'
 OAI::Provider::Base.register_format(OAI::Provider::Metadata::UketdDc.instance)
-
+# rubocop:disable Metrics/BlockLength
 Rails.application.config.after_initialize do
- 
   # Override BlacklightOaiProvider 7.0.2 to handle Dates as well as DateTimes
   BlacklightOaiProvider::ResumptionToken.class_eval do
     def encode_conditions
@@ -17,7 +16,7 @@ Rails.application.config.after_initialize do
       encoded_token << ":#{last}"
     end
   end
-  
+
   # Overrides blacklight_oai_provider
   BlacklightOaiProvider::SolrSet.class_eval do
     def self.sets_from_facets(facet_results)
@@ -27,10 +26,10 @@ Rails.application.config.after_initialize do
                      .select { |t| t[0] != '' } # added to avoid choking on empty values
                      .map { |t| new("#{f[:label]}:#{t.first}") }
       end.flatten
-  
+
       sets.empty? ? nil : sets
     end
-  
+
     # Override and offer translation of an authority id into a term if possible
     def name
       (field, value) = spec.split(':')
@@ -41,14 +40,14 @@ Rails.application.config.after_initialize do
       end
     end
   end
-  
+
   # Only show Theses in OAI (no collections)
   BlacklightOaiProvider::SolrDocumentWrapper.class_eval do
     def conditions(constraints) # conditions/query derived from options
       query = search_service.search_builder.merge(sort: "#{solr_timestamp} asc", rows: limit).query
-  
+
       query.append_filter_query("has_model_ssim:ThesisOrDissertation")
-  
+
       if constraints[:from].present? || constraints[:until].present?
         from_val = solr_date(constraints[:from])
         to_val = solr_date(constraints[:until], true)
@@ -58,12 +57,12 @@ Rails.application.config.after_initialize do
           query.append_filter_query("#{solr_timestamp}:[#{from_val} TO #{to_val}]")
         end
       end
-  
+
       query.append_filter_query(@set.from_spec(constraints[:set])) if constraints[:set].present?
       query
     end
   end
-  
+
   Blacklight::Document::DublinCore.module_eval do # rubocop:disable Metrics/BlockLength
     # dublin core elements are mapped against the #dublin_core_field_names whitelist.
     def export_as_oai_dc_xml # rubocop:disable Metrics/MethodLength
@@ -87,7 +86,7 @@ Rails.application.config.after_initialize do
       end
       xml.target!
     end
-  
+
     def translate_authority(v, field)
       if field == :publisher
         Hyrax::CurrentHeInstitutionsService.label(v)
@@ -96,5 +95,5 @@ Rails.application.config.after_initialize do
       end
     end
   end
-
-end  
+end
+# rubocop:enable Metrics/BlockLength

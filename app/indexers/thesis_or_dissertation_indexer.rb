@@ -10,8 +10,8 @@ class ThesisOrDissertationIndexer < Hyrax::ValkyrieWorkIndexer
   # Uncomment this block if you want to add custom indexing behavior:
   def to_solr
     super.tap do |index_document|
-      index_document[:title_tesim]   = resource.title
-      #index_document[:other_field_ssim] = resource.other_field
+      index_document[:title_tesim] = resource.title
+      # index_document[:other_field_ssim] = resource.other_field
     end
   end
 end

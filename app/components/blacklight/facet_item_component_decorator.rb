@@ -9,7 +9,7 @@ module Blacklight
         link_to_unless(@suppress_link, Hyrax::LanguagesService.term(label), href, class: "facet-select", rel: "nofollow")
       end + render_facet_count
     end
-  
+
     def render_selected_facet_value_with_authority_term
       tag.span(class: "facet-label") do
         tag.span(Hyrax::LanguagesService.term(label), class: "selected") +

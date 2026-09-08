@@ -13,7 +13,7 @@ module Blacklight
         facet_item_component(facet_config, item, facet_field, **options).render_facet_value
       end
     end
-  
+
     def render_selected_facet_value(facet_field, item)
       deprecated_method(:render_selected_facet_value)
       facet_config = facet_configuration_for_field(facet_field)
@@ -23,7 +23,6 @@ module Blacklight
         facet_item_component(facet_config, item, facet_field).render_selected_facet_value
       end
     end
-
   end
 end
 

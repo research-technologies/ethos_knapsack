@@ -1,6 +1,9 @@
-Rails.application.config.after_initialize do
+# frozen_string_literal: true
 
-  # rubocop:disable Metrics/BlockLength
+# OVERRIDE HYKU 7.1 make a solrDocument for EThOS
+
+# rubocop:disable Metrics/BlockLength
+Rails.application.config.after_initialize do
   SolrDocument.class_eval do
     use_extension(Hydra::ContentNegotiation)
     field_semantics.merge!(
@@ -15,14 +18,14 @@ Rails.application.config.after_initialize do
       subject: ['dewey_tesim', 'keyword_tesim'],
       title: 'title_tesim'
     )
-  
+
     use_extension(Blacklight::Document::UketdDc)
     def to_uketd_dc
       export_as('uketd_dc_xml')
     end
-  
+
     # Add field to the solrDocument (required before new fields will appear in catalog controller)
-  
+
     attribute :title, Hyrax::SolrDocument::Metadata::Solr::Array, 'title_tesim'
     attribute :alternative_title, Hyrax::SolrDocument::Metadata::Solr::Array, 'alternative_title_tesim'
     attribute :creator, Hyrax::SolrDocument::Metadata::Solr::Array, 'creator_tesim'
@@ -52,5 +55,5 @@ Rails.application.config.after_initialize do
     attribute :ethos_identifier, Hyrax::SolrDocument::Metadata::Solr::Array, 'ethos_identifier_ssi'
     attribute :licence, Hyrax::SolrDocument::Metadata::Solr::Array, 'licence_tesim'
   end
-
 end
+# rubocop:enable Metrics/BlockLength
