@@ -2,7 +2,11 @@
 <script>
 
   function ga_event_data(form_type, event_type, data) {
-      return $.extend({'event': event_type, 'form_type': form_type}, data );
+      common_data = {'event': event_type};
+      if(form_type !== undefined){
+        common_data['form_type'] =  form_type;
+      }
+      return $.extend(common_data, data);
   }
   function get_params(url) {
       var match = url.match(/\?(.*)$/); 
@@ -49,10 +53,8 @@
             data[name] = value;
           }
         });
-        window.dataLayer.push(ga_event_data('search', 'form_submission', data)); 
-        //event.preventDefault();
-        //return false;
-      });
+        window.dataLayer.push(ga_event_data('search_advanced', 'form_submission', data)); 
+    });
 
     // CLICK SEARCH RESULT
       $('.search-result-title a').on("click", function(event){
@@ -88,7 +90,7 @@
           }
         });
 
-        window.dataLayer.push(ga_event_data('search_results', 'search_result_click', data));
+        window.dataLayer.push(ga_event_data(undefined, 'search_result_click', data));
 
     });
     // SEARCH RESULT PAGE LOAD
