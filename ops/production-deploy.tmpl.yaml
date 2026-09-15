@@ -249,6 +249,13 @@ extraEnvVars: &envVars
 
 worker:
   replicaCount: 1
+  resources:
+    limits:
+      memory: "4Gi"
+      cpu: "1.5"
+    requests:
+      memory: "2Gi"
+      cpu: "750m"
   extraVolumeMounts: *volMounts
   extraEnvVars: *envVars
   podSecurityContext:
