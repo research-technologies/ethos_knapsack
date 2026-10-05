@@ -30,6 +30,7 @@ en:
         additional_info: "Notes"
         license: Licence
   blacklight:
+    application_name: EThOS
     search:
       ethos_start_over: Clear Filters
       fields:
