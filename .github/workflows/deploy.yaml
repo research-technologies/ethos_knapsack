@@ -18,6 +18,7 @@ on:
         default: false
 
 jobs:
+<<<<<<< HEAD
   deployment:
     runs-on: ubuntu-latest
     container: dtzar/helm-kubectl:3.9.4
@@ -56,3 +57,8 @@ jobs:
           export DEPLOY_IMAGE=ghcr.io/${REPO_LOWER}/web;
           export WORKER_IMAGE=ghcr.io/${REPO_LOWER}/worker;
           ./bin/helm_deploy ${{ inputs.k8s-release-name || format('{0}-{1}', github.event.repository.name, inputs.environment) }} ${{ inputs.k8s-namespace || format('{0}-{1}', github.event.repository.name, inputs.environment) }}
+=======
+  deploy:
+    uses: notch8/actions/.github/workflows/deploy.yaml@v1.0.4
+    secrets: inherit
+>>>>>>> prime/main
