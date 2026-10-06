@@ -28,3 +28,6 @@ pg/*
 fits.log
 ImageMagick*
 .DS_Store
+
+# Don't leave this in
+.bundle
