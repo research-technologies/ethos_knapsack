@@ -35,7 +35,7 @@ module HykuKnapsack
     module_function
 
     def call
-      concerns = Hyrax.config.curation_concerns
+      concerns = ::Hyrax.config.curation_concerns
       child_concerns = concerns.reject { |klass| barred_as_child?(klass) }
       concerns.each do |klass|
         next unless klass.respond_to?(:valid_child_concerns=)
