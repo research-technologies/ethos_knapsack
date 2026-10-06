@@ -97,10 +97,10 @@ module HykuKnapsack
 
     config.after_initialize do
       derivative_services = [IiifPrint::PluggableDerivativeService]
-      if Hyrax.config.respond_to?(:derivative_services=)
-        Hyrax.config.derivative_services = derivative_services
+      if config.respond_to?(:derivative_services=)
+        config.derivative_services = derivative_services
       else
-        Hyrax::DerivativeService.services = derivative_services
+        ::Hyrax::DerivativeService.services = derivative_services
       end
 
       # This is the opposite of what you usually want to do.  Normally app views override engine
