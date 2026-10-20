@@ -3,7 +3,7 @@
 # Load the uketd_dc OAI provider
 require 'oai/provider/metadata_format/uketd_dc'
 OAI::Provider::Base.register_format(OAI::Provider::Metadata::UketdDc.instance)
-
+# rubocop:disable Metrics/BlockLength
 Rails.application.config.after_initialize do
   Blacklight::Document::DublinCore.module_eval do # rubocop:disable Metrics/BlockLength
     # dublin core elements are mapped against the #dublin_core_field_names whitelist.
@@ -28,7 +28,7 @@ Rails.application.config.after_initialize do
       end
       xml.target!
     end
-  
+
     def translate_authority(v, field)
       if field == :publisher
         Hyrax::CurrentHeInstitutionsService.label(v)
@@ -38,3 +38,4 @@ Rails.application.config.after_initialize do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength

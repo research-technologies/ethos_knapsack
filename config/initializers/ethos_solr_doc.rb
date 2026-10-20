@@ -17,14 +17,14 @@ Rails.application.config.after_initialize do
       subject: ['dewey_tesim', 'keyword_tesim'],
       title: 'title_tesim'
     )
-  
+
     use_extension(Blacklight::Document::UketdDc)
     def to_uketd_dc
       export_as('uketd_dc_xml')
     end
-  
+
     # Add field to the solrDocument (required before nwe fields will appear in catalog controller:w
-  
+
     attribute :alternative_title, Hyrax::SolrDocument::Metadata::Solr::Array, 'alternative_title_tesim'
     attribute :creator, Hyrax::SolrDocument::Metadata::Solr::Array, 'creator_tesim'
     attribute :creator_search, Hyrax::SolrDocument::Metadata::Solr::Array, 'creator_search_tesim'
@@ -54,4 +54,4 @@ Rails.application.config.after_initialize do
     attribute :licence, Hyrax::SolrDocument::Metadata::Solr::Array, 'licence_tesim'
   end
 end
-# rubocop:enable Metrics/BlockLength  
+# rubocop:enable Metrics/BlockLength

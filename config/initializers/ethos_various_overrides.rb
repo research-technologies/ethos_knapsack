@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-Rails.application.config.after_initialize do 
+# rubocop:disable Metrics/BlockLength
+Rails.application.config.after_initialize do
   # Overrides Hyku WorkShowPresenter
   Hyku::WorkShowPresenter.class_eval do
     def doi
@@ -8,7 +9,7 @@ Rails.application.config.after_initialize do
       doi = extract_from_identifier(doi_regex)
       doi&.join
     end
-  
+
     def extract_from_identifier(rgx)
       if solr_document['doi_ssim'].present?
         ref = solr_document['doi_ssim'].map do |str|
@@ -18,7 +19,7 @@ Rails.application.config.after_initialize do
       ref
     end
   end
-  
+
   # Override BlacklightOaiProvider 7.0.2 to handle Dates as well as DateTimes
   BlacklightOaiProvider::ResumptionToken.class_eval do
     def encode_conditions
@@ -30,7 +31,7 @@ Rails.application.config.after_initialize do
       encoded_token << ":#{last}"
     end
   end
-  
+
   # Overrides blacklight_oai_provider
   BlacklightOaiProvider::SolrSet.class_eval do
     def self.sets_from_facets(facet_results)
@@ -40,10 +41,10 @@ Rails.application.config.after_initialize do
                      .select { |t| t[0] != '' } # added to avoid choking on empty values
                      .map { |t| new("#{f[:label]}:#{t.first}") }
       end.flatten
-  
+
       sets.empty? ? nil : sets
     end
-  
+
     # Override and offer translation of an authority id into a term if possible
     def name
       (field, value) = spec.split(':')
@@ -54,14 +55,14 @@ Rails.application.config.after_initialize do
       end
     end
   end
-  
+
   # Only show Theses in OAI (no collections)
   BlacklightOaiProvider::SolrDocumentWrapper.class_eval do
     def conditions(constraints) # conditions/query derived from options
       query = search_service.search_builder.merge(sort: "#{solr_timestamp} asc", rows: limit).query
-  
+
       query.append_filter_query("has_model_ssim:ThesisOrDissertation")
-  
+
       if constraints[:from].present? || constraints[:until].present?
         from_val = solr_date(constraints[:from])
         to_val = solr_date(constraints[:until], true)
@@ -71,12 +72,12 @@ Rails.application.config.after_initialize do
           query.append_filter_query("#{solr_timestamp}:[#{from_val} TO #{to_val}]")
         end
       end
-  
+
       query.append_filter_query(@set.from_spec(constraints[:set])) if constraints[:set].present?
       query
     end
   end
-  
+
   HyraxHelper.module_eval do
     def available_translations
       {
@@ -84,19 +85,19 @@ Rails.application.config.after_initialize do
       }
     end
   end
-  
+
   Hyrax::Renderers::AttributeRenderer.class_eval do
     # Draw the dl row for the attribute
     def render_dl_row
       return '' if values.blank? && !options[:include_empty]
-  
+
       markup = %(<div class="metadata-group"><dt>#{label}</dt>\n<dd><ul class='tabular'>)
-  
+
       attributes = microdata_object_attributes(field).merge(class: "attribute attribute-#{field}")
-  
+
       values_array = Array(values)
       values_array.sort! if options[:sort]
-  
+
       markup += values_array.map do |value|
         "<li#{html_attributes(attributes)}>#{attribute_value_to_html(value.to_s)}</li>"
       end.join
@@ -106,7 +107,7 @@ Rails.application.config.after_initialize do
       # rubocop:enable Rails/OutputSafety
     end
   end
-  
+
   # Override Hyrax 5.0.5 add a target to external links
   Hyrax::Renderers::ExternalLinkAttributeRenderer.class_eval do
     def li_value(value)
@@ -115,8 +116,7 @@ Rails.application.config.after_initialize do
       end
     end
   end
-  
-  
+
   # OVERRIDE HYKU and add a static contact page (used by BL instead of form)
   # rubocop:disable Metrics/BlockLength
   ContentBlock.class_eval do
@@ -134,7 +134,7 @@ Rails.application.config.after_initialize do
       homepage_about_section_content: :homepage_about_section_content,
       contact_us: :contact_us_page
     }.freeze
-  
+
     # NOTE: method defined outside the metaclass wrapper below because
     # `for` is a reserved word in Ruby.
     def self.for(key)
@@ -142,20 +142,20 @@ Rails.application.config.after_initialize do
       raise ArgumentError, "#{key} is not a ContentBlock name" unless registered?(key)
       ContentBlock.public_send(NAME_REGISTRY[key])
     end
-  
+
     class << self
       def registered?(key)
         NAME_REGISTRY.include?(key)
       end
-  
+
       def contact_us_page
         find_or_create_by(name: 'contact_us_page')
       end
-  
+
       def contact_us_page=(value)
         contact_us_page.update(value:)
       end
     end
   end
-  # rubocop:enable Metrics/BlockLength
 end
+# rubocop:enable Metrics/BlockLength

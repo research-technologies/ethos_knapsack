@@ -2,13 +2,11 @@
 
 # rubocop:disable Metrics/BlockLength
 module CatalogControllerDecorator
-
 end
 
 CatalogController.prepend(CatalogControllerDecorator)
 
 CatalogController.configure_blacklight do |config|
-
   config.oai[:document][:set_fields] = [
     { label: "Subject Discipline", solr_field: "ethos_subject_sim" },
     { label: "University", solr_field: "current_he_institution_sim", helper_method: :current_he_institution_label }
@@ -64,7 +62,7 @@ CatalogController.configure_blacklight do |config|
   config.add_show_field 'licence_tesim'
 
   config.search_fields.delete(:resource_type)
- 
+
   # This one uses all the defaults set by the solr request handler. Which
   # solr request handler? The one set in config[:default_solr_parameters][:qt],
   # since we aren't specifying it otherwise.
@@ -203,4 +201,3 @@ CatalogController.configure_blacklight do |config|
   config.add_sort_field "date_issued_sim asc", label: "Date Awarded (Ascending)"
   config.add_sort_field "date_issued_sim desc", label: "Date Awarded (Descending)"
 end
-
