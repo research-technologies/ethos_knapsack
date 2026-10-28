@@ -19,7 +19,7 @@ on:
 
 jobs:
   deploy:
-    uses: notch8/actions/.github/workflows/deploy.yaml@v1.0.4
+    uses: notch8/actions/.github/workflows/deploy.yaml@v1.0.12
     secrets: inherit
     with:
       environment: ${{ inputs.environment }}
