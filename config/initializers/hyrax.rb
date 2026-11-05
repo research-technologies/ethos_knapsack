@@ -41,16 +41,26 @@ Blacklight::Document::DublinCore.module_eval do # rubocop:disable Metrics/BlockL
           value_to_tag(v, xml, field, "dcterms")
         end
       end
+      dini_oai_elements.each { |field, value| value_to_tag(value, xml, field) }
     end
     xml.target!
   end
 
   def translate_authority(v, field)
-    if field == :publisher
-      Hyrax::CurrentHeInstitutionsService.label(v)
-    else
-      v
+    case field
+    when :publisher then Hyrax::CurrentHeInstitutionsService.label(v)
+    when :language then Ethos::Dini.iso_639_3(v)
+    else v
     end
+  end
+
+  # Values DINI requires in oai_dc only, so uketd_dc is left as it is.
+  def dini_oai_elements
+    levels = self['qualification_level_tesim']
+    types = Ethos::Dini.doc_types(levels).map { |type| "doc-type:#{type}" } + Ethos::Dini.coar_types(levels)
+    subjects = Ethos::Dini.ddc_groups(self['dewey_tesim']).map { |group| "ddc:#{group}" }
+
+    types.map { |value| [:type, value] } + subjects.map { |value| [:subject, value] }
   end
 end
 
@@ -106,11 +116,25 @@ SolrDocument.class_eval do
   attribute :licence, Hyrax::SolrDocument::Metadata::Solr::Array, 'licence_tesim'
 end
 
+require 'ethos_list_set'
+
 ::CatalogController.class_eval do
+  blacklight_config.oai[:provider][:repository_url] = ->(controller) { controller.oai_catalog_url(locale: nil) }
+  blacklight_config.oai[:provider][:extra_description] = <<~XML.delete("\n")
+    <description><oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+    <dc:description>EThOS is the UK national repository of doctoral theses.</dc:description>
+    </oai_dc:dc></description>
+  XML
+
   blacklight_config.oai[:document][:set_fields] = [
     { label: "Subject Discipline", solr_field: "ethos_subject_sim" },
     { label: "University", solr_field: "current_he_institution_sim", helper_method: :current_he_institution_label }
   ]
+
+  blacklight_config.oai[:document][:set_model] = EthosListSet
 
   # I hope there is a better way to re-order facets
   # Remove the ones that are set by hyku
@@ -341,39 +365,22 @@ Hyku::WorkShowPresenter.class_eval do
   end
 end
 
+
 # Override BlacklightOaiProvider 7.0.2 to handle Dates as well as DateTimes
 BlacklightOaiProvider::ResumptionToken.class_eval do
   def encode_conditions
     encoded_token = @prefix.to_s.dup
-    encoded_token << ".s(#{set})" if set
+    # A dot splits the token when it is parsed, and ddc:333.7 has one. EthosListSet.from_spec restores it.
+    encoded_token << ".s(#{set.to_s.tr('.', '!')})" if set
     encoded_token << ".f(#{from.to_datetime.utc.xmlschema})" if from
     encoded_token << ".u(#{self.until.to_datetime.utc.xmlschema})" if self.until
     encoded_token << ".t(#{total})" if total
     encoded_token << ":#{last}"
   end
-end
 
-# Overrides blacklight_oai_provider
-BlacklightOaiProvider::SolrSet.class_eval do
-  def self.sets_from_facets(facet_results)
-    sets = Array.wrap(@fields).map do |f|
-      facet_results.fetch(f[:solr_field], [])
-                   .each_slice(2)
-                   .select { |t| t[0] != '' } # added to avoid choking on empty values
-                   .map { |t| new("#{f[:label]}:#{t.first}") }
-    end.flatten
-
-    sets.empty? ? nil : sets
-  end
-
-  # Override and offer translation of an authority id into a term if possible
-  def name
-    (field, value) = spec.split(':')
-    if field == "University"
-      "#{field.titleize}: #{Hyrax::CurrentHeInstitutionsService.label(value)}"
-    else
-      spec.titleize.gsub(':', ': ')
-    end
+  # Tokens hold an offset, so they do not really expire. DINI recommends at least 24 hours.
+  def expiration
+    1.day.from_now
   end
 end
 
