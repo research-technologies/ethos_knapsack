@@ -98,11 +98,10 @@ terms:
     grid: grid.5600.3
     active: true
   - id: City, University of London
-    term: City, University of London
-    isni: 0000 0004 1936 8497
-    ror: https://ror.org/04489at23
-    wikidata: Q1094046
-    grid: grid.28577.3f
+    term: City St George’s, University of London
+    isni: 0000 0005 1772 2285
+    ror: https://ror.org/047ybhc09
+    wikidata: Q124917493
     active: true
   - id: Courtauld Institute of Art
     term: Courtauld Institute of Art
@@ -516,11 +515,10 @@ terms:
     grid: grid.31044.32
     active: true
   - id: St George's, University of London
-    term: St George's, University of London
-    isni: 0000 0000 8546 682X
-    ror: https://ror.org/040f08y74
-    wikidata: Q772421
-    grid: grid.264200.2
+    term: City St George’s, University of London
+    isni: 0000 0005 1772 2285
+    ror: https://ror.org/047ybhc09
+    wikidata: Q124917493
     active: true
   - id: St Mary's University Twickenham London
     term: St Mary's University Twickenham London
