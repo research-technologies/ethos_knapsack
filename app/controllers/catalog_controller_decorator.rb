@@ -16,9 +16,9 @@ CatalogController.configure_blacklight do |config|
   # Remove the ones that are set by hyku
   config.facet_fields.clear
   # Then add all in correct order
-  #config.add_facet_field 'subject_sim', label: "Subject discipline", limit: 5
+  # config.add_facet_field 'subject_sim', label: "Subject discipline", limit: 5
   config.add_facet_field 'ethos_subject_sim', label: "Subject Discipline", limit: 5 # , single: true
-  #config.add_facet_field 'keyword_sim', limit: 5
+  # config.add_facet_field 'keyword_sim', limit: 5
   config.add_facet_field 'date_issued_sim', label: "Date Awarded", limit: 5, sort: 'index' # , single: true
   config.add_facet_field 'qualification_name_sim', label: "Qualification Name", limit: 5 # , single: true
   config.add_facet_field 'funder_search_sim', label: "Funder(s)", limit: 5
