@@ -4,9 +4,7 @@
 # rubocop:disable Metrics/BlockLength
 Rails.application.config.after_initialize do
   Bulkrax.setup do |config|
-    config.parsers += [
-      { name: " XML - UKETD DC Parser", class_name: "Bulkrax::XmlEtdDcParser", partial: "xml_fields" }
-    ]
+    config.parsers += [{ name: "XML - UKETD DC Parser", class_name: "Bulkrax::XmlEtdDcParser", partial: "xml_fields" }] unless config.parsers.any? { |p| p[:class_name] == "Bulkrax::XmlEtdDcParser" }
 
     #    config.fill_in_blank_source_identifiers = ->(obj, index) { "#{Site.instance.account.name}-#{obj.importerexporter.id}-#{index}" }
     config.fill_in_blank_source_identifiers = ->(_obj, _index) { "uk.bl.ethos.#{::Ethos::IdentifierService.mint}" }
