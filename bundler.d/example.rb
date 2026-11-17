@@ -6,7 +6,6 @@
 # or `ensure_gem` to make sure a gem is there w/o worrying about if it is an
 # override or not
 
-# OVERRIDE Bulkrax (floating on main, unpinned) Gemfile bulkrax source: pins
-#   to the commit where a dependency fix landed, instead of floating on main.
-#   Keep: converts an unpinned floating dependency into a reviewable pin.
+# OVERRIDE Bulkrax (floating on main) Gemfile bulkrax source: pins to a fixed commit instead of floating on main.
+#   Keep: converts an unreviewed floating dependency into an explicit, auditable pin.
 override_gem "bulkrax", github: "samvera/bulkrax", ref: "acc18e45a95e05d9f3c030ddef0a84a71a8d5975"
