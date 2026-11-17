@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # OVERRIDE Bulkrax (acc18e4) Wings::CustomQueries::FindBySourceIdentifier: restores the class Bulkrax removed in samvera/bulkrax#1209.
-#   Remove once hyrax-webapp vendors a Hyrax version that defines this itself.
+#   Remove once hyrax-webapp's wings.rb drops this registration too, as samvera/hyrax#7747 already did for Hyrax's own dummy apps.
 
 return if defined?(Hyrax) && Hyrax.try(:config).try(:disable_wings)
 
