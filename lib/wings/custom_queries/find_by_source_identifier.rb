@@ -30,7 +30,7 @@ module Wings
         # This is doing a solr search first, so we have to use the search_field instead of the property for "field"
         # If it cannot find the object in Solr, it falls back to an ActiveFedora search, if the object is an ActiveFedora object
         af_object = Bulkrax::ObjectFactory.search_by_property(
-          value: value,
+          value:,
           klass: ActiveFedora::Base,
           field: search_field,
           name_field: property
