@@ -17,6 +17,9 @@ on:
         required: false
         default: false
 
+# Inline rather than notch8/actions' deploy.yaml: this repo is in the
+# research-technologies org, not notch8, and secrets: inherit can't carry
+# environment-scoped secrets across that org boundary (they resolve empty).
 jobs:
   deployment:
     runs-on: ubuntu-latest

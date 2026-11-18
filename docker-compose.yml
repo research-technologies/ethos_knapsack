@@ -51,13 +51,6 @@ services:
 
   solr:
     image: ghcr.io/research-technologies/ethos_knapsack/solr:${TAG:-latest}
-    build:
-      context: .
-      target: hyku-solr
-      args:
-        BUILDKIT_INLINE_CACHE: 1
-      cache_from:
-        - ghcr.io/research-technologies/ethos_knapsack/solr:latest
     extends:
       file: hyrax-webapp/docker-compose.yml
       service: solr
