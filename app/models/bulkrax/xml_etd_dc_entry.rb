@@ -4,7 +4,11 @@ require 'nokogiri'
 module Bulkrax
   # Custom XML Entry for British Library's Electronic Theses and Dissertations.
   class XmlEtdDcEntry < XmlEntry # rubocop:disable Metrics/ClassLength
-    serialize :raw_metadata, JSON
+    if Rails.version < '7.1'
+      serialize :raw_metadata, Bulkrax::NormalizedJson
+    else
+      serialize :raw_metadata, coder: Bulkrax::NormalizedJson
+    end
 
     def factory_class
       ThesisOrDissertation
