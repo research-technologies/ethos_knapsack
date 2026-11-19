@@ -71,15 +71,12 @@ ingress:
     - host: "blethoshyku.com"
       paths:
         - path: /
-    - host: "ethos.bl.uk"
-      paths:
-        - path: /
     - host: "blethos-test.notch8.com"
       paths:
         - path: /
+  ingressClassName: nginx-ingress
   annotations: {
-    kubernetes.io/ingress.class: "nginx",
-    nginx.ingress.kubernetes.io/proxy-body-size: "0",
+    nginx.org/proxy-body-size: "0",
     cert-manager.io/cluster-issuer: letsencrypt-production-dns
   }
   tls:
@@ -92,79 +89,17 @@ ingress:
         # TLS for this host is handled by a Cloudflare Custom Hostname
       secretName: ethos-knapsack-production-tls
 
-# Parallel Ingress on the new F5 nginx-ingress controller (notch8-ops#812
-# Phase 2), deployed alongside the existing one above without touching it.
-# ingressClassName takes priority over the legacy annotation for most
-# ingress-nginx-family controllers, so adding it to the *same* object would
-# make the old controller drop the route immediately, before the new one is
-# confirmed ready - a real gap, not just a theoretical one. A second,
-# separate object avoids that: the old Ingress and old controller are never
-# touched, so nothing here can affect current traffic. Delete this block
-# once DNS has cut over and the ingress: block above is updated in its place.
+# ethos.bl.uk needs its own Ingress, not a host on the one above. It's a
+# Cloudflare Custom Hostname that connects to the origin over HTTPS with
+# ethos.bl.uk itself as SNI, so it needs a real 443 listener - but it
+# can't share the cert-manager-managed Ingress's tls.hosts: that makes
+# cert-manager try to fold ethos.bl.uk into the shared certificate's SANs,
+# which requires a DNS-01 challenge against bl.uk - a domain we don't
+# control, so it only ever fails (and risks breaking renewal for the real
+# blethoshyku.com hosts sharing that certificate). This Ingress has no
+# cert-manager.io/cluster-issuer annotation at all, so it's invisible to
+# cert-manager - it just statically reuses the certificate issued above.
 extraDeploy:
-  - |
-    {{- /* Same backend-resolution logic as the chart's own templates/ingress.yaml,
-       so this always matches the real Service regardless of nginx.enabled. */ -}}
-    {{- ${DOLLAR}svcFullName := ternary (include "hyrax.nginx.host" .) (include "hyrax.fullname" .) .Values.nginx.enabled -}}
-    {{- ${DOLLAR}svcPort := ternary .Values.nginx.service.port .Values.service.port .Values.nginx.enabled -}}
-    apiVersion: networking.k8s.io/v1
-    kind: Ingress
-    metadata:
-      name: {{ include "hyrax.fullname" . }}-nginx-ingress
-      labels:
-        {{- include "hyrax.labels" . | nindent 4 }}
-      annotations:
-        nginx.org/proxy-body-size: "0"
-        cert-manager.io/cluster-issuer: letsencrypt-production-dns
-    spec:
-      ingressClassName: nginx-ingress
-      tls:
-        - hosts:
-            - "*.blethoshyku.com"
-            - "blethoshyku.com"
-          secretName: {{ include "hyrax.fullname" . }}-nginx-ingress-tls
-      rules:
-        - host: "*.blethoshyku.com"
-          http:
-            paths:
-              - path: /
-                pathType: ImplementationSpecific
-                backend:
-                  service:
-                    name: {{ ${DOLLAR}svcFullName }}
-                    port:
-                      number: {{ ${DOLLAR}svcPort }}
-        - host: "blethoshyku.com"
-          http:
-            paths:
-              - path: /
-                pathType: ImplementationSpecific
-                backend:
-                  service:
-                    name: {{ ${DOLLAR}svcFullName }}
-                    port:
-                      number: {{ ${DOLLAR}svcPort }}
-        - host: "blethos-test.notch8.com"
-          http:
-            paths:
-              - path: /
-                pathType: ImplementationSpecific
-                backend:
-                  service:
-                    name: {{ ${DOLLAR}svcFullName }}
-                    port:
-                      number: {{ ${DOLLAR}svcPort }}
-  # ethos.bl.uk needs its own Ingress, not a host on the one above. It's a
-  # Cloudflare Custom Hostname that connects to the origin over HTTPS with
-  # ethos.bl.uk itself as SNI, so it needs a real 443 listener - but it
-  # can't share the cert-manager-managed Ingress's tls.hosts: that makes
-  # cert-manager try to fold ethos.bl.uk into the shared certificate's
-  # SANs, which requires a DNS-01 challenge against bl.uk - a domain we
-  # don't control, so it only ever fails (and risks breaking renewal for
-  # the real blethoshyku.com hosts sharing that certificate). This Ingress
-  # has no cert-manager.io/cluster-issuer annotation at all, so it's
-  # invisible to cert-manager - it just statically reuses the certificate
-  # already issued for the Ingress above.
   - |
     {{- ${DOLLAR}svcFullName := ternary (include "hyrax.nginx.host" .) (include "hyrax.fullname" .) .Values.nginx.enabled -}}
     {{- ${DOLLAR}svcPort := ternary .Values.nginx.service.port .Values.service.port .Values.nginx.enabled -}}
@@ -181,7 +116,7 @@ extraDeploy:
       tls:
         - hosts:
             - "ethos.bl.uk"
-          secretName: {{ include "hyrax.fullname" . }}-nginx-ingress-tls
+          secretName: ethos-knapsack-production-tls
       rules:
         - host: "ethos.bl.uk"
           http:
