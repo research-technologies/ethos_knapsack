@@ -122,8 +122,17 @@ extraDeploy:
         - hosts:
             - "*.blethoshyku.com"
             - "blethoshyku.com"
-            # Do NOT add "ethos.bl.uk" here - same reason as the ingress:
-            # block above (Cloudflare Custom Hostname handles its TLS).
+            - "ethos.bl.uk"
+            # ethos.bl.uk IS needed here, unlike the ingress: block above.
+            # Confirmed live (notch8-ops#812 Phase 2 cutover): Cloudflare's
+            # Custom Hostname feature connects to the origin over HTTPS,
+            # sending ethos.bl.uk itself as SNI - without a matching 443
+            # listener here, that connection has nowhere to land (404,
+            # even after the TLS handshake itself succeeds via
+            # controller.defaultTLS). The origin cert doesn't need
+            # ethos.bl.uk as a SAN - only Cloudflare connects to this
+            # origin, real browsers never see this cert, and Cloudflare's
+            # Full (strict) validation checks CA trust, not hostname match.
           secretName: {{ include "hyrax.fullname" . }}-nginx-ingress-tls
       rules:
         - host: "*.blethoshyku.com"
