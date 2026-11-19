@@ -36,7 +36,9 @@ USER root
 COPY --chown=solr:solr solr/security.json /var/solr/data/security.json
 USER $SOLR_USER
 
-FROM ghcr.io/notch8/scripts/bitnamilegacy-nginx:1.21.6-debian-11-r21 AS hyku-nginx
+# No Bitnami image dependency anymore (Bitnami stopped publishing legacy-tag
+# updates). See notch8/notch8-ops#812.
+FROM nginx/nginx-unprivileged:1.31.9-alpine AS hyku-nginx
 COPY --from=hyku-web /app/samvera/hyrax-webapp/public/assets /app/samvera/hyrax-webapp/public/assets
 COPY --from=hyku-web /app/samvera/hyrax-webapp/public/pdf.js /app/samvera/hyrax-webapp/public/pdf.js
 COPY --from=hyku-web /app/samvera/hyrax-webapp/public/uv /app/samvera/hyrax-webapp/public/uv
