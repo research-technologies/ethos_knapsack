@@ -80,6 +80,59 @@ ingress:
         - "*.ethos-knapsack-staging.notch8.cloud"
       secretName: ethos-knapsack-staging-tls
 
+# Parallel Ingress on the new F5 nginx-ingress controller (notch8-ops#812
+# Phase 2), deployed alongside the existing one above without touching it.
+# ingressClassName takes priority over the legacy annotation for most
+# ingress-nginx-family controllers, so adding it to the *same* object would
+# make the old controller drop the route immediately, before the new one is
+# confirmed ready - a real gap, not just a theoretical one. A second,
+# separate object avoids that: the old Ingress and old controller are never
+# touched, so nothing here can affect current traffic. Delete this block
+# once DNS has cut over and the ingress: block above is updated in its place.
+extraDeploy:
+  - |
+    {{- /* Same backend-resolution logic as the chart's own templates/ingress.yaml,
+       so this always matches the real Service regardless of nginx.enabled. */ -}}
+    {{- $svcFullName := ternary (include "hyrax.nginx.host" .) (include "hyrax.fullname" .) .Values.nginx.enabled -}}
+    {{- $svcPort := ternary .Values.nginx.service.port .Values.service.port .Values.nginx.enabled -}}
+    apiVersion: networking.k8s.io/v1
+    kind: Ingress
+    metadata:
+      name: {{ include "hyrax.fullname" . }}-nginx-ingress
+      labels:
+        {{- include "hyrax.labels" . | nindent 4 }}
+      annotations:
+        nginx.org/proxy-body-size: "0"
+        cert-manager.io/cluster-issuer: letsencrypt-production-dns
+    spec:
+      ingressClassName: nginx-ingress
+      tls:
+        - hosts:
+            - "ethos-knapsack-staging.notch8.cloud"
+            - "*.ethos-knapsack-staging.notch8.cloud"
+          secretName: {{ include "hyrax.fullname" . }}-nginx-ingress-tls
+      rules:
+        - host: "ethos-knapsack-staging.notch8.cloud"
+          http:
+            paths:
+              - path: /
+                pathType: ImplementationSpecific
+                backend:
+                  service:
+                    name: {{ $svcFullName }}
+                    port:
+                      number: {{ $svcPort }}
+        - host: "*.ethos-knapsack-staging.notch8.cloud"
+          http:
+            paths:
+              - path: /
+                pathType: ImplementationSpecific
+                backend:
+                  service:
+                    name: {{ $svcFullName }}
+                    port:
+                      number: {{ $svcPort }}
+
 extraEnvVars: &envVars
   - name: BUNDLE_LOCAL__HYKU_KNAPSACK
     value: /app/samvera
