@@ -312,10 +312,6 @@ nginx:
   service:
     port: 80
   image:
-    # Bitnami has stopped publishing updates to the legacy registry this
-    # used to pull from (see notch8/notch8-ops#812). The chart's own nginx
-    # templates (not a Bitnami subchart, as of chart 4.0.0+) don't read a
-    # separate `registry` key, so it's folded into `repository` here.
     # Still no custom-built image (see note below on /assets/).
     repository: nginx/nginx-unprivileged
     tag: 1.31.9-alpine
