@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/ClassLength
 class EthosListSet < BlacklightOaiProvider::SolrSet
   OPEN_ACCESS = 'open_access'
   ACCESS_RIGHTS_FIELD = 'ethos_access_rights_tesim'
@@ -85,7 +86,7 @@ class EthosListSet < BlacklightOaiProvider::SolrSet
     def ddc_sets
       sets = Ethos::Dini::DDC_GROUPS.each_with_object({}) do |(group, name), hash|
         hash["ddc:#{group}"] = {
-          name: name, filter: Ethos::Dini.ddc_filter(group),
+          name:, filter: Ethos::Dini.ddc_filter(group),
           description: "This is a set containing records in DDC subject group #{group}."
         }
       end
@@ -142,3 +143,4 @@ class EthosListSet < BlacklightOaiProvider::SolrSet
     @static ? @static[:description] : "This is a #{label} set containing records with the value of #{value}."
   end
 end
+# rubocop:enable Metrics/ClassLength

@@ -8,7 +8,7 @@ module SolrDocumentDecorator
     set_model = ::CatalogController.blacklight_config.oai.dig(:document, :set_model)
     (set_model || BlacklightOaiProvider::SolrSet).sets_for(self)
   end
-  
+
   # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
   def to_semantic_values
@@ -48,6 +48,7 @@ module SolrDocumentDecorator
     end
     @semantic_value_hash ||= {}
   end
+  # rubocop:enable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
   def get_work_url_by_id(id)
     "#{Rails.application.routes.url_helpers.hyrax_thesis_or_dissertations_url protocol: 'https'}/#{id}"
@@ -82,11 +83,6 @@ module SolrDocumentDecorator
       xml.tag! "#{namespace}:#{field}", v
     end
   end
-
-  def sets
-    EthosListSet.sets_for(self)
-  end
-
 end
 
 SolrDocument.prepend(SolrDocumentDecorator)

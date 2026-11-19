@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/ModuleLength
 module Ethos
   # Vocabulary and mappings for the DINI Certificate 2022 ruleset used by validator.dini.de.
   module Dini
@@ -66,7 +67,7 @@ module Ethos
       '356' => '355', '357' => '355', '358' => '355', '359' => '355',
       '794' => '793', '795' => '793', '797' => '796', '798' => '796', '799' => '796'
     }.merge((240..289).to_h { |n| [n.to_s, '230'] })
-                      .merge((680..689).to_h { |n| [n.to_s, '670'] }).freeze
+                     .merge((680..689).to_h { |n| [n.to_s, '670'] }).freeze
 
     # Three-digit numbers with a decimal group need matching one decimal place deeper.
     DDC_SPLIT_NUMBERS = %w[333 491 621 741 891 914].freeze
@@ -118,9 +119,11 @@ module Ethos
         Array(levels).flat_map { |level| COAR_TYPES.fetch(level, []) }.uniq
       end
 
+      # rubocop:disable Naming/VariableNumber
       def iso_639_3(code)
         ISO_639_3.fetch(code.to_s.strip.downcase, code)
       end
+      # rubocop:enable Naming/VariableNumber
 
       private
 
@@ -138,3 +141,4 @@ module Ethos
     end
   end
 end
+# rubocop:enable Metrics/ModuleLength
