@@ -105,8 +105,8 @@ extraDeploy:
   - |
     {{- /* Same backend-resolution logic as the chart's own templates/ingress.yaml,
        so this always matches the real Service regardless of nginx.enabled. */ -}}
-    {{- $svcFullName := ternary (include "hyrax.nginx.host" .) (include "hyrax.fullname" .) .Values.nginx.enabled -}}
-    {{- $svcPort := ternary .Values.nginx.service.port .Values.service.port .Values.nginx.enabled -}}
+    {{- ${DOLLAR}svcFullName := ternary (include "hyrax.nginx.host" .) (include "hyrax.fullname" .) .Values.nginx.enabled -}}
+    {{- ${DOLLAR}svcPort := ternary .Values.nginx.service.port .Values.service.port .Values.nginx.enabled -}}
     apiVersion: networking.k8s.io/v1
     kind: Ingress
     metadata:
@@ -133,9 +133,9 @@ extraDeploy:
                 pathType: ImplementationSpecific
                 backend:
                   service:
-                    name: {{ $svcFullName }}
+                    name: {{ ${DOLLAR}svcFullName }}
                     port:
-                      number: {{ $svcPort }}
+                      number: {{ ${DOLLAR}svcPort }}
         - host: "blethoshyku.com"
           http:
             paths:
@@ -143,9 +143,9 @@ extraDeploy:
                 pathType: ImplementationSpecific
                 backend:
                   service:
-                    name: {{ $svcFullName }}
+                    name: {{ ${DOLLAR}svcFullName }}
                     port:
-                      number: {{ $svcPort }}
+                      number: {{ ${DOLLAR}svcPort }}
         - host: "ethos.bl.uk"
           http:
             paths:
@@ -153,9 +153,9 @@ extraDeploy:
                 pathType: ImplementationSpecific
                 backend:
                   service:
-                    name: {{ $svcFullName }}
+                    name: {{ ${DOLLAR}svcFullName }}
                     port:
-                      number: {{ $svcPort }}
+                      number: {{ ${DOLLAR}svcPort }}
         - host: "blethos-test.notch8.com"
           http:
             paths:
@@ -163,9 +163,9 @@ extraDeploy:
                 pathType: ImplementationSpecific
                 backend:
                   service:
-                    name: {{ $svcFullName }}
+                    name: {{ ${DOLLAR}svcFullName }}
                     port:
-                      number: {{ $svcPort }}
+                      number: {{ ${DOLLAR}svcPort }}
 
 extraEnvVars: &envVars
   - name: BUNDLE_LOCAL__HYKU_KNAPSACK
