@@ -349,17 +349,17 @@ nginx:
   service:
     port: 80
   image:
-    registry: ghcr.io
-    repository: notch8/scripts/bitnamilegacy-nginx
-    tag: 1.21.6-debian-11-r21
+    # Built from the hyku-nginx Dockerfile stage (already pushed by the
+    # build job's "nginx" component), which bakes in public/assets,
+    # public/pdf.js and public/uv from this exact commit's hyku-web stage -
+    # matches hykuup's pattern. The bare nginx/nginx-unprivileged image has
+    # none of those, so /assets/ fell through to Rails on every request.
+    repository: "ghcr.io/$REPO_LOWER/nginx"
+    tag: "$TAG"
   # Serves /system (site branding uploads: logo/banner/favicon) and /branding
-  # (per-tenant branding assets) directly from the shared EFS PVCs so these
-  # requests never tie up a Puma worker
-  # Deliberately does NOT cover /assets/ the way hykuup's fix does: that needs compiled
-  # assets baked into a custom nginx image via CI, which depends on a much
-  # newer notch8/actions workflow version than this repo is pinned to
-  # (v1.0.4 here vs v1.0.10 there) - out of scope for this change. /assets/
-  # is edge-cached by Cloudflare regardless, so the payoff there is smaller.
+  # (per-tenant branding assets) directly from the shared EFS PVCs, and
+  # /assets/ from the image itself (see above), so these requests never tie
+  # up a Puma worker.
   extraVolumes:
     - name: "uploads"
       persistentVolumeClaim:
@@ -387,7 +387,7 @@ nginx:
                       'request="${DOLLAR}request" status=${DOLLAR}status bytes=${DOLLAR}body_bytes_sent '
                       'referer="${DOLLAR}http_referer" agent="${DOLLAR}http_user_agent" request_time=${DOLLAR}request_time upstream_response_time=${DOLLAR}upstream_response_time upstream_response_length=${DOLLAR}upstream_response_length';
 
-    error_log  /opt/bitnami/nginx/logs/error.log warn;
+    error_log  /var/log/nginx/error.log warn;
     #tcp_nopush     on;
 
     # Cloudflare ips see for refresh
@@ -418,7 +418,6 @@ nginx:
 
     real_ip_header X-Forwarded-For;
     real_ip_recursive on;
-    include /opt/bitnami/nginx/conf/conf.d/*.conf;
     server {
         listen 8080;
         server_name _;
@@ -428,14 +427,11 @@ nginx:
         client_body_in_file_only clean;
         client_body_buffer_size 32K;
         client_max_body_size 0;
-        access_log /opt/bitnami/nginx/logs/access.log loki;
+        access_log /var/log/nginx/access.log loki;
         # if=${DOLLAR}loggable;
 
         sendfile on;
         send_timeout 300s;
-
-        include /opt/bitnami/nginx/conf/bots.d/ddos.conf;
-        include /opt/bitnami/nginx/conf/bots.d/blockbots.conf;
 
         error_page 404 /404.html;
         error_page 500 502 503 504 /500.html;
