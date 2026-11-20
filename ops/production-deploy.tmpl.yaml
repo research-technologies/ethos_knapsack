@@ -71,15 +71,12 @@ ingress:
     - host: "blethoshyku.com"
       paths:
         - path: /
-    - host: "ethos.bl.uk"
-      paths:
-        - path: /
     - host: "blethos-test.notch8.com"
       paths:
         - path: /
+  ingressClassName: nginx-ingress
   annotations: {
-    kubernetes.io/ingress.class: "nginx",
-    nginx.ingress.kubernetes.io/proxy-body-size: "0",
+    nginx.org/proxy-body-size: "0",
     cert-manager.io/cluster-issuer: letsencrypt-production-dns
   }
   tls:
@@ -91,6 +88,46 @@ ingress:
         # Do NOT add "ethos.bl.uk" here.
         # TLS for this host is handled by a Cloudflare Custom Hostname
       secretName: ethos-knapsack-production-tls
+
+# ethos.bl.uk needs its own Ingress, not a host on the one above. It's a
+# Cloudflare Custom Hostname that connects to the origin over HTTPS with
+# ethos.bl.uk itself as SNI, so it needs a real 443 listener - but it
+# can't share the cert-manager-managed Ingress's tls.hosts: that makes
+# cert-manager try to fold ethos.bl.uk into the shared certificate's SANs,
+# which requires a DNS-01 challenge against bl.uk - a domain we don't
+# control, so it only ever fails (and risks breaking renewal for the real
+# blethoshyku.com hosts sharing that certificate). This Ingress has no
+# cert-manager.io/cluster-issuer annotation at all, so it's invisible to
+# cert-manager - it just statically reuses the certificate issued above.
+extraDeploy:
+  - |
+    {{- ${DOLLAR}svcFullName := ternary (include "hyrax.nginx.host" .) (include "hyrax.fullname" .) .Values.nginx.enabled -}}
+    {{- ${DOLLAR}svcPort := ternary .Values.nginx.service.port .Values.service.port .Values.nginx.enabled -}}
+    apiVersion: networking.k8s.io/v1
+    kind: Ingress
+    metadata:
+      name: {{ include "hyrax.fullname" . }}-ethos-bl-uk
+      labels:
+        {{- include "hyrax.labels" . | nindent 4 }}
+      annotations:
+        nginx.org/proxy-body-size: "0"
+    spec:
+      ingressClassName: nginx-ingress
+      tls:
+        - hosts:
+            - "ethos.bl.uk"
+          secretName: ethos-knapsack-production-tls
+      rules:
+        - host: "ethos.bl.uk"
+          http:
+            paths:
+              - path: /
+                pathType: ImplementationSpecific
+                backend:
+                  service:
+                    name: {{ ${DOLLAR}svcFullName }}
+                    port:
+                      number: {{ ${DOLLAR}svcPort }}
 
 extraEnvVars: &envVars
   - name: BUNDLE_LOCAL__HYKU_KNAPSACK
