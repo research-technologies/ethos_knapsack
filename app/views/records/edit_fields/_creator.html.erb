@@ -7,7 +7,7 @@
 <% if record.to_s.match?(/CollectionResource:/) %>
   <% f.object.attributes[key].empty? ? creators = [] : creators = f.object.attributes[key].map{|c| c.gsub(/^\d+~/,'')} %>
   <div class="form-group multi_value optional collection_creator managed">
-    <label class="control-label multi_value optional" for="collection_creator" id="collection_creator_label">Creator</label>
+    <label class="control-label multi_value optional" for="collection_creator" id="collection_creator_label">Author</label>
     <p class="help-block">The person or group responsible for the collection. Usually this is the author of the content. Personal names should be entered with the last name first, e.g. "Smith, John.".</p>
     <ul class="listing" aria-live="polite">
     <% creators.each do | c | %>
@@ -17,7 +17,7 @@
           <button type="button" class="btn btn-link remove">
             <span class="glyphicon glyphicon-remove"></span>
             <span class="controls-remove-text">Remove</span> 
-            <span class="sr-only"> previous <span class="controls-field-name-text"> Creator</span></span>
+            <span class="sr-only"> previous <span class="controls-field-name-text"> Author</span></span>
           </button>
         </span>
       </li>
@@ -25,13 +25,13 @@
     </ul>
     <button type="button" class="btn btn-link add" fdprocessedid="aoilal">
       <span class="glyphicon glyphicon-plus"></span>
-      <span class="controls-add-text">Add another Creator</span>
+      <span class="controls-add-text">Add another Author</span>
     </button>
   </div>
 <% else %>
   <div class="row">
     <div class="col">
-      <label class="control-label multi_value required" for="creator" id="creator_label"><%=label_for(term: key, record_class: record.class)%></label>
+      <label class="control-label multi_value required" for="creator" id="creator_label">Author</label>
      <span class="badge badge-info required-tag">required</span>
     </div>
   </div>
@@ -51,7 +51,7 @@
 
     <div class="row">
       <div class="col-md-3">
-        <label for="creator_position" class="form-control-md creator-position-display"><%=key.capitalize%>: <%=index+1%></h3>
+        <label for="creator_position" class="form-control-md creator-position-display">Author: <%=index+1%></label>
       </div>
     </div>
 

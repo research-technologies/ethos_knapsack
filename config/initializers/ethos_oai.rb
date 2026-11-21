@@ -25,16 +25,26 @@ Rails.application.config.after_initialize do
             value_to_tag(v, xml, field, "dcterms")
           end
         end
+        dini_oai_elements.each { |field, value| value_to_tag(value, xml, field) }
       end
       xml.target!
     end
 
     def translate_authority(v, field)
-      if field == :publisher
-        Hyrax::CurrentHeInstitutionsService.label(v)
-      else
-        v
+      case field
+      when :publisher then Hyrax::CurrentHeInstitutionsService.label(v)
+      when :language then Ethos::Dini.iso_639_3(v)
+      else v
       end
+    end
+
+    # Values DINI requires in oai_dc only, so uketd_dc is left as it is.
+    def dini_oai_elements
+      levels = self['qualification_level_tesim']
+      types = Ethos::Dini.doc_types(levels).map { |type| "doc-type:#{type}" } + Ethos::Dini.coar_types(levels)
+      subjects = Ethos::Dini.ddc_groups(self['dewey_tesim']).map { |group| "ddc:#{group}" }
+
+      types.map { |value| [:type, value] } + subjects.map { |value| [:subject, value] }
     end
   end
 end

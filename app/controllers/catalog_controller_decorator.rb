@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'ethos_list_set'
+
 # rubocop:disable Metrics/BlockLength
 module CatalogControllerDecorator
 end
@@ -7,10 +9,22 @@ end
 CatalogController.prepend(CatalogControllerDecorator)
 
 CatalogController.configure_blacklight do |config|
+  config.oai[:provider][:repository_url] = ->(controller) { controller.oai_catalog_url(locale: nil) }
+  config.oai[:provider][:extra_description] = <<~XML.delete("\n")
+    <description><oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+    <dc:description>EThOS is the UK national repository of doctoral theses.</dc:description>
+    </oai_dc:dc></description>
+  XML
+
   config.oai[:document][:set_fields] = [
     { label: "Subject Discipline", solr_field: "ethos_subject_sim" },
     { label: "University", solr_field: "current_he_institution_sim", helper_method: :current_he_institution_label }
   ]
+
+  config.oai[:document][:set_model] = EthosListSet
 
   # I hope there is a better way to re-order facets
   # Remove the ones that are set by hyku

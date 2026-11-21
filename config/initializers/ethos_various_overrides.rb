@@ -24,37 +24,21 @@ Rails.application.config.after_initialize do
   BlacklightOaiProvider::ResumptionToken.class_eval do
     def encode_conditions
       encoded_token = @prefix.to_s.dup
-      encoded_token << ".s(#{set})" if set
+      # A dot splits the token when it is parsed, and ddc:333.7 has one. EthosListSet.from_spec restores it.
+      encoded_token << ".s(#{set.to_s.tr('.', '!')})" if set
       encoded_token << ".f(#{from.to_datetime.utc.xmlschema})" if from
       encoded_token << ".u(#{self.until.to_datetime.utc.xmlschema})" if self.until
       encoded_token << ".t(#{total})" if total
       encoded_token << ":#{last}"
     end
-  end
 
-  # Overrides blacklight_oai_provider
-  BlacklightOaiProvider::SolrSet.class_eval do
-    def self.sets_from_facets(facet_results)
-      sets = Array.wrap(@fields).map do |f|
-        facet_results.fetch(f[:solr_field], [])
-                     .each_slice(2)
-                     .select { |t| t[0] != '' } # added to avoid choking on empty values
-                     .map { |t| new("#{f[:label]}:#{t.first}") }
-      end.flatten
-
-      sets.empty? ? nil : sets
-    end
-
-    # Override and offer translation of an authority id into a term if possible
-    def name
-      (field, value) = spec.split(':')
-      if field == "University"
-        "#{field.titleize}: #{Hyrax::CurrentHeInstitutionsService.label(value)}"
-      else
-        spec.titleize.gsub(':', ': ')
-      end
+    # Tokens hold an offset, so they do not really expire. DINI recommends at least 24 hours.
+    def expiration
+      1.day.from_now
     end
   end
+
+  # BlacklightOaiProvider::SolrSet overrides now live in EthosListSet (lib/ethos_list_set.rb)
 
   # Only show Theses in OAI (no collections)
   BlacklightOaiProvider::SolrDocumentWrapper.class_eval do
