@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
-# OVERRIDE Hyku f57c5a9 Ability: registers Bulkrax's importer/exporter CanCan rules, which admins need to open /importers.
-#   Remove once the hyrax-webapp submodule includes samvera/hyku#3395.
+# OVERRIDE Hyku f57c5a9 Ability: registers Bulkrax's importer/exporter CanCan rules and limits importer creation to admins.
+#   Remove once the hyrax-webapp submodule includes samvera/hyku#3395 and admin-only creation is handled there.
 unless defined?(Hyrax::Ability::BulkraxAbility)
   Ability.class_eval do
     include ::Bulkrax::AbilityBehavior
 
-    self.ability_logic += [:bulkrax_default_abilities] unless ability_logic.include?(:bulkrax_default_abilities)
+    %i[bulkrax_default_abilities restrict_importer_creation].each do |rule|
+      self.ability_logic += [rule] unless ability_logic.include?(rule)
+    end
 
     def can_admin_importers?
       admin?
@@ -14,6 +16,10 @@ unless defined?(Hyrax::Ability::BulkraxAbility)
 
     def can_admin_exporters?
       admin?
+    end
+
+    def restrict_importer_creation
+      cannot :create, Bulkrax::Importer unless can_admin_importers?
     end
   end
 end
