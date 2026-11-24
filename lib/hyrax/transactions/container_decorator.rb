@@ -2,10 +2,10 @@
 
 # OVERRIDE Hyrax v5.0.0 to add custom relations to the change_set
 
-require_dependency '../lib/hyrax/transactions/ethos/steps/handle_creators'
-require_dependency '../lib/hyrax/transactions/ethos/steps/handle_contributors'
-require_dependency '../lib/hyrax/transactions/ethos/steps/handle_funders'
-require_dependency '../lib/hyrax/transactions/ethos/steps/handle_validate_new_work'
+require_relative 'ethos/steps/handle_creators'
+require_relative 'ethos/steps/handle_contributors'
+require_relative 'ethos/steps/handle_funders'
+require_relative 'ethos/steps/handle_validate_new_work'
 
 module Hyrax
   module Transactions
