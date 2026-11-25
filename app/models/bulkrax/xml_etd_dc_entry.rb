@@ -80,10 +80,22 @@ module Bulkrax
       # parsed_metadata['file'] = raw_metadata['file']
 
       add_local
+      stringify_name_objects
       validate_oai_identifier
       parsed_metadata
     end
     # rubocop:enable Metrics/AbcSize, Metrics/MethodLength#
+
+    # creator/contributor are `type: string` properties but Bulkrax builds them as arrays of hashes
+    # (via the `object:` field mappings). Persist them as the Hash#inspect string the UI and export
+    # `eval` back. This used to happen implicitly when OrderAlready's sanitizer handed the hash to
+    # Nokogiri, but Nokogiri >= 1.19 raises "no implicit conversion of HashWithIndifferentAccess into String".
+    def stringify_name_objects
+      %w[creator contributor].each do |field|
+        next unless parsed_metadata[field].is_a?(Array)
+        parsed_metadata[field] = parsed_metadata[field].map { |v| v.is_a?(Hash) ? v.to_h.to_s : v }
+      end
+    end
 
     def add_additional
       add_model
