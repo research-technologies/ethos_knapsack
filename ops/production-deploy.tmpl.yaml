@@ -76,7 +76,7 @@ ingress:
         - path: /
   ingressClassName: nginx-ingress
   annotations: {
-    nginx.org/proxy-body-size: "0",
+    nginx.org/client-max-body-size: "0",
     cert-manager.io/cluster-issuer: letsencrypt-production-dns
   }
   tls:
@@ -110,7 +110,7 @@ extraDeploy:
       labels:
         {{- include "hyrax.labels" . | nindent 4 }}
       annotations:
-        nginx.org/proxy-body-size: "0"
+        nginx.org/client-max-body-size: "0"
     spec:
       ingressClassName: nginx-ingress
       tls:
